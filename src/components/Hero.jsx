@@ -1,44 +1,69 @@
 import { motion } from "framer-motion";
 import { WHATSAPP_URL } from "../constants";
-import heroImg from "../assets/hero.png";
-import torre from "../assets/torre.png";
 
 export default function Hero() {
   return (
     <section
-      className="relative min-h-screen flex items-center justify-center"
+      className="relative min-h-screen flex flex-col items-center justify-center bg-gradient-hero overflow-hidden"
       style={{
-        backgroundImage: `url(${torre})`,
+        backgroundImage: `url(/assets/hero-fachada.webp)`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      {/* TODO: reemplazar backgroundImage con imagen real del proyecto */}
-      <div className="absolute inset-0 bg-verde-oscuro/60" />
+      {/* Overlay navy para legibilidad */}
+      <div className="absolute inset-0 bg-gradient-to-b from-navy-dark/80 via-navy-dark/65 to-navy-dark/85" />
+
+      {/* Logo Mizar */}
+      <motion.img
+        src="/assets/logo-mizar.webp"
+        alt="Mizar · Diseño y Construcción"
+        className="relative z-10 h-9 md:h-11 w-auto mb-10"
+        initial={{ opacity: 0, y: -16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+      />
+
       <motion.div
-        className="relative z-10 text-center px-6 max-w-4xl mx-auto py-20"
+        className="relative z-10 text-center px-6 max-w-3xl mx-auto"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
+        transition={{ duration: 0.8, delay: 0.15 }}
       >
-        <h1 className="font-serif text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight mb-6">
-          Cómo tener tu apartamento propio, sin bancos y a cuotas, en la zona de
-          mayor crecimiento en Girón.
+        <p className="text-rojo-light font-semibold tracking-widest uppercase text-xs md:text-sm mb-5">
+          Laureles Campestre
+        </p>
+        <h1 className="font-serif font-black text-white text-4xl sm:text-5xl md:text-6xl leading-[1.08] mb-6">
+          Tu apartamento propio en Girón,{" "}
+          <span className="text-rojo-light">sin bancos y a cuotas.</span>
         </h1>
-        <p className="text-white/80 text-lg md:text-xl mb-10">
-          Apartamentos sobre planos a 150 metros del futuro anillo vial
+        <p className="text-white/85 text-lg md:text-xl mb-10 font-light max-w-2xl mx-auto">
+          Apartamentos sobre planos a 150 metros del futuro anillo vial, en la
+          zona de mayor crecimiento de Girón.
         </p>
         <a
           href={WHATSAPP_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block bg-dorado text-verde-oscuro font-bold px-8 py-4 rounded-lg text-lg border-2 border-dorado hover:bg-verde-oscuro hover:text-dorado transition-colors duration-300"
+          className="inline-block bg-rojo text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-rojo-dark transition-colors duration-300 shadow-hover"
         >
-          Quiero saber más
+          Quiero conocer mis opciones
         </a>
-        <p className="text-white/60 text-sm mt-6 tracking-widest uppercase">
+        <p className="text-white/65 text-sm mt-6 tracking-widest uppercase">
           Entregas 2027 · 2028
         </p>
+      </motion.div>
+
+      {/* Indicador de scroll */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 text-white/60"
+        animate={{ y: [0, 10, 0] }}
+        transition={{ duration: 1.8, repeat: Infinity }}
+        aria-hidden="true"
+      >
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
       </motion.div>
     </section>
   );

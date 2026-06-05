@@ -13,19 +13,21 @@ export const APARTAMENTOS = [
     banos: 1,
     piso: "Del segundo al quinto piso",
     nota: null,
-    // TODO: reemplazar con imágenes reales del proyecto
     imagenes: [
       {
-        src: "https://placehold.co/600x400/2D5016/F5F0E8?text=Plano+Tipo+1",
-        alt: "Plano del apartamento Tipo 1",
+        src: "/assets/plano-tipo1-48m.webp",
+        alt: "Plano del apartamento Tipo 1 — 48,24 m², 3 alcobas y 1 baño",
+        tipo: "plano",
       },
       {
-        src: "https://placehold.co/600x400/C8933A/F5F0E8?text=Render+con+Acabados",
-        alt: "Render Tipo 1 con acabados",
+        src: "/assets/torre-frontal.webp",
+        alt: "Render de la fachada de Laureles Campestre",
+        tipo: "render",
       },
       {
-        src: "https://placehold.co/600x400/4a4a4a/F5F0E8?text=Render+Obra+Gris",
-        alt: "Render Tipo 1 en obra gris",
+        src: "/assets/hero-fachada.webp",
+        alt: "Vista panorámica del proyecto Laureles Campestre",
+        tipo: "render",
       },
     ],
   },
@@ -37,19 +39,21 @@ export const APARTAMENTOS = [
     banos: 1,
     piso: "Primer piso",
     nota: "Con posibilidad de ampliar a un segundo baño",
-    // TODO: reemplazar con imágenes reales del proyecto
     imagenes: [
       {
-        src: "https://placehold.co/600x400/2D5016/F5F0E8?text=Plano+Tipo+2",
-        alt: "Plano del apartamento Tipo 2",
+        src: "/assets/plano-tipo2-56m.webp",
+        alt: "Plano del apartamento Tipo 2 — 56,10 m², 3 alcobas, 1 baño y patio",
+        tipo: "plano",
       },
       {
-        src: "https://placehold.co/600x400/C8933A/F5F0E8?text=Render+con+Acabados",
-        alt: "Render Tipo 2 con acabados",
+        src: "/assets/torre-frontal.webp",
+        alt: "Render de la fachada de Laureles Campestre",
+        tipo: "render",
       },
       {
-        src: "https://placehold.co/600x400/4a4a4a/F5F0E8?text=Render+Obra+Gris",
-        alt: "Render Tipo 2 en obra gris",
+        src: "/assets/hero-fachada.webp",
+        alt: "Vista panorámica del proyecto Laureles Campestre",
+        tipo: "render",
       },
     ],
   },

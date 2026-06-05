@@ -12,11 +12,11 @@ function FaqItem({ pregunta, respuesta }) {
         aria-expanded={abierto}
         className="w-full flex items-center justify-between py-5 text-left gap-4 cursor-pointer"
       >
-        <span className="font-semibold text-verde-oscuro text-base md:text-lg">
+        <span className="font-semibold text-navy text-base md:text-lg">
           {pregunta}
         </span>
         <span
-          className={`text-verde-oscuro text-2xl flex-shrink-0 transition-transform duration-300 ${
+          className={`text-navy text-2xl flex-shrink-0 transition-transform duration-300 ${
             abierto ? 'rotate-45' : ''
           }`}
           aria-hidden="true"
@@ -43,10 +43,10 @@ function FaqItem({ pregunta, respuesta }) {
 
 export default function FAQ() {
   return (
-    <section className="py-20 px-6 bg-crema">
+    <section className="py-20 px-6 bg-gris-claro">
       <div className="max-w-3xl mx-auto">
         <motion.h2
-          className="font-serif text-verde-oscuro text-3xl sm:text-4xl md:text-5xl text-center mb-12"
+          className="font-serif text-navy text-3xl sm:text-4xl md:text-5xl text-center mb-12"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}

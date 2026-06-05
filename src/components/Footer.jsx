@@ -15,14 +15,19 @@ function WhatsAppIcon() {
 
 export default function Footer() {
   return (
-    <footer className="bg-verde-oscuro py-10 px-6">
+    <footer className="bg-navy py-10 px-6">
       <div className="max-w-5xl mx-auto flex flex-col items-center gap-4 text-center">
-        <p className="font-serif text-crema text-2xl tracking-wide">
+        <img
+          src="/assets/logo-mizar.webp"
+          alt="Mizar · Diseño y Construcción"
+          className="h-9 w-auto mb-1"
+        />
+        <p className="font-serif text-blanco text-xl tracking-wide">
           Laureles Campestre
         </p>
         {/* TODO: agregar número de teléfono real */}
         <p className="text-white/50 text-sm">
-          © 2026 Laureles Campestre · Girón, Santander
+          © 2026 Mizar · Laureles Campestre · Girón, Santander
         </p>
         <a
           href={WHATSAPP_URL}

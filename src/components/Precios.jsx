@@ -24,10 +24,10 @@ const beneficios = [
 
 export default function Precios() {
   return (
-    <section className="py-20 px-6 bg-verde-oscuro">
+    <section className="py-20 px-6 bg-navy">
       <div className="max-w-4xl mx-auto text-center">
         <motion.h2
-          className="font-serif text-crema text-3xl sm:text-4xl md:text-5xl mb-4 leading-tight"
+          className="font-serif text-blanco text-3xl sm:text-4xl md:text-5xl mb-4 leading-tight"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -37,7 +37,7 @@ export default function Precios() {
         </motion.h2>
 
         <motion.p
-          className="text-dorado font-bold text-4xl md:text-5xl my-10"
+          className="text-rojo-light font-bold text-4xl md:text-5xl my-10"
           initial={{ opacity: 0, scale: 0.9 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
@@ -58,9 +58,9 @@ export default function Precios() {
               transition={{ duration: 0.5, delay: i * 0.15 }}
               viewport={{ once: true }}
             >
-              <Icon className="w-8 h-8 text-dorado mb-3" aria-hidden="true" />
-              <h3 className="text-crema font-bold text-xl mb-2">{plan.tipo}</h3>
-              <p className="text-dorado text-2xl font-bold">desde {plan.desde}</p>
+              <Icon className="w-8 h-8 text-rojo-light mb-3" aria-hidden="true" />
+              <h3 className="text-blanco font-bold text-xl mb-2">{plan.tipo}</h3>
+              <p className="text-rojo-light text-2xl font-bold">desde {plan.desde}</p>
               {plan.nota && (
                 <p className="text-white/60 text-sm mt-1">{plan.nota}</p>
               )}
@@ -75,8 +75,8 @@ export default function Precios() {
               key={i}
               className="flex items-start gap-3 text-left max-w-xl mx-auto"
             >
-              <CheckCircle className="w-5 h-5 text-dorado flex-shrink-0 mt-0.5" aria-hidden="true" />
-              <p className="text-crema text-base">{b}</p>
+              <CheckCircle className="w-5 h-5 text-rojo-light flex-shrink-0 mt-0.5" aria-hidden="true" />
+              <p className="text-blanco text-base">{b}</p>
             </div>
           ))}
         </div>
@@ -85,7 +85,7 @@ export default function Precios() {
           href={WHATSAPP_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block bg-dorado text-verde-oscuro font-bold px-10 py-4 rounded-lg text-lg hover:bg-crema transition-colors duration-300"
+          className="inline-block bg-rojo text-white font-bold px-10 py-4 rounded-lg text-lg hover:bg-rojo-dark transition-colors duration-300 shadow-hover"
         >
           Quiero saber más
         </a>

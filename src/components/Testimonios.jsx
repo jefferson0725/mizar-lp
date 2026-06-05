@@ -6,7 +6,7 @@ export default function Testimonios() {
     <section className="py-20 px-6 bg-white">
       <div className="max-w-5xl mx-auto">
         <motion.h2
-          className="font-serif text-verde-oscuro text-3xl sm:text-4xl md:text-5xl text-center mb-12 leading-tight"
+          className="font-serif text-navy text-3xl sm:text-4xl md:text-5xl text-center mb-12 leading-tight"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -41,14 +41,14 @@ export default function Testimonios() {
           {RESENAS.map((resena, i) => (
             <motion.div
               key={i}
-              className="min-w-[280px] md:min-w-0 bg-crema rounded-xl p-6 flex-shrink-0"
+              className="min-w-[280px] md:min-w-0 bg-gris-claro rounded-xl p-6 flex-shrink-0"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               viewport={{ once: true }}
             >
               <div
-                className="text-dorado text-xl mb-3"
+                className="text-rojo text-xl mb-3"
                 aria-label={`${resena.estrellas} estrellas`}
               >
                 {'★'.repeat(resena.estrellas)}
@@ -56,7 +56,7 @@ export default function Testimonios() {
               <p className="text-gray-700 text-sm leading-relaxed mb-4">
                 "{resena.texto}"
               </p>
-              <p className="font-semibold text-verde-oscuro text-sm">{resena.nombre}</p>
+              <p className="font-semibold text-navy text-sm">{resena.nombre}</p>
             </motion.div>
           ))}
         </div>
