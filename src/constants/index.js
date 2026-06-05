@@ -22,8 +22,7 @@ import {
   obraGris10,
 } from "../assets";
 
-// TODO: reemplazar con el número real de WhatsApp
-export const WHATSAPP_NUMBER = "573XXXXXXXXX";
+export const WHATSAPP_NUMBER = "573112658552";
 export const WHATSAPP_MESSAGE =
   "Me%20interesan%20los%20apartamentos%20de%20Laureles%20Campestre%2C%20mi%20nombre%20es%20";
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`;
