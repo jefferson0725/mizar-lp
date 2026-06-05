@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  --color-verde-oscuro: #2D5016;
+  --color-verde-medio: #3D6B1F;
+  --color-dorado: #C8933A;
+  --color-crema: #F5F0E8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
