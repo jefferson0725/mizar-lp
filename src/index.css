@@ -52,6 +52,28 @@
 }
 
 html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(10, 35, 66, 0.15) transparent; /* Firefox */
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(10, 35, 66, 0.15);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(10, 35, 66, 0.3);
+}
+
+html {
   scroll-behavior: smooth;
 }
 

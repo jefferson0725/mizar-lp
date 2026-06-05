@@ -1,30 +1,26 @@
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { APARTAMENTOS, WHATSAPP_URL } from '../constants'
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { APARTAMENTOS, WHATSAPP_URL } from "../constants";
 
-function AptoCard({ apto }) {
-  const [imagenActual, setImagenActual] = useState(0)
+function AptoCard({ apto, imagenes }) {
+  const [imagenActual, setImagenActual] = useState(0);
 
   const prev = () =>
-    setImagenActual((i) => (i === 0 ? apto.imagenes.length - 1 : i - 1))
+    setImagenActual((i) => (i === 0 ? imagenes.length - 1 : i - 1));
   const next = () =>
-    setImagenActual((i) => (i === apto.imagenes.length - 1 ? 0 : i + 1))
+    setImagenActual((i) => (i === imagenes.length - 1 ? 0 : i + 1));
 
   return (
     <div className="bg-white rounded-2xl shadow-lg overflow-hidden md:flex">
       <div className="md:w-1/2 relative">
         <div className="relative aspect-[4/3] overflow-hidden bg-crema">
           <img
-            src={apto.imagenes[imagenActual].src}
-            alt={apto.imagenes[imagenActual].alt}
-            className={
-              apto.imagenes[imagenActual].tipo === "plano"
-                ? "w-full h-full object-contain p-2"
-                : "w-full h-full object-cover"
-            }
+            src={imagenes[imagenActual].src}
+            alt={imagenes[imagenActual].alt}
+            className="w-full h-full object-cover"
           />
           <span className="absolute top-3 left-3 bg-navy/85 text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">
-            {apto.imagenes[imagenActual].tipo === "plano" ? "Plano" : "Render"}
+            {imagenes[imagenActual].tipo === "plano" ? "Plano" : "Render"}
           </span>
           <button
             onClick={prev}
@@ -42,13 +38,13 @@ function AptoCard({ apto }) {
           </button>
         </div>
         <div className="flex justify-center gap-2 py-3">
-          {apto.imagenes.map((_, i) => (
+          {imagenes.map((_, i) => (
             <button
               key={i}
               onClick={() => setImagenActual(i)}
               aria-label={`Ir a imagen ${i + 1}`}
               className={`w-2.5 h-2.5 rounded-full transition-colors duration-300 cursor-pointer ${
-                imagenActual === i ? 'bg-navy' : 'bg-gray-300'
+                imagenActual === i ? "bg-navy" : "bg-gray-300"
               }`}
             />
           ))}
@@ -82,11 +78,16 @@ function AptoCard({ apto }) {
         </dl>
       </div>
     </div>
-  )
+  );
 }
 
 export default function Apartamentos() {
-  const [tipoActivo, setTipoActivo] = useState(0)
+  const [tipoActivo, setTipoActivo] = useState(0);
+  const [estadoActivo, setEstadoActivo] = useState("acabados");
+
+  const handleEstadoChange = (estado) => {
+    setEstadoActivo(estado);
+  };
 
   return (
     <section className="py-20 px-6 bg-gris-claro">
@@ -96,15 +97,15 @@ export default function Apartamentos() {
         </h2>
 
         {/* Pestañas: solo en escritorio */}
-        <div className="hidden md:flex justify-center gap-4 mb-10">
+        <div className="hidden md:flex justify-center gap-4 mb-4">
           {APARTAMENTOS.map((a, i) => (
             <button
               key={a.id}
               onClick={() => setTipoActivo(i)}
               className={`px-6 py-2 rounded-full font-semibold text-sm transition-colors duration-300 cursor-pointer ${
                 tipoActivo === i
-                  ? 'bg-navy text-white'
-                  : 'bg-white text-navy border border-navy hover:bg-navy/10'
+                  ? "bg-navy text-white"
+                  : "bg-white text-navy border border-navy hover:bg-navy/10"
               }`}
             >
               {a.tipo}
@@ -112,10 +113,40 @@ export default function Apartamentos() {
           ))}
         </div>
 
+        {/* Toggle acabados / obra gris */}
+        <div className="flex justify-center mb-10">
+          <div className="flex bg-white rounded-full border border-gray-200 p-1 gap-1">
+            <button
+              onClick={() => handleEstadoChange("acabados")}
+              className={`px-5 py-1.5 rounded-full text-sm font-semibold transition-colors duration-300 cursor-pointer ${
+                estadoActivo === "acabados"
+                  ? "bg-rojo text-white"
+                  : "text-gray-500 hover:text-navy"
+              }`}
+            >
+              Con acabados
+            </button>
+            <button
+              onClick={() => handleEstadoChange("obraGris")}
+              className={`px-5 py-1.5 rounded-full text-sm font-semibold transition-colors duration-300 cursor-pointer ${
+                estadoActivo === "obraGris"
+                  ? "bg-rojo text-white"
+                  : "text-gray-500 hover:text-navy"
+              }`}
+            >
+              Obra gris
+            </button>
+          </div>
+        </div>
+
         {/* Móvil: todos los apartamentos en secuencia, sin botones */}
         <div className="md:hidden space-y-8">
           {APARTAMENTOS.map((a) => (
-            <AptoCard key={a.id} apto={a} />
+            <AptoCard
+              key={`${a.id}-${estadoActivo}`}
+              apto={a}
+              imagenes={a[estadoActivo]}
+            />
           ))}
         </div>
 
@@ -123,19 +154,23 @@ export default function Apartamentos() {
         <div className="hidden md:block">
           <AnimatePresence mode="wait">
             <motion.div
-              key={tipoActivo}
+              key={`${tipoActivo}-${estadoActivo}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4 }}
             >
-              <AptoCard apto={APARTAMENTOS[tipoActivo]} />
+              <AptoCard
+                apto={APARTAMENTOS[tipoActivo]}
+                imagenes={APARTAMENTOS[tipoActivo][estadoActivo]}
+              />
             </motion.div>
           </AnimatePresence>
         </div>
 
         <p className="text-center text-gray-600 mt-10 text-lg max-w-2xl mx-auto">
-          Puedes recibirlo en obra gris para terminarlo a tu ritmo, o con acabados. Tú eliges.
+          Puedes recibirlo en obra gris para terminarlo a tu ritmo, o con
+          acabados. Tú eliges.
         </p>
 
         <div className="flex justify-center mt-8">
@@ -150,5 +185,5 @@ export default function Apartamentos() {
         </div>
       </div>
     </section>
-  )
+  );
 }

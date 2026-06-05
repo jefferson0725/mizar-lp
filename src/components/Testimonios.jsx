@@ -1,7 +1,27 @@
-import { motion } from 'framer-motion'
-import { RESENAS } from '../constants'
+import { useEffect } from "react";
+import { motion } from "framer-motion";
+
+// Píxeles a recortar del header y footer del embed de Instagram
+const CROP_TOP = 50;
+const CROP_BOTTOM = 120;
+const IFRAME_WIDTH = 400;
+const IFRAME_HEIGHT = 710;
 
 export default function Testimonios() {
+  useEffect(() => {
+    const featurableScript = document.createElement("script");
+    featurableScript.src =
+      "https://featurable.com/assets/v2/carousel_default.min.js";
+    featurableScript.defer = true;
+    featurableScript.charset = "UTF-8";
+    document.body.appendChild(featurableScript);
+    return () => {
+      document.body.removeChild(featurableScript);
+    };
+  }, []);
+
+  const visibleHeight = IFRAME_HEIGHT - CROP_TOP - CROP_BOTTOM;
+
   return (
     <section className="py-20 px-6 bg-white">
       <div className="max-w-5xl mx-auto">
@@ -12,55 +32,44 @@ export default function Testimonios() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          Hemos ayudado a cientos de personas a comprar su apartamento de la forma más sencilla.
+          Hemos ayudado a cientos de personas a comprar su apartamento de la
+          forma más sencilla.
         </motion.h2>
 
         <motion.div
-          className="w-full aspect-video bg-gray-900 rounded-2xl flex flex-col items-center justify-center mb-14 overflow-hidden"
+          className="flex justify-center mb-14"
           initial={{ opacity: 0, scale: 0.97 }}
           whileInView={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          {/* TODO: reemplazar con <iframe> de YouTube o Vimeo */}
-          <svg
-            className="w-16 h-16 text-white/70 mb-3"
-            fill="currentColor"
-            viewBox="0 0 24 24"
-            aria-hidden="true"
+          <div
+            style={{
+              width: IFRAME_WIDTH,
+              height: visibleHeight,
+              overflow: "hidden",
+              borderRadius: "12px",
+            }}
           >
-            <path d="M8 5v14l11-7z" />
-          </svg>
-          <span className="text-white/50 text-sm tracking-widest uppercase">
-            Video Testimonio
-          </span>
+            <iframe
+              src="https://www.instagram.com/reel/DOHiYi9iYnC/embed/"
+              width={IFRAME_WIDTH}
+              height={IFRAME_HEIGHT}
+              frameBorder="0"
+              scrolling="no"
+              allowTransparency="true"
+              allow="encrypted-media"
+              title="Video testimonio"
+              style={{ marginTop: -CROP_TOP }}
+            />
+          </div>
         </motion.div>
 
-        {/* TODO: reemplazar RESENAS en constants/index.js con reseñas reales de Google Maps */}
-        <div className="flex md:grid md:grid-cols-3 gap-4 overflow-x-auto md:overflow-visible pb-4 md:pb-0">
-          {RESENAS.map((resena, i) => (
-            <motion.div
-              key={i}
-              className="min-w-[280px] md:min-w-0 bg-gris-claro rounded-xl p-6 flex-shrink-0"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <div
-                className="text-rojo text-xl mb-3"
-                aria-label={`${resena.estrellas} estrellas`}
-              >
-                {'★'.repeat(resena.estrellas)}
-              </div>
-              <p className="text-gray-700 text-sm leading-relaxed mb-4">
-                "{resena.texto}"
-              </p>
-              <p className="font-semibold text-navy text-sm">{resena.nombre}</p>
-            </motion.div>
-          ))}
-        </div>
+        <div
+          id="featurable-c29f4a7a-ea85-49fe-898f-e666bfc8983d"
+          data-featurable-async
+        ></div>
       </div>
     </section>
-  )
+  );
 }

@@ -1,5 +1,13 @@
-import { motion } from 'framer-motion'
-import { Building2, HeartHandshake, ShieldCheck } from 'lucide-react'
+import { useRef, useEffect, useState } from 'react'
+import { motion, useInView } from 'framer-motion'
+import { Building2, HeartHandshake, ShieldCheck, Home, CalendarCheck, BadgeCheck } from 'lucide-react'
+
+// TODO: reemplazar con números reales de Mizar
+const metricas = [
+  { icono: Home,          valor: 200, sufijo: '+', etiqueta: 'Apartamentos vendidos' },
+  { icono: CalendarCheck, valor: 10,  sufijo: '+', etiqueta: 'Años de experiencia'   },
+  { icono: BadgeCheck,    valor: 8,   sufijo: '',  etiqueta: 'Proyectos entregados'  },
+]
 
 const pilares = [
   {
@@ -19,10 +27,42 @@ const pilares = [
   },
 ]
 
+function Counter({ target, sufijo, duration = 1.8 }) {
+  const [count, setCount] = useState(0)
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true })
+
+  useEffect(() => {
+    if (!isInView) return
+    let frame = 0
+    const totalFrames = Math.round(duration * 60)
+    const timer = setInterval(() => {
+      frame++
+      const progress = frame / totalFrames
+      // ease-out cubic
+      const eased = 1 - Math.pow(1 - progress, 3)
+      setCount(Math.floor(eased * target))
+      if (frame >= totalFrames) {
+        setCount(target)
+        clearInterval(timer)
+      }
+    }, 1000 / 60)
+    return () => clearInterval(timer)
+  }, [isInView, target, duration])
+
+  return (
+    <span ref={ref}>
+      {count}{sufijo}
+    </span>
+  )
+}
+
 export default function QuienesSomos() {
   return (
     <section className="py-20 px-6 bg-gris-claro">
       <div className="max-w-5xl mx-auto">
+
+        {/* Intro */}
         <motion.div
           className="text-center max-w-3xl mx-auto mb-14"
           initial={{ opacity: 0, y: 30 }}
@@ -36,7 +76,6 @@ export default function QuienesSomos() {
           <h2 className="font-serif text-navy text-3xl sm:text-4xl md:text-5xl leading-tight mb-6">
             Detrás de Laureles Campestre está Mizar.
           </h2>
-          {/* TODO: ajustar con datos reales (años de trayectoria, proyectos entregados, familias) */}
           <p className="text-gris-oscuro text-lg leading-relaxed">
             Somos una constructora de Santander dedicada al diseño y la construcción de
             vivienda, con un modelo de pago a cuotas directo y sin bancos. Nuestro propósito
@@ -45,6 +84,32 @@ export default function QuienesSomos() {
           </p>
         </motion.div>
 
+        {/* Métricas */}
+        <div className="grid grid-cols-3 gap-4 md:gap-8 mb-14">
+          {metricas.map((m, i) => {
+            const Icon = m.icono
+            return (
+              <motion.div
+                key={i}
+                className="text-center"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.12 }}
+                viewport={{ once: true }}
+              >
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-rojo/10 mb-3">
+                  <Icon className="w-6 h-6 text-rojo" aria-hidden="true" />
+                </div>
+                <p className="font-serif text-navy text-4xl md:text-5xl font-bold leading-none mb-1">
+                  <Counter target={m.valor} sufijo={m.sufijo} />
+                </p>
+                <p className="text-gris-oscuro text-sm md:text-base">{m.etiqueta}</p>
+              </motion.div>
+            )
+          })}
+        </div>
+
+        {/* Pilares */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {pilares.map((pilar, i) => {
             const Icon = pilar.icono
@@ -66,6 +131,7 @@ export default function QuienesSomos() {
             )
           })}
         </div>
+
       </div>
     </section>
   )

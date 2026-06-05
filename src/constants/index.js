@@ -1,3 +1,27 @@
+import {
+  planoTipo1,
+  tipo1Acabados1,
+  tipo1Acabados2,
+  tipo1Acabados3,
+  tipo1Acabados4,
+  tipo1Acabados5,
+  obraGris1,
+  obraGris2,
+  obraGris3,
+  obraGris4,
+  obraGris5,
+  tipo2Acabados1,
+  tipo2Acabados2,
+  tipo2Acabados3,
+  tipo2Acabados4,
+  tipo2Acabados5,
+  obraGris6,
+  obraGris7,
+  obraGris8,
+  obraGris9,
+  obraGris10,
+} from "../assets";
+
 // TODO: reemplazar con el número real de WhatsApp
 export const WHATSAPP_NUMBER = "573XXXXXXXXX";
 export const WHATSAPP_MESSAGE =
@@ -13,22 +37,49 @@ export const APARTAMENTOS = [
     banos: 1,
     piso: "Del segundo al quinto piso",
     nota: null,
-    imagenes: [
+    acabados: [
       {
-        src: "/assets/plano-tipo1-48m.webp",
+        src: planoTipo1,
         alt: "Plano del apartamento Tipo 1 — 48,24 m², 3 alcobas y 1 baño",
         tipo: "plano",
       },
       {
-        src: "/assets/torre-frontal.webp",
-        alt: "Render de la fachada de Laureles Campestre",
+        src: tipo1Acabados1,
+        alt: "Acabados Tipo 1 - imagen 1",
         tipo: "render",
       },
       {
-        src: "/assets/hero-fachada.webp",
-        alt: "Vista panorámica del proyecto Laureles Campestre",
+        src: tipo1Acabados2,
+        alt: "Acabados Tipo 1 - imagen 2",
         tipo: "render",
       },
+      {
+        src: tipo1Acabados3,
+        alt: "Acabados Tipo 1 - imagen 3",
+        tipo: "render",
+      },
+      {
+        src: tipo1Acabados4,
+        alt: "Acabados Tipo 1 - imagen 4",
+        tipo: "render",
+      },
+      {
+        src: tipo1Acabados5,
+        alt: "Acabados Tipo 1 - imagen 5",
+        tipo: "render",
+      },
+    ],
+    obraGris: [
+      {
+        src: planoTipo1,
+        alt: "Plano del apartamento Tipo 1 — 48,24 m², 3 alcobas y 1 baño",
+        tipo: "plano",
+      },
+      { src: obraGris1, alt: "Obra gris Tipo 1 - imagen 1", tipo: "render" },
+      { src: obraGris2, alt: "Obra gris Tipo 1 - imagen 2", tipo: "render" },
+      { src: obraGris3, alt: "Obra gris Tipo 1 - imagen 3", tipo: "render" },
+      { src: obraGris4, alt: "Obra gris Tipo 1 - imagen 4", tipo: "render" },
+      { src: obraGris5, alt: "Obra gris Tipo 1 - imagen 5", tipo: "render" },
     ],
   },
   {
@@ -39,20 +90,67 @@ export const APARTAMENTOS = [
     banos: 1,
     piso: "Primer piso",
     nota: "Con posibilidad de ampliar a un segundo baño",
-    imagenes: [
+    acabados: [
       {
         src: "/assets/plano-tipo2-56m.webp",
         alt: "Plano del apartamento Tipo 2 — 56,10 m², 3 alcobas, 1 baño y patio",
         tipo: "plano",
       },
       {
-        src: "/assets/torre-frontal.webp",
+        src: tipo2Acabados1,
+        alt: "Acabados Tipo 2 - imagen 1",
+        tipo: "render",
+      },
+      {
+        src: tipo2Acabados2,
+        alt: "Acabados Tipo 2 - imagen 2",
+        tipo: "render",
+      },
+      {
+        src: tipo2Acabados3,
+        alt: "Acabados Tipo 2 - imagen 3",
+        tipo: "render",
+      },
+      {
+        src: tipo2Acabados4,
+        alt: "Acabados Tipo 2 - imagen 4",
+        tipo: "render",
+      },
+      {
+        src: tipo2Acabados5,
+        alt: "Acabados Tipo 2 - imagen 5",
+        tipo: "render",
+      },
+    ],
+    obraGris: [
+      {
+        src: "/assets/plano-tipo2-56m.webp",
+        alt: "Plano del apartamento Tipo 2 — 56,10 m², 3 alcobas, 1 baño y patio",
+        tipo: "plano",
+      },
+      {
+        src: obraGris6,
         alt: "Render de la fachada de Laureles Campestre",
         tipo: "render",
       },
       {
-        src: "/assets/hero-fachada.webp",
+        src: obraGris7,
         alt: "Vista panorámica del proyecto Laureles Campestre",
+        tipo: "render",
+      },
+      {
+        src: obraGris8,
+        alt: "Render del área social de Laureles Campestre",
+        tipo: "render",
+      },
+      {
+        src: obraGris9,
+        alt: "Render del área social de Laureles Campestre",
+        tipo: "render",
+      },
+      {
+        src: obraGris10,
+        alt: "Render del área social de Laureles Campestre",
         tipo: "render",
       },
     ],
