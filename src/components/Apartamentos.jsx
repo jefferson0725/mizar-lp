@@ -1,9 +1,16 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { APARTAMENTOS, WHATSAPP_URL } from "../constants";
 
 function AptoCard({ apto, imagenes }) {
   const [imagenActual, setImagenActual] = useState(0);
+
+  useEffect(() => {
+    imagenes.forEach((img) => {
+      const image = new Image();
+      image.src = img.src;
+    });
+  }, [imagenes]);
 
   const prev = () =>
     setImagenActual((i) => (i === 0 ? imagenes.length - 1 : i - 1));
