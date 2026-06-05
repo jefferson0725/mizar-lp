@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { APARTAMENTOS, WHATSAPP_URL } from "../constants";
 
 function AptoCard({ apto, imagenes }) {
@@ -89,12 +88,7 @@ function AptoCard({ apto, imagenes }) {
 }
 
 export default function Apartamentos() {
-  const [tipoActivo, setTipoActivo] = useState(0);
   const [estadoActivo, setEstadoActivo] = useState("acabados");
-
-  const handleEstadoChange = (estado) => {
-    setEstadoActivo(estado);
-  };
 
   return (
     <section className="py-20 px-6 bg-gris-claro">
@@ -103,28 +97,11 @@ export default function Apartamentos() {
           Los apartamentos
         </h2>
 
-        {/* Pestañas: solo en escritorio */}
-        <div className="hidden md:flex justify-center gap-4 mb-4">
-          {APARTAMENTOS.map((a, i) => (
-            <button
-              key={a.id}
-              onClick={() => setTipoActivo(i)}
-              className={`px-6 py-2 rounded-full font-semibold text-sm transition-colors duration-300 cursor-pointer ${
-                tipoActivo === i
-                  ? "bg-navy text-white"
-                  : "bg-white text-navy border border-navy hover:bg-navy/10"
-              }`}
-            >
-              {a.tipo}
-            </button>
-          ))}
-        </div>
-
         {/* Toggle acabados / obra gris */}
         <div className="flex justify-center mb-10">
           <div className="flex bg-white rounded-full border border-gray-200 p-1 gap-1">
             <button
-              onClick={() => handleEstadoChange("acabados")}
+              onClick={() => setEstadoActivo("acabados")}
               className={`px-5 py-1.5 rounded-full text-sm font-semibold transition-colors duration-300 cursor-pointer ${
                 estadoActivo === "acabados"
                   ? "bg-rojo text-white"
@@ -134,7 +111,7 @@ export default function Apartamentos() {
               Con acabados
             </button>
             <button
-              onClick={() => handleEstadoChange("obraGris")}
+              onClick={() => setEstadoActivo("obraGris")}
               className={`px-5 py-1.5 rounded-full text-sm font-semibold transition-colors duration-300 cursor-pointer ${
                 estadoActivo === "obraGris"
                   ? "bg-rojo text-white"
@@ -146,8 +123,8 @@ export default function Apartamentos() {
           </div>
         </div>
 
-        {/* Móvil: todos los apartamentos en secuencia, sin botones */}
-        <div className="md:hidden space-y-8">
+        {/* Ambos apartamentos en secuencia (móvil y escritorio) */}
+        <div className="space-y-8">
           {APARTAMENTOS.map((a) => (
             <AptoCard
               key={`${a.id}-${estadoActivo}`}
@@ -155,24 +132,6 @@ export default function Apartamentos() {
               imagenes={a[estadoActivo]}
             />
           ))}
-        </div>
-
-        {/* Escritorio: solo el tipo seleccionado con la pestaña */}
-        <div className="hidden md:block">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`${tipoActivo}-${estadoActivo}`}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4 }}
-            >
-              <AptoCard
-                apto={APARTAMENTOS[tipoActivo]}
-                imagenes={APARTAMENTOS[tipoActivo][estadoActivo]}
-              />
-            </motion.div>
-          </AnimatePresence>
         </div>
 
         <p className="text-center text-gray-600 mt-10 text-lg max-w-2xl mx-auto">
