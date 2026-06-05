@@ -34,7 +34,7 @@ export default function Contacto() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <h2 className="font-serif text-verde-oscuro text-3xl sm:text-4xl md:text-5xl mb-4 leading-tight">
+          <h2 className="font-serif text-azul-oscuro text-3xl sm:text-4xl md:text-5xl mb-4 leading-tight">
             Tu apartamento propio en Girón está más cerca de lo que crees.
           </h2>
           <p className="text-gray-600 text-lg">
@@ -65,7 +65,7 @@ export default function Contacto() {
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-verde-oscuro/10 border border-verde-oscuro/30 text-verde-oscuro rounded-xl p-8 text-center"
+            className="bg-azul-oscuro/10 border border-azul-oscuro/30 text-azul-oscuro rounded-xl p-8 text-center"
           >
             <p className="text-xl font-semibold">¡Listo! Te contactamos pronto.</p>
           </motion.div>
@@ -88,7 +88,7 @@ export default function Contacto() {
                 type="text"
                 placeholder="Tu nombre"
                 {...register('nombre', { required: 'Campo requerido' })}
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-verde-oscuro/50 focus:border-verde-oscuro"
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-azul-oscuro/50 focus:border-azul-oscuro"
               />
               {errors.nombre && (
                 <p className="text-red-500 text-xs mt-1">{errors.nombre.message}</p>
@@ -113,7 +113,7 @@ export default function Contacto() {
                     message: 'Número inválido',
                   },
                 })}
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-verde-oscuro/50 focus:border-verde-oscuro"
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-azul-oscuro/50 focus:border-azul-oscuro"
               />
               {errors.telefono && (
                 <p className="text-red-500 text-xs mt-1">{errors.telefono.message}</p>
@@ -130,7 +130,7 @@ export default function Contacto() {
               <select
                 id="tipo"
                 {...register('tipo', { required: 'Selecciona una opción' })}
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-verde-oscuro/50 focus:border-verde-oscuro bg-white"
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-azul-oscuro/50 focus:border-azul-oscuro bg-white"
               >
                 <option value="">Selecciona...</option>
                 <option value="empleado">Empleado</option>
@@ -153,13 +153,13 @@ export default function Contacto() {
                 rows={4}
                 placeholder="Cuéntanos algo sobre tu situación…"
                 {...register('mensaje')}
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-verde-oscuro/50 focus:border-verde-oscuro resize-none"
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-azul-oscuro/50 focus:border-azul-oscuro resize-none"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full bg-verde-oscuro text-white font-bold py-4 rounded-xl text-lg hover:bg-verde-medio transition-colors duration-300 cursor-pointer"
+              className="w-full bg-azul-oscuro text-white font-bold py-4 rounded-xl text-lg hover:bg-azul-medio transition-colors duration-300 cursor-pointer"
             >
               Quiero que me contacten
             </button>

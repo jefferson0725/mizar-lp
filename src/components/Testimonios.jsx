@@ -1,12 +1,12 @@
 import { motion } from 'framer-motion'
-import { RESENAS } from '../constants'
+import { RESENAS, WHATSAPP_URL } from '../constants'
 
 export default function Testimonios() {
   return (
     <section className="py-20 px-6 bg-white">
       <div className="max-w-5xl mx-auto">
         <motion.h2
-          className="font-serif text-verde-oscuro text-3xl sm:text-4xl md:text-5xl text-center mb-12 leading-tight"
+          className="font-serif text-azul-oscuro text-3xl sm:text-4xl md:text-5xl text-center mb-12 leading-tight"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -56,10 +56,27 @@ export default function Testimonios() {
               <p className="text-gray-700 text-sm leading-relaxed mb-4">
                 "{resena.texto}"
               </p>
-              <p className="font-semibold text-verde-oscuro text-sm">{resena.nombre}</p>
+              <p className="font-semibold text-azul-oscuro text-sm">{resena.nombre}</p>
             </motion.div>
           ))}
         </div>
+
+        <motion.div
+          className="flex justify-center mt-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block bg-azul-oscuro text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-azul-medio transition-colors duration-300"
+          >
+            Quiero ser el próximo
+          </a>
+        </motion.div>
       </div>
     </section>
   )

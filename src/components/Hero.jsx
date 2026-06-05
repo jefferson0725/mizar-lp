@@ -14,7 +14,7 @@ export default function Hero() {
       }}
     >
       {/* TODO: reemplazar backgroundImage con imagen real del proyecto */}
-      <div className="absolute inset-0 bg-verde-oscuro/60" />
+      <div className="absolute inset-0 bg-azul-oscuro/60" />
       <motion.div
         className="relative z-10 text-center px-6 max-w-4xl mx-auto py-20"
         initial={{ opacity: 0, y: 30 }}
@@ -32,7 +32,7 @@ export default function Hero() {
           href={WHATSAPP_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block bg-dorado text-verde-oscuro font-bold px-8 py-4 rounded-lg text-lg border-2 border-dorado hover:bg-verde-oscuro hover:text-dorado transition-colors duration-300"
+          className="inline-block bg-dorado text-azul-oscuro font-bold px-8 py-4 rounded-lg text-lg border-2 border-dorado hover:bg-azul-oscuro hover:text-dorado transition-colors duration-300"
         >
           Quiero saber más
         </a>

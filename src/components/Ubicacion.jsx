@@ -21,7 +21,7 @@ export default function Ubicacion() {
     <section className="py-20 px-6 bg-white">
       <div className="max-w-5xl mx-auto">
         <motion.h2
-          className="font-serif text-verde-oscuro text-3xl sm:text-4xl md:text-5xl text-center mb-12 leading-tight"
+          className="font-serif text-azul-oscuro text-3xl sm:text-4xl md:text-5xl text-center mb-12 leading-tight"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -42,7 +42,7 @@ export default function Ubicacion() {
                 transition={{ duration: 0.6, delay: i * 0.15 }}
                 viewport={{ once: true }}
               >
-                <Icon className="w-10 h-10 text-verde-oscuro mx-auto mb-4" aria-hidden="true" />
+                <Icon className="w-10 h-10 text-azul-oscuro mx-auto mb-4" aria-hidden="true" />
                 <p className="text-gray-700 text-base leading-relaxed">{punto.texto}</p>
               </motion.div>
             )
@@ -86,7 +86,7 @@ export default function Ubicacion() {
             href="https://www.google.com/maps/place/LAURELES+CAMPESTRE/@7.0309891,-73.174736,1079m/data=!3m2!1e3!4b1!4m6!3m5!1s0x8e6839005f8dab5f:0x96a0de025729c309!8m2!3d7.0309838!4d-73.1721611!16s%2Fg%2F11yt7fjm25?entry=tts"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-verde-oscuro text-white font-semibold px-6 py-3 rounded-lg hover:bg-verde-medio transition-colors duration-300"
+            className="inline-flex items-center gap-2 bg-azul-oscuro text-white font-semibold px-6 py-3 rounded-lg hover:bg-azul-medio transition-colors duration-300"
           >
             <Navigation className="w-4 h-4" />
             Cómo llegar

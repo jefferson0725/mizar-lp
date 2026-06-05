@@ -24,7 +24,7 @@ const beneficios = [
 
 export default function Precios() {
   return (
-    <section className="py-20 px-6 bg-verde-oscuro">
+    <section className="py-20 px-6 bg-azul-oscuro">
       <div className="max-w-4xl mx-auto text-center">
         <motion.h2
           className="font-serif text-crema text-3xl sm:text-4xl md:text-5xl mb-4 leading-tight"
@@ -85,7 +85,7 @@ export default function Precios() {
           href={WHATSAPP_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block bg-dorado text-verde-oscuro font-bold px-10 py-4 rounded-lg text-lg hover:bg-crema transition-colors duration-300"
+          className="inline-block bg-dorado text-azul-oscuro font-bold px-10 py-4 rounded-lg text-lg hover:bg-crema transition-colors duration-300"
         >
           Quiero saber más
         </a>

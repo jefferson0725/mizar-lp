@@ -15,7 +15,7 @@ function WhatsAppIcon() {
 
 export default function Footer() {
   return (
-    <footer className="bg-verde-oscuro py-10 px-6">
+    <footer className="bg-azul-oscuro py-10 px-6">
       <div className="max-w-5xl mx-auto flex flex-col items-center gap-4 text-center">
         <p className="font-serif text-crema text-2xl tracking-wide">
           Laureles Campestre

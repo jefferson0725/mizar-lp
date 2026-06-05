@@ -2,10 +2,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        verde: {
-          oscuro: "#2D5016",
-          medio: "#3D6B1F",
-          claro: "#5A9A2E",
+        azul: {
+          oscuro: "#1B3A5C",
+          medio: "#254E7A",
+          claro: "#3A6FA0",
         },
         crema: "#F5F0E8",
         dorado: "#C8933A",
