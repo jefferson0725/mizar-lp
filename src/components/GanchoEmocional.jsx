@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { motion } from "framer-motion";
 
 export default function GanchoEmocional() {
   return (
@@ -19,24 +19,11 @@ export default function GanchoEmocional() {
           <span className="text-white/55">¿Y qué tienes a tu nombre?</span>
         </h2>
 
-        <p className="text-white/75 text-lg md:text-xl leading-relaxed mb-6 max-w-2xl mx-auto">
-          Cada mes pagas el arriendo puntual… y al cierre del año el apartamento
-          sigue siendo de otro. Tu esfuerzo termina construyendo el patrimonio de
-          alguien más.
-        </p>
-
         <p className="text-white text-xl md:text-2xl font-light mb-10 max-w-2xl mx-auto">
-          No te falta esfuerzo. Te faltó una oportunidad real, pensada para gente
-          trabajadora como tú.
-        </p>
-
-        <div className="w-12 h-px bg-rojo-light/60 mx-auto mb-8" />
-
-        <p className="font-serif text-rojo-light text-2xl md:text-3xl leading-snug">
-          Hoy la tienes enfrente: deja de pagar lo de otros y empieza a construir
-          lo tuyo.
+          No te falta esfuerzo. Te faltó una oportunidad real, pensada para
+          gente como tú.
         </p>
       </motion.div>
     </section>
-  )
+  );
 }
