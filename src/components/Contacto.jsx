@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
+import { useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { WHATSAPP_URL } from '../constants'
 
@@ -12,17 +11,15 @@ function WhatsAppIcon() {
 }
 
 export default function Contacto() {
-  const [enviado, setEnviado] = useState(false)
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm()
-
-  const onSubmit = () => {
-    // TODO: conectar onSubmit a Formspree, Make.com, o tu backend
-    setEnviado(true)
-  }
+  useEffect(() => {
+    const script = document.createElement('script')
+    script.src = 'https://web.sixteam.pro/js/form_embed.js'
+    script.async = true
+    document.body.appendChild(script)
+    return () => {
+      document.body.removeChild(script)
+    }
+  }, [])
 
   return (
     <section className="py-20 px-6 bg-white">
@@ -53,121 +50,30 @@ export default function Contacto() {
           Quiero saber más por WhatsApp
         </a>
 
-        <div className="flex items-center gap-4 mb-8">
-          <div className="flex-1 h-px bg-gray-200" />
-          <span className="text-gray-400 text-sm text-center">
-            ¿Prefieres que te contactemos nosotros?
-          </span>
-          <div className="flex-1 h-px bg-gray-200" />
-        </div>
-
-        {enviado ? (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="bg-navy/10 border border-navy/30 text-navy rounded-xl p-8 text-center"
-          >
-            <p className="text-xl font-semibold">¡Listo! Te contactamos pronto.</p>
-          </motion.div>
-        ) : (
-          <form
-            id="formulario-contacto"
-            onSubmit={handleSubmit(onSubmit)}
-            noValidate
-            className="space-y-5"
-          >
-            <div>
-              <label
-                htmlFor="nombre"
-                className="block text-sm font-semibold text-gray-700 mb-1"
-              >
-                Nombre completo
-              </label>
-              <input
-                id="nombre"
-                type="text"
-                placeholder="Tu nombre"
-                {...register('nombre', { required: 'Campo requerido' })}
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-navy/50 focus:border-navy"
-              />
-              {errors.nombre && (
-                <p className="text-red-500 text-xs mt-1">{errors.nombre.message}</p>
-              )}
-            </div>
-
-            <div>
-              <label
-                htmlFor="telefono"
-                className="block text-sm font-semibold text-gray-700 mb-1"
-              >
-                Teléfono / WhatsApp
-              </label>
-              <input
-                id="telefono"
-                type="tel"
-                placeholder="300 000 0000"
-                {...register('telefono', {
-                  required: 'Campo requerido',
-                  pattern: {
-                    value: /^[0-9+\s()-]{7,15}$/,
-                    message: 'Número inválido',
-                  },
-                })}
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-navy/50 focus:border-navy"
-              />
-              {errors.telefono && (
-                <p className="text-red-500 text-xs mt-1">{errors.telefono.message}</p>
-              )}
-            </div>
-
-            <div>
-              <label
-                htmlFor="tipo"
-                className="block text-sm font-semibold text-gray-700 mb-1"
-              >
-                ¿Eres empleado o independiente?
-              </label>
-              <select
-                id="tipo"
-                {...register('tipo', { required: 'Selecciona una opción' })}
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-navy/50 focus:border-navy bg-white"
-              >
-                <option value="">Selecciona...</option>
-                <option value="empleado">Empleado</option>
-                <option value="independiente">Independiente</option>
-              </select>
-              {errors.tipo && (
-                <p className="text-red-500 text-xs mt-1">{errors.tipo.message}</p>
-              )}
-            </div>
-
-            <div>
-              <label
-                htmlFor="mensaje"
-                className="block text-sm font-semibold text-gray-700 mb-1"
-              >
-                Mensaje (opcional)
-              </label>
-              <textarea
-                id="mensaje"
-                rows={4}
-                placeholder="Cuéntanos algo sobre tu situación…"
-                {...register('mensaje')}
-                className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-navy/50 focus:border-navy resize-none"
-              />
-            </div>
-
-            <button
-              type="submit"
-              className="w-full bg-navy text-white font-bold py-4 rounded-xl text-lg hover:bg-navy-light transition-colors duration-300 cursor-pointer"
-            >
-              Quiero que me contacten
-            </button>
-            <p className="text-center text-gray-400 text-sm">
-              Un asesor te escribe en menos de 24 horas.
-            </p>
-          </form>
-        )}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          <iframe
+            src="https://web.sixteam.pro/widget/form/TtlEMonBrX00yaU7wCme"
+            style={{ width: '100%', height: '1138px', border: 'none', borderRadius: '12px' }}
+            id="inline-TtlEMonBrX00yaU7wCme"
+            data-layout="{'id':'INLINE'}"
+            data-trigger-type="alwaysShow"
+            data-trigger-value=""
+            data-activation-type="alwaysActivated"
+            data-activation-value=""
+            data-deactivation-type="neverDeactivate"
+            data-deactivation-value=""
+            data-form-name="Agendamiento de llamadas Laureles"
+            data-height="1138"
+            data-layout-iframe-id="inline-TtlEMonBrX00yaU7wCme"
+            data-form-id="TtlEMonBrX00yaU7wCme"
+            title="Agendamiento de llamadas Laureles"
+          />
+        </motion.div>
       </div>
     </section>
   )
