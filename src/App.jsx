@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import IntroParallax from './components/IntroParallax'
 import Ubicacion from './components/Ubicacion'
+import Timeline from './components/Timeline'
 import Apartamentos from './components/Apartamentos'
 import QuienesSomos from './components/QuienesSomos'
 import Testimonios from './components/Testimonios'
@@ -20,6 +21,7 @@ export default function App() {
     <>
       <IntroParallax />
       <Ubicacion />
+      <Timeline />
       <Apartamentos />
       <Testimonios />
       <QuienesSomos />

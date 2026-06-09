@@ -3,8 +3,7 @@ import { motion, useInView } from "framer-motion";
 import {
   Building2,
   HeartHandshake,
-  ShieldCheck,
-  Home,
+  Globe2,
   CalendarCheck,
   BadgeCheck,
 } from "lucide-react";
@@ -38,9 +37,9 @@ const pilares = [
     texto: "El acuerdo es contigo, sin bancos ni intermediarios de por medio.",
   },
   {
-    icono: ShieldCheck,
-    titulo: "Respaldo en Santander",
-    texto: "Construimos en Girón y el área metropolitana de Bucaramanga.",
+    icono: Globe2,
+    titulo: "Compra desde el exterior",
+    texto: "Te acompañamos en todo el proceso a distancia, paso a paso desde tu país.",
   },
 ];
 
@@ -87,17 +86,18 @@ export default function QuienesSomos() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <p className="text-rojo font-semibold tracking-widest uppercase text-xs md:text-sm mb-4">
+          <p className="text-rojo-dark font-semibold tracking-widest uppercase text-xs md:text-sm mb-4">
             Quiénes somos
           </p>
           <h2 className="font-serif text-navy text-3xl sm:text-4xl md:text-5xl leading-tight mb-6">
-            Detrás de Laureles Campestre está Mizar.
+            Detrás de Terrazas de la Cantera está Mizar.
           </h2>
           <p className="text-gris-oscuro text-lg leading-relaxed">
             Somos una constructora de Santander dedicada al diseño y la
-            construcción de vivienda, con un modelo de pago a cuotas directo y
-            sin bancos. Nuestro propósito es simple: que más familias tengan su
-            apartamento propio, sin trámites imposibles.
+            construcción de vivienda, con pago a cuotas directo y sin bancos.
+            Nuestro propósito es simple: que más familias e inversionistas
+            tengan su apartamento propio, sin trámites imposibles y sin importar
+            dónde vivan hoy.
           </p>
         </motion.div>
 
@@ -114,8 +114,8 @@ export default function QuienesSomos() {
                 transition={{ duration: 0.5, delay: i * 0.12 }}
                 viewport={{ once: true }}
               >
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-rojo/10 mb-3">
-                  <Icon className="w-6 h-6 text-rojo" aria-hidden="true" />
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-navy/10 mb-3">
+                  <Icon className="w-6 h-6 text-navy" aria-hidden="true" />
                 </div>
                 <p className="font-serif text-navy text-4xl md:text-5xl font-bold leading-none mb-1">
                   <Counter target={m.valor} sufijo={m.sufijo} />
@@ -141,8 +141,8 @@ export default function QuienesSomos() {
                 transition={{ duration: 0.6, delay: i * 0.15 }}
                 viewport={{ once: true }}
               >
-                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-rojo/10 mb-5">
-                  <Icon className="w-7 h-7 text-rojo" aria-hidden="true" />
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-navy/10 mb-5">
+                  <Icon className="w-7 h-7 text-navy" aria-hidden="true" />
                 </div>
                 <h3 className="font-semibold text-navy text-lg mb-2">
                   {pilar.titulo}

@@ -16,12 +16,13 @@ function WhatsAppIcon() {
 }
 
 const items = [
-  { label: "Apartamento de 3 alcobas en Girón", valor: "Tuyo" },
-  { label: "Separación", valor: "$3.000.000" },
-  { label: "Cuota mensual desde", valor: "$865.000" },
+  { label: "Apartamento de 3 alcobas en Piedecuesta", valor: "Tuyo" },
+  { label: "Separación", valor: "$2.000.000" },
+  { label: "Ahorro / cuota inicial", valor: "$30.000.000" },
+  { label: "Cuotas mensuales desde", valor: "$4.000.000" },
   { label: "Estudio de crédito bancario", valor: "No necesario" },
-  { label: "Subsidios de vivienda", valor: "Aplican" },
-  { label: "Entrega", valor: "2027 · 2028" },
+  { label: "Permuta de carro o moto", valor: "Aceptamos" },
+  { label: "Entrega proyectada", valor: "Diciembre 2027" },
 ];
 
 export default function Resumen() {
@@ -48,9 +49,9 @@ export default function Resumen() {
           {/* Logo */}
           <div className="flex justify-center mb-6">
             <img
-              src="/assets/logo-mizar.webp"
-              alt="Mizar · Diseño y Construcción"
-              className="h-8 w-auto"
+              src="/assets/logo-terrazas.webp"
+              alt="Terrazas de la Cantera"
+              className="h-16 w-auto"
             />
           </div>
 
@@ -82,13 +83,13 @@ export default function Resumen() {
 
           {/* Caja destacada (equivalente al "HOY" del recibo) */}
           <div className="bg-gradient-cta rounded-2xl py-6 px-4 text-center mb-6">
-            <p className="text-white/80 text-sm uppercase tracking-widest mb-1">
+            <p className="text-navy/70 text-sm uppercase tracking-widest mb-1">
               Separas hoy con
             </p>
-            <p className="text-white font-bold text-3xl sm:text-4xl">
-              $3.000.000
+            <p className="text-navy font-bold text-3xl sm:text-4xl">
+              $2.000.000
             </p>
-            <p className="text-white/85 text-sm mt-2">
+            <p className="text-navy/80 text-sm mt-2">
               Pago directo con Mizar, sin bancos.
             </p>
           </div>

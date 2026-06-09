@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { APARTAMENTOS, WHATSAPP_URL } from "../constants";
 
-function AptoCard({ apto, imagenes }) {
+function AptoCard({ apto }) {
+  const imagenes = apto.imagenes;
   const [imagenActual, setImagenActual] = useState(0);
 
   useEffect(() => {
@@ -23,9 +24,13 @@ function AptoCard({ apto, imagenes }) {
           <img
             src={imagenes[imagenActual].src}
             alt={imagenes[imagenActual].alt}
-            className="w-full h-full object-cover"
+            className={`w-full h-full ${
+              imagenes[imagenActual].tipo === "plano"
+                ? "object-contain bg-white"
+                : "object-cover"
+            }`}
           />
-          <span className="absolute top-3 left-3 bg-navy/85 text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">
+          <span className="absolute top-3 left-3 bg-navy/90 text-white text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide">
             {imagenes[imagenActual].tipo === "plano" ? "Plano" : "Render"}
           </span>
           <button
@@ -43,7 +48,7 @@ function AptoCard({ apto, imagenes }) {
             ›
           </button>
         </div>
-        <div className="flex justify-center gap-2 py-3">
+        <div className="flex flex-wrap justify-center gap-2 py-3">
           {imagenes.map((_, i) => (
             <button
               key={i}
@@ -58,7 +63,9 @@ function AptoCard({ apto, imagenes }) {
       </div>
 
       <div className="md:w-1/2 p-8 flex flex-col justify-center">
-        <h3 className="font-serif text-navy text-2xl mb-6">{apto.tipo}</h3>
+        <h3 className="font-serif text-navy text-2xl mb-6">
+          Apartamento {apto.tipo}
+        </h3>
         <dl className="space-y-3 text-gray-700">
           <div className="flex justify-between border-b border-gray-100 pb-2">
             <dt className="font-semibold">Área</dt>
@@ -72,13 +79,15 @@ function AptoCard({ apto, imagenes }) {
             <dt className="font-semibold">Baños</dt>
             <dd>{apto.banos}</dd>
           </div>
-          <div className="flex justify-between border-b border-gray-100 pb-2">
-            <dt className="font-semibold">Piso</dt>
-            <dd className="text-right text-sm">{apto.piso}</dd>
-          </div>
+          {apto.extra && (
+            <div className="flex justify-between border-b border-gray-100 pb-2">
+              <dt className="font-semibold">Vista</dt>
+              <dd className="text-right text-sm">{apto.extra}</dd>
+            </div>
+          )}
           {apto.nota && (
             <div className="pt-1">
-              <p className="text-sm text-rojo italic">{apto.nota}</p>
+              <p className="text-sm text-rojo-dark italic">{apto.nota}</p>
             </div>
           )}
         </dl>
@@ -88,55 +97,25 @@ function AptoCard({ apto, imagenes }) {
 }
 
 export default function Apartamentos() {
-  const [estadoActivo, setEstadoActivo] = useState("acabados");
-
   return (
     <section className="py-20 px-6 bg-gris-claro">
       <div className="max-w-5xl mx-auto">
-        <h2 className="font-serif text-navy text-3xl sm:text-4xl md:text-5xl text-center mb-10">
-          Los apartamentos
+        <h2 className="font-serif text-navy text-3xl sm:text-4xl md:text-5xl text-center mb-3">
+          Conoce el apartamento
         </h2>
+        <p className="text-center text-gris-medio text-lg mb-10 max-w-xl mx-auto">
+          Recorre el plano y los renders de los interiores.
+        </p>
 
-        {/* Toggle acabados / obra gris */}
-        <div className="flex justify-center mb-10">
-          <div className="flex bg-white rounded-full border border-gray-200 p-1 gap-1">
-            <button
-              onClick={() => setEstadoActivo("acabados")}
-              className={`px-5 py-1.5 rounded-full text-sm font-semibold transition-colors duration-300 cursor-pointer ${
-                estadoActivo === "acabados"
-                  ? "bg-rojo text-white"
-                  : "text-gray-500 hover:text-navy"
-              }`}
-            >
-              Con acabados
-            </button>
-            <button
-              onClick={() => setEstadoActivo("obraGris")}
-              className={`px-5 py-1.5 rounded-full text-sm font-semibold transition-colors duration-300 cursor-pointer ${
-                estadoActivo === "obraGris"
-                  ? "bg-rojo text-white"
-                  : "text-gray-500 hover:text-navy"
-              }`}
-            >
-              Obra gris
-            </button>
-          </div>
-        </div>
-
-        {/* Ambos apartamentos en secuencia (móvil y escritorio) */}
         <div className="space-y-8">
           {APARTAMENTOS.map((a) => (
-            <AptoCard
-              key={`${a.id}-${estadoActivo}`}
-              apto={a}
-              imagenes={a[estadoActivo]}
-            />
+            <AptoCard key={a.id} apto={a} />
           ))}
         </div>
 
         <p className="text-center text-gray-600 mt-10 text-lg max-w-2xl mx-auto">
-          Puedes recibirlo en obra gris para terminarlo a tu ritmo, o con
-          acabados. Tú eliges.
+          Apartamentos de 3 alcobas, 2 baños y vista al Cerro de La Cantera. Se
+          entregan con full acabados.
         </p>
 
         <div className="flex justify-center mt-8">
@@ -144,7 +123,7 @@ export default function Apartamentos() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-rojo text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-rojo-dark transition-colors duration-300 shadow-hover"
+            className="inline-block bg-rojo text-navy font-bold px-8 py-4 rounded-lg text-lg hover:bg-rojo-dark hover:text-navy transition-colors duration-300 shadow-hover"
           >
             Me interesa, quiero precios
           </a>

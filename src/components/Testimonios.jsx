@@ -1,74 +1,71 @@
-import { useEffect } from "react";
 import { motion } from "framer-motion";
+import { Users, Landmark, Globe2 } from "lucide-react";
 
-// Píxeles a recortar del header y footer del embed de Instagram
-const CROP_TOP = 50;
-const CROP_BOTTOM = 120;
-const IFRAME_WIDTH = 400;
-const IFRAME_HEIGHT = 710;
+const trust = [
+  { icono: Users, valor: "Cientos", etiqueta: "de familias e inversionistas" },
+  { icono: Landmark, valor: "Sin bancos", etiqueta: "directo con Mizar" },
+  { icono: Globe2, valor: "A distancia", etiqueta: "compra desde tu país" },
+];
 
 export default function Testimonios() {
-  useEffect(() => {
-    const featurableScript = document.createElement("script");
-    featurableScript.src =
-      "https://featurable.com/assets/v2/carousel_default.min.js";
-    featurableScript.defer = true;
-    featurableScript.charset = "UTF-8";
-    document.body.appendChild(featurableScript);
-    return () => {
-      document.body.removeChild(featurableScript);
-    };
-  }, []);
-
-  const visibleHeight = IFRAME_HEIGHT - CROP_TOP - CROP_BOTTOM;
-
   return (
-    <section className="py-20 px-6 bg-white">
-      <div className="max-w-5xl mx-auto">
+    <section className="py-20 px-6 bg-navy">
+      <div className="max-w-4xl mx-auto text-center">
+        <motion.p
+          className="text-rojo-light font-semibold tracking-widest uppercase text-xs md:text-sm mb-5"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
+          Prueba social
+        </motion.p>
+
         <motion.h2
-          className="font-serif text-navy text-3xl sm:text-4xl md:text-5xl text-center mb-12 leading-tight"
+          className="font-serif text-white text-3xl sm:text-4xl md:text-5xl leading-tight mb-6"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          Hemos ayudado a cientos de personas a comprar su apartamento de la
-          forma más sencilla.
+          Hemos acompañado a cientos de familias e inversionistas a comprar su
+          apartamento de la forma más sencilla.
         </motion.h2>
 
-        <motion.div
-          className="flex justify-center mb-14"
-          initial={{ opacity: 0, scale: 0.97 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
+        <motion.p
+          className="text-white/80 text-lg max-w-2xl mx-auto mb-14"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
           viewport={{ once: true }}
         >
-          <div
-            style={{
-              width: IFRAME_WIDTH,
-              height: visibleHeight,
-              overflow: "hidden",
-              borderRadius: "12px",
-            }}
-          >
-            <iframe
-              src="https://www.instagram.com/reel/DOHiYi9iYnC/embed/"
-              width={IFRAME_WIDTH}
-              height={IFRAME_HEIGHT}
-              frameBorder="0"
-              scrolling="no"
-              allowTransparency="true"
-              allow="encrypted-media"
-              title="Video testimonio"
-              style={{ marginTop: -CROP_TOP }}
-            />
-          </div>
-        </motion.div>
+          Sin bancos, sin intermediarios y con acompañamiento en cada paso,
+          estés donde estés.
+        </motion.p>
 
-        <div
-          id="featurable-c29f4a7a-ea85-49fe-898f-e666bfc8983d"
-          data-featurable-async
-        ></div>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+          {trust.map((t, i) => {
+            const Icon = t.icono;
+            return (
+              <motion.div
+                key={i}
+                className="flex flex-col items-center"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.12 }}
+                viewport={{ once: true }}
+              >
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-rojo/15 mb-4">
+                  <Icon className="w-7 h-7 text-rojo-light" aria-hidden="true" />
+                </div>
+                <p className="font-serif text-white text-2xl md:text-3xl font-bold leading-none mb-1">
+                  {t.valor}
+                </p>
+                <p className="text-white/70 text-sm">{t.etiqueta}</p>
+              </motion.div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

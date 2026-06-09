@@ -19,11 +19,11 @@ export default function Hero() {
       {/* Overlay navy para legibilidad */}
       <div className="absolute inset-0 bg-gradient-to-b from-navy-dark/80 via-navy-dark/65 to-navy-dark/85" />
 
-      {/* Logo Mizar */}
+      {/* Logo Terrazas de la Cantera */}
       <motion.img
-        src="/assets/logo-mizar.webp"
-        alt="Mizar · Diseño y Construcción"
-        className="relative z-10 h-9 md:h-11 w-auto mb-10"
+        src="/assets/logo-terrazas.webp"
+        alt="Terrazas de la Cantera"
+        className="relative z-10 h-20 md:h-28 w-auto mb-8"
         initial={{ opacity: 0, y: -16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
@@ -36,26 +36,26 @@ export default function Hero() {
         transition={{ duration: 0.8, delay: 0.15 }}
       >
         <p className="text-rojo-light font-semibold tracking-widest uppercase text-xs md:text-sm mb-5">
-          Laureles Campestre
+          Apartamentos en el centro de Piedecuesta
         </p>
         <h1 className="font-serif font-black text-white text-4xl sm:text-5xl md:text-6xl leading-[1.08] mb-6">
-          Tu apartamento propio en Girón,{" "}
-          <span className="text-rojo-light">sin bancos y a cuotas.</span>
+          Tu apartamento propio en Piedecuesta,{" "}
+          <span className="text-rojo-light">sin bancos y sin viajar.</span>
         </h1>
         <p className="text-white/85 text-lg md:text-xl mb-10 font-light max-w-2xl mx-auto">
-          Apartamentos sobre planos a 150 metros del futuro anillo vial, en la
-          zona de mayor crecimiento de Girón.
+          Apartamentos sobre planos frente al Cerro de La Cantera. Pago a cuotas
+          directo con Mizar, desde donde estés.
         </p>
         <a
           href={WHATSAPP_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block bg-rojo text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-rojo-dark transition-colors duration-300 shadow-hover"
+          className="inline-block bg-rojo text-navy font-bold px-8 py-4 rounded-lg text-lg hover:bg-rojo-dark hover:text-navy transition-colors duration-300 shadow-hover"
         >
           Quiero conocer mis opciones
         </a>
         <p className="text-white/65 text-sm mt-6 tracking-widest uppercase">
-          Entregas 2027 · 2028
+          Entrega proyectada · Diciembre 2027
         </p>
       </motion.div>
 

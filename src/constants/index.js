@@ -1,198 +1,75 @@
-import {
-  planoTipo1,
-  tipo1Acabados1,
-  tipo1Acabados2,
-  tipo1Acabados3,
-  tipo1Acabados4,
-  tipo1Acabados5,
-  obraGris1,
-  obraGris2,
-  obraGris3,
-  obraGris4,
-  obraGris5,
-  tipo2Acabados1,
-  tipo2Acabados2,
-  tipo2Acabados3,
-  tipo2Acabados4,
-  tipo2Acabados5,
-  obraGris6,
-  obraGris7,
-  obraGris8,
-  obraGris9,
-  obraGris10,
-} from "../assets";
+// ===================================================================
+//  TERRAZAS DE LA CANTERA · Mizar
+//  Apartamentos VIS sobre planos en el centro de Piedecuesta.
+//  Las imágenes viven en public/assets (servidas como /assets/*).
+// ===================================================================
 
-export const WHATSAPP_NUMBER = "573112658552";
+export const WHATSAPP_NUMBER = "573112658552"; // TODO: confirmar número del proyecto
 export const WHATSAPP_MESSAGE =
-  "Me%20interesan%20los%20apartamentos%20de%20Laureles%20Campestre%2C%20mi%20nombre%20es%20";
+  "Me%20interesan%20los%20apartamentos%20de%20Terrazas%20de%20La%20Cantera%2C%20mi%20nombre%20es%20";
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`;
+
+// Link a Google Maps del proyecto (del copy)
+export const MAPS_URL =
+  "https://www.google.com/maps/place/Terrazas+de+la+Cantera/data=!4m2!3m1!1s0x0:0x3cf669ce4908575f?sa=X&ved=1t:2428&ictx=111";
+// Embed sin API key
+export const MAPS_EMBED_URL =
+  "https://maps.google.com/maps?q=Terrazas+de+la+Cantera+Piedecuesta&z=16&output=embed";
+
+// Carrusel del apartamento Tipo 1: plano + renders de interiores
+const galeriaInteriores = [
+  { src: "/assets/galeria-01.webp", alt: "Sala con ventanal y vista al Cerro de La Cantera", tipo: "render" },
+  { src: "/assets/galeria-02.webp", alt: "Render interior del apartamento — Terrazas de la Cantera", tipo: "render" },
+  { src: "/assets/galeria-03.webp", alt: "Render interior del apartamento — Terrazas de la Cantera", tipo: "render" },
+  { src: "/assets/galeria-04.webp", alt: "Render interior del apartamento — Terrazas de la Cantera", tipo: "render" },
+  { src: "/assets/galeria-05.webp", alt: "Cocina integral y comedor — Terrazas de la Cantera", tipo: "render" },
+  { src: "/assets/galeria-06.webp", alt: "Render interior del apartamento — Terrazas de la Cantera", tipo: "render" },
+  { src: "/assets/galeria-07.webp", alt: "Render interior del apartamento — Terrazas de la Cantera", tipo: "render" },
+  { src: "/assets/galeria-08.webp", alt: "Render interior del apartamento — Terrazas de la Cantera", tipo: "render" },
+  { src: "/assets/galeria-09.webp", alt: "Render interior del apartamento — Terrazas de la Cantera", tipo: "render" },
+  { src: "/assets/galeria-10.webp", alt: "Render interior del apartamento — Terrazas de la Cantera", tipo: "render" },
+  { src: "/assets/galeria-11.webp", alt: "Render interior del apartamento — Terrazas de la Cantera", tipo: "render" },
+  { src: "/assets/galeria-12.webp", alt: "Render interior del apartamento — Terrazas de la Cantera", tipo: "render" },
+];
 
 export const APARTAMENTOS = [
   {
     id: 1,
     tipo: "Tipo 1",
-    area: "48,24 m²",
+    area: "60,47 m²",
     habitaciones: 3,
-    banos: 1,
-    piso: "Del segundo al quinto piso",
+    banos: 2,
+    extra: "Vista hacia el cerro",
     nota: null,
-    acabados: [
+    imagenes: [
       {
-        src: planoTipo1,
-        alt: "Plano del apartamento Tipo 1 — 48,24 m², 3 alcobas y 1 baño",
+        src: "/assets/plano-tipo1.webp",
+        alt: "Plano del apartamento Tipo 1 — 60,47 m², 3 alcobas y 2 baños",
         tipo: "plano",
       },
-      {
-        src: tipo1Acabados1,
-        alt: "Acabados Tipo 1 - imagen 1",
-        tipo: "render",
-      },
-      {
-        src: tipo1Acabados2,
-        alt: "Acabados Tipo 1 - imagen 2",
-        tipo: "render",
-      },
-      {
-        src: tipo1Acabados3,
-        alt: "Acabados Tipo 1 - imagen 3",
-        tipo: "render",
-      },
-      {
-        src: tipo1Acabados4,
-        alt: "Acabados Tipo 1 - imagen 4",
-        tipo: "render",
-      },
-      {
-        src: tipo1Acabados5,
-        alt: "Acabados Tipo 1 - imagen 5",
-        tipo: "render",
-      },
-    ],
-    obraGris: [
-      {
-        src: planoTipo1,
-        alt: "Plano del apartamento Tipo 1 — 48,24 m², 3 alcobas y 1 baño",
-        tipo: "plano",
-      },
-      { src: obraGris1, alt: "Obra gris Tipo 1 - imagen 1", tipo: "render" },
-      { src: obraGris2, alt: "Obra gris Tipo 1 - imagen 2", tipo: "render" },
-      { src: obraGris3, alt: "Obra gris Tipo 1 - imagen 3", tipo: "render" },
-      { src: obraGris4, alt: "Obra gris Tipo 1 - imagen 4", tipo: "render" },
-      { src: obraGris5, alt: "Obra gris Tipo 1 - imagen 5", tipo: "render" },
-    ],
-  },
-  {
-    id: 2,
-    tipo: "Tipo 2",
-    area: "56,10 m²",
-    habitaciones: 3,
-    banos: 1,
-    piso: "Primer piso",
-    nota: "Con posibilidad de ampliar a un segundo baño",
-    acabados: [
-      {
-        src: "/assets/plano-tipo2-56m.webp",
-        alt: "Plano del apartamento Tipo 2 — 56,10 m², 3 alcobas, 1 baño y patio",
-        tipo: "plano",
-      },
-      {
-        src: tipo2Acabados1,
-        alt: "Acabados Tipo 2 - imagen 1",
-        tipo: "render",
-      },
-      {
-        src: tipo2Acabados2,
-        alt: "Acabados Tipo 2 - imagen 2",
-        tipo: "render",
-      },
-      {
-        src: tipo2Acabados3,
-        alt: "Acabados Tipo 2 - imagen 3",
-        tipo: "render",
-      },
-      {
-        src: tipo2Acabados4,
-        alt: "Acabados Tipo 2 - imagen 4",
-        tipo: "render",
-      },
-      {
-        src: tipo2Acabados5,
-        alt: "Acabados Tipo 2 - imagen 5",
-        tipo: "render",
-      },
-    ],
-    obraGris: [
-      {
-        src: "/assets/plano-tipo2-56m.webp",
-        alt: "Plano del apartamento Tipo 2 — 56,10 m², 3 alcobas, 1 baño y patio",
-        tipo: "plano",
-      },
-      {
-        src: obraGris6,
-        alt: "Render de la fachada de Laureles Campestre",
-        tipo: "render",
-      },
-      {
-        src: obraGris7,
-        alt: "Vista panorámica del proyecto Laureles Campestre",
-        tipo: "render",
-      },
-      {
-        src: obraGris8,
-        alt: "Render del área social de Laureles Campestre",
-        tipo: "render",
-      },
-      {
-        src: obraGris9,
-        alt: "Render del área social de Laureles Campestre",
-        tipo: "render",
-      },
-      {
-        src: obraGris10,
-        alt: "Render del área social de Laureles Campestre",
-        tipo: "render",
-      },
+      ...galeriaInteriores,
     ],
   },
 ];
 
 export const FAQ_ITEMS = [
   {
-    pregunta: "¿Tengo que ir a un banco?",
+    pregunta: "¿Puedo comprar desde Estados Unidos o Europa?",
     respuesta:
-      "No. El acuerdo es directo con Mizar. Sin estudios de crédito bancario, sin intermediarios.",
+      "Sí. Todo el proceso se puede hacer a distancia. Te acompañamos en cada paso desde tu país.",
   },
   {
-    pregunta: "¿Qué pasa si estoy reportado?",
+    pregunta: "¿Tengo que pasar por un banco?",
     respuesta:
-      "No importa si estás reportado. No revisamos centrales de riesgo.",
+      "No. El acuerdo es directo con Mizar, sin estudios de crédito bancario ni intermediarios.",
   },
   {
     pregunta: "¿Cuándo me entregan el apartamento?",
+    respuesta: "La entrega está proyectada para diciembre de 2027.",
+  },
+  {
+    pregunta: "¿El apartamento se entrega terminado?",
     respuesta:
-      "Las entregas están proyectadas para noviembre de 2027 y noviembre de 2028, según el plan que elijas.",
-  },
-  {
-    pregunta: "¿Y si tengo un carro o moto?",
-    respuesta: "Aceptamos permuta con vehículo como parte de tu pago.",
-  },
-];
-
-// TODO: reemplazar con reseñas reales de Google Maps
-export const RESENAS = [
-  {
-    nombre: "María G.",
-    texto: "Reemplazar con reseña real de Google Maps",
-    estrellas: 5,
-  },
-  {
-    nombre: "Carlos R.",
-    texto: "Reemplazar con reseña real de Google Maps",
-    estrellas: 5,
-  },
-  {
-    nombre: "Paola M.",
-    texto: "Reemplazar con reseña real de Google Maps",
-    estrellas: 5,
+      "Sí. Con acabados de carpintería, puertas, closets, cocina integral y extractor.",
   },
 ];

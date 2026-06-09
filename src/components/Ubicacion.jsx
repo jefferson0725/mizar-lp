@@ -1,19 +1,26 @@
 import { motion } from 'framer-motion'
-import { MapPin, Car, Trees, Navigation } from 'lucide-react'
+import { MapPin, Bus, Trees, Navigation, Building2, ParkingSquare, Sparkles } from 'lucide-react'
+import { MAPS_URL, MAPS_EMBED_URL } from '../constants'
 
 const puntos = [
   {
     icono: MapPin,
-    texto: 'A 150 metros del futuro anillo vial metropolitano Piedecuesta–Girón.',
-  },
-  {
-    icono: Car,
-    texto: 'Acceso a parqueaderos de la urbanización.',
+    texto: 'A 4 cuadras del Parque Principal y la Plaza de Mercado.',
   },
   {
     icono: Trees,
-    texto: '2,5 hectáreas reservadas para zonas verdes y espacios de uso público.',
+    texto: 'Frente al Cerro de La Cantera, uno de los pulmones verdes y puntos turísticos del sector.',
   },
+  {
+    icono: Bus,
+    texto: 'Acceso directo a transporte público y vías principales.',
+  },
+]
+
+const features = [
+  { icono: Building2, texto: 'Torre de 5 pisos' },
+  { icono: ParkingSquare, texto: 'Parqueadero en sótano' },
+  { icono: Sparkles, texto: 'Full acabados' },
 ]
 
 export default function Ubicacion() {
@@ -27,10 +34,10 @@ export default function Ubicacion() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          Estás comprando del lado correcto de Girón.
+          Estás comprando en el mejor punto de Piedecuesta.
         </motion.h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
           {puntos.map((punto, i) => {
             const Icon = punto.icono
             return (
@@ -42,8 +49,28 @@ export default function Ubicacion() {
                 transition={{ duration: 0.6, delay: i * 0.15 }}
                 viewport={{ once: true }}
               >
-                <Icon className="w-10 h-10 text-rojo mx-auto mb-4" aria-hidden="true" />
+                <Icon className="w-10 h-10 text-navy mx-auto mb-4" aria-hidden="true" />
                 <p className="text-gris-oscuro text-base leading-relaxed">{punto.texto}</p>
+              </motion.div>
+            )
+          })}
+        </div>
+
+        {/* Características del edificio */}
+        <div className="flex flex-wrap justify-center gap-3 mb-12">
+          {features.map((f, i) => {
+            const Icon = f.icono
+            return (
+              <motion.div
+                key={i}
+                className="inline-flex items-center gap-2 bg-navy text-white rounded-full px-5 py-2.5 text-sm font-semibold"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <Icon className="w-4 h-4 text-rojo-light" aria-hidden="true" />
+                {f.texto}
               </motion.div>
             )
           })}
@@ -56,7 +83,7 @@ export default function Ubicacion() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          Durante años, el crecimiento de Girón se concentró sobre la vía antigua. El nuevo anillo vial está cambiando esa historia, justo donde está Laureles Campestre.
+          El centro de Piedecuesta concentra todo lo que necesitas a pie, y el Cerro de La Cantera le da naturaleza y plusvalía a la zona.
         </motion.p>
 
         <motion.div
@@ -66,11 +93,13 @@ export default function Ubicacion() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <img
-            src="/assets/mapa-ubicacion.webp"
-            alt="Ubicación de Laureles Campestre frente al nuevo anillo vial Piedecuesta–Girón"
-            className="w-full h-auto"
+          <iframe
+            src={MAPS_EMBED_URL}
+            title="Ubicación de Terrazas de la Cantera en Piedecuesta"
+            className="w-full h-[340px] md:h-[420px] border-0"
             loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
           />
         </motion.div>
 
@@ -82,10 +111,10 @@ export default function Ubicacion() {
           viewport={{ once: true }}
         >
           <a
-            href="https://www.google.com/maps/place/LAURELES+CAMPESTRE/@7.0309891,-73.174736,1079m/data=!3m2!1e3!4b1!4m6!3m5!1s0x8e6839005f8dab5f:0x96a0de025729c309!8m2!3d7.0309838!4d-73.1721611!16s%2Fg%2F11yt7fjm25?entry=tts"
+            href={MAPS_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-rojo text-white font-semibold px-6 py-3 rounded-lg hover:bg-rojo-dark transition-colors duration-300 shadow-lg"
+            className="inline-flex items-center gap-2 bg-rojo text-navy font-semibold px-6 py-3 rounded-lg hover:bg-rojo-dark hover:text-navy transition-colors duration-300 shadow-lg"
           >
             <Navigation className="w-4 h-4" />
             Cómo llegar
@@ -93,8 +122,8 @@ export default function Ubicacion() {
         </motion.div>
 
         <p className="text-navy font-bold text-center text-xl md:text-2xl">
-          Más conexión, más desarrollo alrededor.{" "}
-          <span className="text-rojo">Un apartamento que gana valor todos los días.</span>
+          Más conexión, más naturaleza, más ciudad.{" "}
+          <span className="text-rojo-dark">Un apartamento que gana valor todos los días.</span>
         </p>
       </div>
     </section>

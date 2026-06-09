@@ -1,50 +1,54 @@
 @import "tailwindcss";
 
 /* ===================================================================
-   PALETA REAL MIZAR · Diseño y Construcción
-   Extraída del logo (rojo crimson + montaña metálica), los planos
-   y mizar.com.co. Tailwind v4 lee los colores desde este @theme.
+   PALETA · TERRAZAS DE LA CANTERA (Mizar · Diseño y Construcción)
+   Marca de dos colores: teal profundo del logo + verde lima de acento.
+   Para reutilizar los componentes ya creados conservamos los nombres
+   de token (navy / rojo), remapeando sus valores:
+     navy  -> teal  #025362   (fondos oscuros, titulares, texto)
+     rojo  -> lima  #dfd473   (acento "pop" sobre fondos teal/CTAs)
+   Tailwind v4 lee los colores desde este @theme.
    =================================================================== */
 @theme {
-  /* Navy corporativo */
-  --color-navy: #0a2342;
-  --color-navy-light: #16335c;
-  --color-navy-dark: #061629;
+  /* Teal corporativo (color principal del logo) */
+  --color-navy: #025362;
+  --color-navy-light: #0a6b7a;
+  --color-navy-dark: #013a45;
 
-  /* Rojo Mizar (crimson del logo / títulos de los planos) */
-  --color-rojo: #d12e45;
-  --color-rojo-light: #e85c70;
-  --color-rojo-dark: #a4123a;
+  /* Verde lima de acento (montaña del logo / planos) */
+  --color-rojo: #dfd473; /* fill de CTAs (con texto teal) y acento en oscuro */
+  --color-rojo-light: #ebe39a; /* texto de acento sobre fondos teal */
+  --color-rojo-dark: #a89a2f; /* oliva legible sobre blanco + hover de CTAs */
 
-  /* Gris metálico (montaña del logo) + neutros */
-  --color-gris-oscuro: #333333;
-  --color-gris-medio: #7c8696;
-  --color-gris-claro: #f6f4f1;
-  --color-crema: #f5f0e8;
+  /* Neutros cálidos */
+  --color-gris-oscuro: #2d3a3d;
+  --color-gris-medio: #6b7a7d;
+  --color-gris-claro: #f1f4f3;
+  --color-crema: #faf7ec;
   --color-blanco: #ffffff;
 
-  /* Dorado discreto (solo detalle de plusvalía) */
-  --color-dorado: #c8933a;
+  /* Dorado/lima discreto (detalle de plusvalía) */
+  --color-dorado: #c5b94f;
 
   /* Tipografía */
   --font-serif: "Fraunces", "Playfair Display", Georgia, serif;
   --font-sans: "DM Sans", system-ui, sans-serif;
 
   /* Sombras de marca */
-  --shadow-card: 0 4px 16px rgba(10, 35, 66, 0.1);
-  --shadow-hover: 0 10px 28px rgba(209, 46, 69, 0.18);
-  --shadow-dark: 0 6px 20px rgba(6, 22, 41, 0.25);
+  --shadow-card: 0 4px 16px rgba(2, 83, 98, 0.1);
+  --shadow-hover: 0 10px 28px rgba(2, 83, 98, 0.22);
+  --shadow-dark: 0 6px 20px rgba(1, 58, 69, 0.3);
 }
 
 /* Gradientes de marca (utilidades v4) */
 @utility bg-gradient-hero {
-  background-image: linear-gradient(135deg, #0a2342 0%, #16335c 100%);
+  background-image: linear-gradient(135deg, #013a45 0%, #025362 55%, #0a6b7a 100%);
 }
 @utility bg-gradient-cta {
-  background-image: linear-gradient(135deg, #d12e45 0%, #a4123a 100%);
+  background-image: linear-gradient(135deg, #ebe39a 0%, #dfd473 100%);
 }
 @utility bg-gradient-section {
-  background-image: linear-gradient(180deg, #ffffff 0%, #f6f4f1 100%);
+  background-image: linear-gradient(180deg, #ffffff 0%, #f1f4f3 100%);
 }
 
 * {
@@ -80,7 +84,7 @@ html {
 body {
   margin: 0;
   font-family: var(--font-sans);
-  color: #333333;
+  color: #2d3a3d;
   background-color: #ffffff;
   -webkit-font-smoothing: antialiased;
 }

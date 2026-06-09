@@ -1,25 +1,25 @@
 import { motion } from 'framer-motion'
-import { User, Briefcase, CheckCircle } from 'lucide-react'
+import { Wallet, CalendarClock, Car, Clock, CheckCircle } from 'lucide-react'
 import { WHATSAPP_URL } from '../constants'
 
 const planes = [
   {
-    icono: User,
-    tipo: 'Empleado',
-    desde: '$865.000/mes',
-    nota: '(más cesantías y primas)',
+    icono: Wallet,
+    tipo: 'Ahorro / cuota inicial',
+    desde: '$30.000.000',
+    nota: 'durante la construcción',
   },
   {
-    icono: Briefcase,
-    tipo: 'Independiente',
-    desde: '$1.400.000/mes',
+    icono: CalendarClock,
+    tipo: 'Cuotas mensuales',
+    desde: 'desde $4.000.000',
     nota: null,
   },
 ]
 
 const beneficios = [
-  'Aplican todos los subsidios de vivienda. Te ayudamos a aprovecharlos.',
-  'Financiamos hasta por 20 años',
+  { icono: Car, texto: 'Aceptamos permuta de carro o moto como parte de tu pago.' },
+  { icono: Clock, texto: 'Financiación hasta por 8 años, directo con Mizar.' },
 ]
 
 export default function Precios() {
@@ -35,6 +35,15 @@ export default function Precios() {
         >
           Pago a cuotas, directo con nosotros.
         </motion.h2>
+        <motion.p
+          className="text-white/70 text-lg mb-2"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+        >
+          Sin bancos, sin intermediarios.
+        </motion.p>
 
         <motion.p
           className="text-rojo-light font-bold text-4xl md:text-5xl my-10"
@@ -43,7 +52,7 @@ export default function Precios() {
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          Separas con $3.000.000
+          Separas con $2.000.000
         </motion.p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
@@ -60,7 +69,7 @@ export default function Precios() {
             >
               <Icon className="w-8 h-8 text-rojo-light mb-3" aria-hidden="true" />
               <h3 className="text-blanco font-bold text-xl mb-2">{plan.tipo}</h3>
-              <p className="text-rojo-light text-2xl font-bold">desde {plan.desde}</p>
+              <p className="text-rojo-light text-2xl font-bold">{plan.desde}</p>
               {plan.nota && (
                 <p className="text-white/60 text-sm mt-1">{plan.nota}</p>
               )}
@@ -70,22 +79,25 @@ export default function Precios() {
         </div>
 
         <div className="space-y-3 mb-10">
-          {beneficios.map((b, i) => (
-            <div
-              key={i}
-              className="flex items-start gap-3 text-left max-w-xl mx-auto"
-            >
-              <CheckCircle className="w-5 h-5 text-rojo-light flex-shrink-0 mt-0.5" aria-hidden="true" />
-              <p className="text-blanco text-base">{b}</p>
-            </div>
-          ))}
+          {beneficios.map((b, i) => {
+            const Icon = b.icono
+            return (
+              <div
+                key={i}
+                className="flex items-start gap-3 text-left max-w-xl mx-auto"
+              >
+                <Icon className="w-5 h-5 text-rojo-light flex-shrink-0 mt-0.5" aria-hidden="true" />
+                <p className="text-blanco text-base">{b.texto}</p>
+              </div>
+            )
+          })}
         </div>
 
         <a
           href={WHATSAPP_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block bg-rojo text-white font-bold px-10 py-4 rounded-lg text-lg hover:bg-rojo-dark transition-colors duration-300 shadow-hover"
+          className="inline-block bg-rojo text-navy font-bold px-10 py-4 rounded-lg text-lg hover:bg-rojo-dark hover:text-navy transition-colors duration-300 shadow-hover"
         >
           Quiero saber más
         </a>
