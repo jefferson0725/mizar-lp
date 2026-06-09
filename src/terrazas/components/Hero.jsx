@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { WHATSAPP_URL } from "../constants";
 
 export default function Hero() {
   return (
@@ -36,13 +35,10 @@ export default function Hero() {
           <span className="text-rojo-light">sin bancos y sin viajar.</span>
         </h1>
         <p className="text-white/85 text-lg md:text-xl mb-10 font-light max-w-2xl mx-auto">
-          Apartamentos sobre planos frente al Cerro de La Cantera. Pago a cuotas
-          directo con Mizar, desde donde estés.
+          Apartamentos sobre planos en el centro de Piedecuesta
         </p>
         <a
-          href={WHATSAPP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#intro"
           className="inline-block bg-rojo text-navy font-bold px-8 py-4 rounded-lg text-lg hover:bg-rojo-dark hover:text-navy transition-colors duration-300 shadow-hover"
         >
           Quiero conocer mis opciones

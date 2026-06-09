@@ -6,7 +6,7 @@ export default function IntroParallax() {
     <>
       <Hero />
 
-      <section className="bg-navy overflow-hidden">
+      <section id="intro" className="bg-navy overflow-hidden">
         <div className="flex flex-col md:grid md:grid-cols-2 md:min-h-[580px]">
 
           <motion.div
