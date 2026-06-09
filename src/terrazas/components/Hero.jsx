@@ -35,7 +35,8 @@ export default function Hero() {
           <span className="text-rojo-light">sin bancos y sin viajar.</span>
         </h1>
         <p className="text-white/85 text-lg md:text-xl mb-10 font-light max-w-2xl mx-auto">
-          Apartamentos sobre planos en el centro de Piedecuesta
+          Apartamentos sobre planos en el centro de Piedecuesta. Pago a cuotas
+          directo con Mizar, desde donde estés.
         </p>
         <a
           href="#intro"
