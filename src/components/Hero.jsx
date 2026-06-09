@@ -4,13 +4,18 @@ import { WHATSAPP_URL } from "../constants";
 export default function Hero() {
   return (
     <section
-      className="relative min-h-screen flex flex-col items-center justify-center bg-gradient-hero overflow-hidden"
-      style={{
-        backgroundImage: `url(/assets/hero-fachada.webp)`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
+      className="relative min-h-screen flex flex-col items-center justify-center bg-navy-dark overflow-hidden"
     >
+      {/* Fondo: paneo HORIZONTAL en bucle continuo (tipo video), independiente del scroll.
+          La imagen es horizontal, así que el movimiento es de lado a lado y se repite solo. */}
+      <motion.div
+        style={{ backgroundImage: `url(/assets/hero-fachada.webp)` }}
+        className="absolute inset-y-0 left-0 w-[135%] bg-gradient-hero bg-cover bg-center will-change-transform"
+        animate={{ x: ["0%", "-24%"] }}
+        transition={{ duration: 18, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
+        aria-hidden="true"
+      />
+
       {/* Overlay navy para legibilidad */}
       <div className="absolute inset-0 bg-gradient-to-b from-navy-dark/80 via-navy-dark/65 to-navy-dark/85" />
 

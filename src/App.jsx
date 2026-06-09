@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
-import Hero from './components/Hero'
-import GanchoEmocional from './components/GanchoEmocional'
+import IntroParallax from './components/IntroParallax'
 import Ubicacion from './components/Ubicacion'
 import Apartamentos from './components/Apartamentos'
 import QuienesSomos from './components/QuienesSomos'
@@ -19,8 +18,7 @@ export default function App() {
 
   return (
     <>
-      <Hero />
-      <GanchoEmocional />
+      <IntroParallax />
       <Ubicacion />
       <Apartamentos />
       <Testimonios />
