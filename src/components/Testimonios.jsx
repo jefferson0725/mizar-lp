@@ -67,7 +67,7 @@ export default function Testimonios() {
               href={INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center w-full mt-2 py-3 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-white font-semibold rounded-lg hover:shadow-lg transition-shadow"
+              className="flex items-center justify-center w-full mt-2 py-3 text-blue-400 font-medium hover:text-blue-300 transition-colors"
             >
               Ver más en Instagram
             </a>
