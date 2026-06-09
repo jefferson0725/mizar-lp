@@ -91,7 +91,7 @@ export default function Apartamentos() {
   const [estadoActivo, setEstadoActivo] = useState("acabados");
 
   return (
-    <section className="py-20 px-6 bg-gris-claro">
+    <section id="apartamentos" className="py-20 px-6 bg-gris-claro">
       <div className="max-w-5xl mx-auto">
         <h2 className="font-serif text-navy text-3xl sm:text-4xl md:text-5xl text-center mb-10">
           Los apartamentos

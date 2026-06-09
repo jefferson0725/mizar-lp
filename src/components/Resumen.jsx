@@ -26,7 +26,7 @@ const items = [
 
 export default function Resumen() {
   return (
-    <section className="py-20 px-6 bg-navy">
+    <section id="resumen" className="py-20 px-6 bg-navy">
       <div className="max-w-2xl mx-auto">
         <motion.h2
           className="font-serif text-blanco text-3xl sm:text-4xl md:text-5xl text-center mb-12 leading-tight"

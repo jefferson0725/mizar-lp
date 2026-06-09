@@ -11,9 +11,8 @@ export default function IntroParallax() {
           Móvil  : texto (navy) → imagen (torre-frontal) con fundido a gris-claro
           Desktop: dos columnas — torre-con-fondo izquierda | texto derecha
       =================================================================== */}
-      <section className="bg-navy overflow-hidden">
+      <section id="proposicion-valor" className="bg-navy overflow-hidden">
         <div className="flex flex-col md:grid md:grid-cols-2 md:min-h-[580px]">
-
           {/* ── Columna texto (derecha en desktop, primera en móvil) ── */}
           <motion.div
             className="flex flex-col justify-center py-20 px-8 md:py-28 md:px-14 lg:px-20 md:order-2"
@@ -37,7 +36,6 @@ export default function IntroParallax() {
 
           {/* ── Columna imagen (izquierda en desktop, segunda en móvil) ── */}
           <div className="relative md:order-1">
-
             {/* Móvil: imagen pega flush con el navy de arriba; sólo fundido inferior a gris-claro */}
             <div className="md:hidden relative">
               <img
@@ -47,8 +45,10 @@ export default function IntroParallax() {
                 className="block w-full h-auto"
               />
               {/* Fundido inferior → gris-claro, sólo en la parte baja de la imagen */}
-              <div className="pointer-events-none absolute bottom-0 inset-x-0 h-1/4
-                              bg-gradient-to-t from-[#F5F5F5] via-[#F5F5F5]/70 to-transparent" />
+              <div
+                className="pointer-events-none absolute bottom-0 inset-x-0 h-1/4
+                              bg-gradient-to-t from-[#F5F5F5] via-[#F5F5F5]/70 to-transparent"
+              />
             </div>
 
             {/* Desktop: imagen completa sin recorte ni degradados */}
@@ -59,7 +59,6 @@ export default function IntroParallax() {
                 className="block w-full h-auto"
               />
             </div>
-
           </div>
         </div>
       </section>

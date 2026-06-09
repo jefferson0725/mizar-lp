@@ -15,7 +15,7 @@ function WhatsAppIcon() {
 
 export default function Footer() {
   return (
-    <footer className="bg-navy py-10 px-6">
+    <footer id="footer" className="bg-navy py-10 px-6">
       <div className="max-w-5xl mx-auto flex flex-col items-center gap-4 text-center">
         <img
           src="/assets/logo-mizar.webp"

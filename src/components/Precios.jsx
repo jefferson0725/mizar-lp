@@ -1,30 +1,30 @@
-import { motion } from 'framer-motion'
-import { User, Briefcase, CheckCircle } from 'lucide-react'
-import { WHATSAPP_URL } from '../constants'
+import { motion } from "framer-motion";
+import { User, Briefcase, CheckCircle } from "lucide-react";
+import { WHATSAPP_URL } from "../constants";
 
 const planes = [
   {
     icono: User,
-    tipo: 'Empleado',
-    desde: '$865.000/mes',
-    nota: '(más cesantías y primas)',
+    tipo: "Empleado",
+    desde: "$865.000/mes",
+    nota: "(más cesantías y primas)",
   },
   {
     icono: Briefcase,
-    tipo: 'Independiente',
-    desde: '$1.400.000/mes',
+    tipo: "Independiente",
+    desde: "$1.400.000/mes",
     nota: null,
   },
-]
+];
 
 const beneficios = [
-  'Aplican todos los subsidios de vivienda. Te ayudamos a aprovecharlos.',
-  'Financiamos hasta por 20 años',
-]
+  "Aplican todos los subsidios de vivienda. Te ayudamos a aprovecharlos.",
+  "Financiamos hasta por 20 años",
+];
 
 export default function Precios() {
   return (
-    <section className="py-20 px-6 bg-navy">
+    <section id="planes-precios" className="py-20 px-6 bg-navy">
       <div className="max-w-4xl mx-auto text-center">
         <motion.h2
           className="font-serif text-blanco text-3xl sm:text-4xl md:text-5xl mb-4 leading-tight"
@@ -48,24 +48,31 @@ export default function Precios() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
           {planes.map((plan, i) => {
-            const Icon = plan.icono
+            const Icon = plan.icono;
             return (
-            <motion.div
-              key={i}
-              className="bg-white/10 border border-white/10 rounded-2xl p-8 text-left"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: i * 0.15 }}
-              viewport={{ once: true }}
-            >
-              <Icon className="w-8 h-8 text-rojo-light mb-3" aria-hidden="true" />
-              <h3 className="text-blanco font-bold text-xl mb-2">{plan.tipo}</h3>
-              <p className="text-rojo-light text-2xl font-bold">desde {plan.desde}</p>
-              {plan.nota && (
-                <p className="text-white/60 text-sm mt-1">{plan.nota}</p>
-              )}
-            </motion.div>
-            )
+              <motion.div
+                key={i}
+                className="bg-white/10 border border-white/10 rounded-2xl p-8 text-left"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: i * 0.15 }}
+                viewport={{ once: true }}
+              >
+                <Icon
+                  className="w-8 h-8 text-rojo-light mb-3"
+                  aria-hidden="true"
+                />
+                <h3 className="text-blanco font-bold text-xl mb-2">
+                  {plan.tipo}
+                </h3>
+                <p className="text-rojo-light text-2xl font-bold">
+                  desde {plan.desde}
+                </p>
+                {plan.nota && (
+                  <p className="text-white/60 text-sm mt-1">{plan.nota}</p>
+                )}
+              </motion.div>
+            );
           })}
         </div>
 
@@ -75,7 +82,10 @@ export default function Precios() {
               key={i}
               className="flex items-start gap-3 text-left max-w-xl mx-auto"
             >
-              <CheckCircle className="w-5 h-5 text-rojo-light flex-shrink-0 mt-0.5" aria-hidden="true" />
+              <CheckCircle
+                className="w-5 h-5 text-rojo-light flex-shrink-0 mt-0.5"
+                aria-hidden="true"
+              />
               <p className="text-blanco text-base">{b}</p>
             </div>
           ))}
@@ -91,5 +101,5 @@ export default function Precios() {
         </a>
       </div>
     </section>
-  )
+  );
 }

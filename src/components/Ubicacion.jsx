@@ -1,24 +1,26 @@
-import { motion } from 'framer-motion'
-import { MapPin, Car, Trees, Navigation } from 'lucide-react'
+import { motion } from "framer-motion";
+import { MapPin, Car, Trees, Navigation } from "lucide-react";
 
 const puntos = [
   {
     icono: MapPin,
-    texto: 'A 150 metros del futuro anillo vial metropolitano Piedecuesta–Girón.',
+    texto:
+      "A 150 metros del futuro anillo vial metropolitano Piedecuesta–Girón.",
   },
   {
     icono: Car,
-    texto: 'Acceso a parqueaderos de la urbanización.',
+    texto: "Acceso a parqueaderos de la urbanización.",
   },
   {
     icono: Trees,
-    texto: '2,5 hectáreas reservadas para zonas verdes y espacios de uso público.',
+    texto:
+      "2,5 hectáreas reservadas para zonas verdes y espacios de uso público.",
   },
-]
+];
 
 export default function Ubicacion() {
   return (
-    <section className="py-20 px-6 bg-gris-claro">
+    <section id="ubicacion" className="py-20 px-6 bg-gris-claro">
       <div className="max-w-5xl mx-auto">
         <motion.h2
           className="font-serif text-navy text-3xl sm:text-4xl md:text-5xl text-center mb-12 leading-tight"
@@ -32,7 +34,7 @@ export default function Ubicacion() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
           {puntos.map((punto, i) => {
-            const Icon = punto.icono
+            const Icon = punto.icono;
             return (
               <motion.div
                 key={i}
@@ -42,10 +44,15 @@ export default function Ubicacion() {
                 transition={{ duration: 0.6, delay: i * 0.15 }}
                 viewport={{ once: true }}
               >
-                <Icon className="w-10 h-10 text-rojo mx-auto mb-4" aria-hidden="true" />
-                <p className="text-gris-oscuro text-base leading-relaxed">{punto.texto}</p>
+                <Icon
+                  className="w-10 h-10 text-rojo mx-auto mb-4"
+                  aria-hidden="true"
+                />
+                <p className="text-gris-oscuro text-base leading-relaxed">
+                  {punto.texto}
+                </p>
               </motion.div>
-            )
+            );
           })}
         </div>
 
@@ -56,7 +63,9 @@ export default function Ubicacion() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          Durante años, el crecimiento de Girón se concentró sobre la vía antigua. El nuevo anillo vial está cambiando esa historia, justo donde está Laureles Campestre.
+          Durante años, el crecimiento de Girón se concentró sobre la vía
+          antigua. El nuevo anillo vial está cambiando esa historia, justo donde
+          está Laureles Campestre.
         </motion.p>
 
         <motion.div
@@ -94,9 +103,11 @@ export default function Ubicacion() {
 
         <p className="text-navy font-bold text-center text-xl md:text-2xl">
           Más conexión, más desarrollo alrededor.{" "}
-          <span className="text-rojo">Un apartamento que gana valor todos los días.</span>
+          <span className="text-rojo">
+            Un apartamento que gana valor todos los días.
+          </span>
         </p>
       </div>
     </section>
-  )
+  );
 }

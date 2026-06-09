@@ -1,18 +1,20 @@
 import { motion } from "framer-motion";
-import { WHATSAPP_URL } from "../constants";
 
 export default function Hero() {
   return (
-    <section
-      className="relative min-h-screen flex flex-col items-center justify-center bg-navy-dark overflow-hidden"
-    >
+    <section className="relative min-h-screen flex flex-col items-center justify-center bg-navy-dark overflow-hidden">
       {/* Fondo: paneo HORIZONTAL en bucle continuo (tipo video), independiente del scroll.
           La imagen es horizontal, así que el movimiento es de lado a lado y se repite solo. */}
       <motion.div
         style={{ backgroundImage: `url(/assets/hero-fachada.webp)` }}
         className="absolute inset-y-0 left-0 w-[135%] bg-gradient-hero bg-cover bg-center will-change-transform"
         animate={{ x: ["0%", "-24%"] }}
-        transition={{ duration: 18, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
+        transition={{
+          duration: 18,
+          repeat: Infinity,
+          repeatType: "mirror",
+          ease: "easeInOut",
+        }}
         aria-hidden="true"
       />
 
@@ -47,9 +49,7 @@ export default function Hero() {
           zona de mayor crecimiento de Girón.
         </p>
         <a
-          href={WHATSAPP_URL}
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#proposicion-valor"
           className="inline-block bg-rojo text-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-rojo-dark transition-colors duration-300 shadow-hover"
         >
           Quiero conocer mis opciones
@@ -66,8 +66,18 @@ export default function Hero() {
         transition={{ duration: 1.8, repeat: Infinity }}
         aria-hidden="true"
       >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 14l-7 7m0 0l-7-7m7 7V3"
+          />
         </svg>
       </motion.div>
     </section>

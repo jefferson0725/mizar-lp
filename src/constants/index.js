@@ -26,6 +26,8 @@ export const WHATSAPP_NUMBER = "573112658552";
 export const WHATSAPP_MESSAGE =
   "Me%20interesan%20los%20apartamentos%20de%20Laureles%20Campestre%2C%20mi%20nombre%20es%20";
 export const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`;
+export const INSTAGRAM_URL =
+  "https://www.instagram.com/mizar.col/?utm_source=ig_embed&ig_rid=eabde098-a6fb-4cce-8c10-5502c784701b";
 
 export const APARTAMENTOS = [
   {

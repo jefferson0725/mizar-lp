@@ -1,29 +1,24 @@
-import { useEffect } from "react";
 import { motion } from "framer-motion";
+import { useState, useRef } from "react";
+import { Volume2, VolumeX } from "lucide-react";
+import { INSTAGRAM_URL } from "../constants";
+import videoTestimonios from "../assets/videos/testimios.mp4";
 
-// Píxeles a recortar del header y footer del embed de Instagram
-const CROP_TOP = 50;
-const CROP_BOTTOM = 120;
-const IFRAME_WIDTH = 400;
-const IFRAME_HEIGHT = 710;
+const VIDEO_WIDTH = 400;
 
 export default function Testimonios() {
-  useEffect(() => {
-    const featurableScript = document.createElement("script");
-    featurableScript.src =
-      "https://featurable.com/assets/v2/carousel_default.min.js";
-    featurableScript.defer = true;
-    featurableScript.charset = "UTF-8";
-    document.body.appendChild(featurableScript);
-    return () => {
-      document.body.removeChild(featurableScript);
-    };
-  }, []);
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef(null);
 
-  const visibleHeight = IFRAME_HEIGHT - CROP_TOP - CROP_BOTTOM;
+  const toggleAudio = () => {
+    setIsMuted(!isMuted);
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted;
+    }
+  };
 
   return (
-    <section className="py-20 px-6 bg-white">
+    <section id="video-testimonios" className="py-20 px-6 bg-white">
       <div className="max-w-5xl mx-auto">
         <motion.h2
           className="font-serif text-navy text-3xl sm:text-4xl md:text-5xl text-center mb-12 leading-tight"
@@ -43,32 +38,41 @@ export default function Testimonios() {
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <div
-            style={{
-              width: IFRAME_WIDTH,
-              height: visibleHeight,
-              overflow: "hidden",
-              borderRadius: "12px",
-            }}
-          >
-            <iframe
-              src="https://www.instagram.com/reel/DOHiYi9iYnC/embed/"
-              width={IFRAME_WIDTH}
-              height={IFRAME_HEIGHT}
-              frameBorder="0"
-              scrolling="no"
-              allowTransparency="true"
-              allow="encrypted-media"
-              title="Video testimonio"
-              style={{ marginTop: -CROP_TOP }}
-            />
+          <div className="w-full max-w-sm">
+            <div className="relative">
+              <video
+                ref={videoRef}
+                src={videoTestimonios}
+                width={VIDEO_WIDTH}
+                autoPlay
+                muted={isMuted}
+                loop
+                playsInline
+                className="w-full rounded-xl"
+                style={{ display: "block" }}
+              />
+              <button
+                onClick={toggleAudio}
+                className="absolute bottom-4 right-4 bg-black bg-opacity-60 hover:bg-opacity-80 text-white p-2.5 rounded-full transition-all"
+                title={isMuted ? "Activar audio" : "Desactivar audio"}
+              >
+                {isMuted ? (
+                  <VolumeX className="w-5 h-5" />
+                ) : (
+                  <Volume2 className="w-5 h-5" />
+                )}
+              </button>
+            </div>
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center w-full mt-2 py-3 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 text-white font-semibold rounded-lg hover:shadow-lg transition-shadow"
+            >
+              Ver más en Instagram
+            </a>
           </div>
         </motion.div>
-
-        <div
-          id="featurable-c29f4a7a-ea85-49fe-898f-e666bfc8983d"
-          data-featurable-async
-        ></div>
       </div>
     </section>
   );

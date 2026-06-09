@@ -77,7 +77,7 @@ function Counter({ target, sufijo, duration = 1.8 }) {
 
 export default function QuienesSomos() {
   return (
-    <section className="py-20 px-6 bg-gris-claro">
+    <section id="quienes-somos" className="py-20 px-6 bg-gris-claro">
       <div className="max-w-5xl mx-auto">
         {/* Intro */}
         <motion.div

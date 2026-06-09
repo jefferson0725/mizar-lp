@@ -1,9 +1,9 @@
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
-import { FAQ_ITEMS } from '../constants'
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { FAQ_ITEMS } from "../constants";
 
 function FaqItem({ pregunta, respuesta }) {
-  const [abierto, setAbierto] = useState(false)
+  const [abierto, setAbierto] = useState(false);
 
   return (
     <div className="border-b border-gray-200 last:border-0">
@@ -17,7 +17,7 @@ function FaqItem({ pregunta, respuesta }) {
         </span>
         <span
           className={`text-navy text-2xl flex-shrink-0 transition-transform duration-300 ${
-            abierto ? 'rotate-45' : ''
+            abierto ? "rotate-45" : ""
           }`}
           aria-hidden="true"
         >
@@ -28,7 +28,7 @@ function FaqItem({ pregunta, respuesta }) {
         {abierto && (
           <motion.div
             initial={{ height: 0, opacity: 0 }}
-            animate={{ height: 'auto', opacity: 1 }}
+            animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
@@ -38,12 +38,12 @@ function FaqItem({ pregunta, respuesta }) {
         )}
       </AnimatePresence>
     </div>
-  )
+  );
 }
 
 export default function FAQ() {
   return (
-    <section className="py-20 px-6 bg-gris-claro">
+    <section id="preguntas-frecuentes" className="py-20 px-6 bg-gris-claro">
       <div className="max-w-3xl mx-auto">
         <motion.h2
           className="font-serif text-navy text-3xl sm:text-4xl md:text-5xl text-center mb-12"
@@ -62,5 +62,5 @@ export default function FAQ() {
         </div>
       </div>
     </section>
-  )
+  );
 }
