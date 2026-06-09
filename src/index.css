@@ -36,7 +36,7 @@
   --shadow-dark: 0 6px 20px rgba(6, 22, 41, 0.25);
 }
 
-/* Gradientes de marca (utilidades v4) */
+/* Gradientes de marca — Laureles (utilidades v4) */
 @utility bg-gradient-hero {
   background-image: linear-gradient(135deg, #0a2342 0%, #16335c 100%);
 }
@@ -45,6 +45,36 @@
 }
 @utility bg-gradient-section {
   background-image: linear-gradient(180deg, #ffffff 0%, #f6f4f1 100%);
+}
+
+/* ===================================================================
+   TEMA TERRAZAS DE LA CANTERA
+   Sobreescribe los tokens de color dentro de .theme-terrazas.
+   Tailwind v4 usa CSS custom properties → al cambiar la variable en
+   el wrapper, todas las utilidades (bg-navy, text-rojo, etc.) toman
+   automáticamente los valores del proyecto Terrazas.
+   =================================================================== */
+.theme-terrazas {
+  --color-navy: #025362;
+  --color-navy-light: #0a6b7a;
+  --color-navy-dark: #013a45;
+
+  --color-rojo: #dfd473;
+  --color-rojo-light: #ebe39a;
+  --color-rojo-dark: #a89a2f;
+
+  --color-gris-claro: #f1f4f3;
+  --color-crema: #faf7ec;
+
+  --shadow-card: 0 4px 16px rgba(2, 83, 98, 0.1);
+  --shadow-hover: 0 10px 28px rgba(2, 83, 98, 0.22);
+  --shadow-dark: 0 6px 20px rgba(1, 58, 69, 0.3);
+}
+
+/* Gradiente CTA de Terrazas (lima → lima claro), scoped por el tema */
+.theme-terrazas .bg-gradient-cta,
+.theme-terrazas [class*="bg-gradient-cta"] {
+  background-image: linear-gradient(135deg, #ebe39a 0%, #dfd473 100%);
 }
 
 * {
