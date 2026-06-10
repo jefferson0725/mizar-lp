@@ -15,7 +15,8 @@ import WhatsAppButton from "./components/WhatsAppButton";
 export default function TerrazasApp() {
   useEffect(() => {
     document.documentElement.style.scrollBehavior = "smooth";
-    document.title = "Terrazas de la Cantera · Apartamentos en Piedecuesta | Mizar";
+    document.title =
+      "Terrazas de la Cantera · Apartamentos en Piedecuesta | Mizar";
     return () => {
       document.title = "Laureles Campestre · Apartamentos en Girón | Mizar";
     };
@@ -25,10 +26,10 @@ export default function TerrazasApp() {
     // theme-terrazas sobreescribe los tokens CSS de Tailwind (navy → teal, rojo → lima)
     <div className="theme-terrazas">
       <IntroParallax />
-      <Ubicacion />
-      <Apartamentos />
       <Testimonios />
       <Comentarios />
+      <Ubicacion />
+      <Apartamentos />
       <QuienesSomos />
       <Precios />
       <FAQ />

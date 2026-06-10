@@ -76,7 +76,9 @@ function AptoCard({ apto, tipoImagenes }) {
           {(imagenes[imagenActual]?.extra || apto.extra) && (
             <div className="flex justify-between border-b border-gray-100 pb-2">
               <dt className="font-semibold">Vista</dt>
-              <dd className="text-right text-sm">{imagenes[imagenActual]?.extra || apto.extra}</dd>
+              <dd className="text-right text-sm">
+                {imagenes[imagenActual]?.extra || apto.extra}
+              </dd>
             </div>
           )}
           {apto.nota && (
@@ -97,7 +99,7 @@ export default function Apartamentos() {
     <section className="py-20 px-6 bg-gris-claro">
       <div className="max-w-5xl mx-auto">
         <h2 className="font-serif text-navy text-3xl sm:text-4xl md:text-5xl text-center mb-10">
-          Conoce el apartamento
+          Conoce los apartamentos
         </h2>
 
         <div className="flex justify-center mb-10">
@@ -125,7 +127,11 @@ export default function Apartamentos() {
           </div>
         </div>
 
-        <AptoCard key={tipoImagenes} apto={APARTAMENTOS[0]} tipoImagenes={tipoImagenes} />
+        <AptoCard
+          key={tipoImagenes}
+          apto={APARTAMENTOS[0]}
+          tipoImagenes={tipoImagenes}
+        />
 
         <p className="text-center text-gray-600 mt-10 text-lg max-w-2xl mx-auto">
           Apartamentos con vista al Cerro de La Cantera. Se entregan con full
