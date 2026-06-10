@@ -7,7 +7,12 @@ export default function Hero() {
         style={{ backgroundImage: `url(/assets/terrazas-fachada.webp)` }}
         className="absolute inset-y-0 left-0 w-[135%] bg-cover bg-center will-change-transform"
         animate={{ x: ["0%", "-24%"] }}
-        transition={{ duration: 18, repeat: Infinity, repeatType: "mirror", ease: "easeInOut" }}
+        transition={{
+          duration: 18,
+          repeat: Infinity,
+          repeatType: "mirror",
+          ease: "easeInOut",
+        }}
         aria-hidden="true"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-navy-dark/85 via-navy-dark/70 to-navy-dark/88" />
@@ -27,9 +32,6 @@ export default function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.15 }}
       >
-        <p className="text-rojo-light font-semibold tracking-widest uppercase text-xs md:text-sm mb-5">
-          Apartamentos en el centro de Piedecuesta
-        </p>
         <h1 className="font-serif font-black text-white text-4xl sm:text-5xl md:text-6xl leading-[1.08] mb-6">
           Tu apartamento propio en Piedecuesta,{" "}
           <span className="text-rojo-light">sin bancos y sin viajar.</span>
@@ -55,8 +57,18 @@ export default function Hero() {
         transition={{ duration: 1.8, repeat: Infinity }}
         aria-hidden="true"
       >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 14l-7 7m0 0l-7-7m7 7V3"
+          />
         </svg>
       </motion.div>
     </section>

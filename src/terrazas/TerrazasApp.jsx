@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import IntroParallax from "./components/IntroParallax";
 import Ubicacion from "./components/Ubicacion";
-import Timeline from "./components/Timeline";
 import Apartamentos from "./components/Apartamentos";
 import Testimonios from "./components/Testimonios";
+import Comentarios from "./components/Comentarios";
 import QuienesSomos from "./components/QuienesSomos";
 import Precios from "./components/Precios";
 import FAQ from "./components/FAQ";
@@ -26,9 +26,9 @@ export default function TerrazasApp() {
     <div className="theme-terrazas">
       <IntroParallax />
       <Ubicacion />
-      <Timeline />
       <Apartamentos />
       <Testimonios />
+      <Comentarios />
       <QuienesSomos />
       <Precios />
       <FAQ />
