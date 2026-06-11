@@ -81,7 +81,7 @@ export const APARTAMENTOS = [
   {
     id: 1,
     tipo: "Apartamentos",
-    area: "62,87 m²",
+    area: "60,47 m²",
     habitaciones: 3,
     banos: 2,
     extra: "Vista hacia la iglesia",
@@ -89,13 +89,13 @@ export const APARTAMENTOS = [
     imagenes: [
       {
         src: "/assets/planos/Tipo-1.webp",
-        alt: "Plano Tipo 1 — 62,87 m², 3 alcobas y 2 baños",
+        alt: "Plano Tipo 1 — 60,47 m², 3 alcobas y 2 baños",
         tipo: "plano",
         tipoApto: "Tipo 1",
-        area: "62,87 m²",
+        area: "60,47 m²",
         habitaciones: 3,
         banos: 2,
-        extra: "Vista hacia la iglesia",
+        extra: "Vista hacia la cerro",
       },
       {
         src: "/assets/planos/tipo-2.webp",
