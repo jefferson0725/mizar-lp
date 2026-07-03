@@ -1,67 +1,78 @@
 import { motion } from "framer-motion";
-import { Users, Landmark, Globe2 } from "lucide-react";
+import { useState, useRef } from "react";
+import { Volume2, VolumeX } from "lucide-react";
+import { INSTAGRAM_URL } from "../constants";
+import videoTestimonios from "../../assets/videos/testimios.mp4";
 
-const trust = [
-  { icono: Users, valor: "Cientos", etiqueta: "de familias e inversionistas" },
-  { icono: Landmark, valor: "Sin bancos", etiqueta: "directo con Mizar" },
-  { icono: Globe2, valor: "A distancia", etiqueta: "compra desde tu país" },
-];
+const VIDEO_WIDTH = 400;
 
 export default function Testimonios() {
-  return (
-    <section className="py-20 px-6 bg-navy">
-      <div className="max-w-4xl mx-auto text-center">
-        <motion.p
-          className="text-rojo-light font-semibold tracking-widest uppercase text-xs md:text-sm mb-5"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-        >
-          Prueba social
-        </motion.p>
+  const [isMuted, setIsMuted] = useState(true);
+  const videoRef = useRef(null);
 
+  const toggleAudio = () => {
+    setIsMuted(!isMuted);
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted;
+    }
+  };
+
+  return (
+    <section id="video-testimonios" className="py-20 px-6 bg-navy">
+      <div className="max-w-5xl mx-auto">
         <motion.h2
-          className="font-serif text-white text-3xl sm:text-4xl md:text-5xl leading-tight mb-6"
+          className="font-serif text-white text-3xl sm:text-4xl md:text-5xl text-center mb-12 leading-tight"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          Hemos acompañado a cientos de familias e inversionistas a comprar su apartamento de la forma más sencilla.
+          Hemos acompañado a cientos de familias e inversionistas a comprar su
+          apartamento de la forma más sencilla.
         </motion.h2>
 
-        <motion.p
-          className="text-white/80 text-lg max-w-2xl mx-auto mb-14"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.15 }}
+        <motion.div
+          className="flex justify-center mb-14"
+          initial={{ opacity: 0, scale: 0.97 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          Sin bancos, sin intermediarios y con acompañamiento en cada paso, estés donde estés.
-        </motion.p>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-          {trust.map((t, i) => {
-            const Icon = t.icono;
-            return (
-              <motion.div
-                key={i}
-                className="flex flex-col items-center"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.12 }}
-                viewport={{ once: true }}
+          <div className="w-full max-w-sm">
+            <div className="relative">
+              <video
+                ref={videoRef}
+                src={videoTestimonios}
+                width={VIDEO_WIDTH}
+                autoPlay
+                muted={isMuted}
+                loop
+                playsInline
+                className="w-full rounded-xl"
+                style={{ display: "block" }}
+              />
+              <button
+                onClick={toggleAudio}
+                className="absolute bottom-4 right-4 bg-black bg-opacity-60 hover:bg-opacity-80 text-white p-2.5 rounded-full transition-all"
+                title={isMuted ? "Activar audio" : "Desactivar audio"}
               >
-                <div className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-rojo/15 mb-4">
-                  <Icon className="w-7 h-7 text-rojo-light" aria-hidden="true" />
-                </div>
-                <p className="font-serif text-white text-2xl md:text-3xl font-bold leading-none mb-1">{t.valor}</p>
-                <p className="text-white/70 text-sm">{t.etiqueta}</p>
-              </motion.div>
-            );
-          })}
-        </div>
+                {isMuted ? (
+                  <VolumeX className="w-5 h-5" />
+                ) : (
+                  <Volume2 className="w-5 h-5" />
+                )}
+              </button>
+            </div>
+            <a
+              href={INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center w-full mt-2 py-3 text-blue-400 font-medium hover:text-lima/80 transition-colors"
+            >
+              Ver más en Instagram
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

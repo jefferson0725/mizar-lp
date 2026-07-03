@@ -8,7 +8,6 @@ export default function IntroParallax() {
 
       <section id="intro" className="bg-navy overflow-hidden">
         <div className="flex flex-col md:grid md:grid-cols-2 md:min-h-[580px]">
-
           <motion.div
             className="flex flex-col justify-center py-20 px-8 md:py-28 md:px-14 lg:px-20 md:order-2"
             initial={{ opacity: 0, y: 40 }}
@@ -31,25 +30,26 @@ export default function IntroParallax() {
             </p>
           </motion.div>
 
-          <div className="relative md:order-1">
-            <div className="md:hidden relative">
-              <img
-                src="/assets/render-edificio.webp"
-                alt=""
-                aria-hidden="true"
-                className="block w-full h-auto object-cover"
+          <motion.div
+            className="relative md:order-1 flex items-center justify-center mb-8 md:mb-0"
+            initial={{ opacity: 0, scale: 0.97 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            <div className="w-full aspect-[10/12] rounded-3xl overflow-hidden shadow-dark border border-white/10">
+              <video
+                className="w-full h-full object-cover block"
+                src="/assets/timeline-edificio.mp4"
+                poster="/assets/render-edificio.webp"
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
               />
-              <div className="pointer-events-none absolute bottom-0 inset-x-0 h-1/4 bg-gradient-to-t from-[#f1f4f3] via-[#f1f4f3]/70 to-transparent" />
             </div>
-            <div className="hidden md:flex items-center justify-center h-full">
-              <img
-                src="/assets/render-edificio.webp"
-                alt="Render del edificio Terrazas de la Cantera"
-                className="block w-full h-full object-cover"
-              />
-            </div>
-          </div>
-
+          </motion.div>
         </div>
       </section>
     </>
