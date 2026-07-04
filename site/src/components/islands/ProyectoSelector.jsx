@@ -31,7 +31,7 @@ export default function ProyectoSelector({ items }) {
   );
 
   const chip = (active) =>
-    `cursor-pointer rounded-[4px] border px-3.5 py-2 text-sm font-semibold transition-colors ${
+    `cursor-pointer rounded-full border px-3.5 py-2 text-sm font-semibold transition-colors ${
       active
         ? 'border-teal bg-teal text-white'
         : 'border-ink/20 text-ink/70 hover:border-teal/60'
@@ -66,7 +66,7 @@ export default function ProyectoSelector({ items }) {
           <a
             key={p.slug}
             href={p.href}
-            className="group block overflow-hidden rounded-[4px] border border-ink/10 bg-white transition-shadow hover:shadow-md"
+            className="group block overflow-hidden rounded-2xl border border-ink/10 bg-white transition-shadow hover:shadow-md"
           >
             <div className="relative aspect-[4/3] overflow-hidden bg-plum">
               {p.imgSrc ? (
@@ -87,7 +87,7 @@ export default function ProyectoSelector({ items }) {
                   <span className="display-lg text-lg text-white/85">{p.nombre}</span>
                 </div>
               )}
-              <span className="absolute top-3 left-3 rounded-[3px] bg-plum-dark/85 px-2 py-1 text-[0.65rem] font-bold tracking-widest text-gold uppercase">
+              <span className="absolute top-3 left-3 rounded-full bg-plum-dark/85 px-2 py-1 text-[0.65rem] font-bold tracking-widest text-gold uppercase">
                 {p.tipo}
               </span>
             </div>

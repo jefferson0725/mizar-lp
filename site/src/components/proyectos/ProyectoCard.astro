@@ -25,7 +25,7 @@ const estadoLabel: Record<string, string> = {
 
 <a
   href={href}
-  class="group block overflow-hidden rounded-[4px] border border-ink/10 bg-white transition-shadow hover:shadow-md"
+  class="group block overflow-hidden rounded-2xl border border-ink/10 bg-white transition-shadow hover:shadow-md"
 >
   <div class="relative aspect-[4/3] overflow-hidden bg-plum">
     {
@@ -48,10 +48,10 @@ const estadoLabel: Record<string, string> = {
       )
     }
     <div class="absolute top-3 left-3 flex gap-1.5">
-      <span class="rounded-[3px] bg-plum-dark/85 px-2 py-1 text-[0.65rem] font-bold tracking-widest text-gold uppercase">
+      <span class="rounded-full bg-plum-dark/85 px-2 py-1 text-[0.65rem] font-bold tracking-widest text-gold uppercase">
         {p.tipo}
       </span>
-      <span class="rounded-[3px] bg-teal/90 px-2 py-1 text-[0.65rem] font-bold tracking-widest text-white uppercase">
+      <span class="rounded-full bg-teal/90 px-2 py-1 text-[0.65rem] font-bold tracking-widest text-white uppercase">
         {estadoLabel[p.estado]}
       </span>
     </div>

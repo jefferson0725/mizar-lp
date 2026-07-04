@@ -53,7 +53,7 @@ export default function HeroForm() {
     <form
       onSubmit={enviar}
       data-event="form-submit"
-      className="w-full max-w-md rounded-2xl border border-white/15 bg-plum-dark/80 p-6 shadow-2xl backdrop-blur-sm md:p-7"
+      className="w-full max-w-md rounded-2xl border border-white/15 bg-black/55 p-6 shadow-2xl backdrop-blur-md md:p-7"
       aria-label="Cuéntanos qué buscas"
     >
       <fieldset className="mb-5">
@@ -135,7 +135,7 @@ export default function HeroForm() {
         </div>
       </div>
 
-      <button type="submit" className="btn-primary mt-5 w-full !rounded-full">
+      <button type="submit" className="btn-primary mt-5 w-full">
         Quiero más información
       </button>
       <p className="mt-3 text-center text-xs text-white/50">

@@ -88,7 +88,7 @@ const carouselSlides = [
   path="/"
 >
   <!-- HERO: slideshow automático de fondo, contenido anclado abajo (como la web actual) -->
-  <section class="relative flex min-h-[90vh] flex-col justify-end overflow-hidden bg-plum-dark text-white">
+  <section class="relative flex min-h-[90vh] flex-col justify-end overflow-hidden bg-neutral-950 text-white">
     <div id="hero-slides" class="absolute inset-0" aria-hidden="true">
       {
         heroSlides.map((src, i) => (
@@ -96,14 +96,14 @@ const carouselSlides = [
             src={src}
             alt=""
             class="absolute inset-0 h-full w-full object-cover transition-opacity duration-500"
-            style={`opacity:${i === 0 ? 1 : 0}; filter:saturate(0.65);`}
+            style={`opacity:${i === 0 ? 1 : 0};`}
             data-hero-slide
             loading={i === 0 ? 'eager' : 'lazy'}
           />
         ))
       }
       <div class="absolute inset-0" style="background:#000000b8;"></div>
-      <div class="absolute inset-0 bg-gradient-to-t from-plum-dark via-transparent to-plum-dark/40"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30"></div>
     </div>
 
     <div class="container-site relative grid gap-10 py-14 md:grid-cols-[7fr_5fr] md:items-end md:gap-14 md:py-20">

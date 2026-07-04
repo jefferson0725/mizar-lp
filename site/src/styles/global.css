@@ -77,13 +77,16 @@ body {
   padding-inline: 1.25rem;
 }
 
-/* Botones: esquinas de 4px — arquitectónico, no pill */
+/* Sistema de radios unificado:
+   - Controles (botones, chips, badges): pill (rounded-full)
+   - Superficies (cards, cajas, imágenes, iframes): rounded-2xl
+   - Inputs/selects: rounded-xl */
 @utility btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  border-radius: 4px;
+  border-radius: 9999px;
   background-color: var(--color-mizar);
   padding: 0.8rem 1.75rem;
   font-weight: 700;
@@ -99,7 +102,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  border-radius: 4px;
+  border-radius: 9999px;
   border: 2px solid currentColor;
   padding: 0.75rem 1.7rem;
   font-weight: 700;
