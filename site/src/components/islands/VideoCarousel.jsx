@@ -69,7 +69,7 @@ export default function VideoCarousel({ slides }) {
         {slides.map((s, i) => (
           <figure
             key={s.src}
-            className="relative aspect-[4/5] min-w-[80%] snap-center overflow-hidden rounded-[4px] bg-plum-dark sm:aspect-video sm:min-w-[70%] lg:min-w-[58%]"
+            className="relative aspect-[9/16] min-w-[68%] snap-start overflow-hidden rounded-2xl bg-plum-dark sm:min-w-[42%] md:min-w-[30%] lg:min-w-[23%]"
           >
             {s.type === 'video' ? (
               <>

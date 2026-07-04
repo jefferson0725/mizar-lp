@@ -40,20 +40,20 @@ export default function HeroForm() {
   }
 
   const chip = (active) =>
-    `cursor-pointer rounded-[4px] border px-3.5 py-2 text-sm font-semibold transition-colors ${
+    `cursor-pointer rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
       active
         ? 'border-gold bg-gold/15 text-gold'
         : 'border-white/25 text-white/80 hover:border-white/50'
     }`;
 
   const input =
-    'w-full rounded-[4px] border border-white/25 bg-white/5 px-3.5 py-2.5 text-sm text-white placeholder:text-white/40 focus:border-gold focus:outline-none';
+    'w-full rounded-xl border border-white/25 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/40 focus:border-gold focus:outline-none';
 
   return (
     <form
       onSubmit={enviar}
       data-event="form-submit"
-      className="w-full max-w-md border border-white/15 bg-plum-dark/80 p-6 backdrop-blur-sm md:p-7"
+      className="w-full max-w-md rounded-2xl border border-white/15 bg-plum-dark/80 p-6 shadow-2xl backdrop-blur-sm md:p-7"
       aria-label="Cuéntanos qué buscas"
     >
       <fieldset className="mb-5">
@@ -112,7 +112,7 @@ export default function HeroForm() {
         />
         <div className="flex gap-2">
           <select
-            className="rounded-[4px] border border-white/25 bg-plum-dark px-2.5 py-2.5 text-sm text-white focus:border-gold focus:outline-none"
+            className="rounded-xl border border-white/25 bg-plum-dark px-2.5 py-2.5 text-sm text-white focus:border-gold focus:outline-none"
             value={pais}
             onChange={(e) => setPais(e.target.value)}
             aria-label="País"
@@ -135,7 +135,7 @@ export default function HeroForm() {
         </div>
       </div>
 
-      <button type="submit" className="btn-primary mt-5 w-full">
+      <button type="submit" className="btn-primary mt-5 w-full !rounded-full">
         Quiero más información
       </button>
       <p className="mt-3 text-center text-xs text-white/50">

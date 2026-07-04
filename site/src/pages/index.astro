@@ -30,7 +30,8 @@ const items = await Promise.all(
     propositos: p.propositos,
     resumen: p.resumen,
     imgSrc: await resolveImg(p.imagen),
-    href: p.slug === 'lotes-cucuta' ? '/lotes-cucuta' : `/proyectos/${p.slug}`,
+    // Laureles y Terrazas ya tienen landing propia: enlazar directo
+    href: p.lpUrl ?? (p.slug === 'lotes-cucuta' ? '/lotes-cucuta' : `/proyectos/${p.slug}`),
   })),
 );
 

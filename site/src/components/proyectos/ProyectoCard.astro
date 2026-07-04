@@ -12,7 +12,8 @@ const imagenes = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true },
 );
 const img = p.imagen ? imagenes[`../../assets/proyectos/${p.imagen}`]?.default : null;
-const href = p.slug === 'lotes-cucuta' ? '/lotes-cucuta' : `/proyectos/${p.slug}`;
+// Laureles y Terrazas ya tienen landing propia: enlazar directo
+const href = p.lpUrl ?? (p.slug === 'lotes-cucuta' ? '/lotes-cucuta' : `/proyectos/${p.slug}`);
 
 const estadoLabel: Record<string, string> = {
   'sobre-planos': 'Sobre planos',

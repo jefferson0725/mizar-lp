@@ -4,8 +4,10 @@ import Base from '../../layouts/Base.astro';
 import { proyectos, WHATSAPP_GENERAL } from '../../data/proyectos';
 
 export function getStaticPaths() {
+  // Ficha interna solo para proyectos sin landing propia
+  // (Laureles/Terrazas usan su LP existente; Mi Lote tiene /lotes-cucuta)
   return proyectos
-    .filter((p) => p.slug !== 'lotes-cucuta')
+    .filter((p) => p.slug !== 'lotes-cucuta' && !p.lpUrl)
     .map((p) => ({ params: { slug: p.slug }, props: { proyecto: p } }));
 }
 

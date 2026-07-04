@@ -1,7 +1,34 @@
 ---
+import { getImage } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
-import ProyectoCard from '../../components/proyectos/ProyectoCard.astro';
+import ProyectoSelector from '../../components/islands/ProyectoSelector.jsx';
 import { proyectos, WHATSAPP_GENERAL } from '../../data/proyectos';
+
+const imagenes = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/proyectos/*.png',
+  { eager: true },
+);
+
+const items = await Promise.all(
+  proyectos.map(async (p) => {
+    const mod = p.imagen ? imagenes[`../../assets/proyectos/${p.imagen}`] : null;
+    const imgSrc = mod
+      ? (await getImage({ src: mod.default, width: 800, format: 'webp' })).src
+      : null;
+    return {
+      slug: p.slug,
+      nombre: p.nombre,
+      tipo: p.tipo,
+      ubicacion: p.ubicacion,
+      estado: p.estado,
+      propositos: p.propositos,
+      resumen: p.resumen,
+      imgSrc,
+      // Laureles y Terrazas ya tienen landing propia: enlazar directo
+      href: p.lpUrl ?? (p.slug === 'lotes-cucuta' ? '/lotes-cucuta' : `/proyectos/${p.slug}`),
+    };
+  }),
+);
 
 const waTerminados = `https://wa.me/${WHATSAPP_GENERAL}?text=${encodeURIComponent(
   'Hola, vengo de la web, ¿puedo ver los apartamentos terminados?',
@@ -29,8 +56,8 @@ const waTerminados = `https://wa.me/${WHATSAPP_GENERAL}?text=${encodeURIComponen
   </section>
 
   <section class="py-14 md:py-20">
-    <div class="container-site grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-      {proyectos.map((p) => <ProyectoCard proyecto={p} />)}
+    <div class="container-site">
+      <ProyectoSelector items={items} client:load />
     </div>
   </section>
 </Base>
