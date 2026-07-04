@@ -1,0 +1,166 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import FaqAccordion from '../components/proyectos/FaqAccordion.astro';
+import { WHATSAPP_MILOTE } from '../data/proyectos';
+import renderLotes from '../assets/proyectos/lotes-cucuta.png';
+
+const wa = (msg: string) =>
+  `https://wa.me/${WHATSAPP_MILOTE}?text=${encodeURIComponent(msg)}`;
+
+const incluye = [
+  'Lote de 7x10 o 7x16 metros',
+  'Escritura independiente: 100% legal, a tu nombre',
+  'Pago a cuotas sin intereses, sin bancos y sin intermediarios',
+  'Servicios públicos y vías garantizados: agua, luz, alcantarillado, pavimentación, andenes',
+  'Zonas verdes',
+  'Diseño arquitectónico personalizado a la medida, sin costo adicional',
+  'El respaldo del Grupo Mizar: +20 años y +100 obras entregadas',
+];
+
+const faq = [
+  {
+    q: '¿Tengo que pasar por un banco o tener historial crediticio?',
+    a: 'No. Pagas directamente a cuotas, sin intereses y sin bancos. No hay estudio de crédito ni hipoteca: por eso es accesible incluso si nunca has comprado tierra antes.',
+  },
+  {
+    q: '¿Puedo comprar si vivo en el exterior?',
+    a: 'Sí. Muchos de nuestros propietarios viven fuera de Colombia. Te acompañamos en todo el proceso y puedes avanzar desde donde estés.',
+  },
+  {
+    q: '¿Qué puedo construir en el lote?',
+    a: 'Lo que decidas: casa, local comercial o un edificio que te genere ingresos. El diseño arquitectónico se personaliza a la medida de lo que quieras hacer.',
+  },
+  {
+    q: '¿En qué se diferencia Mi Lote de otras urbanizadoras?',
+    a: 'En tres cosas que no se improvisan: escrituración independiente, diseño arquitectónico personalizado, y el respaldo de 20 años del Grupo Mizar. No solo te vendemos un lote, te entregamos algo legalmente tuyo y listo para construir.',
+  },
+  {
+    q: '¿El proyecto es legal y está en regla?',
+    a: 'Sí. Miravista es suelo urbano con escrituración independiente y servicios garantizados. Toda la documentación está en regla y la revisas antes de decidir.',
+  },
+  {
+    q: '¿Y si en algún momento no puedo seguir pagando?',
+    a: 'Conversamos contigo. No es un proceso bancario frío: trabajamos con procesos humanos y claros, pensados para acompañarte, no para presionarte.',
+  },
+  {
+    q: '¿Dónde queda y cómo lo conozco?',
+    a: 'En San Cayetano, Cúcuta, a pocos minutos del anillo vial occidental. La mejor forma de conocerlo es agendar una visita o una llamada con nuestro equipo.',
+  },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<Base
+  title="Mi Lote — Tu lote propio en Cúcuta, a cuotas y sin bancos"
+  description="Lotes urbanos de 7x10 y 7x16 en San Cayetano, Cúcuta, a 100 m de la futura Universidad Simón Bolívar. Escritura independiente, cuotas sin intereses, sin bancos. Grupo Mizar."
+  path="/lotes-cucuta"
+  schema={schema}
+>
+  <!-- HERO -->
+  <section class="bg-plum-dark text-white">
+    <div class="container-site grid items-center gap-10 py-16 md:grid-cols-[6fr_6fr] md:py-24">
+      <div>
+        <p class="eyebrow text-gold">Mi Lote · San Cayetano, Cúcuta</p>
+        <h1 class="display-xl mt-4 text-4xl md:text-6xl">Tu lote propio, a cuotas, sin bancos</h1>
+        <p class="mt-5 max-w-lg text-lg leading-relaxed text-white/85">
+          Llevas años trabajando duro, y no tienes nada a tu nombre. Hoy ese esfuerzo puede
+          quedar en tierra propia, de forma segura.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href={wa('Hola, vengo de la web de Mi Lote y quiero información de los lotes en San Cayetano.')} target="_blank" rel="noopener" class="btn-primary" data-event="whatsapp-click">
+            Quiero mi lote
+          </a>
+          <a href="#faq" class="btn-outline text-white">Resolver mis dudas</a>
+        </div>
+      </div>
+      <!-- TODO: aquí va el video general de 30 s (dron + render + comunidad) cuando llegue de Drive -->
+      <Image
+        src={renderLotes}
+        alt="Render aéreo de la urbanización Miravista en San Cayetano, Cúcuta"
+        widths={[500, 900, 1300]}
+        sizes="(min-width: 768px) 50vw, 100vw"
+        format="webp"
+        class="w-full rounded-[4px]"
+      />
+    </div>
+  </section>
+
+  <!-- BANDA CREDENCIAL -->
+  <section class="border-y border-gold/30 bg-plum py-6 text-center text-white">
+    <p class="display-lg container-site text-xl md:text-2xl">
+      La urbanización más grande de San Cayetano
+    </p>
+    <p class="mt-1 text-sm tracking-wider text-white/70 uppercase">
+      Junto al anillo vial occidental · a 100 metros de la futura Universidad Simón Bolívar
+    </p>
+  </section>
+
+  <!-- LO QUE INCLUYE -->
+  <section class="py-16 md:py-24">
+    <div class="container-site grid gap-12 md:grid-cols-[5fr_7fr]">
+      <div>
+        <p class="eyebrow text-teal">Sin letra pequeña</p>
+        <h2 class="display-lg mt-3 text-3xl md:text-4xl">Lo que incluye tu lote</h2>
+        <p class="mt-4 max-w-prose text-ink/70">
+          Entrar ahora es entrar a tiempo. Y si vives fuera del país, puedes invertir desde
+          donde estés: te acompañamos en cada paso del proceso.
+        </p>
+        <a href={wa('Hola, vivo fuera de Colombia y quiero invertir en un lote de Mi Lote en Cúcuta.')} target="_blank" rel="noopener" class="btn-primary mt-7" data-event="whatsapp-click">
+          Invierto desde el exterior
+        </a>
+      </div>
+      <ul class="space-y-4">
+        {
+          incluye.map((item) => (
+            <li class="flex items-start gap-3 border-b border-ink/10 pb-4">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d9a441" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0" aria-hidden="true">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              <span class="font-medium">{item}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-white py-16 md:py-24" id="faq">
+    <div class="container-site max-w-3xl">
+      <p class="eyebrow text-teal">Preguntas frecuentes</p>
+      <h2 class="display-lg mt-3 text-3xl md:text-4xl">Lo que todos preguntan antes de decidir</h2>
+      <div class="mt-8">
+        <FaqAccordion items={faq} />
+      </div>
+    </div>
+  </section>
+
+  <!-- CIERRE -->
+  <section class="bg-plum-dark py-16 text-white md:py-20">
+    <div class="container-site max-w-3xl">
+      <h2 class="display-lg text-3xl md:text-4xl">Da el primer paso</h2>
+      <p class="mt-4 max-w-prose leading-relaxed text-white/80">
+        Agenda tu visita y conoce el sector acompañado de nuestro equipo. Si estás lejos o
+        prefieres, te llamamos y resolvemos todo por teléfono o videollamada.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href={wa('Hola, quiero agendar una visita a los lotes de San Cayetano.')} target="_blank" rel="noopener" class="btn-primary" data-event="whatsapp-click">
+          Agendar visita
+        </a>
+        <a href="https://maps.app.goo.gl/jhAWKJDp7szhNFQs7" target="_blank" rel="noopener" class="btn-outline text-white">
+          Conocer nuestras oficinas
+        </a>
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,119 @@
+﻿---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const site = Astro.site ?? new URL('https://mizar.com.co');
+const path = `/blog/${post.id}`;
+const canonical = new URL(path, site).href;
+
+const formatDate = (date: Date) =>
+  new Intl.DateTimeFormat('es-CO', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(date);
+
+const articleSchema: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: post.data.title,
+  description: post.data.description,
+  author: {
+    '@type': 'Organization',
+    name: post.data.author,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Grupo Mizar',
+    logo: {
+      '@type': 'ImageObject',
+      url: new URL('/logo-mizar.webp', site).href,
+    },
+  },
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+  mainEntityOfPage: canonical,
+  url: canonical,
+  keywords: post.data.tags,
+};
+
+if (post.data.heroImage) {
+  articleSchema.image = [new URL(post.data.heroImage, site).href];
+}
+---
+
+<Base
+  title={`${post.data.title} | Grupo Mizar`}
+  description={post.data.description}
+  path={path}
+  ogImage={post.data.heroImage}
+  schema={articleSchema}
+>
+  <article class="bg-cream">
+    <header class="bg-plum-dark py-16 text-white md:py-24">
+      <div class="container-site max-w-prose">
+        <p class="eyebrow text-gold">{post.data.frente.replace('-', ' ')}</p>
+        <h1 class="display-xl mt-4 text-4xl md:text-6xl">{post.data.title}</h1>
+        <p class="mt-6 text-lg text-white/80">{post.data.description}</p>
+        <p class="mt-6 text-sm font-semibold text-white/65">
+          {formatDate(post.data.pubDate)} · {post.data.author}
+        </p>
+      </div>
+    </header>
+
+    <div class="container-site max-w-prose py-12 md:py-16">
+      <div class="article-body">
+        <Content />
+      </div>
+    </div>
+  </article>
+</Base>
+
+<style>
+  .article-body {
+    color: var(--color-ink);
+    font-size: 1.075rem;
+    line-height: 1.8;
+  }
+
+  .article-body :global(h2) {
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    color: var(--color-plum);
+    font-size: clamp(1.6rem, 3vw, 2.25rem);
+    font-variation-settings: "wdth" 112;
+    font-weight: 800;
+    line-height: 1.12;
+  }
+
+  .article-body :global(p) {
+    margin-top: 1rem;
+  }
+
+  .article-body :global(ul) {
+    margin-top: 1rem;
+    padding-left: 1.25rem;
+    list-style: square;
+  }
+
+  .article-body :global(li) {
+    margin-top: 0.5rem;
+  }
+
+  .article-body :global(strong) {
+    color: var(--color-plum);
+    font-weight: 800;
+  }
+</style>
+

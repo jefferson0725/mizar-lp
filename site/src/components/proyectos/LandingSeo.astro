@@ -1,0 +1,101 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProyectoCard from './ProyectoCard.astro';
+import FaqAccordion from './FaqAccordion.astro';
+import { proyectos, WHATSAPP_GENERAL } from '../../data/proyectos';
+
+interface Props {
+  path: string;
+  title: string;
+  description: string;
+  eyebrow: string;
+  h1: string;
+  /** Párrafo-respuesta directo (40-60 palabras) para GEO/citabilidad IA */
+  respuesta: string;
+  beneficios: { t: string; d: string }[];
+  proyectoSlugs: string[];
+  faq: { q: string; a: string }[];
+  ctaMensaje: string;
+}
+
+const { path, title, description, eyebrow, h1, respuesta, beneficios, proyectoSlugs, faq, ctaMensaje } =
+  Astro.props;
+
+const relacionados = proyectos.filter((p) => proyectoSlugs.includes(p.slug));
+const wa = `https://wa.me/${WHATSAPP_GENERAL}?text=${encodeURIComponent(ctaMensaje)}`;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+};
+---
+
+<Base title={title} description={description} path={path} schema={schema}>
+  <section class="bg-plum py-14 text-white md:py-20">
+    <div class="container-site max-w-3xl">
+      <p class="eyebrow text-gold">{eyebrow}</p>
+      <h1 class="display-xl mt-3 text-4xl md:text-5xl">{h1}</h1>
+      <p class="mt-6 max-w-prose text-lg leading-relaxed text-white/85">{respuesta}</p>
+      <a href={wa} target="_blank" rel="noopener" class="btn-primary mt-8" data-event="whatsapp-click">
+        Quiero más información
+      </a>
+    </div>
+  </section>
+
+  <section class="py-14 md:py-20">
+    <div class="container-site">
+      <h2 class="display-lg max-w-xl text-3xl md:text-4xl">Por qué con Grupo Mizar</h2>
+      <div class="mt-10 grid gap-x-10 gap-y-8 md:grid-cols-2">
+        {
+          beneficios.map((b) => (
+            <div class="border-l-2 border-gold pl-5">
+              <h3 class="font-bold">{b.t}</h3>
+              <p class="mt-1.5 max-w-prose text-sm leading-relaxed text-ink/70">{b.d}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {
+    relacionados.length > 0 && (
+      <section class="bg-white py-14 md:py-20">
+        <div class="container-site">
+          <h2 class="display-lg text-3xl md:text-4xl">Proyectos disponibles</h2>
+          <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {relacionados.map((p) => (
+              <ProyectoCard proyecto={p} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <section class="py-14 md:py-20">
+    <div class="container-site max-w-3xl">
+      <h2 class="display-lg text-3xl md:text-4xl">Preguntas frecuentes</h2>
+      <div class="mt-8">
+        <FaqAccordion items={faq} />
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-plum-dark py-14 text-white md:py-16">
+    <div class="container-site flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
+      <h2 class="display-lg text-2xl md:text-3xl">Da el primer paso</h2>
+      <div class="flex flex-wrap gap-3">
+        <a href={wa} target="_blank" rel="noopener" class="btn-primary" data-event="whatsapp-click">
+          Hablar por WhatsApp
+        </a>
+        <a href="/contacto" class="btn-outline text-white">Ir a contacto</a>
+      </div>
+    </div>
+  </section>
+</Base>

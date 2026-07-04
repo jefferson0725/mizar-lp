@@ -1,0 +1,197 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import equipoImg from '../assets/equipo.jpg';
+
+const equipo = [
+  { nombre: 'Claudia Villamizar', rol: 'Gerencia General' },
+  { nombre: 'Nelson Villamizar', rol: 'Dirección de Proyectos' },
+  { nombre: 'Ingry Suárez', rol: 'Dirección Jurídica' },
+  { nombre: 'Juliana Parada', rol: 'Arquitectura' },
+  { nombre: 'María Paula Parada', rol: 'Marketing Digital' },
+];
+
+const pasos = [
+  { n: '1', t: 'Eliges tu propiedad', d: 'Apartamento, parcela o lote: encuentras el proyecto que se ajusta a lo que buscas.' },
+  { n: '2', t: 'Acordamos tu plan de cuotas', d: 'Directo con nosotros, según tu capacidad real. Sin estudio de crédito ni codeudores.' },
+  { n: '3', t: 'Pagas sin intereses bancarios', d: 'Sin filas, sin trámites infinitos, sin cobros ocultos ni intermediarios que se quedan con una tajada.' },
+  { n: '4', t: 'Escrituras a tu nombre', d: 'Todo 100% legal y documentado. Lo que pagaste con esfuerzo queda legalmente tuyo.' },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'Nosotros — Grupo Mizar',
+  description:
+    'Historia de Grupo Mizar: más de 20 años construyendo en Colombia, del Parque Bosque Encantado a un modelo de propiedades a cuotas sin bancos.',
+};
+---
+
+<Base
+  title="Nosotros — 20 años construyendo en Colombia | Grupo Mizar"
+  description="De construir parques y centros de convenciones para el Estado a financiar directo: la historia de Grupo Mizar, la empresa familiar santandereana que entrega propiedades a cuotas y sin bancos."
+  path="/nosotros"
+  schema={schema}
+>
+  <!-- HERO -->
+  <section class="py-16 md:py-24">
+    <div class="container-site max-w-3xl">
+      <p class="eyebrow text-teal">Nuestra historia</p>
+      <h1 class="display-xl mt-4 text-4xl md:text-6xl">Empezamos construyendo para el país.</h1>
+    </div>
+  </section>
+
+  <!-- HISTORIA -->
+  <section class="pb-16 md:pb-24">
+    <div class="container-site grid gap-10 md:grid-cols-[7fr_5fr]">
+      <div class="max-w-prose space-y-5 leading-relaxed text-ink/85">
+        <p>
+          Hace más de veinte años, un grupo de ingenieros santandereanos comenzó a levantar
+          obras para el Estado: parques, centros de convenciones, espacios públicos. Uno de
+          esos proyectos, el Parque Metropolitano Bosque Encantado en Bucaramanga, llegó
+          hasta la Bienal Colombiana de Arquitectura. Otro nos llevó a la Sierra Nevada, a
+          construir el Centro de Interpretación Arhuaca en Nabusimake. Ese no se podía hacer
+          con planos estándar: había que escuchar a la comunidad, entender su cultura y
+          construir a su medida.
+        </p>
+        <p class="display-lg text-xl text-plum md:text-2xl">
+          Adaptar el proyecto a la gente, y no la gente al proyecto, se volvió nuestra forma
+          de trabajar.
+        </p>
+        <p>
+          Con los años entregamos más de cien obras en distintas regiones de Colombia. Pero
+          en el camino entendimos algo que cambió el rumbo. Había una barrera que dejaba a
+          mucha gente por fuera: el banco, el puntaje de crédito, el reporte en la central de
+          riesgo. Personas trabajadoras, con la disciplina y el esfuerzo para pagar, a las
+          que el sistema les decía que no.
+        </p>
+        <!-- TODO: carrusel de imágenes de proyectos del brochure cuando estén extraídas -->
+      </div>
+
+      <aside class="space-y-6 md:pt-2">
+        <div class="border-l-2 border-gold pl-5">
+          <p class="stat-num text-3xl text-plum">Bienal</p>
+          <p class="mt-1 text-sm leading-snug text-ink/70">
+            Parque Metropolitano Bosque Encantado (Bucaramanga), seleccionado en la Bienal
+            Colombiana de Arquitectura.
+          </p>
+        </div>
+        <div class="border-l-2 border-gold pl-5">
+          <p class="stat-num text-3xl text-plum">Nabusimake</p>
+          <p class="mt-1 text-sm leading-snug text-ink/70">
+            Centro de Interpretación Arhuaca, construido escuchando a la comunidad en la
+            Sierra Nevada.
+          </p>
+        </div>
+        <div class="border-l-2 border-gold pl-5">
+          <p class="stat-num text-3xl text-plum">100+</p>
+          <p class="mt-1 text-sm leading-snug text-ink/70">
+            Obras entregadas en distintas regiones de Colombia en más de 20 años.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- MODELO -->
+  <section class="bg-plum py-16 text-white md:py-24">
+    <div class="container-site">
+      <div class="max-w-2xl">
+        <p class="eyebrow text-gold">El modelo</p>
+        <h2 class="display-lg mt-3 text-3xl md:text-4xl">¿Cómo funciona nuestro modelo?</h2>
+        <p class="mt-5 leading-relaxed text-white/80">
+          Tenemos la convicción de que tener algo tuyo en Colombia no debería ser tan difícil
+          ni depender de un banco. Cambiamos la deuda bancaria por algo más justo: pago
+          directo, a cuotas, sin filas y trámites infinitos, codeudores, o cobros ocultos,
+          sin intermediarios que se quedan con una tajada.
+        </p>
+      </div>
+
+      <ol class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {
+          pasos.map((p) => (
+            <li class="border-t-2 border-gold pt-4">
+              <span class="stat-num text-4xl text-gold/80">{p.n}</span>
+              <h3 class="mt-2 font-bold">{p.t}</h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-white/70">{p.d}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- DOS MARCAS -->
+  <section class="py-16 md:py-24">
+    <div class="container-site">
+      <h2 class="display-lg max-w-xl text-3xl md:text-4xl">Hoy Grupo Mizar es dos cosas a la vez</h2>
+      <div class="mt-10 grid gap-6 md:grid-cols-[7fr_5fr]">
+        <a href="/proyectos" class="group block bg-plum-dark p-8 text-white transition-colors hover:bg-plum md:p-10">
+          <p class="eyebrow text-gold">Mizar</p>
+          <p class="display-lg mt-3 text-2xl md:text-3xl">Apartamentos, cabañas y parcelas campestres</p>
+          <p class="mt-3 max-w-prose text-white/70">
+            En Girón, Piedecuesta, Charta y la Mesa de los Santos. Sobre planos y terminados.
+          </p>
+          <span class="mt-6 inline-block font-bold text-gold group-hover:underline">Ver proyectos →</span>
+        </a>
+        <a href="/lotes-cucuta" class="group block bg-teal p-8 text-white transition-opacity hover:opacity-90 md:p-10">
+          <p class="eyebrow text-white/70">Mi Lote</p>
+          <p class="display-lg mt-3 text-2xl md:text-3xl">Lotes urbanos en Cúcuta</p>
+          <p class="mt-3 max-w-prose text-white/80">
+            Tierra propia con escritura independiente en San Cayetano, para quienes quieren
+            invertir en tierra.
+          </p>
+          <span class="mt-6 inline-block font-bold group-hover:underline">Conocer Mi Lote →</span>
+        </a>
+      </div>
+      <!-- TODO: logos de entidades con las que hemos trabajado (última página del brochure) -->
+    </div>
+  </section>
+
+  <!-- QUIÉNES ESTAMOS DETRÁS -->
+  <section class="bg-white py-16 md:py-24">
+    <div class="container-site grid items-center gap-10 md:grid-cols-[6fr_6fr]">
+      <Image
+        src={equipoImg}
+        alt="Equipo de Grupo Mizar en sus oficinas de Bucaramanga"
+        widths={[480, 800, 1100]}
+        sizes="(min-width: 768px) 50vw, 100vw"
+        format="webp"
+        class="w-full rounded-[4px] object-cover"
+      />
+      <div>
+        <p class="eyebrow text-teal">Quiénes estamos detrás</p>
+        <h2 class="display-lg mt-3 text-3xl md:text-4xl">Una empresa familiar</h2>
+        <p class="mt-4 max-w-prose leading-relaxed text-ink/75">
+          Grupo Mizar es una empresa familiar. Detrás de cada obra hay un equipo que responde
+          con nombre propio por lo que construye.
+        </p>
+        <ul class="mt-8 space-y-4">
+          {
+            equipo.map((m) => (
+              <li class="flex items-baseline justify-between gap-4 border-b border-ink/10 pb-3">
+                <span class="font-extrabold" style="font-variation-settings:'wdth' 110">{m.nombre}</span>
+                <span class="text-sm font-semibold text-teal">{m.rol}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROPÓSITO -->
+  <section class="bg-plum-dark py-16 text-white md:py-24">
+    <div class="container-site max-w-3xl">
+      <p class="eyebrow text-gold">Nuestro propósito</p>
+      <h2 class="display-xl mt-4 text-3xl md:text-5xl">
+        Convertimos tu esfuerzo en propiedades, a cuotas y sin bancos
+      </h2>
+      <p class="mt-5 text-lg text-white/80">Tu libertad empieza con una decisión segura.</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="/proyectos" class="btn-primary">Conoce nuestros proyectos</a>
+        <a href="/contacto" class="btn-outline text-white">Hablemos</a>
+      </div>
+    </div>
+  </section>
+</Base>

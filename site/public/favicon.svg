@@ -1,0 +1,6 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Monograma M de Grupo Mizar">
+  <rect width="128" height="128" rx="12" fill="#3b1f3e" />
+  <path d="M20 96V34l25 36 19-42 19 42 25-36v62H91V74L75 99H53L37 74v22H20Z" fill="#f6f3ee" />
+  <path d="M35 88 64 32l29 56H80L64 58 48 88H35Z" fill="#e62e4d" />
+  <path d="M48 88 64 58l16 30H48Z" fill="#3b1f3e" opacity=".9" />
+</svg>

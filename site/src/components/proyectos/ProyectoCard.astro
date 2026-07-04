@@ -1,0 +1,63 @@
+---
+import { Image } from 'astro:assets';
+import type { Proyecto } from '../../data/proyectos';
+
+interface Props {
+  proyecto: Proyecto;
+}
+const { proyecto: p } = Astro.props;
+
+const imagenes = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/proyectos/*.png',
+  { eager: true },
+);
+const img = p.imagen ? imagenes[`../../assets/proyectos/${p.imagen}`]?.default : null;
+const href = p.slug === 'lotes-cucuta' ? '/lotes-cucuta' : `/proyectos/${p.slug}`;
+
+const estadoLabel: Record<string, string> = {
+  'sobre-planos': 'Sobre planos',
+  'en-obra': 'En obra',
+  terminado: 'Terminado',
+  disponible: 'Disponible',
+};
+---
+
+<a
+  href={href}
+  class="group block overflow-hidden rounded-[4px] border border-ink/10 bg-white transition-shadow hover:shadow-md"
+>
+  <div class="relative aspect-[4/3] overflow-hidden bg-plum">
+    {
+      img ? (
+        <Image
+          src={img}
+          alt={p.nombre}
+          widths={[400, 700]}
+          sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
+          format="webp"
+          class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
+      ) : (
+        <div
+          class="flex h-full w-full items-end p-4"
+          style="background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 14px);"
+        >
+          <span class="display-lg text-lg text-white/85">{p.nombre}</span>
+        </div>
+      )
+    }
+    <div class="absolute top-3 left-3 flex gap-1.5">
+      <span class="rounded-[3px] bg-plum-dark/85 px-2 py-1 text-[0.65rem] font-bold tracking-widest text-gold uppercase">
+        {p.tipo}
+      </span>
+      <span class="rounded-[3px] bg-teal/90 px-2 py-1 text-[0.65rem] font-bold tracking-widest text-white uppercase">
+        {estadoLabel[p.estado]}
+      </span>
+    </div>
+  </div>
+  <div class="p-4">
+    <h3 class="font-bold leading-snug">{p.nombre}</h3>
+    <p class="mt-1 text-sm text-teal">{p.ubicacion}</p>
+    <p class="mt-2 text-sm text-ink/70">{p.resumen}</p>
+  </div>
+</a>

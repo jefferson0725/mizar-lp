@@ -1,0 +1,140 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import { proyectos, WHATSAPP_GENERAL } from '../../data/proyectos';
+
+export function getStaticPaths() {
+  return proyectos
+    .filter((p) => p.slug !== 'lotes-cucuta')
+    .map((p) => ({ params: { slug: p.slug }, props: { proyecto: p } }));
+}
+
+const { proyecto: p } = Astro.props;
+
+const imagenes = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/proyectos/*.png',
+  { eager: true },
+);
+const img = p.imagen ? imagenes[`../../assets/proyectos/${p.imagen}`]?.default : null;
+
+const tipoLabel = { apartamento: 'Apartamentos', parcela: 'Parcelas campestres', lote: 'Lotes urbanos' }[p.tipo];
+const estadoLabel = {
+  'sobre-planos': 'Sobre planos',
+  'en-obra': 'En obra',
+  terminado: 'Terminado',
+  disponible: 'Disponible',
+}[p.estado];
+
+const wa = `https://wa.me/${WHATSAPP_GENERAL}?text=${encodeURIComponent(
+  `Hola, vengo de la web y quiero más información sobre ${p.nombre}.`,
+)}`;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: p.nombre,
+  description: p.resumen,
+  category: tipoLabel,
+  brand: { '@type': 'Organization', name: 'Grupo Mizar' },
+  offers: {
+    '@type': 'Offer',
+    availability: 'https://schema.org/InStock',
+    areaServed: p.ubicacion,
+  },
+};
+
+const beneficios = [
+  { t: 'Sin bancos ni estudio de crédito', d: 'Pagas directo con la constructora. No hay hipoteca, codeudores ni central de riesgo.' },
+  { t: 'Cuotas claras, sin letra pequeña', d: 'Acordamos un plan de pagos a tu medida, sin intereses ocultos ni intermediarios.' },
+  { t: 'Respaldo de +20 años', d: 'Más de 100 proyectos entregados en Colombia por un equipo que responde con nombre propio.' },
+  { t: 'Puedes comprar desde el exterior', d: 'Muchos de nuestros propietarios viven fuera de Colombia. Te acompañamos todo el proceso.' },
+];
+---
+
+<Base
+  title={`${p.nombre} — a cuotas, sin bancos | Grupo Mizar`}
+  description={`${p.resumen} Pago directo con la constructora en ${p.ubicacion}.`}
+  path={`/proyectos/${p.slug}`}
+  schema={schema}
+>
+  <section class="relative bg-plum-dark text-white">
+    {
+      img && (
+        <div class="absolute inset-0">
+          <Image
+            src={img}
+            alt=""
+            widths={[800, 1400]}
+            sizes="100vw"
+            format="webp"
+            class="h-full w-full object-cover opacity-30"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-plum-dark via-plum-dark/40 to-transparent" />
+        </div>
+      )
+    }
+    <div class="container-site relative py-16 md:py-24">
+      <div class="flex flex-wrap gap-2">
+        <span class="rounded-[3px] bg-gold/20 px-2.5 py-1 text-[0.7rem] font-bold tracking-widest text-gold uppercase">{tipoLabel}</span>
+        <span class="rounded-[3px] bg-white/10 px-2.5 py-1 text-[0.7rem] font-bold tracking-widest text-white uppercase">{estadoLabel}</span>
+      </div>
+      <h1 class="display-xl mt-4 max-w-3xl text-4xl md:text-5xl">{p.nombre}</h1>
+      <p class="mt-3 text-lg text-gold">{p.ubicacion}</p>
+      <p class="mt-5 max-w-2xl leading-relaxed text-white/85">{p.resumen}</p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href={wa} target="_blank" rel="noopener" class="btn-primary" data-event="whatsapp-click">
+          Quiero información de este proyecto
+        </a>
+        {
+          p.lpUrl && (
+            <a href={p.lpUrl} target="_blank" rel="noopener" class="btn-outline text-white">
+              Ver la página completa del proyecto
+            </a>
+          )
+        }
+      </div>
+    </div>
+  </section>
+
+  {
+    img && (
+      <section class="container-site -mt-0 py-10 md:py-14">
+        <Image
+          src={img}
+          alt={`Render de ${p.nombre}`}
+          widths={[700, 1200, 1800]}
+          sizes="(min-width: 1024px) 74rem, 100vw"
+          format="webp"
+          class="w-full rounded-[4px] border border-ink/10"
+        />
+      </section>
+    )
+  }
+
+  <section class="bg-white py-14 md:py-20">
+    <div class="container-site">
+      <p class="eyebrow text-teal">El modelo Mizar</p>
+      <h2 class="display-lg mt-3 max-w-xl text-3xl md:text-4xl">A cuotas y sin bancos, así de simple</h2>
+      <div class="mt-10 grid gap-x-10 gap-y-8 md:grid-cols-2">
+        {
+          beneficios.map((b) => (
+            <div class="border-l-2 border-gold pl-5">
+              <h3 class="font-bold">{b.t}</h3>
+              <p class="mt-1.5 max-w-prose text-sm leading-relaxed text-ink/70">{b.d}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-plum py-14 text-white md:py-16">
+    <div class="container-site flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
+      <h2 class="display-lg text-2xl md:text-3xl">Da el primer paso hacia {tipoLabel?.toLowerCase()} en {p.ciudad}</h2>
+      <div class="flex flex-wrap gap-3">
+        <a href={wa} target="_blank" rel="noopener" class="btn-primary" data-event="whatsapp-click">Hablar por WhatsApp</a>
+        <a href="/contacto" class="btn-outline text-white">Ir a contacto</a>
+      </div>
+    </div>
+  </section>
+</Base>

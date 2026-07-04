@@ -1,0 +1,202 @@
+---
+import { getImage, Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import HeroForm from '../components/islands/HeroForm.jsx';
+import ProyectoSelector from '../components/islands/ProyectoSelector.jsx';
+import { proyectos } from '../data/proyectos';
+import equipoImg from '../assets/equipo.jpg';
+
+const imagenes = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/proyectos/*.png',
+  { eager: true },
+);
+
+async function resolveImg(nombre: string | null) {
+  if (!nombre) return null;
+  const mod = imagenes[`../assets/proyectos/${nombre}`];
+  if (!mod) return null;
+  const img = await getImage({ src: mod.default, width: 800, format: 'webp' });
+  return img.src;
+}
+
+const items = await Promise.all(
+  proyectos.map(async (p) => ({
+    slug: p.slug,
+    nombre: p.nombre,
+    tipo: p.tipo,
+    ubicacion: p.ubicacion,
+    estado: p.estado,
+    propositos: p.propositos,
+    resumen: p.resumen,
+    imgSrc: await resolveImg(p.imagen),
+    href: p.slug === 'lotes-cucuta' ? '/lotes-cucuta' : `/proyectos/${p.slug}`,
+  })),
+);
+
+const heroBg = await resolveImg('piedecuesta.png');
+
+const testimonios = [
+  {
+    quote:
+      'Llevaba años pagando arriendo y pensando que sin crédito nunca iba a tener nada. Hoy pago la cuota de mi apartamento directo con la constructora.',
+    autor: 'Propietaria en Girón',
+  },
+  {
+    quote:
+      'Compré mi lote desde Estados Unidos. Todo el proceso fue por videollamada y los documentos llegaron en regla.',
+    autor: 'Inversionista en Cúcuta, vive en EE. UU.',
+  },
+  {
+    quote:
+      'Lo que me convenció fue que no hay letra pequeña: cuota fija, sin intereses, y la escritura queda a mi nombre.',
+    autor: 'Propietario en Piedecuesta',
+  },
+];
+---
+
+<Base
+  title="Grupo Mizar — Propiedades a cuotas y sin bancos en Colombia"
+  description="Apartamentos, parcelas campestres y lotes urbanos en Santander y Norte de Santander. Más de 20 años construyendo, +100 proyectos entregados. Pago directo, a cuotas, sin bancos."
+  path="/"
+>
+  <!-- HERO -->
+  <section class="relative overflow-hidden bg-plum-dark text-white">
+    {
+      heroBg && (
+        <img
+          src={heroBg}
+          alt=""
+          aria-hidden="true"
+          class="absolute inset-0 h-full w-full object-cover opacity-25"
+          style="filter: saturate(0.6);"
+        />
+      )
+    }
+    <div class="absolute inset-0 bg-gradient-to-b from-plum-dark/60 via-transparent to-plum-dark"></div>
+
+    <div class="container-site relative grid gap-10 py-16 md:grid-cols-[7fr_5fr] md:items-center md:gap-14 md:py-24">
+      <div>
+        <p class="eyebrow text-gold">Constructora · +20 años en Colombia</p>
+        <h1 class="display-xl mt-4 text-4xl md:text-6xl">
+          Convertimos tu esfuerzo en propiedades, a cuotas y sin bancos
+        </h1>
+        <p class="mt-5 max-w-lg text-base leading-relaxed text-white/80 md:text-lg">
+          Sin estudio de crédito, sin codeudores, sin intermediarios. Pago directo con la
+          constructora que lleva más de veinte años entregando obras en Colombia.
+        </p>
+
+        <dl class="mt-10 flex flex-wrap gap-x-10 gap-y-6">
+          <div>
+            <dt class="sr-only">Años construyendo</dt>
+            <dd class="stat-num text-4xl text-white md:text-5xl">20<span class="text-mizar">+</span></dd>
+            <dd class="mt-1 text-xs font-semibold tracking-wider text-white/60 uppercase">Años construyendo</dd>
+          </div>
+          <div>
+            <dt class="sr-only">Proyectos entregados</dt>
+            <dd class="stat-num text-4xl text-white md:text-5xl">100<span class="text-mizar">+</span></dd>
+            <dd class="mt-1 text-xs font-semibold tracking-wider text-white/60 uppercase">Proyectos entregados</dd>
+          </div>
+          <div>
+            <dt class="sr-only">Regiones</dt>
+            <dd class="stat-num text-4xl text-white md:text-5xl">2</dd>
+            <dd class="mt-1 text-xs font-semibold tracking-wider text-white/60 uppercase">Santander y N. de Santander</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div class="md:justify-self-end">
+        <HeroForm client:load />
+      </div>
+    </div>
+  </section>
+
+  <!-- SELECTOR DE PROYECTOS -->
+  <section class="py-16 md:py-24" id="proyectos">
+    <div class="container-site">
+      <div class="mb-10 max-w-2xl">
+        <p class="eyebrow text-teal">Portafolio</p>
+        <h2 class="display-lg mt-3 text-3xl md:text-4xl">Encuentra tu proyecto</h2>
+        <p class="mt-4 text-ink/70">
+          Apartamentos sobre planos, parcelas campestres y lotes urbanos. Filtra por lo que
+          buscas y para qué lo buscas.
+        </p>
+      </div>
+      <ProyectoSelector items={items} client:visible />
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS -->
+  <section class="bg-white py-16 md:py-24">
+    <div class="container-site">
+      <div class="mb-10 flex items-end justify-between gap-6">
+        <div>
+          <p class="eyebrow text-teal">Historias reales</p>
+          <h2 class="display-lg mt-3 text-3xl md:text-4xl">Ya lo están logrando</h2>
+        </div>
+      </div>
+
+      <!-- TODO: reemplazar por carrusel de videos de Drive cuando lleguen los assets -->
+      <div class="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4" style="scrollbar-width: thin;">
+        {
+          testimonios.map((t) => (
+            <blockquote class="min-w-[85%] snap-start border-l-2 border-gold bg-cream p-6 sm:min-w-[45%] lg:min-w-[30%]">
+              <p class="text-base leading-relaxed text-ink/85">“{t.quote}”</p>
+              <footer class="mt-4 text-sm font-bold text-teal">{t.autor}</footer>
+            </blockquote>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- EQUIPO -->
+  <section class="relative overflow-hidden bg-plum text-white">
+    <div class="container-site grid items-center gap-10 py-16 md:grid-cols-[5fr_7fr] md:py-24">
+      <div>
+        <p class="eyebrow text-gold">Empresa familiar</p>
+        <h2 class="display-lg mt-3 text-3xl md:text-4xl">
+          Tu libertad empieza con una decisión segura.
+        </h2>
+        <p class="mt-5 max-w-md leading-relaxed text-white/75">
+          Detrás de cada obra hay un equipo que responde con nombre propio por lo que
+          construye. Somos ingenieros santandereanos y llevamos más de veinte años
+          entregando lo que prometemos.
+        </p>
+        <a href="/nosotros" class="btn-outline mt-8 text-white">Conócenos</a>
+      </div>
+      <Image
+        src={equipoImg}
+        alt="Equipo de Grupo Mizar frente a sus oficinas en Bucaramanga"
+        widths={[480, 800, 1100]}
+        sizes="(min-width: 768px) 55vw, 100vw"
+        format="webp"
+        class="h-full w-full rounded-[4px] object-cover"
+      />
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="bg-plum-dark py-16 text-white md:py-20">
+    <div class="container-site flex flex-col items-start gap-6 md:flex-row md:items-center md:justify-between">
+      <div>
+        <h2 class="display-lg text-3xl md:text-4xl">Da el primer paso</h2>
+        <p class="mt-3 max-w-lg text-white/70">
+          Agenda una visita o una llamada. Si estás fuera del país, resolvemos todo por
+          teléfono o videollamada.
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <a
+          href="https://wa.me/573112382253?text=Hola,%20vengo%20de%20la%20web%20de%20Grupo%20Mizar%20y%20quiero%20agendar%20una%20visita."
+          target="_blank"
+          rel="noopener"
+          class="btn-primary"
+          data-event="whatsapp-click"
+        >
+          Escríbenos por WhatsApp
+        </a>
+        <a href="/contacto" class="btn-outline text-white">Ir a contacto</a>
+      </div>
+    </div>
+  </section>
+</Base>

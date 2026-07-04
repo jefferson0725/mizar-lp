@@ -1,0 +1,36 @@
+---
+import Base from '../../layouts/Base.astro';
+import ProyectoCard from '../../components/proyectos/ProyectoCard.astro';
+import { proyectos, WHATSAPP_GENERAL } from '../../data/proyectos';
+
+const waTerminados = `https://wa.me/${WHATSAPP_GENERAL}?text=${encodeURIComponent(
+  'Hola, vengo de la web, ¿puedo ver los apartamentos terminados?',
+)}`;
+---
+
+<Base
+  title="Proyectos — Apartamentos, parcelas y lotes a cuotas | Grupo Mizar"
+  description="Portafolio de Grupo Mizar: apartamentos sobre planos en Girón y Piedecuesta, parcelas campestres en Charta y Mesa de los Santos, y lotes urbanos en Cúcuta. A cuotas, sin bancos."
+  path="/proyectos"
+>
+  <section class="bg-plum py-14 text-white md:py-20">
+    <div class="container-site max-w-3xl">
+      <p class="eyebrow text-gold">Portafolio</p>
+      <h1 class="display-xl mt-3 text-4xl md:text-5xl">Nuestros proyectos</h1>
+      <p class="mt-5 leading-relaxed text-white/80">
+        Contamos con un portafolio de apartamentos sobre planos y terminados, parcelas
+        campestres y lotes urbanos. Todos con el mismo modelo: pago directo, a cuotas y sin
+        bancos.
+      </p>
+      <a href={waTerminados} target="_blank" rel="noopener" class="btn-outline mt-6 text-white" data-event="whatsapp-click">
+        ¿Quieres ver los terminados? Escríbenos
+      </a>
+    </div>
+  </section>
+
+  <section class="py-14 md:py-20">
+    <div class="container-site grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {proyectos.map((p) => <ProyectoCard proyecto={p} />)}
+    </div>
+  </section>
+</Base>
