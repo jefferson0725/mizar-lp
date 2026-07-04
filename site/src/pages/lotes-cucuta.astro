@@ -135,6 +135,78 @@ const schema = {
     </div>
   </section>
 
+  <!-- TESTIMONIOS EN VIDEO (estructura de la LP base de Terrazas) -->
+  <!-- TODO: reemplazar por el video testimonial propio de Mi Lote cuando llegue de Drive -->
+  <section class="bg-white py-16 md:py-24">
+    <div class="container-site grid items-center gap-10 md:grid-cols-[5fr_7fr]">
+      <div>
+        <p class="eyebrow text-teal">Testimonios</p>
+        <h2 class="display-lg mt-3 text-3xl md:text-4xl">Ellos ya dieron el paso</h2>
+        <p class="mt-4 max-w-prose leading-relaxed text-ink/75">
+          Personas que trabajaron años sin tener nada a su nombre y hoy pagan su propiedad
+          directo con la constructora. Dale play y escúchalos.
+        </p>
+      </div>
+      <div class="relative overflow-hidden rounded-2xl bg-plum-dark">
+        <video
+          id="video-testimonio"
+          src="/videos/testimonios.mp4"
+          class="aspect-video w-full object-cover"
+          muted
+          loop
+          playsinline
+          preload="metadata"
+        ></video>
+        <button
+          id="video-audio-toggle"
+          type="button"
+          class="absolute right-4 bottom-4 flex h-12 w-12 items-center justify-center rounded-full bg-black/60 text-white"
+          aria-label="Activar sonido"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M11 5 6 9H2v6h4l5 4V5ZM23 9l-6 6M17 9l6 6" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMENTARIOS (carrusel scroll-snap, como la LP base) -->
+  <!-- TODO: reemplazar por comentarios reales de compradores de Mi Lote -->
+  <section class="py-16 md:py-24">
+    <div class="container-site">
+      <p class="eyebrow text-teal">Comentarios</p>
+      <h2 class="display-lg mt-3 max-w-xl text-3xl md:text-4xl">Lo que dicen quienes ya compraron</h2>
+      <div class="mt-8 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4" style="scrollbar-width: thin;">
+        {
+          [
+            {
+              quote: 'Compré mi lote desde Estados Unidos. Todo el proceso fue por videollamada y los documentos llegaron en regla.',
+              autor: 'Inversionista, vive en EE. UU.',
+            },
+            {
+              quote: 'Lo que me convenció fue que no hay letra pequeña: cuota fija, sin intereses, y la escritura queda a mi nombre.',
+              autor: 'Comprador en San Cayetano',
+            },
+            {
+              quote: 'Nunca había podido comprar nada porque estaba reportado. Aquí nadie me pidió puntaje de crédito.',
+              autor: 'Comprador en Cúcuta',
+            },
+            {
+              quote: 'Llevaba años pagando arriendo y pensando que sin crédito nunca iba a tener nada. Hoy tengo tierra propia.',
+              autor: 'Propietaria, Norte de Santander',
+            },
+          ].map((c) => (
+            <blockquote class="min-w-[85%] snap-start rounded-2xl border-l-2 border-gold bg-white p-6 sm:min-w-[45%] lg:min-w-[30%]">
+              <p class="leading-relaxed text-ink/85">“{c.quote}”</p>
+              <footer class="mt-4 text-sm font-bold text-teal">{c.autor}</footer>
+            </blockquote>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
   <!-- LO QUE INCLUYE + RESUMEN DE VALOR -->
   <section class="bg-white py-16 md:py-24" id="incluye">
     <div class="container-site grid gap-12 md:grid-cols-[7fr_5fr]">
@@ -213,6 +285,24 @@ const schema = {
         class="mt-10 h-72 w-full rounded-2xl border-0 md:h-96"
         allowfullscreen
       ></iframe>
+    </div>
+  </section>
+
+  <!-- GALERÍA: así avanza la urbanización (equivalente a la galería de la LP base) -->
+  <section class="bg-white py-16 md:py-24">
+    <div class="container-site">
+      <p class="eyebrow text-teal">La urbanización</p>
+      <h2 class="display-lg mt-3 max-w-xl text-3xl md:text-4xl">Así avanza Miravista</h2>
+      <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <img src={renderMid} alt="Render aéreo de la glorieta de entrada de Miravista" loading="lazy" class="aspect-[4/3] w-full rounded-2xl object-cover" />
+        <!-- TODO: fotos reales del avance de obra (Drive) -->
+        <div class="flex aspect-[4/3] items-end rounded-2xl bg-plum p-5" style="background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 14px);">
+          <span class="font-bold text-white/85">Vías y andenes en pavimentación</span>
+        </div>
+        <div class="flex aspect-[4/3] items-end rounded-2xl bg-plum p-5" style="background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 14px);">
+          <span class="font-bold text-white/85">Redes de servicios públicos en instalación</span>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -331,6 +421,20 @@ const schema = {
 </Base>
 
 <script>
+  // Video testimonial: reproducir al entrar en pantalla, toggle de audio
+  const video = document.getElementById('video-testimonio') as HTMLVideoElement | null;
+  const audioBtn = document.getElementById('video-audio-toggle');
+  if (video) {
+    new IntersectionObserver(
+      ([e]) => (e.isIntersecting ? video.play().catch(() => {}) : video.pause()),
+      { threshold: 0.4 },
+    ).observe(video);
+    audioBtn?.addEventListener('click', () => {
+      video.muted = !video.muted;
+      audioBtn.setAttribute('aria-label', video.muted ? 'Activar sonido' : 'Silenciar');
+    });
+  }
+
   const form = document.getElementById('form-milote') as HTMLFormElement | null;
   form?.addEventListener('submit', (e) => {
     e.preventDefault();

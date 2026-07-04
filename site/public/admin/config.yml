@@ -31,3 +31,4 @@ collections:
         default: "seo-local"
       - { name: "tags", label: "Tags", widget: "list", default: [] }
       - { name: "draft", label: "Draft", widget: "boolean", default: false }
+      - { name: "body", label: "Body", widget: "markdown" }
