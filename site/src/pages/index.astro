@@ -3,6 +3,7 @@ import { getImage, Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import HeroForm from '../components/islands/HeroForm.jsx';
 import ProyectoSelector from '../components/islands/ProyectoSelector.jsx';
+import VideoCarousel from '../components/islands/VideoCarousel.jsx';
 import { proyectos } from '../data/proyectos';
 import equipoImg from '../assets/equipo.jpg';
 
@@ -11,11 +12,11 @@ const imagenes = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true },
 );
 
-async function resolveImg(nombre: string | null) {
+async function resolveImg(nombre: string | null, width = 800) {
   if (!nombre) return null;
   const mod = imagenes[`../assets/proyectos/${nombre}`];
   if (!mod) return null;
-  const img = await getImage({ src: mod.default, width: 800, format: 'webp' });
+  const img = await getImage({ src: mod.default, width, format: 'webp' });
   return img.src;
 }
 
@@ -33,23 +34,49 @@ const items = await Promise.all(
   })),
 );
 
-const heroBg = await resolveImg('piedecuesta.png');
+// Slideshow del hero (estilo web actual: fade automático cada 5 s)
+// TODO: sumar fotos reales de Drive (personas, obras) cuando lleguen
+const heroSlides = (
+  await Promise.all([
+    resolveImg('piedecuesta.png', 1600),
+    resolveImg('giron.png', 1600),
+    resolveImg('lotes-cucuta.png', 1600),
+  ])
+).filter(Boolean) as string[];
 
-const testimonios = [
+const equipoSrc = (await getImage({ src: equipoImg, width: 1200, format: 'webp' })).src;
+const gironSrc = await resolveImg('giron.png', 1200);
+const lotesSrc = await resolveImg('lotes-cucuta.png', 1200);
+
+// Carrusel de videos: 1 video real de testimonios; el resto marcado para
+// reemplazar por los videos de Drive (personas, grupos, proyectos)
+const carouselSlides = [
   {
-    quote:
-      'Llevaba años pagando arriendo y pensando que sin crédito nunca iba a tener nada. Hoy pago la cuota de mi apartamento directo con la constructora.',
+    type: 'video',
+    src: '/videos/testimonios.mp4',
+    label: 'Testimonios',
+    quote: 'Historias reales de quienes ya pagan su propiedad directo con la constructora.',
+  },
+  {
+    type: 'image',
+    src: equipoSrc,
+    label: 'Nuestro equipo',
+    quote: 'Una empresa familiar que responde con nombre propio por lo que construye.',
+    autor: 'Grupo Mizar · Bucaramanga',
+  },
+  {
+    type: 'image',
+    src: gironSrc,
+    label: 'Proyectos',
+    quote: 'Llevaba años pagando arriendo y pensando que sin crédito nunca iba a tener nada. Hoy pago la cuota de mi apartamento directo con la constructora.',
     autor: 'Propietaria en Girón',
   },
   {
-    quote:
-      'Compré mi lote desde Estados Unidos. Todo el proceso fue por videollamada y los documentos llegaron en regla.',
+    type: 'image',
+    src: lotesSrc,
+    label: 'Inversionistas',
+    quote: 'Compré mi lote desde Estados Unidos. Todo el proceso fue por videollamada y los documentos llegaron en regla.',
     autor: 'Inversionista en Cúcuta, vive en EE. UU.',
-  },
-  {
-    quote:
-      'Lo que me convenció fue que no hay letra pequeña: cuota fija, sin intereses, y la escritura queda a mi nombre.',
-    autor: 'Propietario en Piedecuesta',
   },
 ];
 ---
@@ -59,47 +86,47 @@ const testimonios = [
   description="Apartamentos, parcelas campestres y lotes urbanos en Santander y Norte de Santander. Más de 20 años construyendo, +100 proyectos entregados. Pago directo, a cuotas, sin bancos."
   path="/"
 >
-  <!-- HERO -->
-  <section class="relative overflow-hidden bg-plum-dark text-white">
-    {
-      heroBg && (
-        <img
-          src={heroBg}
-          alt=""
-          aria-hidden="true"
-          class="absolute inset-0 h-full w-full object-cover opacity-25"
-          style="filter: saturate(0.6);"
-        />
-      )
-    }
-    <div class="absolute inset-0 bg-gradient-to-b from-plum-dark/60 via-transparent to-plum-dark"></div>
+  <!-- HERO: slideshow automático de fondo, contenido anclado abajo (como la web actual) -->
+  <section class="relative flex min-h-[90vh] flex-col justify-end overflow-hidden bg-plum-dark text-white">
+    <div id="hero-slides" class="absolute inset-0" aria-hidden="true">
+      {
+        heroSlides.map((src, i) => (
+          <img
+            src={src}
+            alt=""
+            class="absolute inset-0 h-full w-full object-cover transition-opacity duration-500"
+            style={`opacity:${i === 0 ? 1 : 0}; filter:saturate(0.65);`}
+            data-hero-slide
+            loading={i === 0 ? 'eager' : 'lazy'}
+          />
+        ))
+      }
+      <div class="absolute inset-0" style="background:#000000b8;"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-plum-dark via-transparent to-plum-dark/40"></div>
+    </div>
 
-    <div class="container-site relative grid gap-10 py-16 md:grid-cols-[7fr_5fr] md:items-center md:gap-14 md:py-24">
+    <div class="container-site relative grid gap-10 py-14 md:grid-cols-[7fr_5fr] md:items-end md:gap-14 md:py-20">
       <div>
         <p class="eyebrow text-gold">Constructora · +20 años en Colombia</p>
         <h1 class="display-xl mt-4 text-4xl md:text-6xl">
           Convertimos tu esfuerzo en propiedades, a cuotas y sin bancos
         </h1>
-        <p class="mt-5 max-w-lg text-base leading-relaxed text-white/80 md:text-lg">
-          Sin estudio de crédito, sin codeudores, sin intermediarios. Pago directo con la
-          constructora que lleva más de veinte años entregando obras en Colombia.
-        </p>
 
-        <dl class="mt-10 flex flex-wrap gap-x-10 gap-y-6">
+        <dl class="mt-9 flex flex-wrap gap-x-10 gap-y-6">
           <div>
-            <dt class="sr-only">Años construyendo</dt>
+            <dt class="sr-only">Años construyendo en Colombia</dt>
             <dd class="stat-num text-4xl text-white md:text-5xl">20<span class="text-mizar">+</span></dd>
-            <dd class="mt-1 text-xs font-semibold tracking-wider text-white/60 uppercase">Años construyendo</dd>
+            <dd class="mt-1 text-xs font-semibold tracking-wider text-white/70 uppercase">Años construyendo en Colombia</dd>
           </div>
           <div>
             <dt class="sr-only">Proyectos entregados</dt>
             <dd class="stat-num text-4xl text-white md:text-5xl">100<span class="text-mizar">+</span></dd>
-            <dd class="mt-1 text-xs font-semibold tracking-wider text-white/60 uppercase">Proyectos entregados</dd>
+            <dd class="mt-1 text-xs font-semibold tracking-wider text-white/70 uppercase">Proyectos entregados</dd>
           </div>
           <div>
-            <dt class="sr-only">Regiones</dt>
+            <dt class="sr-only">Dónde construimos</dt>
             <dd class="stat-num text-4xl text-white md:text-5xl">2</dd>
-            <dd class="mt-1 text-xs font-semibold tracking-wider text-white/60 uppercase">Santander y N. de Santander</dd>
+            <dd class="mt-1 text-xs font-semibold tracking-wider text-white/70 uppercase">Santander y N. de Santander</dd>
           </div>
         </dl>
       </div>
@@ -110,46 +137,18 @@ const testimonios = [
     </div>
   </section>
 
-  <!-- SELECTOR DE PROYECTOS -->
-  <section class="py-16 md:py-24" id="proyectos">
-    <div class="container-site">
-      <div class="mb-10 max-w-2xl">
-        <p class="eyebrow text-teal">Portafolio</p>
-        <h2 class="display-lg mt-3 text-3xl md:text-4xl">Encuentra tu proyecto</h2>
-        <p class="mt-4 text-ink/70">
-          Apartamentos sobre planos, parcelas campestres y lotes urbanos. Filtra por lo que
-          buscas y para qué lo buscas.
-        </p>
-      </div>
-      <ProyectoSelector items={items} client:visible />
-    </div>
-  </section>
-
-  <!-- TESTIMONIOS -->
+  <!-- CARRUSEL DE VIDEOS (personas, grupos, proyectos — auto) -->
   <section class="bg-white py-16 md:py-24">
     <div class="container-site">
-      <div class="mb-10 flex items-end justify-between gap-6">
-        <div>
-          <p class="eyebrow text-teal">Historias reales</p>
-          <h2 class="display-lg mt-3 text-3xl md:text-4xl">Ya lo están logrando</h2>
-        </div>
+      <div class="mb-8 max-w-2xl">
+        <p class="eyebrow text-teal">Historias reales</p>
+        <h2 class="display-lg mt-3 text-3xl md:text-4xl">Ya lo están logrando</h2>
       </div>
-
-      <!-- TODO: reemplazar por carrusel de videos de Drive cuando lleguen los assets -->
-      <div class="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4" style="scrollbar-width: thin;">
-        {
-          testimonios.map((t) => (
-            <blockquote class="min-w-[85%] snap-start border-l-2 border-gold bg-cream p-6 sm:min-w-[45%] lg:min-w-[30%]">
-              <p class="text-base leading-relaxed text-ink/85">“{t.quote}”</p>
-              <footer class="mt-4 text-sm font-bold text-teal">{t.autor}</footer>
-            </blockquote>
-          ))
-        }
-      </div>
+      <VideoCarousel slides={carouselSlides} client:visible />
     </div>
   </section>
 
-  <!-- EQUIPO -->
+  <!-- FOTO DEL EQUIPO -->
   <section class="relative overflow-hidden bg-plum text-white">
     <div class="container-site grid items-center gap-10 py-16 md:grid-cols-[5fr_7fr] md:py-24">
       <div>
@@ -172,6 +171,24 @@ const testimonios = [
         format="webp"
         class="h-full w-full rounded-[4px] object-cover"
       />
+    </div>
+  </section>
+
+  <!-- PROYECTOS: selector + miniaturas -->
+  <section class="py-16 md:py-24" id="proyectos">
+    <div class="container-site">
+      <div class="mb-10 flex flex-wrap items-end justify-between gap-6">
+        <div class="max-w-2xl">
+          <p class="eyebrow text-teal">Portafolio</p>
+          <h2 class="display-lg mt-3 text-3xl md:text-4xl">Encuentra tu proyecto</h2>
+          <p class="mt-4 text-ink/70">
+            Apartamentos sobre planos, parcelas campestres y lotes urbanos. Filtra por lo
+            que buscas y para qué lo buscas.
+          </p>
+        </div>
+        <a href="/proyectos" class="btn-primary">Conoce nuestros proyectos</a>
+      </div>
+      <ProyectoSelector items={items} client:visible />
     </div>
   </section>
 
@@ -200,3 +217,19 @@ const testimonios = [
     </div>
   </section>
 </Base>
+
+<script>
+  // Slideshow del hero: fade cada 5 s (igual que el Elementor de la web actual)
+  const slides = Array.from(
+    document.querySelectorAll<HTMLImageElement>('[data-hero-slide]'),
+  );
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (slides.length > 1 && !reduced) {
+    let i = 0;
+    setInterval(() => {
+      slides[i].style.opacity = '0';
+      i = (i + 1) % slides.length;
+      slides[i].style.opacity = '1';
+    }, 5000);
+  }
+</script>
