@@ -16,7 +16,7 @@ const PROPOSITOS = [
 /**
  * props.items: [{ slug, nombre, tipo, ubicacion, estado, propositos, resumen, imgSrc|null, href }]
  */
-export default function ProyectoSelector({ items }) {
+export default function ProyectoSelector({ items, singleRow = false }) {
   const [tipo, setTipo] = useState('todos');
   const [proposito, setProposito] = useState('todos');
 
@@ -39,27 +39,73 @@ export default function ProyectoSelector({ items }) {
 
   return (
     <div>
-      <div className="mb-8 flex flex-col gap-3">
-        <div className="flex flex-wrap gap-2" role="group" aria-label="Filtrar por tipo">
+      {singleRow ? (
+        <div
+          className="mb-8 flex flex-nowrap gap-2 overflow-x-auto pb-1 lg:flex-wrap lg:overflow-visible lg:pb-0"
+          style={{ scrollbarWidth: 'thin' }}
+          role="group"
+          aria-label="Filtrar proyectos"
+        >
           {TIPOS.map((t) => (
-            <button key={t.id} type="button" className={chip(tipo === t.id)} onClick={() => setTipo(t.id)}>
+            <button
+              key={t.id}
+              type="button"
+              className={`${chip(tipo === t.id)} shrink-0`}
+              onClick={() => setTipo(t.id)}
+            >
               {t.label}
             </button>
           ))}
-        </div>
-        <div className="flex flex-wrap gap-2" role="group" aria-label="Filtrar por propósito">
+          <span className="mx-1 hidden h-6 w-px shrink-0 self-center bg-ink/15 lg:block" aria-hidden="true" />
           {PROPOSITOS.map((p) => (
             <button
               key={p.id}
               type="button"
-              className={chip(proposito === p.id)}
+              className={`${chip(proposito === p.id)} shrink-0`}
               onClick={() => setProposito(p.id)}
             >
               {p.label}
             </button>
           ))}
         </div>
-      </div>
+      ) : (
+        <div className="mb-8 flex flex-col gap-3">
+          <div
+            className="flex flex-nowrap gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible sm:pb-0"
+            style={{ scrollbarWidth: 'thin' }}
+            role="group"
+            aria-label="Filtrar por tipo"
+          >
+            {TIPOS.map((t) => (
+              <button
+                key={t.id}
+                type="button"
+                className={`${chip(tipo === t.id)} shrink-0`}
+                onClick={() => setTipo(t.id)}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
+          <div
+            className="flex flex-nowrap gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible sm:pb-0"
+            style={{ scrollbarWidth: 'thin' }}
+            role="group"
+            aria-label="Filtrar por propósito"
+          >
+            {PROPOSITOS.map((p) => (
+              <button
+                key={p.id}
+                type="button"
+                className={`${chip(proposito === p.id)} shrink-0`}
+                onClick={() => setProposito(p.id)}
+              >
+                {p.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
 
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {visibles.map((p) => (
@@ -72,7 +118,7 @@ export default function ProyectoSelector({ items }) {
               {p.imgSrc ? (
                 <img
                   src={p.imgSrc}
-                  alt={p.nombre}
+                  alt={`Render de ${p.nombre} en ${p.ubicacion}`}
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />

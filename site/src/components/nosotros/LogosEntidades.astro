@@ -1,0 +1,32 @@
+---
+import { Image } from 'astro:assets';
+
+const modules = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/nosotros/logos/*.{png,jpg,jpeg,webp}',
+  { eager: true },
+);
+const logos = Object.entries(modules).map(([path, mod]) => ({
+  src: mod.default,
+  alt: `Logo de entidad con la que ha trabajado Grupo Mizar: ${path.split('/').pop()!.replace(/.[^.]+$/, '').replace(/[-_]/g, ' ')}`,
+}));
+---
+
+{
+  logos.length > 0 && (
+    <div class="mt-10">
+      <p class="eyebrow text-teal">Entidades con las que hemos trabajado</p>
+      <div class="mt-5 flex flex-wrap items-center gap-x-10 gap-y-6">
+        {logos.map((logo) => (
+          <Image
+            src={logo.src}
+            alt={logo.alt}
+            width={140}
+            format="webp"
+            loading="lazy"
+            class="h-10 w-auto object-contain grayscale transition-all hover:grayscale-0"
+          />
+        ))}
+      </div>
+    </div>
+  )
+}

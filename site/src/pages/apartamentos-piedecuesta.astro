@@ -1,0 +1,159 @@
+---
+import { getImage } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import FaqAccordion from '../components/proyectos/FaqAccordion.astro';
+import { WHATSAPP_GENERAL } from '../data/proyectos';
+import renderPiedecuesta from '../assets/proyectos/piedecuesta.png';
+
+const wa = (msg: string) =>
+  `https://wa.me/${WHATSAPP_GENERAL}?text=${encodeURIComponent(msg)}`;
+
+const heroBg = (await getImage({ src: renderPiedecuesta, width: 1800, format: 'webp' })).src;
+const renderMid = (await getImage({ src: renderPiedecuesta, width: 1200, format: 'webp' })).src;
+
+const incluye = [
+  'Apartamentos sobre planos frente al Cerro de La Cantera',
+  'Pago a cuotas directo con Mizar, desde donde estés',
+  'A 4 cuadras del Parque Principal y la Plaza de Mercado',
+  'Acceso directo a transporte público y vías principales',
+  'Torre de 5 pisos',
+  'Parqueadero en sótano',
+  'Full acabados',
+  'Aceptamos permuta de carro o moto como parte de tu pago',
+  'Financiación hasta por 8 años, directo con Mizar',
+];
+
+const resumen = [
+  { label: 'Proyecto', valor: 'Terrazas de la Cantera' },
+  { label: 'Ubicación', valor: 'Centro de Piedecuesta' },
+  { label: 'Apartamentos', valor: '3 alcobas' },
+  { label: 'Entrega', valor: 'Diciembre 2027' },
+  { label: 'Bancos e intermediarios', valor: 'Cero' },
+];
+
+const ubicacion = [
+  'A 4 cuadras del Parque Principal y la Plaza de Mercado',
+  'Frente al Cerro de La Cantera, uno de los pulmones verdes y puntos turísticos del sector',
+  'Acceso directo a transporte público y vías principales',
+  'El centro de Piedecuesta concentra todo lo que necesitas a pie',
+];
+
+const tipologias = [
+  { tipo: 'Apartamento Tipo 1', area: '60,47 m²', alcobas: '3', banos: '2', vista: 'Vista hacia el cerro' },
+];
+
+const pasos = [
+  { n: '1', t: 'Conoces el apartamento', d: 'Revisas el plano, los renders interiores y la disponibilidad de apartamentos de 3 alcobas, 2 baños y vista al Cerro de La Cantera.' },
+  { n: '2', t: 'Acordamos tu forma de pago', d: 'Puedes pagar a cuotas directo con Mizar, sin bancos, y consultar permuta de carro o moto como parte del pago.' },
+  { n: '3', t: 'Aseguras propiedad en Piedecuesta', d: 'Separas en el centro de Piedecuesta, con entrega proyectada a diciembre de 2027 y respaldo de Grupo Mizar.' },
+];
+
+const faq = [
+  { q: '¿Puedo comprar desde Estados Unidos o Europa?', a: 'Sí. Cada vez más personas están eligiendo Piedecuesta para vivir o invertir desde fuera de Colombia. Te atendemos por WhatsApp o videollamada.' },
+  { q: '¿Tengo que pasar por un banco?', a: 'No. El pago es a cuotas directo con Mizar, sin bancos ni intermediarios.' },
+  { q: '¿Cuándo me entregan el apartamento?', a: 'La landing original indica entrega proyectada: diciembre de 2027. Nuestro equipo te confirma etapa, disponibilidad y cronograma vigente.' },
+  { q: '¿El apartamento se entrega terminado?', a: 'Sí. La landing original indica full acabados para Terrazas de la Cantera.' },
+  { q: '¿Puedo entregar carro o moto como parte de pago?', a: 'Sí. La landing original indica que aceptan permuta de carro o moto como parte de tu pago. <!-- TODO: verificar con el cliente condiciones y avalúo de permutas. -->' },
+];
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a.replace(/<!--.*?-->/g, '').trim() },
+  })),
+};
+
+const schema = [
+  faqSchema,
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://mizar.com.co/' },
+      { '@type': 'ListItem', position: 2, name: 'Terrazas de la Cantera', item: 'https://mizar.com.co/apartamentos-piedecuesta' },
+    ],
+  },
+];
+---
+
+<Base
+  title="Terrazas de la Cantera — Apartamentos en Piedecuesta, sin bancos"
+  description="Apartamentos sobre planos en el centro de Piedecuesta, frente al Cerro de La Cantera, con financiación directa, cuotas fijas y sin bancos."
+  path="/apartamentos-piedecuesta"
+  schema={schema}
+>
+  <section class="relative flex min-h-[88vh] flex-col justify-end overflow-hidden bg-neutral-950 text-white">
+    <img src={heroBg} alt="Render de apartamentos Terrazas de la Cantera en Piedecuesta" loading="eager" fetchpriority="high" class="absolute inset-0 h-full w-full object-cover" />
+    <div class="absolute inset-0" style="background:#000000a8;"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30"></div>
+
+    <div class="container-site relative py-16 md:py-20">
+      <p class="eyebrow text-gold">Terrazas de la Cantera · Piedecuesta</p>
+      <h1 class="display-xl mt-4 max-w-3xl text-4xl md:text-6xl">
+        Tu apartamento propio en Piedecuesta, sin bancos y sin viajar.
+      </h1>
+      <p class="mt-5 max-w-xl text-lg leading-relaxed text-white/85">
+        Apartamentos sobre planos frente al Cerro de La Cantera. Pago a cuotas directo con Mizar, desde donde estés.
+      </p>
+      <div class="mt-8 flex flex-wrap items-center gap-3">
+        <a href={wa('Hola, vengo de la web y quiero información de los apartamentos de Terrazas de la Cantera en Piedecuesta.')} target="_blank" rel="noopener" class="btn-primary" data-event="whatsapp-click">Quiero conocer mis opciones</a>
+        <a href="#incluye" class="btn-outline text-white">Ver qué incluye</a>
+      </div>
+      <p class="mt-10 border-t border-white/15 pt-5 text-sm font-bold tracking-[0.18em] text-white/80 uppercase">Entrega proyectada · Diciembre 2027</p>
+    </div>
+  </section>
+
+  <section class="py-16 md:py-24">
+    <div class="container-site max-w-3xl">
+      <p class="eyebrow text-teal">Hablemos claro</p>
+      <p class="display-lg text-2xl text-plum md:text-3xl">Llevas años trabajando duro lejos de casa. ¿Qué tienes hoy en Colombia que asegure tu retiro?</p>
+      <p class="mt-6 text-xl leading-relaxed text-ink/85 md:text-2xl">Cada vez más personas están eligiendo Piedecuesta para vivir. Tú puedes ser dueño en el mejor punto, sin importar dónde estés hoy.</p>
+      <p class="mt-6 max-w-prose leading-relaxed text-ink/75">El centro de Piedecuesta concentra todo lo que necesitas a pie, y el Cerro de La Cantera le da naturaleza y plusvalía a la zona.</p>
+    </div>
+  </section>
+
+  <section class="bg-white py-16 md:py-24">
+    <div class="container-site grid items-center gap-10 md:grid-cols-[5fr_7fr]">
+      <div><p class="eyebrow text-teal">Testimonios</p><h2 class="display-lg mt-3 text-3xl md:text-4xl">Ellos ya dieron el paso</h2><p class="mt-4 max-w-prose leading-relaxed text-ink/75">Personas que compran a cuotas directo con la constructora. Dale play y escúchalos.</p></div>
+      <div class="relative overflow-hidden rounded-2xl bg-plum-dark"><video id="video-testimonio" src="/videos/testimonios.mp4" class="aspect-video w-full object-cover" muted loop playsinline preload="metadata"></video><button id="video-audio-toggle" type="button" class="absolute right-4 bottom-4 flex h-12 w-12 items-center justify-center rounded-full bg-black/60 text-white" aria-label="Activar sonido"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5ZM23 9l-6 6M17 9l6 6" /></svg></button></div>
+    </div>
+  </section>
+
+  <!-- TODO: reemplazar por comentarios reales de compradores de Terrazas de la Cantera -->
+  <section class="py-16 md:py-24"><div class="container-site"><p class="eyebrow text-teal">Comentarios</p><h2 class="display-lg mt-3 max-w-xl text-3xl md:text-4xl">Lo que dicen quienes ya compraron</h2><div class="mt-8 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4" style="scrollbar-width: thin;">{[{ quote: 'Me interesó porque está en el centro de Piedecuesta y puedo pagar directo con Mizar, sin bancos.', autor: 'Comprador en Santander' }, { quote: 'Vivo fuera de Colombia y pude avanzar por videollamada. La ubicación frente al cerro me dio mucha confianza.', autor: 'Colombiana en el exterior' }, { quote: 'Lo que me gustó fue tener acabados, parqueadero en sótano y una cuota clara desde el principio.', autor: 'Comprador de apartamento' }].map((c) => <blockquote class="min-w-[85%] snap-start rounded-2xl border-l-2 border-gold bg-white p-6 sm:min-w-[45%] lg:min-w-[30%]"><p class="leading-relaxed text-ink/85">“{c.quote}”</p><footer class="mt-4 text-sm font-bold text-teal">{c.autor}</footer></blockquote>)}</div></div></section>
+
+  <section class="bg-white py-16 md:py-24" id="incluye"><div class="container-site grid gap-12 md:grid-cols-[7fr_5fr]"><div><p class="eyebrow text-teal">Sin letra pequeña</p><h2 class="display-lg mt-3 text-3xl md:text-4xl">Lo que incluye tu apartamento</h2><ul class="mt-8 space-y-4">{incluye.map((item) => <li class="flex items-start gap-3 border-b border-ink/10 pb-4"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d9a441" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg><span class="font-medium">{item}</span></li>)}</ul></div><aside class="h-fit rounded-2xl bg-plum p-7 text-white md:sticky md:top-24"><p class="eyebrow text-gold">En resumen</p><ul class="mt-5 divide-y divide-white/10">{resumen.map((r) => <li class="flex items-baseline justify-between gap-4 py-3.5"><span class="text-sm text-white/80">{r.label}</span><span class="shrink-0 font-extrabold text-gold">{r.valor}</span></li>)}</ul><a href={wa('Hola, quiero saber precios y disponibilidad de Terrazas de la Cantera en Piedecuesta.')} target="_blank" rel="noopener" class="btn-primary mt-6 w-full" data-event="whatsapp-click">Pregunta precio y disponibilidad</a></aside></div></section>
+
+  <section class="py-16 md:py-24"><div class="container-site"><div class="grid items-center gap-10 md:grid-cols-[6fr_6fr]"><img src={renderMid} alt="Render de Terrazas de la Cantera en Piedecuesta" loading="lazy" class="w-full rounded-2xl" /><div><p class="eyebrow text-teal">Ubicación</p><h2 class="display-lg mt-3 text-3xl md:text-4xl">Estás comprando en el mejor punto de Piedecuesta.</h2><ul class="mt-7 space-y-4">{ubicacion.map((u) => <li class="flex items-start gap-3"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#35565a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z" /><circle cx="12" cy="10" r="3" /></svg><span class="font-medium">{u}</span></li>)}</ul><p class="mt-7 font-bold text-plum">Más conexión, más naturaleza, más ciudad. <span class="text-mizar">Un apartamento que gana valor todos los días.</span></p></div></div><iframe src="https://www.google.com/maps?q=Piedecuesta,+Santander,+Colombia&z=14&output=embed" title="Mapa de Terrazas de la Cantera en Piedecuesta" loading="lazy" referrerpolicy="no-referrer-when-downgrade" class="mt-10 h-72 w-full rounded-2xl border-0 md:h-96" allowfullscreen></iframe></div></section>
+
+  <section class="bg-white py-16 md:py-24"><div class="container-site"><p class="eyebrow text-teal">Conoce el apartamento</p><h2 class="display-lg mt-3 max-w-xl text-3xl md:text-4xl">Apartamento de 3 alcobas, 2 baños y vista al Cerro de La Cantera</h2><div class="mt-8 grid gap-5 md:grid-cols-2">{tipologias.map((t) => <article class="rounded-2xl border border-ink/10 bg-white p-6 shadow-sm"><p class="eyebrow text-mizar">{t.tipo}</p><p class="stat-num mt-2 text-4xl text-plum">{t.area}</p><dl class="mt-5 divide-y divide-ink/10 text-sm"><div class="flex justify-between py-2"><dt>Habitaciones</dt><dd class="font-bold">{t.alcobas}</dd></div><div class="flex justify-between py-2"><dt>Baños</dt><dd class="font-bold">{t.banos}</dd></div><div class="flex justify-between py-2"><dt>Vista</dt><dd class="font-bold text-right">{t.vista}</dd></div></dl></article>)}</div><p class="mt-7 text-center text-ink/70">Apartamentos de 3 alcobas, 2 baños y vista al Cerro de La Cantera. Se entregan con full acabados.</p></div></section>
+
+  <section class="bg-plum py-16 text-white md:py-24"><div class="container-site"><div class="max-w-2xl"><p class="eyebrow text-gold">Así de simple</p><h2 class="display-lg mt-3 text-3xl md:text-4xl">Tu plan de pagos, directo y sin bancos</h2></div><ol class="mt-12 grid gap-8 md:grid-cols-3">{pasos.map((p) => <li class="border-t-2 border-gold pt-4"><span class="stat-num text-4xl text-gold/80">{p.n}</span><h3 class="mt-2 font-bold">{p.t}</h3><p class="mt-1.5 text-sm leading-relaxed text-white/70">{p.d}</p></li>)}</ol><a href={wa('Hola, quiero conocer el plan de cuotas de Terrazas de la Cantera en Piedecuesta.')} target="_blank" rel="noopener" class="btn-primary mt-10" data-event="whatsapp-click">Conocer mi plan de cuotas</a></div></section>
+
+  <section class="py-16 md:py-24"><div class="container-site grid gap-10 md:grid-cols-[7fr_5fr] md:items-center"><div><p class="eyebrow text-teal">Para colombianos en el exterior</p><h2 class="display-lg mt-3 text-3xl md:text-4xl">Sin viajar: compra desde donde estés</h2><p class="mt-5 max-w-prose leading-relaxed text-ink/75">Cada vez más personas están eligiendo Piedecuesta para vivir o asegurar su retiro en Colombia. Te acompañamos por WhatsApp, videollamada y documentos digitales.</p></div><a href={wa('Hola, vivo fuera de Colombia y quiero invertir en Terrazas de la Cantera en Piedecuesta.')} target="_blank" rel="noopener" class="btn-primary justify-self-start md:justify-self-end" data-event="whatsapp-click">Invierto desde el exterior</a></div></section>
+
+  <section class="bg-white py-16 md:py-24"><div class="container-site grid gap-10 md:grid-cols-3"><div class="md:col-span-1"><p class="eyebrow text-teal">El respaldo</p><h2 class="display-lg mt-3 text-3xl">Detrás de Terrazas de la Cantera está Grupo Mizar</h2><a href="/nosotros" class="mt-5 inline-block font-bold text-mizar hover:underline">Conoce nuestra historia →</a></div><div class="grid grid-cols-2 gap-8 md:col-span-2"><div><p class="stat-num text-5xl text-plum">20<span class="text-mizar">+</span></p><p class="mt-1 text-sm font-semibold tracking-wider text-ink/60 uppercase">Años construyendo en Colombia</p></div><div><p class="stat-num text-5xl text-plum">100<span class="text-mizar">+</span></p><p class="mt-1 text-sm font-semibold tracking-wider text-ink/60 uppercase">Obras entregadas</p></div><p class="col-span-2 max-w-prose text-ink/75">Somos una empresa familiar de ingenieros santandereanos. Respondemos con nombre propio por cada obra que entregamos.</p></div></div></section>
+
+  <section class="py-16 md:py-24" id="faq"><div class="container-site max-w-3xl"><p class="eyebrow text-teal">Preguntas frecuentes</p><h2 class="display-lg mt-3 text-3xl md:text-4xl">Lo que todos preguntan antes de decidir</h2><div class="mt-8"><FaqAccordion items={faq} /></div></div></section>
+
+  <section class="bg-plum-dark py-16 text-white md:py-24"><div class="container-site grid gap-12 md:grid-cols-[6fr_6fr] md:items-center"><div><h2 class="display-xl text-3xl md:text-5xl">Da el primer paso</h2><p class="mt-4 max-w-prose leading-relaxed text-white/80">Agenda una visita o llamada para conocer Terrazas de la Cantera. Si estás fuera del país, resolvemos todo por teléfono o videollamada.</p><a href="https://maps.app.goo.gl/jhAWKJDp7szhNFQs7" target="_blank" rel="noopener" class="btn-outline mt-7 text-white">Conocer nuestras oficinas</a></div><form id="form-terrazas" class="w-full max-w-md rounded-2xl border border-white/15 bg-black/45 p-6 backdrop-blur-md md:justify-self-end md:p-7" data-event="form-submit"><p class="eyebrow text-gold">Te contactamos hoy</p><div class="mt-4 space-y-3"><input name="nombre" required autocomplete="name" placeholder="Tu nombre" class="w-full rounded-xl border border-white/25 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/40 focus:border-gold focus:outline-none" /><select name="pais" class="w-full rounded-xl border border-white/25 bg-plum-dark px-3 py-2.5 text-sm text-white focus:border-gold focus:outline-none" aria-label="País donde vives"><option>Vivo en Colombia</option><option>Vivo en Estados Unidos</option><option>Vivo en España</option><option>Vivo en otro país</option></select><input name="celular" type="tel" required autocomplete="tel" placeholder="Celular (con indicativo)" class="w-full rounded-xl border border-white/25 bg-white/5 px-4 py-2.5 text-sm text-white placeholder:text-white/40 focus:border-gold focus:outline-none" /></div><button type="submit" class="btn-primary mt-5 w-full">Agendar visita o llamada</button><p class="mt-3 text-center text-xs text-white/50">Te respondemos por WhatsApp, sin compromiso.</p></form></div></section>
+</Base>
+
+<script>
+  const video = document.getElementById('video-testimonio') as HTMLVideoElement | null;
+  const audioBtn = document.getElementById('video-audio-toggle');
+  if (video) {
+    new IntersectionObserver(([e]) => (e.isIntersecting ? video.play().catch(() => {}) : video.pause()), { threshold: 0.4 }).observe(video);
+    audioBtn?.addEventListener('click', () => { video.muted = !video.muted; audioBtn.setAttribute('aria-label', video.muted ? 'Activar sonido' : 'Silenciar'); });
+  }
+  const form = document.getElementById('form-terrazas') as HTMLFormElement | null;
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    const msg = `Hola, vengo de la web y quiero información de los apartamentos de Terrazas de la Cantera en Piedecuesta.\nNombre: ${data.get('nombre')}\n${data.get('pais')}\nCelular: ${data.get('celular')}`;
+    window.open(`https://wa.me/573112382253?text=${encodeURIComponent(msg)}`, '_blank');
+  });
+</script>

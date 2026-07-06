@@ -1,0 +1,40 @@
+---
+import { Image } from 'astro:assets';
+
+const modules = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/nosotros/proyectos/*.{jpg,jpeg,png,webp}',
+  { eager: true },
+);
+const fotos = Object.entries(modules).map(([path, mod]) => ({
+  src: mod.default,
+  alt: `Obra construida por Grupo Mizar: ${path.split('/').pop()!.replace(/.[^.]+$/, '').replace(/[-_]/g, ' ')}`,
+}));
+---
+
+{
+  fotos.length > 0 && (
+    <section class="pb-16 md:pb-24">
+      <div class="container-site">
+        <p class="eyebrow text-teal">Así hemos construido</p>
+      </div>
+      <div
+        class="container-site mt-4 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4"
+        style="scrollbar-width: thin;"
+      >
+        {fotos.map((foto) => (
+          <div class="min-w-[85%] snap-start overflow-hidden rounded-2xl sm:min-w-[45%] lg:min-w-[30%]">
+            <Image
+              src={foto.src}
+              alt={foto.alt}
+              widths={[400, 700]}
+              sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 85vw"
+              format="webp"
+              loading="lazy"
+              class="aspect-[4/3] h-full w-full object-cover"
+            />
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}

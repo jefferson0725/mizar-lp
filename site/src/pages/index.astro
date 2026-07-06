@@ -4,7 +4,7 @@ import Base from '../layouts/Base.astro';
 import HeroForm from '../components/islands/HeroForm.jsx';
 import ProyectoSelector from '../components/islands/ProyectoSelector.jsx';
 import VideoCarousel from '../components/islands/VideoCarousel.jsx';
-import { proyectos } from '../data/proyectos';
+import { getProyectoHref, proyectos } from '../data/proyectos';
 import equipoImg from '../assets/equipo.jpg';
 
 const imagenes = import.meta.glob<{ default: ImageMetadata }>(
@@ -30,8 +30,7 @@ const items = await Promise.all(
     propositos: p.propositos,
     resumen: p.resumen,
     imgSrc: await resolveImg(p.imagen),
-    // Laureles y Terrazas ya tienen landing propia: enlazar directo
-    href: p.lpUrl ?? (p.slug === 'lotes-cucuta' ? '/lotes-cucuta' : `/proyectos/${p.slug}`),
+    href: getProyectoHref(p),
   })),
 );
 
@@ -39,11 +38,11 @@ const items = await Promise.all(
 // TODO: sumar fotos reales de Drive (personas, obras) cuando lleguen
 const heroSlides = (
   await Promise.all([
-    resolveImg('piedecuesta.png', 1600),
-    resolveImg('giron.png', 1600),
-    resolveImg('lotes-cucuta.png', 1600),
+    { src: await resolveImg('piedecuesta.png', 1600), alt: 'Render de apartamentos Terrazas de la Cantera en Piedecuesta' },
+    { src: await resolveImg('giron.png', 1600), alt: 'Render de apartamentos Laureles Campestre en Girón' },
+    { src: await resolveImg('lotes-cucuta.png', 1600), alt: 'Render aéreo de lotes urbanos Mi Lote en San Cayetano, Cúcuta' },
   ])
-).filter(Boolean) as string[];
+).filter((slide): slide is { src: string; alt: string } => Boolean(slide.src));
 
 const equipoSrc = (await getImage({ src: equipoImg, width: 1200, format: 'webp' })).src;
 const gironSrc = await resolveImg('giron.png', 1200);
@@ -84,56 +83,69 @@ const carouselSlides = [
 
 <Base
   title="Grupo Mizar — Propiedades a cuotas y sin bancos en Colombia"
-  description="Apartamentos, parcelas campestres y lotes urbanos en Santander y Norte de Santander. Más de 20 años construyendo, +100 proyectos entregados. Pago directo, a cuotas, sin bancos."
+  description="Apartamentos, parcelas y lotes urbanos en Santander y Norte de Santander. +20 años construyendo en Colombia y +100 proyectos entregados, a cuotas y sin bancos."
   path="/"
+  headerTransparent
 >
-  <!-- HERO: slideshow automático de fondo, contenido anclado abajo (como la web actual) -->
-  <section class="relative flex min-h-[90vh] flex-col justify-end overflow-hidden bg-neutral-950 text-white">
+  <!-- HERO: video de fondo, header flotante encima, contenido anclado abajo -->
+  <section class="relative flex min-h-[80svh] flex-col justify-end overflow-hidden bg-neutral-950 text-white md:min-h-[90vh] md:justify-center">
     <div id="hero-slides" class="absolute inset-0" aria-hidden="true">
       {
-        heroSlides.map((src, i) => (
+        heroSlides.map((slide, i) => (
           <img
-            src={src}
-            alt=""
+            src={slide.src}
+            alt={slide.alt}
             class="absolute inset-0 h-full w-full object-cover transition-opacity duration-500"
             style={`opacity:${i === 0 ? 1 : 0};`}
             data-hero-slide
             loading={i === 0 ? 'eager' : 'lazy'}
+            fetchpriority={i === 0 ? 'high' : 'auto'}
           />
         ))
       }
-      <div class="absolute inset-0" style="background:#000000b8;"></div>
+      <video
+        class="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
+        muted
+        loop
+        playsinline
+        preload="none"
+        poster={heroSlides[0]?.src}
+        data-hero-video
+        data-src="/videos/hero-mizar.mp4"
+        aria-hidden="true"
+      ></video>
+      <div class="absolute inset-0" style="background:#00000080;"></div>
       <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30"></div>
     </div>
 
-    <div class="container-site relative grid gap-10 py-14 md:grid-cols-[7fr_5fr] md:items-end md:gap-14 md:py-20">
+    <div class="container-site relative grid gap-10 py-14 md:grid-cols-[7fr_5fr] md:items-center md:gap-14 md:py-20">
       <div>
-        <p class="eyebrow text-gold">Constructora · +20 años en Colombia</p>
-        <h1 class="display-xl mt-4 text-4xl md:text-6xl">
+        <p class="eyebrow hidden text-gold md:block">Constructora · +20 años en Colombia</p>
+        <h1 class="display-xl mt-10 text-4xl md:mt-4 md:text-6xl">
           Convertimos tu esfuerzo en propiedades, a cuotas y sin bancos
         </h1>
 
-        <dl class="mt-9 flex flex-wrap gap-x-10 gap-y-6">
-          <div>
+        <dl class="mt-6 grid grid-cols-3 gap-x-4 md:mt-9 md:flex md:flex-nowrap md:gap-x-6 md:gap-y-6 lg:gap-x-10">
+          <div class="md:shrink-0">
             <dt class="sr-only">Años construyendo en Colombia</dt>
-            <dd class="stat-num text-4xl text-white md:text-5xl">20<span class="text-mizar">+</span></dd>
-            <dd class="mt-1 text-xs font-semibold tracking-wider text-white/70 uppercase">Años construyendo en Colombia</dd>
+            <dd class="stat-num text-3xl text-white md:text-4xl lg:text-5xl">20<span class="text-mizar">+</span></dd>
+            <dd class="mt-1 text-[10px] font-semibold tracking-wider text-white/70 uppercase md:text-xs">Años construyendo en Colombia</dd>
           </div>
-          <div>
+          <div class="md:shrink-0">
             <dt class="sr-only">Proyectos entregados</dt>
-            <dd class="stat-num text-4xl text-white md:text-5xl">100<span class="text-mizar">+</span></dd>
-            <dd class="mt-1 text-xs font-semibold tracking-wider text-white/70 uppercase">Proyectos entregados</dd>
+            <dd class="stat-num text-3xl text-white md:text-4xl lg:text-5xl">100<span class="text-mizar">+</span></dd>
+            <dd class="mt-1 text-[10px] font-semibold tracking-wider text-white/70 uppercase md:text-xs">Proyectos entregados</dd>
           </div>
-          <div>
+          <div class="md:shrink-0">
             <dt class="sr-only">Dónde construimos</dt>
-            <dd class="stat-num text-4xl text-white md:text-5xl">2</dd>
-            <dd class="mt-1 text-xs font-semibold tracking-wider text-white/70 uppercase">Santander y N. de Santander</dd>
+            <dd class="stat-num text-3xl text-white md:text-4xl lg:text-5xl">2</dd>
+            <dd class="mt-1 text-[10px] font-semibold tracking-wider text-white/70 uppercase md:text-xs">Santander y N. de Santander</dd>
           </div>
         </dl>
       </div>
 
       <div class="md:justify-self-end">
-        <HeroForm client:load />
+        <HeroForm client:idle />
       </div>
     </div>
   </section>
@@ -170,6 +182,7 @@ const carouselSlides = [
         widths={[480, 800, 1100]}
         sizes="(min-width: 768px) 55vw, 100vw"
         format="webp"
+        loading="lazy"
         class="h-full w-full rounded-[4px] object-cover"
       />
     </div>
@@ -189,7 +202,7 @@ const carouselSlides = [
         </div>
         <a href="/proyectos" class="btn-primary">Conoce nuestros proyectos</a>
       </div>
-      <ProyectoSelector items={items} client:visible />
+      <ProyectoSelector items={items} singleRow client:visible />
     </div>
   </section>
 
@@ -220,17 +233,47 @@ const carouselSlides = [
 </Base>
 
 <script>
-  // Slideshow del hero: fade cada 5 s (igual que el Elementor de la web actual)
+  // Hero video loads after the browser has time to paint the poster/LCP image.
   const slides = Array.from(
     document.querySelectorAll<HTMLImageElement>('[data-hero-slide]'),
   );
+  const video = document.querySelector<HTMLVideoElement>('[data-hero-video]');
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (slides.length > 1 && !reduced) {
-    let i = 0;
-    setInterval(() => {
-      slides[i].style.opacity = '0';
-      i = (i + 1) % slides.length;
-      slides[i].style.opacity = '1';
-    }, 5000);
+  const requestIdle =
+    window.requestIdleCallback ??
+    ((callback: IdleRequestCallback) =>
+      window.setTimeout(
+        () => callback({ didTimeout: false, timeRemaining: () => 0 } as IdleDeadline),
+        1200,
+      ));
+
+  function startSlideshow() {
+    if (slides.length > 1 && !reduced) {
+      let i = 0;
+      setInterval(() => {
+        slides[i].style.opacity = '0';
+        i = (i + 1) % slides.length;
+        slides[i].style.opacity = '1';
+      }, 5000);
+    }
+  }
+
+  function loadHeroVideo() {
+    if (!video?.dataset.src) return;
+    video.src = video.dataset.src;
+    video.load();
+    video.play().catch(() => {
+      startSlideshow();
+    });
+  }
+
+  if (!video || reduced) {
+    startSlideshow();
+  } else {
+    video.addEventListener('error', () => {
+      video.remove();
+      startSlideshow();
+    });
+    requestIdle(loadHeroVideo, { timeout: 2500 });
   }
 </script>

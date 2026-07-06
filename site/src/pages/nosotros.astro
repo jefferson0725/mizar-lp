@@ -2,6 +2,8 @@
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import equipoImg from '../assets/equipo.jpg';
+import GaleriaProyectos from '../components/nosotros/GaleriaProyectos.astro';
+import LogosEntidades from '../components/nosotros/LogosEntidades.astro';
 
 const equipo = [
   { nombre: 'Claudia Villamizar', rol: 'Gerencia General' },
@@ -11,11 +13,44 @@ const equipo = [
   { nombre: 'María Paula Parada', rol: 'Marketing Digital' },
 ];
 
+function iniciales(nombre: string) {
+  return nombre
+    .split(' ')
+    .filter((p) => p[0] === p[0]?.toUpperCase())
+    .slice(0, 2)
+    .map((p) => p[0])
+    .join('')
+    .toUpperCase();
+}
+
 const pasos = [
   { n: '1', t: 'Eliges tu propiedad', d: 'Apartamento, parcela o lote: encuentras el proyecto que se ajusta a lo que buscas.' },
   { n: '2', t: 'Acordamos tu plan de cuotas', d: 'Directo con nosotros, según tu capacidad real. Sin estudio de crédito ni codeudores.' },
   { n: '3', t: 'Pagas sin intereses bancarios', d: 'Sin filas, sin trámites infinitos, sin cobros ocultos ni intermediarios que se quedan con una tajada.' },
   { n: '4', t: 'Escrituras a tu nombre', d: 'Todo 100% legal y documentado. Lo que pagaste con esfuerzo queda legalmente tuyo.' },
+];
+
+const marcas = [
+  {
+    href: '/proyectos',
+    eyebrow: 'Mizar',
+    eyebrowClass: 'text-gold',
+    titulo: 'Apartamentos, cabañas y parcelas campestres',
+    texto: 'En Girón, Piedecuesta, Charta y la Mesa de los Santos. Sobre planos y terminados.',
+    cta: 'Ver proyectos',
+    cardClass: 'bg-plum-dark hover:bg-plum',
+    ctaClass: 'text-gold',
+  },
+  {
+    href: '/lotes-cucuta',
+    eyebrow: 'Mi Lote',
+    eyebrowClass: 'text-white/70',
+    titulo: 'Lotes urbanos en Cúcuta',
+    texto: 'Tierra propia con escritura independiente en San Cayetano, para quienes quieren invertir en tierra.',
+    cta: 'Conocer Mi Lote',
+    cardClass: 'bg-teal hover:opacity-90',
+    ctaClass: 'text-white',
+  },
 ];
 
 const schema = {
@@ -29,74 +64,69 @@ const schema = {
 
 <Base
   title="Nosotros — 20 años construyendo en Colombia | Grupo Mizar"
-  description="De construir parques y centros de convenciones para el Estado a financiar directo: la historia de Grupo Mizar, la empresa familiar santandereana que entrega propiedades a cuotas y sin bancos."
+  description="Conoce la historia de Grupo Mizar: empresa familiar santandereana con +20 años, +100 obras entregadas y propiedades a cuotas, sin bancos ni filas largas."
   path="/nosotros"
   schema={schema}
 >
-  <!-- HERO -->
+  <!-- HERO + CIFRAS (credibilidad en el primer viewport, también en mobile) -->
   <section class="py-16 md:py-24">
     <div class="container-site max-w-3xl">
       <p class="eyebrow text-teal">Nuestra historia</p>
       <h1 class="display-xl mt-4 text-4xl md:text-6xl">Empezamos construyendo para el país.</h1>
+
+      <dl class="reveal mt-8 grid grid-cols-3 gap-4 border-t border-ink/10 pt-6 sm:mt-10 sm:max-w-xl" data-reveal>
+        <div>
+          <dt class="sr-only">Años construyendo en Colombia</dt>
+          <dd class="stat-num text-3xl text-plum sm:text-4xl" data-counter="20" data-suffix="+">0</dd>
+          <dd class="mt-1 text-[11px] font-semibold tracking-wide text-ink/60 uppercase">Años construyendo</dd>
+        </div>
+        <div>
+          <dt class="sr-only">Obras entregadas</dt>
+          <dd class="stat-num text-3xl text-plum sm:text-4xl" data-counter="100" data-suffix="+">0</dd>
+          <dd class="mt-1 text-[11px] font-semibold tracking-wide text-ink/60 uppercase">Obras entregadas</dd>
+        </div>
+        <div>
+          <dt class="sr-only">Reconocimiento</dt>
+          <dd class="stat-num text-2xl text-plum sm:text-3xl">Bienal</dd>
+          <dd class="mt-1 text-[11px] font-semibold tracking-wide text-ink/60 uppercase">Col. de Arquitectura</dd>
+        </div>
+      </dl>
     </div>
   </section>
 
   <!-- HISTORIA -->
   <section class="pb-16 md:pb-24">
-    <div class="container-site grid gap-10 md:grid-cols-[7fr_5fr]">
-      <div class="max-w-prose space-y-5 leading-relaxed text-ink/85">
-        <p>
-          Hace más de veinte años, un grupo de ingenieros santandereanos comenzó a levantar
-          obras para el Estado: parques, centros de convenciones, espacios públicos. Uno de
-          esos proyectos, el Parque Metropolitano Bosque Encantado en Bucaramanga, llegó
-          hasta la Bienal Colombiana de Arquitectura. Otro nos llevó a la Sierra Nevada, a
-          construir el Centro de Interpretación Arhuaca en Nabusimake. Ese no se podía hacer
-          con planos estándar: había que escuchar a la comunidad, entender su cultura y
-          construir a su medida.
-        </p>
-        <p class="display-lg text-xl text-plum md:text-2xl">
-          Adaptar el proyecto a la gente, y no la gente al proyecto, se volvió nuestra forma
-          de trabajar.
-        </p>
-        <p>
-          Con los años entregamos más de cien obras en distintas regiones de Colombia. Pero
-          en el camino entendimos algo que cambió el rumbo. Había una barrera que dejaba a
-          mucha gente por fuera: el banco, el puntaje de crédito, el reporte en la central de
-          riesgo. Personas trabajadoras, con la disciplina y el esfuerzo para pagar, a las
-          que el sistema les decía que no.
-        </p>
-        <!-- TODO: carrusel de imágenes de proyectos del brochure cuando estén extraídas -->
-      </div>
-
-      <aside class="space-y-6 md:pt-2">
-        <div class="border-l-2 border-gold pl-5">
-          <p class="stat-num text-3xl text-plum">Bienal</p>
-          <p class="mt-1 text-sm leading-snug text-ink/70">
-            Parque Metropolitano Bosque Encantado (Bucaramanga), seleccionado en la Bienal
-            Colombiana de Arquitectura.
-          </p>
-        </div>
-        <div class="border-l-2 border-gold pl-5">
-          <p class="stat-num text-3xl text-plum">Nabusimake</p>
-          <p class="mt-1 text-sm leading-snug text-ink/70">
-            Centro de Interpretación Arhuaca, construido escuchando a la comunidad en la
-            Sierra Nevada.
-          </p>
-        </div>
-        <div class="border-l-2 border-gold pl-5">
-          <p class="stat-num text-3xl text-plum">100+</p>
-          <p class="mt-1 text-sm leading-snug text-ink/70">
-            Obras entregadas en distintas regiones de Colombia en más de 20 años.
-          </p>
-        </div>
-      </aside>
+    <div class="container-site max-w-prose space-y-5 leading-relaxed text-ink/85 reveal" data-reveal>
+      <p class="display-lg text-xl text-plum md:text-2xl">
+        Adaptar el proyecto a la gente, y no la gente al proyecto, se volvió nuestra forma
+        de trabajar.
+      </p>
+      <p>
+        Hace más de veinte años, un grupo de ingenieros santandereanos comenzó a levantar
+        obras para el Estado: parques, centros de convenciones, espacios públicos. Uno de
+        esos proyectos, el Parque Metropolitano Bosque Encantado en Bucaramanga, llegó
+        hasta la Bienal Colombiana de Arquitectura. Otro nos llevó a la Sierra Nevada, a
+        construir el Centro de Interpretación Arhuaca en Nabusimake. Ese no se podía hacer
+        con planos estándar: había que escuchar a la comunidad, entender su cultura y
+        construir a su medida.
+      </p>
+      <p>
+        Con los años entregamos más de cien obras en distintas regiones de Colombia. Pero
+        en el camino entendimos algo que cambió el rumbo. Había una barrera que dejaba a
+        mucha gente por fuera: el banco, el puntaje de crédito, el reporte en la central de
+        riesgo. Personas trabajadoras, con la disciplina y el esfuerzo para pagar, a las
+        que el sistema les decía que no.
+      </p>
     </div>
   </section>
+
+  <!-- GALERÍA (banda completa, se llena sola cuando haya fotos en assets/nosotros/proyectos) -->
+  <GaleriaProyectos />
 
   <!-- MODELO -->
   <section class="bg-plum py-16 text-white md:py-24">
     <div class="container-site">
-      <div class="max-w-2xl">
+      <div class="max-w-2xl reveal" data-reveal>
         <p class="eyebrow text-gold">El modelo</p>
         <h2 class="display-lg mt-3 text-3xl md:text-4xl">¿Cómo funciona nuestro modelo?</h2>
         <p class="mt-5 leading-relaxed text-white/80">
@@ -109,8 +139,12 @@ const schema = {
 
       <ol class="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
         {
-          pasos.map((p) => (
-            <li class="border-t-2 border-gold pt-4">
+          pasos.map((p, i) => (
+            <li
+              class="reveal border-t-2 border-gold pt-4 transition-transform duration-300 hover:-translate-y-1"
+              data-reveal
+              style={`transition-delay:${i * 90}ms`}
+            >
               <span class="stat-num text-4xl text-gold/80">{p.n}</span>
               <h3 class="mt-2 font-bold">{p.t}</h3>
               <p class="mt-1.5 text-sm leading-relaxed text-white/70">{p.d}</p>
@@ -126,25 +160,26 @@ const schema = {
     <div class="container-site">
       <h2 class="display-lg max-w-xl text-3xl md:text-4xl">Hoy Grupo Mizar es dos cosas a la vez</h2>
       <div class="mt-10 grid gap-6 md:grid-cols-[7fr_5fr]">
-        <a href="/proyectos" class="group block bg-plum-dark p-8 text-white transition-colors hover:bg-plum md:p-10">
-          <p class="eyebrow text-gold">Mizar</p>
-          <p class="display-lg mt-3 text-2xl md:text-3xl">Apartamentos, cabañas y parcelas campestres</p>
-          <p class="mt-3 max-w-prose text-white/70">
-            En Girón, Piedecuesta, Charta y la Mesa de los Santos. Sobre planos y terminados.
-          </p>
-          <span class="mt-6 inline-block font-bold text-gold group-hover:underline">Ver proyectos →</span>
-        </a>
-        <a href="/lotes-cucuta" class="group block bg-teal p-8 text-white transition-opacity hover:opacity-90 md:p-10">
-          <p class="eyebrow text-white/70">Mi Lote</p>
-          <p class="display-lg mt-3 text-2xl md:text-3xl">Lotes urbanos en Cúcuta</p>
-          <p class="mt-3 max-w-prose text-white/80">
-            Tierra propia con escritura independiente en San Cayetano, para quienes quieren
-            invertir en tierra.
-          </p>
-          <span class="mt-6 inline-block font-bold group-hover:underline">Conocer Mi Lote →</span>
-        </a>
+        {
+          marcas.map((m, i) => (
+            <a
+              href={m.href}
+              class={`group reveal block p-8 text-white transition-all duration-300 hover:-translate-y-1 md:p-10 ${m.cardClass}`}
+              data-reveal
+              style={`transition-delay:${i * 100}ms`}
+            >
+              <p class={`eyebrow ${m.eyebrowClass}`}>{m.eyebrow}</p>
+              <p class="display-lg mt-3 text-2xl md:text-3xl">{m.titulo}</p>
+              <p class="mt-3 max-w-prose text-white/70">{m.texto}</p>
+              <span class={`mt-6 inline-flex items-center gap-1.5 font-bold group-hover:underline ${m.ctaClass}`}>
+                {m.cta}
+                <span class="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true">→</span>
+              </span>
+            </a>
+          ))
+        }
       </div>
-      <!-- TODO: logos de entidades con las que hemos trabajado (última página del brochure) -->
+      <LogosEntidades />
     </div>
   </section>
 
@@ -157,30 +192,38 @@ const schema = {
         widths={[480, 800, 1100]}
         sizes="(min-width: 768px) 50vw, 100vw"
         format="webp"
+        loading="lazy"
         class="w-full rounded-2xl object-cover"
       />
-      <div>
+      <div class="reveal" data-reveal>
         <p class="eyebrow text-teal">Quiénes estamos detrás</p>
         <h2 class="display-lg mt-3 text-3xl md:text-4xl">Una empresa familiar</h2>
         <p class="mt-4 max-w-prose leading-relaxed text-ink/75">
           Grupo Mizar es una empresa familiar. Detrás de cada obra hay un equipo que responde
           con nombre propio por lo que construye.
         </p>
-        <ul class="mt-8 space-y-4">
+        <div class="mt-8 grid gap-3 sm:grid-cols-2">
           {
             equipo.map((m) => (
-              <li class="flex items-baseline justify-between gap-4 border-b border-ink/10 pb-3">
-                <span class="font-extrabold" style="font-variation-settings:'wdth' 110">{m.nombre}</span>
-                <span class="text-sm font-semibold text-teal">{m.rol}</span>
-              </li>
+              <div class="flex items-center gap-4 rounded-2xl border border-ink/10 bg-cream/60 p-4 transition-colors hover:border-gold">
+                <span class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-gold bg-plum text-sm font-extrabold text-white">
+                  {iniciales(m.nombre)}
+                </span>
+                <div class="min-w-0">
+                  <p class="truncate font-extrabold leading-snug" style="font-variation-settings:'wdth' 110">
+                    {m.nombre}
+                  </p>
+                  <p class="text-sm font-semibold text-teal">{m.rol}</p>
+                </div>
+              </div>
             ))
           }
-        </ul>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- PROPÓSITO -->
+  <!-- PROPÓSITO / CTA final -->
   <section class="bg-plum-dark py-16 text-white md:py-24">
     <div class="container-site max-w-3xl">
       <p class="eyebrow text-gold">Nuestro propósito</p>
@@ -188,10 +231,52 @@ const schema = {
         Convertimos tu esfuerzo en propiedades, a cuotas y sin bancos
       </h2>
       <p class="mt-5 text-lg text-white/80">Tu libertad empieza con una decisión segura.</p>
-      <div class="mt-8 flex flex-wrap gap-3">
-        <a href="/proyectos" class="btn-primary">Conoce nuestros proyectos</a>
-        <a href="/contacto" class="btn-outline text-white">Hablemos</a>
+      <div class="mt-8">
+        <a href="/contacto" class="btn-primary">Hablemos</a>
       </div>
     </div>
   </section>
 </Base>
+
+<script>
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const revealEls = Array.from(document.querySelectorAll<HTMLElement>('[data-reveal]'));
+
+  function animateCounter(el: HTMLElement) {
+    const target = Number(el.dataset.counter);
+    const suffix = el.dataset.suffix ?? '';
+    if (reduced || Number.isNaN(target)) {
+      el.textContent = `${target}${suffix}`;
+      return;
+    }
+    const duration = 900;
+    const start = performance.now();
+    function tick(now: number) {
+      const progress = Math.min((now - start) / duration, 1);
+      el.textContent = `${Math.round(target * progress)}${suffix}`;
+      if (progress < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  function reveal(el: HTMLElement) {
+    el.classList.add('is-visible');
+    el.querySelectorAll<HTMLElement>('[data-counter]').forEach(animateCounter);
+  }
+
+  if (reduced || !('IntersectionObserver' in window)) {
+    revealEls.forEach(reveal);
+  } else {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          reveal(entry.target as HTMLElement);
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.2 },
+    );
+    revealEls.forEach((el) => observer.observe(el));
+  }
+</script>

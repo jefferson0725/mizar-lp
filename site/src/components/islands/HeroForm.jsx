@@ -40,7 +40,7 @@ export default function HeroForm() {
   }
 
   const chip = (active) =>
-    `cursor-pointer rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
+    `cursor-pointer whitespace-nowrap rounded-full border px-2 py-2 text-center text-xs font-semibold transition-colors sm:px-4 sm:text-sm ${
       active
         ? 'border-gold bg-gold/15 text-gold'
         : 'border-white/25 text-white/80 hover:border-white/50'
@@ -53,12 +53,12 @@ export default function HeroForm() {
     <form
       onSubmit={enviar}
       data-event="form-submit"
-      className="w-full max-w-md rounded-2xl border border-white/15 bg-black/55 p-6 shadow-2xl backdrop-blur-md md:p-7"
+      className="w-full max-w-md rounded-2xl border border-white/15 bg-black/15 p-6 shadow-2xl backdrop-blur-[2px] md:p-7"
       aria-label="Cuéntanos qué buscas"
     >
       <fieldset className="mb-5">
         <legend className="eyebrow mb-2.5 text-gold">¿Qué buscas?</legend>
-        <div className="flex flex-wrap gap-2" role="radiogroup">
+        <div className="grid grid-cols-3 gap-1.5 sm:flex sm:flex-wrap sm:gap-2" role="radiogroup">
           {TIPOS.map((t) => (
             <button
               key={t.id}

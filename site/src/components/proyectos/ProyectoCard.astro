@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import type { Proyecto } from '../../data/proyectos';
+import { getProyectoHref, type Proyecto } from '../../data/proyectos';
 
 interface Props {
   proyecto: Proyecto;
@@ -12,8 +12,7 @@ const imagenes = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true },
 );
 const img = p.imagen ? imagenes[`../../assets/proyectos/${p.imagen}`]?.default : null;
-// Laureles y Terrazas ya tienen landing propia: enlazar directo
-const href = p.lpUrl ?? (p.slug === 'lotes-cucuta' ? '/lotes-cucuta' : `/proyectos/${p.slug}`);
+const href = getProyectoHref(p);
 
 const estadoLabel: Record<string, string> = {
   'sobre-planos': 'Sobre planos',
@@ -32,10 +31,11 @@ const estadoLabel: Record<string, string> = {
       img ? (
         <Image
           src={img}
-          alt={p.nombre}
+          alt={`Render de ${p.nombre} en ${p.ubicacion}`}
           widths={[400, 700]}
           sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
           format="webp"
+          loading="lazy"
           class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
       ) : (

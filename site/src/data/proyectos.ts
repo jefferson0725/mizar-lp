@@ -16,9 +16,20 @@ export interface Proyecto {
   resumen: string;
   /** nombre de archivo en src/assets/proyectos/ (sin ruta), o null si aún no hay imagen */
   imagen: string | null;
-  /** URL de landing dedicada si existe (LPs actuales de Terrazas/Laureles se integrarán aquí) */
+  /** URL externa de landing dedicada si existe */
   lpUrl: string | null;
   destacado: boolean;
+}
+
+export const PROYECTOS_CON_LANDING_PROPIA = new Set([
+  'lotes-cucuta',
+  'apartamentos-giron',
+  'apartamentos-piedecuesta',
+]);
+
+export function getProyectoHref(proyecto: Pick<Proyecto, 'slug' | 'lpUrl'>) {
+  if (PROYECTOS_CON_LANDING_PROPIA.has(proyecto.slug)) return `/${proyecto.slug}`;
+  return proyecto.lpUrl ?? `/proyectos/${proyecto.slug}`;
 }
 
 export const proyectos: Proyecto[] = [
@@ -33,7 +44,7 @@ export const proyectos: Proyecto[] = [
     resumen:
       'Apartamentos sobre planos a 150 m del futuro anillo vial, en la zona de mayor crecimiento de Girón. A cuotas y sin bancos.',
     imagen: 'giron.png',
-    lpUrl: 'https://mizar.sixteam.pro/',
+    lpUrl: null,
     destacado: true,
   },
   {
@@ -47,7 +58,7 @@ export const proyectos: Proyecto[] = [
     resumen:
       'Apartamentos sobre planos en el centro de Piedecuesta con financiación directa: cuotas fijas, sin intereses bancarios ni intermediarios.',
     imagen: 'piedecuesta.png',
-    lpUrl: 'https://mizar.sixteam.pro/terrazas',
+    lpUrl: null,
     destacado: true,
   },
   {

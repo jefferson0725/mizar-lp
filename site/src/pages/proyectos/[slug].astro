@@ -1,13 +1,12 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
-import { proyectos, WHATSAPP_GENERAL } from '../../data/proyectos';
+import { PROYECTOS_CON_LANDING_PROPIA, proyectos, WHATSAPP_GENERAL } from '../../data/proyectos';
 
 export function getStaticPaths() {
-  // Ficha interna solo para proyectos sin landing propia
-  // (Laureles/Terrazas usan su LP existente; Mi Lote tiene /lotes-cucuta)
+  // Ficha interna solo para proyectos sin landing propia dedicada.
   return proyectos
-    .filter((p) => p.slug !== 'lotes-cucuta' && !p.lpUrl)
+    .filter((p) => !PROYECTOS_CON_LANDING_PROPIA.has(p.slug) && !p.lpUrl)
     .map((p) => ({ params: { slug: p.slug }, props: { proyecto: p } }));
 }
 
@@ -31,18 +30,52 @@ const wa = `https://wa.me/${WHATSAPP_GENERAL}?text=${encodeURIComponent(
   `Hola, vengo de la web y quiero más información sobre ${p.nombre}.`,
 )}`;
 
-const schema = {
+const site = Astro.site ?? new URL('https://mizar.com.co');
+const path = `/proyectos/${p.slug}`;
+const canonical = new URL(path, site).href;
+const imageUrl = img ? new URL(img.src, site).href : undefined;
+
+const projectDescription =
+  p.slug === 'parcelas-charta'
+    ? 'Parcelas campestres en Charta, Santander: tierra propia para vivienda o inversión, a cuotas con Grupo Mizar, sin bancos ni intermediarios locales hoy.'
+    : 'Parcelas campestres en Mesa de los Santos, Santander: tierra propia para vivienda o inversión, a cuotas con Grupo Mizar, sin bancos ni intermediarios.';
+
+const projectSchema: Record<string, unknown> = {
   '@context': 'https://schema.org',
   '@type': 'Product',
   name: p.nombre,
   description: p.resumen,
   category: tipoLabel,
+  url: canonical,
   brand: { '@type': 'Organization', name: 'Grupo Mizar' },
-  offers: {
+  areaServed: p.ubicacion,
+  additionalProperty: [
+    { '@type': 'PropertyValue', name: 'Tipo de proyecto', value: tipoLabel },
+    { '@type': 'PropertyValue', name: 'Estado', value: estadoLabel },
+    { '@type': 'PropertyValue', name: 'Ubicación', value: p.ubicacion },
+  ],
+};
+
+if (imageUrl) {
+  projectSchema.image = imageUrl;
+}
+
+if (p.estado === 'disponible') {
+  projectSchema.offers = {
     '@type': 'Offer',
     availability: 'https://schema.org/InStock',
     areaServed: p.ubicacion,
-  },
+  };
+}
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: new URL('/', site).href },
+    { '@type': 'ListItem', position: 2, name: 'Proyectos', item: new URL('/proyectos', site).href },
+    { '@type': 'ListItem', position: 3, name: p.nombre, item: canonical },
+  ],
 };
 
 const beneficios = [
@@ -55,9 +88,9 @@ const beneficios = [
 
 <Base
   title={`${p.nombre} — a cuotas, sin bancos | Grupo Mizar`}
-  description={`${p.resumen} Pago directo con la constructora en ${p.ubicacion}.`}
-  path={`/proyectos/${p.slug}`}
-  schema={schema}
+  description={projectDescription}
+  path={path}
+  schema={[projectSchema, breadcrumbSchema]}
 >
   <section class="relative bg-plum-dark text-white">
     {
@@ -65,10 +98,12 @@ const beneficios = [
         <div class="absolute inset-0">
           <Image
             src={img}
-            alt=""
+            alt={`Render de ${p.nombre} en ${p.ubicacion}`}
             widths={[800, 1400]}
             sizes="100vw"
             format="webp"
+            loading="eager"
+            fetchpriority="high"
             class="h-full w-full object-cover opacity-30"
           />
           <div class="absolute inset-0 bg-gradient-to-t from-plum-dark via-plum-dark/40 to-transparent" />
@@ -107,6 +142,7 @@ const beneficios = [
           widths={[700, 1200, 1800]}
           sizes="(min-width: 1024px) 74rem, 100vw"
           format="webp"
+          loading="lazy"
           class="w-full rounded-2xl border border-ink/10"
         />
       </section>

@@ -101,7 +101,7 @@ export default function VideoCarousel({ slides }) {
                 </button>
               </>
             ) : (
-              <img src={s.src} alt={s.label} loading="lazy" className="h-full w-full object-cover" />
+              <img src={s.src} alt={s.alt ?? s.label} loading="lazy" className="h-full w-full object-cover" />
             )}
 
             <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent p-5 pt-14 text-white">

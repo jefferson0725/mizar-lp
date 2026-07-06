@@ -1,4 +1,4 @@
-﻿---
+---
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 
@@ -51,6 +51,16 @@ const articleSchema: Record<string, unknown> = {
 if (post.data.heroImage) {
   articleSchema.image = [new URL(post.data.heroImage, site).href];
 }
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: new URL('/', site).href },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: new URL('/blog', site).href },
+    { '@type': 'ListItem', position: 3, name: post.data.title, item: canonical },
+  ],
+};
 ---
 
 <Base
@@ -58,7 +68,7 @@ if (post.data.heroImage) {
   description={post.data.description}
   path={path}
   ogImage={post.data.heroImage}
-  schema={articleSchema}
+  schema={[articleSchema, breadcrumbSchema]}
 >
   <article class="bg-cream">
     <header class="bg-plum-dark py-16 text-white md:py-24">

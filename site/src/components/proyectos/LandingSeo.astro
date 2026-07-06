@@ -24,7 +24,8 @@ const { path, title, description, eyebrow, h1, respuesta, beneficios, proyectoSl
 const relacionados = proyectos.filter((p) => proyectoSlugs.includes(p.slug));
 const wa = `https://wa.me/${WHATSAPP_GENERAL}?text=${encodeURIComponent(ctaMensaje)}`;
 
-const schema = {
+const site = Astro.site ?? new URL('https://mizar.com.co');
+const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: faq.map((f) => ({
@@ -33,6 +34,17 @@ const schema = {
     acceptedAnswer: { '@type': 'Answer', text: f.a },
   })),
 };
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: new URL('/', site).href },
+    { '@type': 'ListItem', position: 2, name: h1, item: new URL(path, site).href },
+  ],
+};
+
+const schema = [faqSchema, breadcrumbSchema];
 ---
 
 <Base title={title} description={description} path={path} schema={schema}>
