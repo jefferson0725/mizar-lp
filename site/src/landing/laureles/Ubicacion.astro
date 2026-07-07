@@ -1,5 +1,5 @@
 ---
-const MAPS_URL = "https://www.google.com/maps/place/LAURELES+CAMPESTRE/@7.0309891,-73.174736,1079m/data=!3m2!1e3!4b1!4m6!3m5!1s0x8e6839005f8dab5f:0x96a0de025729c309!8m2!3d7.0309838!4d-73.1721611!16s%2Fg%2F11yt7fjm25?entry=tts";
+const MAPS_URL = "https://maps.app.goo.gl/3BggRD6CCFP5oFJ7A";
 
 const puntos = [
   {
@@ -14,6 +14,10 @@ const puntos = [
     texto: "2,5 hectáreas reservadas para zonas verdes y espacios de uso público.",
     icon: `<path d="M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0Z"/><path d="M7 16v6"/><path d="M13 19v3"/><path d="M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5"/>`,
   },
+  {
+    texto: "Entregas para el 2027 o 2028.",
+    icon: `<path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/>`,
+  },
 ];
 ---
 
@@ -23,7 +27,7 @@ const puntos = [
       Estás comprando del lado correcto de Girón.
     </h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
       {puntos.map((punto, i) => (
         <div
           class="reveal text-center p-6 rounded-xl bg-white border border-gris-claro shadow-card hover:shadow-hover transition-shadow"
@@ -56,7 +60,7 @@ const puntos = [
         target="_blank"
         rel="noopener noreferrer"
         class="inline-flex items-center gap-2 bg-rojo text-white font-semibold px-6 py-3 rounded-lg hover:bg-rojo-dark transition-colors duration-300 shadow-lg"
-        data-event="whatsapp-click"
+        data-event="mapa-click"
       >
         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
           <polygon points="3 11 22 2 13 21 11 13 3 11"/>
