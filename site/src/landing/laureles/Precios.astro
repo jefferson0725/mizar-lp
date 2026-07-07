@@ -1,0 +1,71 @@
+---
+const WA_URL = "https://wa.me/573112658552?text=Me%20interesan%20los%20apartamentos%20de%20Laureles%20Campestre%2C%20mi%20nombre%20es%20";
+
+const planes = [
+  {
+    tipo: "Empleado",
+    desde: "$865.000/mes",
+    nota: "(más cesantías y primas)",
+    iconPath: `<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>`,
+  },
+  {
+    tipo: "Independiente",
+    desde: "$1.400.000/mes",
+    nota: null,
+    iconPath: `<path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><rect width="20" height="14" x="2" y="6" rx="2"/>`,
+  },
+];
+
+const beneficios = [
+  "Aplican todos los subsidios de vivienda. Te ayudamos a aprovecharlos.",
+  "Financiamos hasta por 20 años",
+];
+---
+
+<section id="planes-precios" class="py-20 px-6 bg-navy">
+  <div class="max-w-4xl mx-auto text-center">
+    <h2 class="reveal font-serif text-blanco text-3xl sm:text-4xl md:text-5xl mb-4 leading-tight">
+      Pago a cuotas, directo con nosotros.
+    </h2>
+
+    <p class="reveal text-rojo-light font-bold text-4xl md:text-5xl my-10">
+      Separas con $3.000.000
+    </p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+      {planes.map((plan, i) => (
+        <div
+          class="reveal bg-white/10 border border-white/10 rounded-2xl p-8 text-left"
+          style={`transition-delay: ${i * 0.15}s`}
+        >
+          <svg class="w-8 h-8 text-rojo-light mb-3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true" set:html={plan.iconPath}></svg>
+          <h3 class="text-blanco font-bold text-xl mb-2">{plan.tipo}</h3>
+          <p class="text-rojo-light text-2xl font-bold">desde {plan.desde}</p>
+          {plan.nota && <p class="text-white/60 text-sm mt-1">{plan.nota}</p>}
+        </div>
+      ))}
+    </div>
+
+    <div class="space-y-3 mb-10">
+      {beneficios.map((b) => (
+        <div class="flex items-start gap-3 text-left max-w-xl mx-auto">
+          <svg class="w-5 h-5 text-rojo-light flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+          <p class="text-blanco text-base">{b}</p>
+        </div>
+      ))}
+    </div>
+
+    <a
+      href={WA_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-block bg-rojo text-white font-bold px-10 py-4 rounded-lg text-lg hover:bg-rojo-dark transition-colors duration-300 shadow-hover"
+      data-event="whatsapp-click"
+    >
+      Quiero saber más
+    </a>
+  </div>
+</section>

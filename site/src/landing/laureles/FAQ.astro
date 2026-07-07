@@ -1,0 +1,43 @@
+---
+const FAQ_ITEMS = [
+  {
+    pregunta: "¿Tengo que ir a un banco?",
+    respuesta: "No. El acuerdo es directo con Mizar. Sin estudios de crédito bancario, sin intermediarios.",
+  },
+  {
+    pregunta: "¿Qué pasa si estoy reportado?",
+    respuesta: "No importa si estás reportado. No revisamos centrales de riesgo.",
+  },
+  {
+    pregunta: "¿Cuándo me entregan el apartamento?",
+    respuesta: "Las entregas están proyectadas para noviembre de 2027 y noviembre de 2028, según el plan que elijas.",
+  },
+  {
+    pregunta: "¿Y si tengo un carro o moto?",
+    respuesta: "Aceptamos permuta con vehículo como parte de tu pago.",
+  },
+];
+---
+
+<section id="preguntas-frecuentes" class="py-20 px-6 bg-gris-claro">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="reveal font-serif text-navy text-3xl sm:text-4xl md:text-5xl text-center mb-12">
+      Preguntas frecuentes
+    </h2>
+
+    <div class="bg-white rounded-2xl px-6 py-2 shadow-sm">
+      {FAQ_ITEMS.map(({ pregunta, respuesta }) => (
+        <details class="border-b border-gray-200 last:border-0 group">
+          <summary class="flex items-center justify-between py-5 cursor-pointer gap-4 [list-style:none] [&::-webkit-details-marker]:hidden">
+            <span class="font-semibold text-navy text-base md:text-lg">{pregunta}</span>
+            <span
+              class="faq-icon text-navy text-2xl flex-shrink-0 transition-transform duration-300 group-open:rotate-45"
+              aria-hidden="true"
+            >+</span>
+          </summary>
+          <p class="text-gray-600 pb-5 leading-relaxed">{respuesta}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

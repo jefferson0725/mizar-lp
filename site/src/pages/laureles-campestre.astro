@@ -1,6 +1,17 @@
 ---
 import LandingReact from "../layouts/LandingReact.astro";
-import LaurelesApp from "../landing/LaurelesApp.jsx";
+import IntroParallax from "../landing/laureles/IntroParallax.astro";
+import Ubicacion from "../landing/laureles/Ubicacion.astro";
+import Comentarios from "../landing/laureles/Comentarios.astro";
+import Testimonios from "../landing/laureles/Testimonios.astro";
+import Apartamentos from "../landing/components/Apartamentos.jsx";
+import QuienesSomos from "../landing/laureles/QuienesSomos.astro";
+import Precios from "../landing/laureles/Precios.astro";
+import FAQ from "../landing/laureles/FAQ.astro";
+import Resumen from "../landing/laureles/Resumen.astro";
+import Contacto from "../landing/laureles/Contacto.astro";
+import LandingFooter from "../landing/laureles/Footer.astro";
+import WhatsAppFloat from "../components/WhatsAppFloat.astro";
 ---
 
 <LandingReact
@@ -9,5 +20,41 @@ import LaurelesApp from "../landing/LaurelesApp.jsx";
   ogImage="/assets/hero-fachada.webp"
   path="/laureles-campestre"
 >
-  <LaurelesApp client:load />
+  <IntroParallax />
+  <Ubicacion />
+  <Comentarios />
+  <Testimonios />
+  <Apartamentos client:visible />
+  <QuienesSomos />
+  <Precios />
+  <FAQ />
+  <Resumen />
+  <Contacto />
+  <LandingFooter />
+  <WhatsAppFloat
+    phone="573112658552"
+    message="Me interesan los apartamentos de Laureles Campestre, mi nombre es"
+  />
 </LandingReact>
+
+<script>
+  // Reveal on scroll — activa la clase .in-view en elementos .reveal
+  // cuando entran en el viewport. Respeta prefers-reduced-motion.
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduced) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  } else {
+    // Si prefiere reduced-motion, mostrar todo inmediatamente
+    document.querySelectorAll('.reveal').forEach((el) => el.classList.add('in-view'));
+  }
+</script>

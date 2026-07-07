@@ -123,3 +123,71 @@ body {
   font-weight: 600;
   letter-spacing: -0.01em;
 }
+
+/* ===================================================================
+   ANIMACIONES HERO — Laureles Campestre (sin framer-motion)
+   =================================================================== */
+@keyframes lc-pan-bg {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-24%); }
+}
+@keyframes lc-fade-down {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes lc-fade-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes lc-bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(10px); }
+}
+
+.lc-hero-bg {
+  animation: lc-pan-bg 18s ease-in-out infinite alternate;
+}
+.lc-hero-logo {
+  animation: lc-fade-down 0.7s ease-out both;
+}
+.lc-hero-content {
+  animation: lc-fade-up 0.8s ease-out 0.15s both;
+}
+.lc-hero-arrow {
+  animation: lc-bounce 1.8s ease-in-out infinite;
+}
+
+/* ===================================================================
+   REVEAL ON SCROLL — activado por IntersectionObserver (.in-view)
+   =================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lc-hero-bg,
+  .lc-hero-logo,
+  .lc-hero-content,
+  .lc-hero-arrow {
+    animation: none !important;
+  }
+  .lc-hero-logo,
+  .lc-hero-content {
+    opacity: 1;
+    transform: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  details > summary span.faq-icon {
+    transition: none;
+  }
+}

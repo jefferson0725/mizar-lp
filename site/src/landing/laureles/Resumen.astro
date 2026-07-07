@@ -1,0 +1,66 @@
+---
+const WA_URL = "https://wa.me/573112658552?text=Me%20interesan%20los%20apartamentos%20de%20Laureles%20Campestre%2C%20mi%20nombre%20es%20";
+
+const items = [
+  { label: "Apartamento de 3 alcobas en Girón", valor: "Tuyo" },
+  { label: "Separación", valor: "$3.000.000" },
+  { label: "Cuota mensual desde", valor: "$865.000" },
+  { label: "Estudio de crédito bancario", valor: "No necesario" },
+  { label: "Subsidios de vivienda", valor: "Aplican" },
+  { label: "Entrega", valor: "2027 · 2028" },
+];
+---
+
+<section id="resumen" class="py-20 px-6 bg-navy">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="reveal font-serif text-blanco text-3xl sm:text-4xl md:text-5xl text-center mb-12 leading-tight">
+      Resumen rápido de todo lo que obtienes
+    </h2>
+
+    <div class="reveal bg-navy-dark border border-white/10 rounded-3xl p-6 sm:p-10 shadow-dark">
+      <!-- Logo -->
+      <div class="flex justify-center mb-6">
+        <img
+          src="/assets/logo-mizar.webp"
+          alt="Mizar · Diseño y Construcción"
+          class="h-8 w-auto"
+        />
+      </div>
+
+      <div class="h-px bg-white/10 mb-6"></div>
+
+      <!-- Checklist tipo recibo -->
+      <ul class="space-y-3 sm:space-y-4">
+        {items.map((row) => (
+          <li class="flex items-center gap-2 sm:gap-3">
+            <svg class="w-5 h-5 text-rojo-light flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 6 9 17l-5-5"/>
+            </svg>
+            <span class="text-blanco text-xs sm:text-base font-medium flex-1 sm:flex-none">{row.label}</span>
+            <span class="hidden sm:block flex-1 border-b border-dotted border-white/25 mx-1 translate-y-1" aria-hidden="true"></span>
+            <span class="text-rojo-light text-xs sm:text-base font-semibold">{row.valor}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div class="h-px bg-white/10 my-6"></div>
+
+      <!-- Caja destacada -->
+      <div class="bg-gradient-cta rounded-2xl py-6 px-4 text-center mb-6">
+        <p class="text-white/80 text-sm uppercase tracking-widest mb-1">Separas hoy con</p>
+        <p class="text-white font-bold text-3xl sm:text-4xl">$3.000.000</p>
+        <p class="text-white/85 text-sm mt-2">Pago directo con Mizar, sin bancos.</p>
+      </div>
+
+      <a
+        href={WA_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="block w-full bg-[#25D366] text-white font-bold py-4 px-4 rounded-xl text-lg hover:bg-[#128C7E] transition-colors duration-300 text-center"
+        data-event="whatsapp-click"
+      >
+        Quiero asegurar mi apartamento
+      </a>
+    </div>
+  </div>
+</section>
