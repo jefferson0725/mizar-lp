@@ -3,6 +3,7 @@
 // No usa Base.astro: estas páginas traen su propio Tailwind (@theme de la
 // landing), tipografías Fraunces/DM Sans y no llevan header/footer del sitio.
 import "../landing/index.css";
+import Analytics from "../components/Analytics.astro";
 
 interface Props {
   title: string;
@@ -47,6 +48,7 @@ const canonical = new URL(path, Astro.site).href;
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
       })(window, document, "clarity", "script", "x4jt12aihp");
     </script>
+    <Analytics />
   </head>
   <body>
     <slot />
