@@ -1,0 +1,125 @@
+@import "tailwindcss" source(".");
+
+/* ===================================================================
+   PALETA REAL MIZAR · Diseño y Construcción
+   Extraída del logo (rojo crimson + montaña metálica), los planos
+   y mizar.com.co. Tailwind v4 lee los colores desde este @theme.
+   =================================================================== */
+@theme {
+  /* Navy corporativo */
+  --color-navy: #0a2342;
+  --color-navy-light: #16335c;
+  --color-navy-dark: #061629;
+
+  /* Rojo Mizar (crimson del logo / títulos de los planos) */
+  --color-rojo: #d12e45;
+  --color-rojo-light: #e85c70;
+  --color-rojo-dark: #a4123a;
+
+  /* Gris metálico (montaña del logo) + neutros */
+  --color-gris-oscuro: #333333;
+  --color-gris-medio: #7c8696;
+  --color-gris-claro: #f6f4f1;
+  --color-crema: #f5f0e8;
+  --color-blanco: #ffffff;
+
+  /* Dorado discreto (solo detalle de plusvalía) */
+  --color-dorado: #c8933a;
+
+  /* Tipografía */
+  --font-serif: "Fraunces", "Playfair Display", Georgia, serif;
+  --font-sans: "DM Sans", system-ui, sans-serif;
+
+  /* Sombras de marca */
+  --shadow-card: 0 4px 16px rgba(10, 35, 66, 0.1);
+  --shadow-hover: 0 10px 28px rgba(209, 46, 69, 0.18);
+  --shadow-dark: 0 6px 20px rgba(6, 22, 41, 0.25);
+}
+
+/* Gradientes de marca — Laureles (utilidades v4) */
+@utility bg-gradient-hero {
+  background-image: linear-gradient(135deg, #0a2342 0%, #16335c 100%);
+}
+@utility bg-gradient-cta {
+  background-image: linear-gradient(135deg, #d12e45 0%, #a4123a 100%);
+}
+@utility bg-gradient-section {
+  background-image: linear-gradient(180deg, #ffffff 0%, #f6f4f1 100%);
+}
+
+/* ===================================================================
+   TEMA TERRAZAS DE LA CANTERA
+   Sobreescribe los tokens de color dentro de .theme-terrazas.
+   Tailwind v4 usa CSS custom properties → al cambiar la variable en
+   el wrapper, todas las utilidades (bg-navy, text-rojo, etc.) toman
+   automáticamente los valores del proyecto Terrazas.
+   =================================================================== */
+.theme-terrazas {
+  --color-navy: #025362;
+  --color-navy-light: #0a6b7a;
+  --color-navy-dark: #013a45;
+
+  --color-rojo: #dfd473;
+  --color-rojo-light: #ebe39a;
+  --color-rojo-dark: #a89a2f;
+
+  --color-gris-claro: #f1f4f3;
+  --color-crema: #faf7ec;
+
+  --shadow-card: 0 4px 16px rgba(2, 83, 98, 0.1);
+  --shadow-hover: 0 10px 28px rgba(2, 83, 98, 0.22);
+  --shadow-dark: 0 6px 20px rgba(1, 58, 69, 0.3);
+}
+
+/* Gradiente CTA de Terrazas (lima → lima claro), scoped por el tema */
+.theme-terrazas .bg-gradient-cta,
+.theme-terrazas [class*="bg-gradient-cta"] {
+  background-image: linear-gradient(135deg, #ebe39a 0%, #dfd473 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(10, 35, 66, 0.15) transparent; /* Firefox */
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(10, 35, 66, 0.15);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(10, 35, 66, 0.3);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: #333333;
+  background-color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Fraunces con fuerza: peso fuerte por defecto en titulares + optical sizing.
+   Antes (Playfair 400) los titulares se veían delgados. Las utilidades
+   font-bold/font-black de cada componente siguen mandando por encima. */
+.font-serif {
+  font-optical-sizing: auto;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
