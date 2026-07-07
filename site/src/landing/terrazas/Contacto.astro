@@ -1,0 +1,62 @@
+---
+const FORM_ID = "3fFCODye6YCSItphtEmo";
+---
+
+<section id="contacto" class="py-20 px-6 bg-white">
+  <div class="max-w-2xl mx-auto">
+    <div class="reveal text-center mb-12">
+      <h2 class="font-serif text-navy text-3xl sm:text-4xl md:text-5xl mb-4 leading-tight">
+        Tu apartamento propio en Piedecuesta está más cerca de lo que crees,
+        sin importar dónde estés hoy.
+      </h2>
+      <p class="text-gray-600 text-lg">
+        Cuéntanos tu caso y te explicamos cuál plan se ajusta a ti.
+      </p>
+    </div>
+
+    <div class="reveal">
+      <iframe
+        id={`inline-${FORM_ID}`}
+        src={`https://web.sixteam.pro/widget/form/${FORM_ID}`}
+        style="width: 100%; height: 600px; border: none; border-radius: 3px; transition: height 0.3s ease;"
+        data-layout='{"id":"INLINE"}'
+        data-trigger-type="alwaysShow"
+        data-trigger-value=""
+        data-activation-type="alwaysActivated"
+        data-activation-value=""
+        data-deactivation-type="neverDeactivate"
+        data-deactivation-value=""
+        data-form-name="Agendamiento de llamadas Terrazas"
+        data-height="600"
+        data-layout-iframe-id={`inline-${FORM_ID}`}
+        data-form-id={FORM_ID}
+        title="Agendamiento de llamadas Terrazas"
+      ></iframe>
+    </div>
+  </div>
+</section>
+
+<script is:inline src="https://web.sixteam.pro/js/form_embed.js" async></script>
+
+<script>
+  // Ajuste dinámico de altura del iframe via postMessage (GHL/sixteam format)
+  const FORM_ID = '3fFCODye6YCSItphtEmo';
+  const iframe = document.getElementById(`inline-${FORM_ID}`) as HTMLIFrameElement | null;
+
+  window.addEventListener('message', (e: MessageEvent) => {
+    try {
+      const data = typeof e.data === 'string' ? JSON.parse(e.data) : e.data;
+      if (!data || !iframe) return;
+      const h =
+        data.height ??
+        data.frameHeight ??
+        (data.type === 'GHL:iframeResize' ? data.value : null) ??
+        (data.id === FORM_ID ? data.height : null);
+      if (h && Number(h) > 100) {
+        iframe.style.height = `${Number(h)}px`;
+      }
+    } catch {
+      // ignorar errores de parseo
+    }
+  });
+</script>

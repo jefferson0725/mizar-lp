@@ -108,7 +108,7 @@ export default function Apartamentos() {
               onClick={() => setTipoImagenes("render")}
               className={`px-5 py-1.5 rounded-full text-sm font-semibold transition-colors duration-300 cursor-pointer ${
                 tipoImagenes === "render"
-                  ? "bg-lima text-navy"
+                  ? "bg-rojo text-navy"
                   : "text-gray-500 hover:text-navy"
               }`}
             >
@@ -118,7 +118,7 @@ export default function Apartamentos() {
               onClick={() => setTipoImagenes("plano")}
               className={`px-5 py-1.5 rounded-full text-sm font-semibold transition-colors duration-300 cursor-pointer ${
                 tipoImagenes === "plano"
-                  ? "bg-lima text-navy"
+                  ? "bg-rojo text-navy"
                   : "text-gray-500 hover:text-navy"
               }`}
             >

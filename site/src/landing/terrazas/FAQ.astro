@@ -1,0 +1,46 @@
+---
+const FAQ_ITEMS = [
+  {
+    pregunta: "¿Puedo comprar desde Estados Unidos o Europa?",
+    respuesta:
+      "Sí. Todo el proceso se puede hacer a distancia. Te acompañamos en cada paso desde tu país.",
+  },
+  {
+    pregunta: "¿Tengo que pasar por un banco?",
+    respuesta:
+      "No. El acuerdo es directo con Mizar, sin estudios de crédito bancario ni intermediarios.",
+  },
+  {
+    pregunta: "¿Cuándo me entregan el apartamento?",
+    respuesta: "La entrega está proyectada para diciembre de 2027.",
+  },
+  {
+    pregunta: "¿El apartamento se entrega terminado?",
+    respuesta:
+      "Sí. Con acabados de carpintería, puertas, closets, cocina integral y extractor.",
+  },
+];
+---
+
+<section id="preguntas-frecuentes" class="py-20 px-6 bg-gris-claro">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="reveal font-serif text-navy text-3xl sm:text-4xl md:text-5xl text-center mb-12">
+      Preguntas frecuentes
+    </h2>
+
+    <div class="bg-white rounded-2xl px-6 py-2 shadow-sm">
+      {FAQ_ITEMS.map(({ pregunta, respuesta }) => (
+        <details class="border-b border-gray-200 last:border-0 group">
+          <summary class="flex items-center justify-between py-5 cursor-pointer gap-4 [list-style:none] [&::-webkit-details-marker]:hidden">
+            <span class="font-semibold text-navy text-base md:text-lg">{pregunta}</span>
+            <span
+              class="faq-icon text-navy text-2xl flex-shrink-0 transition-transform duration-300 group-open:rotate-45"
+              aria-hidden="true"
+            >+</span>
+          </summary>
+          <p class="text-gray-600 pb-5 leading-relaxed">{respuesta}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
