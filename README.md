@@ -1,16 +1,20 @@
-# React + Vite
+# Grupo Mizar — Sitio web
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Sitio corporativo de Grupo Mizar (mizar.com.co): inmobiliaria/constructora santandereana. Propiedades a cuotas, directo con la constructora, sin bancos.
 
-Currently, two official plugins are available:
+## Estructura
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- `site/` — la app Astro 7 + Tailwind 4 (todo el sitio, incluidas las landings `/laureles-campestre` y `/terrazas` como Astro estático con islas React). Ver `site/SPEC.md` para el sistema de diseño y el copy oficial.
+- `context/` — paleta y contexto de marca.
 
-## React Compiler
+## Desarrollo
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+cd site
+npm install
+npm run dev
+```
 
-## Expanding the ESLint configuration
+Build de producción: `npm run build` (salida en `site/dist/`).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Analytics: configurar `PUBLIC_GA4_ID` (ver `site/.env.example`).
