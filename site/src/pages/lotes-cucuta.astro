@@ -2,14 +2,28 @@
 import { getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import FaqAccordion from '../components/proyectos/FaqAccordion.astro';
+import GalleryCarousel from '../components/GalleryCarousel.astro';
 import { WHATSAPP_MILOTE } from '../data/proyectos';
 import renderLotes from '../assets/proyectos/lotes-cucuta.png';
+import imagen1Raw from '../assets/proyectos/miravista-imagen1.png';
+import galeriaRaw1 from '../assets/proyectos/miravista-g1.png';
+import galeriaRaw2 from '../assets/proyectos/miravista-g2.png';
+import galeriaRaw3 from '../assets/proyectos/miravista-g3.png';
+import galeriaRaw4 from '../assets/proyectos/miravista-g4.png';
+import galeriaRaw5 from '../assets/proyectos/miravista-g5.png';
 
 const wa = (msg: string) =>
   `https://wa.me/${WHATSAPP_MILOTE}?text=${encodeURIComponent(msg)}`;
 
 const heroBg = (await getImage({ src: renderLotes, width: 1800, format: 'webp' })).src;
 const renderMid = (await getImage({ src: renderLotes, width: 1200, format: 'webp' })).src;
+const imagen1 = (await getImage({ src: imagen1Raw, width: 900, format: 'webp' })).src;
+
+const galeria = await Promise.all(
+  [galeriaRaw1, galeriaRaw2, galeriaRaw3, galeriaRaw4, galeriaRaw5].map((img) =>
+    getImage({ src: img, width: 900, format: 'webp' }).then((r) => r.src),
+  ),
+);
 
 const incluye = [
   'Lote de 7x10 o 7x16 metros',
@@ -98,12 +112,12 @@ const schema = [
 
 <Base
   title="Mi Lote — Tu lote propio en Cúcuta, a cuotas y sin bancos"
-  description="Lotes urbanos de 7x10 y 7x16 en San Cayetano, Cúcuta, a 100 m de la futura Universidad Simón Bolívar, con escritura independiente y cuotas sin bancos."
+  description="Lotes urbanos de 7×10 y 7×16 en San Cayetano, Cúcuta, a 100 m de la futura Universidad Simón Bolívar, con escritura independiente y cuotas sin bancos."
   path="/lotes-cucuta"
   schema={schema}
 >
-  <!-- HERO full-bleed con render aéreo -->
-  <section class="relative flex min-h-[88vh] flex-col justify-end overflow-hidden bg-neutral-950 text-white">
+  <!-- HERO -->
+  <section class="relative flex min-h-[88vh] flex-col justify-start overflow-hidden bg-neutral-950 text-white">
     <img
       src={heroBg}
       alt="Render aéreo de la urbanización Miravista en San Cayetano, Cúcuta"
@@ -112,9 +126,9 @@ const schema = [
       class="absolute inset-0 h-full w-full object-cover"
     />
     <div class="absolute inset-0" style="background:#000000a8;"></div>
-    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/30"></div>
+    <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(0,0,0,0.8),transparent,rgba(0,0,0,0.3))"></div>
 
-    <div class="container-site relative py-16 md:py-20">
+    <div class="container-site relative pt-20 pb-12 md:pt-32 md:pb-20">
       <p class="eyebrow text-gold">Mi Lote · San Cayetano, Cúcuta</p>
       <h1 class="display-xl mt-4 max-w-3xl text-4xl md:text-6xl">
         Tu lote propio, a cuotas, sin bancos
@@ -129,103 +143,109 @@ const schema = [
         </a>
         <a href="#incluye" class="btn-outline text-white">Ver qué incluye</a>
       </div>
-      <p class="mt-10 border-t border-white/15 pt-5 text-sm font-bold tracking-[0.18em] text-white/80 uppercase">
-        La urbanización más grande de San Cayetano
-      </p>
     </div>
   </section>
 
-  <!-- GANCHO EMOCIONAL -->
+  <!-- VIDEO GENERAL -->
+  <section class="py-14 md:py-20">
+    <div class="container-site">
+      <div class="mx-auto w-full max-w-sm">
+        <div class="relative overflow-hidden rounded-2xl bg-plum-dark">
+          <video
+            id="video-recorrido"
+            src="/videos/mi-lote-recorrido.mp4"
+            class="w-full object-cover" style="aspect-ratio:9/16"
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          ></video>
+          <button
+            id="recorrido-audio-toggle"
+            type="button"
+            class="absolute right-4 bottom-4 flex h-12 w-12 items-center justify-center rounded-full bg-black/60 text-white"
+            aria-label="Activar sonido"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M11 5 6 9H2v6h4l5 4V5ZM23 9l-6 6M17 9l6 6" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESPALDO -->
   <section class="py-16 md:py-24">
-    <div class="container-site max-w-3xl">
-      <p class="text-xl leading-relaxed text-ink/85 md:text-2xl">
-        Madrugadas, turnos dobles, años de esfuerzo. Y al final del mes, la plata se va y no
-        queda nada tuyo.
-      </p>
-      <p class="display-lg mt-6 text-2xl text-plum md:text-3xl">
-        Un lote no es un gasto: es la primera cosa que nadie te puede quitar.
-      </p>
-      <p class="mt-6 max-w-prose leading-relaxed text-ink/75">
-        Entrar ahora es entrar a tiempo: San Cayetano está creciendo junto al anillo vial
-        occidental, y la futura Universidad Simón Bolívar queda a 100 metros de la
-        urbanización. La tierra de hoy no va a costar lo mismo mañana.
-      </p>
-    </div>
-  </section>
-
-  <!-- TESTIMONIOS EN VIDEO (estructura de la LP base de Terrazas) -->
-  <!-- TODO: reemplazar por el video testimonial propio de Mi Lote cuando llegue de Drive -->
-  <section class="bg-white py-16 md:py-24">
-    <div class="container-site grid items-center gap-10 md:grid-cols-[5fr_7fr]">
-      <div>
-        <p class="eyebrow text-teal">Testimonios</p>
-        <h2 class="display-lg mt-3 text-3xl md:text-4xl">Ellos ya dieron el paso</h2>
-        <p class="mt-4 max-w-prose leading-relaxed text-ink/75">
-          Personas que trabajaron años sin tener nada a su nombre y hoy pagan su propiedad
-          directo con la constructora. Dale play y escúchalos.
+    <div class="container-site grid gap-10 md:grid-cols-3">
+      <div class="md:col-span-1">
+        <p class="eyebrow text-teal">El respaldo</p>
+        <h2 class="display-lg mt-3 text-3xl">Detrás de Mi Lote está Grupo Mizar</h2>
+        <p class="mt-4 leading-relaxed text-ink/75">
+          Más de 20 años construyendo en Colombia y más de 100 obras entregadas.
+        </p>
+        <a href="/nosotros" class="mt-5 inline-block font-bold text-mizar hover:underline">Conoce nuestra historia →</a>
+      </div>
+      <div class="grid grid-cols-2 gap-8 md:col-span-2">
+        <div>
+          <p class="stat-num text-5xl text-plum">20<span class="text-mizar">+</span></p>
+          <p class="mt-1 text-sm font-semibold tracking-wider text-ink/60 uppercase">Años construyendo en Colombia</p>
+        </div>
+        <div>
+          <p class="stat-num text-5xl text-plum">100<span class="text-mizar">+</span></p>
+          <p class="mt-1 text-sm font-semibold tracking-wider text-ink/60 uppercase">Obras entregadas</p>
+        </div>
+        <p class="col-span-2 max-w-prose text-ink/75">
+          Somos una empresa familiar de ingenieros santandereanos. Respondemos con nombre
+          propio por cada obra que entregamos, desde parques públicos premiados hasta la
+          urbanización más grande de San Cayetano.
         </p>
       </div>
-      <div class="relative overflow-hidden rounded-2xl bg-plum-dark">
-        <video
-          id="video-testimonio"
-          src="/videos/testimonios.mp4"
-          class="aspect-video w-full object-cover"
-          muted
-          loop
-          playsinline
-          preload="metadata"
-        ></video>
-        <button
-          id="video-audio-toggle"
-          type="button"
-          class="absolute right-4 bottom-4 flex h-12 w-12 items-center justify-center rounded-full bg-black/60 text-white"
-          aria-label="Activar sonido"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M11 5 6 9H2v6h4l5 4V5ZM23 9l-6 6M17 9l6 6" />
-          </svg>
-        </button>
-      </div>
     </div>
   </section>
 
-  <!-- COMENTARIOS (carrusel scroll-snap, como la LP base) -->
-  <!-- TODO: reemplazar por comentarios reales de compradores de Mi Lote -->
+  <!-- IMAGEN + UBICACION + MAPA -->
   <section class="py-16 md:py-24">
     <div class="container-site">
-      <p class="eyebrow text-teal">Comentarios</p>
-      <h2 class="display-lg mt-3 max-w-xl text-3xl md:text-4xl">Lo que dicen quienes ya compraron</h2>
-      <div class="mt-8 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4" style="scrollbar-width: thin;">
-        {
-          [
+      <div class="grid items-center gap-10 md:grid-cols-[6fr_6fr]">
+        <img
+          src={imagen1}
+          alt="Vista de la urbanización Miravista en San Cayetano, Cúcuta"
+          loading="lazy"
+          class="w-full rounded-2xl"
+        />
+        <div>
+          <p class="eyebrow text-teal">Ubicación</p>
+          <h2 class="display-lg mt-3 text-3xl md:text-4xl">
+            Junto al anillo vial occidental y a 100 metros de la futura Universidad Simón Bolívar
+          </h2>
+          <ul class="mt-7 space-y-4">
             {
-              quote: 'Compré mi lote desde Estados Unidos. Todo el proceso fue por videollamada y los documentos llegaron en regla.',
-              autor: 'Inversionista, vive en EE. UU.',
-            },
-            {
-              quote: 'Lo que me convenció fue que no hay letra pequeña: cuota fija, sin intereses, y la escritura queda a mi nombre.',
-              autor: 'Comprador en San Cayetano',
-            },
-            {
-              quote: 'Nunca había podido comprar nada porque estaba reportado. Aquí nadie me pidió puntaje de crédito.',
-              autor: 'Comprador en Cúcuta',
-            },
-            {
-              quote: 'Llevaba años pagando arriendo y pensando que sin crédito nunca iba a tener nada. Hoy tengo tierra propia.',
-              autor: 'Propietaria, Norte de Santander',
-            },
-          ].map((c) => (
-            <blockquote class="min-w-[85%] snap-start rounded-2xl border-l-2 border-gold bg-white p-6 sm:min-w-[45%] lg:min-w-[30%]">
-              <p class="leading-relaxed text-ink/85">“{c.quote}”</p>
-              <footer class="mt-4 text-sm font-bold text-teal">{c.autor}</footer>
-            </blockquote>
-          ))
-        }
+              ubicacion.map((u) => (
+                <li class="flex items-start gap-3">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#35565a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0" aria-hidden="true">
+                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z" />
+                    <circle cx="12" cy="10" r="3" />
+                  </svg>
+                  <span class="font-medium">{u}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
       </div>
+      <iframe
+        src="https://www.google.com/maps?q=San+Cayetano,+Norte+de+Santander,+Colombia&z=13&output=embed"
+        title="Mapa de la urbanización Miravista en San Cayetano, Cúcuta"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        class="mt-10 h-72 w-full rounded-2xl border-0 md:h-96"
+        allowfullscreen
+      ></iframe>
     </div>
   </section>
 
-  <!-- LO QUE INCLUYE + RESUMEN DE VALOR -->
+  <!-- LO QUE INCLUYE -->
   <section class="bg-white py-16 md:py-24" id="incluye">
     <div class="container-site grid gap-12 md:grid-cols-[7fr_5fr]">
       <div>
@@ -257,70 +277,141 @@ const schema = [
             ))
           }
         </ul>
-        <a href={wa('Hola, quiero saber precios y disponibilidad de los lotes en San Cayetano.')} target="_blank" rel="noopener" class="btn-primary mt-6 w-full" data-event="whatsapp-click">
+        <a href={wa('Hola, quiero saber precios y disponibilidad de los lotes en San Cayetano.')} target="_blank" rel="noopener" class="btn-primary mt-6 flex w-full justify-center" data-event="whatsapp-click">
           Pregunta precio y disponibilidad
         </a>
       </aside>
     </div>
   </section>
 
-  <!-- RENDER + UBICACIÓN -->
-  <section class="py-16 md:py-24">
-    <div class="container-site">
-      <div class="grid items-center gap-10 md:grid-cols-[6fr_6fr]">
-        <img
-          src={renderMid}
-          alt="Render aéreo de la urbanización Miravista en San Cayetano, Cúcuta"
-          loading="lazy"
-          class="w-full rounded-2xl"
-        />
-        <div>
-          <p class="eyebrow text-teal">Ubicación</p>
-          <h2 class="display-lg mt-3 text-3xl md:text-4xl">
-            Estás comprando del lado por donde crece Cúcuta
-          </h2>
-          <ul class="mt-7 space-y-4">
-            {
-              ubicacion.map((u) => (
-                <li class="flex items-start gap-3">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#35565a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0" aria-hidden="true">
-                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z" />
-                    <circle cx="12" cy="10" r="3" />
-                  </svg>
-                  <span class="font-medium">{u}</span>
-                </li>
-              ))
-            }
-          </ul>
-          <!-- TODO: video general 30 s (dron + render + comunidad) cuando llegue de Drive -->
-        </div>
-      </div>
-      <iframe
-        src="https://www.google.com/maps?q=San+Cayetano,+Norte+de+Santander,+Colombia&z=13&output=embed"
-        title="Mapa de la urbanización Miravista en San Cayetano, Cúcuta"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        class="mt-10 h-72 w-full rounded-2xl border-0 md:h-96"
-        allowfullscreen
-      ></iframe>
-    </div>
-  </section>
-
-  <!-- GALERÍA: así avanza la urbanización (equivalente a la galería de la LP base) -->
+  <!-- GALERIA -->
   <section class="bg-white py-16 md:py-24">
     <div class="container-site">
       <p class="eyebrow text-teal">La urbanización</p>
       <h2 class="display-lg mt-3 max-w-xl text-3xl md:text-4xl">Así avanza Miravista</h2>
-      <div class="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        <img src={renderMid} alt="Render aéreo de la glorieta de entrada de Miravista" loading="lazy" class="aspect-[4/3] w-full rounded-2xl object-cover" />
-        <!-- TODO: fotos reales del avance de obra (Drive) -->
-        <div class="flex aspect-[4/3] items-end rounded-2xl bg-plum p-5" style="background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 14px);">
-          <span class="font-bold text-white/85">Vías y andenes en pavimentación</span>
+      <div class="relative mt-8" data-carousel-root>
+        <div
+          data-carousel-track
+          class="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth"
+          style="scrollbar-width: none; -ms-overflow-style: none;"
+        >
+          {[
+            { src: renderMid, alt: 'Render aéreo de la glorieta de entrada de Miravista' },
+            { src: imagen1,   alt: 'Vista de la urbanización Miravista' },
+            ...galeria.map((src, i) => ({ src, alt: `Avance de la urbanización Miravista ${i + 1}` })),
+          ].map(({ src, alt }) => (
+            <img
+              src={src}
+              alt={alt}
+              loading="lazy"
+              class="w-[85%] shrink-0 snap-start rounded-2xl object-cover sm:w-[55%] lg:w-[38%]"
+              style="aspect-ratio:4/3"
+            />
+          ))}
         </div>
-        <div class="flex aspect-[4/3] items-end rounded-2xl bg-plum p-5" style="background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 14px);">
-          <span class="font-bold text-white/85">Redes de servicios públicos en instalación</span>
+        <GalleryCarousel />
+      </div>
+      <div data-carousel-dots class="mt-5 flex items-center justify-center gap-2"></div>
+    </div>
+  </section>
+
+  <!-- ENTRAR AHORA + EXTERIOR -->
+  <section class="py-16 md:py-24">
+    <div class="container-site grid gap-10 md:grid-cols-[7fr_5fr] md:items-center">
+      <div>
+        <p class="display-lg text-2xl text-plum md:text-3xl">Entrar ahora es entrar a tiempo.</p>
+        <p class="mt-5 max-w-prose leading-relaxed text-ink/75">
+          San Cayetano está creciendo. La futura Universidad Simón Bolívar queda a 100 metros de
+          la urbanización. La tierra de hoy no va a costar lo mismo mañana.
+        </p>
+        <p class="mt-4 max-w-prose leading-relaxed text-ink/75">
+          Y si vives fuera del país, puedes invertir desde donde estés: te acompañamos en cada
+          paso del proceso.
+        </p>
+      </div>
+      <a href={wa('Hola, vivo fuera de Colombia y quiero invertir en un lote de Mi Lote en Cúcuta.')} target="_blank" rel="noopener" class="btn-primary justify-self-start md:justify-self-end" data-event="whatsapp-click">
+        Invierto desde el exterior
+      </a>
+    </div>
+  </section>
+
+  <!-- TESTIMONIOS EN VIDEO -->
+  <section class="bg-white py-16 md:py-24">
+    <div class="container-site grid items-center gap-10 md:grid-cols-[5fr_7fr]">
+      <div>
+        <p class="eyebrow text-teal">Testimonios</p>
+        <h2 class="display-lg mt-3 text-3xl md:text-4xl">Ellos ya dieron el paso</h2>
+        <p class="mt-4 max-w-prose leading-relaxed text-ink/75">
+          Personas que trabajaron años sin tener nada a su nombre y hoy pagan su propiedad
+          directo con la constructora. Dale play y escúchalos.
+        </p>
+      </div>
+      <div class="mx-auto w-full max-w-xs">
+        <div class="relative overflow-hidden rounded-2xl bg-plum-dark">
+          <video
+            id="video-testimonio"
+            src="/videos/testimonios.mp4"
+            class="w-full object-cover" style="aspect-ratio:9/16"
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          ></video>
+          <button
+            id="video-audio-toggle"
+            type="button"
+            class="absolute right-4 bottom-4 flex h-12 w-12 items-center justify-center rounded-full bg-black/60 text-white"
+            aria-label="Activar sonido"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M11 5 6 9H2v6h4l5 4V5ZM23 9l-6 6M17 9l6 6" />
+            </svg>
+          </button>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- COMENTARIOS -->
+  <section class="py-16 md:py-24">
+    <div class="container-site">
+      <p class="eyebrow text-teal">Comentarios</p>
+      <h2 class="display-lg mt-3 max-w-xl text-3xl md:text-4xl">Lo que dicen quienes ya compraron</h2>
+      <div class="relative mt-8" data-carousel-root>
+        <div
+          data-carousel-track
+          class="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth"
+          style="scrollbar-width: none; -ms-overflow-style: none;"
+        >
+          {
+            [
+              {
+                quote: 'Compré mi lote desde Estados Unidos. Todo el proceso fue por videollamada y los documentos llegaron en regla.',
+                autor: 'Inversionista, vive en EE. UU.',
+              },
+              {
+                quote: 'Lo que me convenció fue que no hay letra pequeña: cuota fija, sin intereses, y la escritura queda a mi nombre.',
+                autor: 'Comprador en San Cayetano',
+              },
+              {
+                quote: 'Nunca había podido comprar nada porque estaba reportado. Aquí nadie me pidió puntaje de crédito.',
+                autor: 'Comprador en Cúcuta',
+              },
+              {
+                quote: 'Llevaba años pagando arriendo y pensando que sin crédito nunca iba a tener nada. Hoy tengo tierra propia.',
+                autor: 'Propietaria, Norte de Santander',
+              },
+            ].map((c) => (
+              <blockquote class="min-w-[85%] snap-start rounded-2xl border-l-2 border-gold bg-white p-6 sm:min-w-[45%] lg:min-w-[30%]">
+                <p class="leading-relaxed text-ink/85">"{c.quote}"</p>
+                <footer class="mt-4 text-sm font-bold text-teal">{c.autor}</footer>
+              </blockquote>
+            ))
+          }
+        </div>
+        <GalleryCarousel />
+      </div>
+      <div data-carousel-dots class="mt-5 flex items-center justify-center gap-2"></div>
     </div>
   </section>
 
@@ -348,54 +439,22 @@ const schema = [
     </div>
   </section>
 
-  <!-- DESDE EL EXTERIOR -->
-  <section class="py-16 md:py-24">
-    <div class="container-site grid gap-10 md:grid-cols-[7fr_5fr] md:items-center">
+  <!-- OFICINAS -->
+  <section class="py-14 md:py-20">
+    <div class="container-site flex flex-wrap items-center justify-between gap-6">
       <div>
-        <p class="eyebrow text-teal">Para colombianos en el exterior</p>
-        <h2 class="display-lg mt-3 text-3xl md:text-4xl">
-          ¿Vives fuera del país? Puedes invertir desde donde estés
-        </h2>
-        <p class="mt-5 max-w-prose leading-relaxed text-ink/75">
-          Muchos de nuestros propietarios compraron su lote desde Estados Unidos o España.
-          Todo el proceso se hace por videollamada, con documentos digitales y, si lo
-          prefieres, un apoderado de tu confianza. Te acompañamos en cada paso.
-        </p>
+        <p class="eyebrow text-teal">Visítanos</p>
+        <h2 class="display-lg mt-2 text-2xl md:text-3xl">Conoce nuestras oficinas</h2>
+        <p class="mt-2 text-ink/75">San Cayetano, Cúcuta. Te esperamos.</p>
       </div>
-      <a href={wa('Hola, vivo fuera de Colombia y quiero invertir en un lote de Mi Lote en Cúcuta.')} target="_blank" rel="noopener" class="btn-primary justify-self-start md:justify-self-end" data-event="whatsapp-click">
-        Invierto desde el exterior
+      <a href="https://maps.app.goo.gl/jhAWKJDp7szhNFQs7" target="_blank" rel="noopener" class="btn-primary" data-event="maps-click">
+        Ver en Google Maps
       </a>
     </div>
   </section>
 
-  <!-- RESPALDO -->
-  <section class="bg-white py-16 md:py-24">
-    <div class="container-site grid gap-10 md:grid-cols-3">
-      <div class="md:col-span-1">
-        <p class="eyebrow text-teal">El respaldo</p>
-        <h2 class="display-lg mt-3 text-3xl">Detrás de Mi Lote está Grupo Mizar</h2>
-        <a href="/nosotros" class="mt-5 inline-block font-bold text-mizar hover:underline">Conoce nuestra historia →</a>
-      </div>
-      <div class="grid grid-cols-2 gap-8 md:col-span-2">
-        <div>
-          <p class="stat-num text-5xl text-plum">20<span class="text-mizar">+</span></p>
-          <p class="mt-1 text-sm font-semibold tracking-wider text-ink/60 uppercase">Años construyendo en Colombia</p>
-        </div>
-        <div>
-          <p class="stat-num text-5xl text-plum">100<span class="text-mizar">+</span></p>
-          <p class="mt-1 text-sm font-semibold tracking-wider text-ink/60 uppercase">Obras entregadas</p>
-        </div>
-        <p class="col-span-2 max-w-prose text-ink/75">
-          Somos una empresa familiar de ingenieros santandereanos. Respondemos con nombre
-          propio por cada obra que entregamos, desde parques públicos premiados hasta la
-          urbanización más grande de San Cayetano.
-        </p>
-      </div>
-    </div>
-  </section>
-
   <!-- FAQ -->
-  <section class="py-16 md:py-24" id="faq">
+  <section class="bg-white py-16 md:py-24" id="faq">
     <div class="container-site max-w-3xl">
       <p class="eyebrow text-teal">Preguntas frecuentes</p>
       <h2 class="display-lg mt-3 text-3xl md:text-4xl">Lo que todos preguntan antes de decidir</h2>
@@ -414,9 +473,6 @@ const schema = [
           Agenda tu visita y conoce el sector acompañado de nuestro equipo. Si estás lejos,
           resolvemos todo por teléfono o videollamada.
         </p>
-        <a href="https://maps.app.goo.gl/jhAWKJDp7szhNFQs7" target="_blank" rel="noopener" class="btn-outline mt-7 text-white">
-          Conocer nuestras oficinas
-        </a>
       </div>
 
       <form id="form-milote" class="w-full max-w-md rounded-2xl border border-white/15 bg-black/45 p-6 backdrop-blur-md md:justify-self-end md:p-7" data-event="form-submit">
@@ -439,19 +495,22 @@ const schema = [
 </Base>
 
 <script>
-  // Video testimonial: reproducir al entrar en pantalla, toggle de audio
-  const video = document.getElementById('video-testimonio') as HTMLVideoElement | null;
-  const audioBtn = document.getElementById('video-audio-toggle');
-  if (video) {
+  function setupVideo(videoId: string, btnId: string) {
+    const v = document.getElementById(videoId) as HTMLVideoElement | null;
+    const btn = document.getElementById(btnId);
+    if (!v) return;
     new IntersectionObserver(
-      ([e]) => (e.isIntersecting ? video.play().catch(() => {}) : video.pause()),
+      ([e]) => (e.isIntersecting ? v.play().catch(() => {}) : v.pause()),
       { threshold: 0.4 },
-    ).observe(video);
-    audioBtn?.addEventListener('click', () => {
-      video.muted = !video.muted;
-      audioBtn.setAttribute('aria-label', video.muted ? 'Activar sonido' : 'Silenciar');
+    ).observe(v);
+    btn?.addEventListener('click', () => {
+      v.muted = !v.muted;
+      btn.setAttribute('aria-label', v.muted ? 'Activar sonido' : 'Silenciar');
     });
   }
+
+  setupVideo('video-testimonio', 'video-audio-toggle');
+  setupVideo('video-recorrido', 'recorrido-audio-toggle');
 
   const form = document.getElementById('form-milote') as HTMLFormElement | null;
   form?.addEventListener('submit', (e) => {

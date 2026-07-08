@@ -69,40 +69,44 @@ export default function ProyectoSelector({ items, singleRow = false }) {
           ))}
         </div>
       ) : (
-        <div className="mb-8 flex flex-col gap-3">
-          <div
-            className="flex flex-nowrap gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible sm:pb-0"
-            style={{ scrollbarWidth: 'thin' }}
-            role="group"
-            aria-label="Filtrar por tipo"
-          >
-            {TIPOS.map((t) => (
-              <button
-                key={t.id}
-                type="button"
-                className={`${chip(tipo === t.id)} shrink-0`}
-                onClick={() => setTipo(t.id)}
-              >
-                {t.label}
-              </button>
-            ))}
+        <div className="mb-8 flex flex-col gap-4">
+          <div>
+            <p className="mb-2 text-xs font-bold uppercase tracking-widest text-ink/50">¿Qué buscas?</p>
+            <div
+              className="flex flex-wrap gap-2"
+              role="group"
+              aria-label="Filtrar por tipo"
+            >
+              {TIPOS.map((t) => (
+                <button
+                  key={t.id}
+                  type="button"
+                  className={`${chip(tipo === t.id)} shrink-0`}
+                  onClick={() => setTipo(t.id)}
+                >
+                  {t.label}
+                </button>
+              ))}
+            </div>
           </div>
-          <div
-            className="flex flex-nowrap gap-2 overflow-x-auto pb-1 sm:flex-wrap sm:overflow-visible sm:pb-0"
-            style={{ scrollbarWidth: 'thin' }}
-            role="group"
-            aria-label="Filtrar por propósito"
-          >
-            {PROPOSITOS.map((p) => (
-              <button
-                key={p.id}
-                type="button"
-                className={`${chip(proposito === p.id)} shrink-0`}
-                onClick={() => setProposito(p.id)}
-              >
-                {p.label}
-              </button>
-            ))}
+          <div>
+            <p className="mb-2 text-xs font-bold uppercase tracking-widest text-ink/50">¿Para qué?</p>
+            <div
+              className="flex flex-wrap gap-2"
+              role="group"
+              aria-label="Filtrar por propósito"
+            >
+              {PROPOSITOS.map((p) => (
+                <button
+                  key={p.id}
+                  type="button"
+                  className={`${chip(proposito === p.id)} shrink-0`}
+                  onClick={() => setProposito(p.id)}
+                >
+                  {p.label}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       )}

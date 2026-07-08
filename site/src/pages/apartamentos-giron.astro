@@ -2,6 +2,7 @@
 import { getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import FaqAccordion from '../components/proyectos/FaqAccordion.astro';
+import GalleryCarousel from '../components/GalleryCarousel.astro';
 import { WHATSAPP_GENERAL } from '../data/proyectos';
 import renderGiron from '../assets/proyectos/giron.png';
 
@@ -135,18 +136,26 @@ const schema = [
     <div class="container-site">
       <p class="eyebrow text-teal">Comentarios</p>
       <h2 class="display-lg mt-3 max-w-xl text-3xl md:text-4xl">Lo que dicen nuestros clientes</h2>
-      <div class="mt-8 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4" style="scrollbar-width: thin;">
-        {[
-          { quote: 'Sus diseños son super lindo y cómodos 💖✨', autor: 'Erika R.' },
-          { quote: 'Muy buena experiencia, especialmente para quienes vivimos fuera del país y queremos invertir en nuestra tierra.', autor: 'Paula L.' },
-          { quote: 'Desde el primer contacto me atendieron súper bien. Se nota el compromiso y la seriedad con los clientes.', autor: 'Maura D.' },
-        ].map((c) => (
-          <blockquote class="min-w-[85%] snap-start rounded-2xl border-l-2 border-gold bg-white p-6 sm:min-w-[45%] lg:min-w-[30%]">
-            <p class="leading-relaxed text-ink/85">“{c.quote}”</p>
-            <footer class="mt-4 text-sm font-bold text-teal">{c.autor}</footer>
-          </blockquote>
-        ))}
+      <div class="relative mt-8" data-carousel-root>
+        <div
+          data-carousel-track
+          class="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth"
+          style="scrollbar-width: none; -ms-overflow-style: none;"
+        >
+          {[
+            { quote: 'Sus diseños son super lindo y cómodos 💖✨', autor: 'Erika R.' },
+            { quote: 'Muy buena experiencia, especialmente para quienes vivimos fuera del país y queremos invertir en nuestra tierra.', autor: 'Paula L.' },
+            { quote: 'Desde el primer contacto me atendieron súper bien. Se nota el compromiso y la seriedad con los clientes.', autor: 'Maura D.' },
+          ].map((c) => (
+            <blockquote class="min-w-[85%] snap-start rounded-2xl border-l-2 border-gold bg-white p-6 sm:min-w-[45%] lg:min-w-[30%]">
+              <p class="leading-relaxed text-ink/85">"{c.quote}"</p>
+              <footer class="mt-4 text-sm font-bold text-teal">{c.autor}</footer>
+            </blockquote>
+          ))}
+        </div>
+        <GalleryCarousel />
       </div>
+      <div data-carousel-dots class="mt-5 flex items-center justify-center gap-2"></div>
     </div>
   </section>
 

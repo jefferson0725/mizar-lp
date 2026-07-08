@@ -2,6 +2,7 @@
 import { getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import FaqAccordion from '../components/proyectos/FaqAccordion.astro';
+import GalleryCarousel from '../components/GalleryCarousel.astro';
 import { WHATSAPP_GENERAL } from '../data/proyectos';
 import renderPiedecuesta from '../assets/proyectos/piedecuesta.png';
 
@@ -123,7 +124,32 @@ const schema = [
   </section>
 
   <!-- TODO: reemplazar por comentarios reales de compradores de Terrazas de la Cantera -->
-  <section class="py-16 md:py-24"><div class="container-site"><p class="eyebrow text-teal">Comentarios</p><h2 class="display-lg mt-3 max-w-xl text-3xl md:text-4xl">Lo que dicen quienes ya compraron</h2><div class="mt-8 flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4" style="scrollbar-width: thin;">{[{ quote: 'Me interesó porque está en el centro de Piedecuesta y puedo pagar directo con Mizar, sin bancos.', autor: 'Comprador en Santander' }, { quote: 'Vivo fuera de Colombia y pude avanzar por videollamada. La ubicación frente al cerro me dio mucha confianza.', autor: 'Colombiana en el exterior' }, { quote: 'Lo que me gustó fue tener acabados, parqueadero en sótano y una cuota clara desde el principio.', autor: 'Comprador de apartamento' }].map((c) => <blockquote class="min-w-[85%] snap-start rounded-2xl border-l-2 border-gold bg-white p-6 sm:min-w-[45%] lg:min-w-[30%]"><p class="leading-relaxed text-ink/85">“{c.quote}”</p><footer class="mt-4 text-sm font-bold text-teal">{c.autor}</footer></blockquote>)}</div></div></section>
+  <section class="py-16 md:py-24">
+    <div class="container-site">
+      <p class="eyebrow text-teal">Comentarios</p>
+      <h2 class="display-lg mt-3 max-w-xl text-3xl md:text-4xl">Lo que dicen quienes ya compraron</h2>
+      <div class="relative mt-8" data-carousel-root>
+        <div
+          data-carousel-track
+          class="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth"
+          style="scrollbar-width: none; -ms-overflow-style: none;"
+        >
+          {[
+            { quote: 'Me interesó porque está en el centro de Piedecuesta y puedo pagar directo con Mizar, sin bancos.', autor: 'Comprador en Santander' },
+            { quote: 'Vivo fuera de Colombia y pude avanzar por videollamada. La ubicación frente al cerro me dio mucha confianza.', autor: 'Colombiana en el exterior' },
+            { quote: 'Lo que me gustó fue tener acabados, parqueadero en sótano y una cuota clara desde el principio.', autor: 'Comprador de apartamento' },
+          ].map((c) => (
+            <blockquote class="min-w-[85%] snap-start rounded-2xl border-l-2 border-gold bg-white p-6 sm:min-w-[45%] lg:min-w-[30%]">
+              <p class="leading-relaxed text-ink/85">"{c.quote}"</p>
+              <footer class="mt-4 text-sm font-bold text-teal">{c.autor}</footer>
+            </blockquote>
+          ))}
+        </div>
+        <GalleryCarousel />
+      </div>
+      <div data-carousel-dots class="mt-5 flex items-center justify-center gap-2"></div>
+    </div>
+  </section>
 
   <section class="bg-white py-16 md:py-24" id="incluye"><div class="container-site grid gap-12 md:grid-cols-[7fr_5fr]"><div><p class="eyebrow text-teal">Sin letra pequeña</p><h2 class="display-lg mt-3 text-3xl md:text-4xl">Lo que incluye tu apartamento</h2><ul class="mt-8 space-y-4">{incluye.map((item) => <li class="flex items-start gap-3 border-b border-ink/10 pb-4"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d9a441" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0" aria-hidden="true"><path d="M20 6 9 17l-5-5" /></svg><span class="font-medium">{item}</span></li>)}</ul></div><aside class="h-fit rounded-2xl bg-plum p-7 text-white md:sticky md:top-24"><p class="eyebrow text-gold">En resumen</p><ul class="mt-5 divide-y divide-white/10">{resumen.map((r) => <li class="flex items-baseline justify-between gap-4 py-3.5"><span class="text-sm text-white/80">{r.label}</span><span class="shrink-0 font-extrabold text-gold">{r.valor}</span></li>)}</ul><a href={wa('Hola, quiero saber precios y disponibilidad de Terrazas de la Cantera en Piedecuesta.')} target="_blank" rel="noopener" class="btn-primary mt-6 w-full" data-event="whatsapp-click">Pregunta precio y disponibilidad</a></aside></div></section>
 
