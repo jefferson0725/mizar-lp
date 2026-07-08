@@ -1,0 +1,11 @@
+[phases.setup]
+nixPkgs = ["nodejs_20"]
+
+[phases.install]
+cmds = ["cd site && npm ci"]
+
+[phases.build]
+cmds = ["cd site && npm run build"]
+
+[start]
+cmd = "npx --yes serve site/dist -l 3000"
