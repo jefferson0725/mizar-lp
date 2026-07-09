@@ -18,6 +18,7 @@ const isActive = (href: string) =>
 <header
   class="fixed inset-x-0 top-0 z-50 bg-transparent text-white transition-colors duration-300"
   data-header
+  data-transparent={transparent}
 >
   <div class="container-site flex h-16 items-center justify-between gap-4">
     <a href="/" class="flex items-center" aria-label="Grupo Mizar — Inicio">
@@ -79,18 +80,29 @@ const isActive = (href: string) =>
   const toggle = document.getElementById('menu-toggle');
   const menu = document.getElementById('mobile-menu');
   const header = document.querySelector<HTMLElement>('[data-header]');
+  const isTransparent = header?.dataset.transparent === 'true';
   let menuOpen = false;
   let hovered = false;
 
   function syncHeaderBg() {
     if (!header) return;
-    const solid = window.scrollY > 24 || menuOpen || hovered;
+    const solid = !isTransparent || window.scrollY > 24 || menuOpen || hovered;
     header.classList.toggle('bg-plum', solid);
     header.classList.toggle('shadow-lg', solid);
     header.classList.toggle('bg-transparent', !solid);
   }
 
+  function syncInstant() {
+    if (!header) return;
+    header.style.transition = 'none';
+    syncHeaderBg();
+    requestAnimationFrame(() => { header.style.transition = ''; });
+  }
+
   window.addEventListener('scroll', syncHeaderBg, { passive: true });
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') syncInstant();
+  });
   header?.addEventListener('mouseenter', () => { hovered = true; syncHeaderBg(); });
   header?.addEventListener('mouseleave', () => { hovered = false; syncHeaderBg(); });
 
@@ -100,5 +112,5 @@ const isActive = (href: string) =>
     syncHeaderBg();
   });
 
-  syncHeaderBg();
+  syncInstant();
 </script>
