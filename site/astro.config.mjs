@@ -13,7 +13,10 @@ export default defineConfig({
     plugins: [tailwindcss()],
     server: {
       allowedHosts: ['.trycloudflare.com', '.loca.lt']
-    }
+    },
+    optimizeDeps: {
+      exclude: ['react/jsx-dev-runtime'],
+    },
   },
 
   integrations: [react(), sitemap()]

@@ -1,6 +1,5 @@
 ---
 interface Props {
-  /** Header flotante y transparente sobre el hero (gana fondo al hacer scroll) */
   transparent?: boolean;
 }
 const { transparent = false } = Astro.props;
@@ -17,14 +16,8 @@ const isActive = (href: string) =>
 ---
 
 <header
-  class:list={[
-    'top-0 z-50 text-white',
-    transparent
-      ? 'fixed inset-x-0 bg-transparent transition-colors duration-300'
-      : 'sticky bg-plum shadow-lg',
-  ]}
+  class="fixed inset-x-0 top-0 z-50 bg-transparent text-white transition-colors duration-300"
   data-header
-  data-transparent={transparent ? 'true' : undefined}
 >
   <div class="container-site flex h-16 items-center justify-between gap-4">
     <a href="/" class="flex items-center" aria-label="Grupo Mizar — Inicio">
@@ -87,24 +80,25 @@ const isActive = (href: string) =>
   const menu = document.getElementById('mobile-menu');
   const header = document.querySelector<HTMLElement>('[data-header]');
   let menuOpen = false;
+  let hovered = false;
 
-  // Variante transparente: fondo sólido al hacer scroll o con el menú abierto
-  const isTransparent = header?.dataset.transparent === 'true';
   function syncHeaderBg() {
-    if (!header || !isTransparent) return;
-    const solid = window.scrollY > 24 || menuOpen;
+    if (!header) return;
+    const solid = window.scrollY > 24 || menuOpen || hovered;
     header.classList.toggle('bg-plum', solid);
     header.classList.toggle('shadow-lg', solid);
     header.classList.toggle('bg-transparent', !solid);
   }
-  if (isTransparent) {
-    window.addEventListener('scroll', syncHeaderBg, { passive: true });
-    syncHeaderBg();
-  }
+
+  window.addEventListener('scroll', syncHeaderBg, { passive: true });
+  header?.addEventListener('mouseenter', () => { hovered = true; syncHeaderBg(); });
+  header?.addEventListener('mouseleave', () => { hovered = false; syncHeaderBg(); });
 
   toggle?.addEventListener('click', () => {
     menuOpen = menu?.classList.toggle('hidden') === false;
     toggle.setAttribute('aria-expanded', String(menuOpen));
     syncHeaderBg();
   });
+
+  syncHeaderBg();
 </script>

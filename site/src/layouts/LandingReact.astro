@@ -10,9 +10,11 @@ interface Props {
   description: string;
   ogImage: string;
   path: string;
+  headerColor?: string;
+  headerColorDark?: string;
 }
 
-const { title, description, ogImage, path } = Astro.props;
+const { title, description, ogImage, path, headerColor = '#22484c', headerColorDark = '#17333a' } = Astro.props;
 const canonical = new URL(path, Astro.site).href;
 ---
 
@@ -37,10 +39,11 @@ const canonical = new URL(path, Astro.site).href;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=DM+Sans:wght@400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=DM+Sans:wght@400;500;600&family=Archivo:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <title>{title}</title>
+    <style set:html={`:root{--color-plum:${headerColor};--color-plum-dark:${headerColorDark};}`}></style>
     <script is:inline type="text/javascript">
       (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -50,6 +53,19 @@ const canonical = new URL(path, Astro.site).href;
     </script>
     <Analytics />
   </head>
+  <style is:global>
+    /* Restaura los tokens del sitio principal en el header */
+    [data-header] {
+      --color-gold: #e0b973 !important;
+      --color-mizar: #d72b47 !important;
+      --color-teal: #1e3a5f !important;
+      --color-ink: #1e2b2e !important;
+      font-family: "Archivo", ui-sans-serif, system-ui, sans-serif !important;
+    }
+    [data-header] a, [data-header] button, [data-header] nav {
+      font-family: "Archivo", ui-sans-serif, system-ui, sans-serif !important;
+    }
+  </style>
   <body>
     <slot />
   </body>

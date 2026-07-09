@@ -1,5 +1,6 @@
 ---
 import LandingReact from "../layouts/LandingReact.astro";
+import Header from "../components/Header.astro";
 import IntroParallax from "../landing/terrazas/IntroParallax.astro";
 import Testimonios from "../landing/terrazas/Testimonios.astro";
 import Comentarios from "../landing/terrazas/Comentarios.astro";
@@ -19,7 +20,10 @@ import WhatsAppFloat from "../components/WhatsAppFloat.astro";
   description="Apartamentos propios en Piedecuesta con vista al Cerro de La Cantera. Sin bancos y a cuotas, directo con Mizar. 60 m², 3 alcobas. Entrega diciembre 2027."
   ogImage="/assets/terrazas-fachada.webp"
   path="/terrazas"
+  headerColor="#025362"
+  headerColorDark="#013a45"
 >
+  <Header transparent />
   <!-- .theme-terrazas sobreescribe los tokens CSS (navy → teal, rojo → lima) -->
   <div class="theme-terrazas">
     <IntroParallax />

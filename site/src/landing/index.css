@@ -1,4 +1,28 @@
 @import "tailwindcss" source(".");
+@source "../components/Header.astro";
+
+@utility container-site {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 74rem;
+  padding-inline: 1.25rem;
+}
+
+@utility btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  background-color: var(--color-mizar);
+  padding: 0.8rem 1.75rem;
+  font-weight: 700;
+  color: white;
+  transition: background-color 150ms ease;
+  &:hover {
+    background-color: var(--color-mizar-dark);
+  }
+}
 
 /* ===================================================================
    PALETA REAL MIZAR · Diseño y Construcción
@@ -25,6 +49,10 @@
 
   /* Dorado discreto (solo detalle de plusvalía) */
   --color-dorado: #c8933a;
+
+  /* Token para el Header.astro (bg-plum / bg-plum-dark) */
+  --color-plum: #22484c;
+  --color-plum-dark: #17333a;
 
   /* Tipografía */
   --font-serif: "Fraunces", "Playfair Display", Georgia, serif;

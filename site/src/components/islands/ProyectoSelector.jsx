@@ -56,17 +56,6 @@ export default function ProyectoSelector({ items, singleRow = false }) {
               {t.label}
             </button>
           ))}
-          <span className="mx-1 hidden h-6 w-px shrink-0 self-center bg-ink/15 lg:block" aria-hidden="true" />
-          {PROPOSITOS.map((p) => (
-            <button
-              key={p.id}
-              type="button"
-              className={`${chip(proposito === p.id)} shrink-0`}
-              onClick={() => setProposito(p.id)}
-            >
-              {p.label}
-            </button>
-          ))}
         </div>
       ) : (
         <div className="mb-8 flex flex-col gap-4">
@@ -85,25 +74,6 @@ export default function ProyectoSelector({ items, singleRow = false }) {
                   onClick={() => setTipo(t.id)}
                 >
                   {t.label}
-                </button>
-              ))}
-            </div>
-          </div>
-          <div>
-            <p className="mb-2 text-xs font-bold uppercase tracking-widest text-ink/50">¿Para qué?</p>
-            <div
-              className="flex flex-wrap gap-2"
-              role="group"
-              aria-label="Filtrar por propósito"
-            >
-              {PROPOSITOS.map((p) => (
-                <button
-                  key={p.id}
-                  type="button"
-                  className={`${chip(proposito === p.id)} shrink-0`}
-                  onClick={() => setProposito(p.id)}
-                >
-                  {p.label}
                 </button>
               ))}
             </div>

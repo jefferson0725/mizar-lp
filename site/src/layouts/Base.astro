@@ -93,7 +93,7 @@ const orgSchema = {
   </head>
   <body>
     <Header transparent={headerTransparent} />
-    <main>
+    <main class:list={[!headerTransparent && 'pt-16']}>
       <slot />
     </main>
     <Footer />
