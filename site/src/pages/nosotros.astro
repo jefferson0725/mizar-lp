@@ -4,6 +4,8 @@ import Base from '../layouts/Base.astro';
 import equipoImg from '../assets/equipo.jpg';
 import GaleriaProyectos from '../components/nosotros/GaleriaProyectos.astro';
 import LogosEntidades from '../components/nosotros/LogosEntidades.astro';
+import ProyectoCard from '../components/proyectos/ProyectoCard.astro';
+import { proyectos } from '../data/proyectos';
 
 const equipo = [
   { nombre: 'Claudia Villamizar', rol: 'Gerencia General' },
@@ -179,6 +181,17 @@ const schema = {
           ))
         }
       </div>
+      <!-- PROYECTOS -->
+      <div class="mt-14">
+        <p class="eyebrow text-teal">Proyectos disponibles</p>
+        <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {proyectos.map((p) => <ProyectoCard proyecto={p} />)}
+        </div>
+        <div class="mt-8 text-center">
+          <a href="/proyectos" class="btn-primary">Ver todos los proyectos</a>
+        </div>
+      </div>
+
       <LogosEntidades />
     </div>
   </section>

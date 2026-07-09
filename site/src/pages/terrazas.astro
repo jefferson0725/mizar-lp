@@ -13,6 +13,8 @@ import Resumen from "../landing/terrazas/Resumen.astro";
 import Contacto from "../landing/terrazas/Contacto.astro";
 import TerrazasFooter from "../landing/terrazas/Footer.astro";
 import WhatsAppFloat from "../components/WhatsAppFloat.astro";
+import { getWhatsAppConfig } from "../data/whatsapp";
+const wa = getWhatsAppConfig('/terrazas');
 ---
 
 <LandingReact
@@ -37,10 +39,7 @@ import WhatsAppFloat from "../components/WhatsAppFloat.astro";
     <Resumen />
     <Contacto />
     <TerrazasFooter />
-    <WhatsAppFloat
-      phone="573112658552"
-      message="Me interesan los apartamentos de Terrazas de la Cantera, mi nombre es"
-    />
+    <WhatsAppFloat phone={wa.phone} message={wa.message} />
   </div>
 </LandingReact>
 

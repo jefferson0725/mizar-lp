@@ -5,28 +5,47 @@ const modules = import.meta.glob<{ default: ImageMetadata }>(
   '../../assets/nosotros/logos/*.{png,jpg,jpeg,webp}',
   { eager: true },
 );
-const logos = Object.entries(modules).map(([path, mod]) => ({
-  src: mod.default,
-  alt: `Logo de entidad con la que ha trabajado Grupo Mizar: ${path.split('/').pop()!.replace(/.[^.]+$/, '').replace(/[-_]/g, ' ')}`,
-}));
+const logos = Object.entries(modules)
+  .filter(([p]) => !p.includes('LEEME'))
+  .map(([path, mod]) => ({
+    src: mod.default,
+    alt: path.split('/').pop()!.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' '),
+  }));
 ---
 
 {
   logos.length > 0 && (
-    <div class="mt-10">
+    <div class="mt-14">
       <p class="eyebrow text-teal">Entidades con las que hemos trabajado</p>
-      <div class="mt-5 flex flex-wrap items-center gap-x-10 gap-y-6">
-        {logos.map((logo) => (
-          <Image
-            src={logo.src}
-            alt={logo.alt}
-            width={140}
-            format="webp"
-            loading="lazy"
-            class="h-10 w-auto object-contain grayscale transition-all hover:grayscale-0"
-          />
-        ))}
+      <div class="relative mt-8 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_8%,black_92%,transparent)]">
+        <div class="flex w-max animate-marquee items-center gap-16 hover:[animation-play-state:paused]">
+          {[...logos, ...logos].map((logo, i) => (
+            <div class="flex shrink-0 items-center justify-center" style="width:220px;height:130px">
+              <Image
+                src={logo.src}
+                alt={logo.alt}
+                width={200}
+                format="webp"
+                loading="lazy"
+                class="max-h-28 w-auto max-w-[200px] object-contain transition-opacity duration-300 hover:opacity-80"
+              />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
 }
+
+<style>
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .animate-marquee {
+    animation: marquee 32s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-marquee { animation: none; flex-wrap: wrap; }
+  }
+</style>

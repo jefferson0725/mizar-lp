@@ -24,16 +24,16 @@ const fotos = Object.entries(modules).map(([path, mod]) => ({
             style="scrollbar-width: none; -ms-overflow-style: none;"
           >
             {fotos.map((foto) => (
-              <div class="min-w-[85%] snap-start overflow-hidden rounded-2xl sm:min-w-[45%] lg:min-w-[30%]">
+              <div class="min-w-[100%] snap-start overflow-hidden rounded-2xl sm:min-w-[90%] lg:min-w-[72%]">
                 <Image
                   src={foto.src}
                   alt={foto.alt}
-                  widths={[400, 700]}
-                  sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 85vw"
+                  widths={[800, 1400, 2000]}
+                  sizes="(min-width: 1024px) 72vw, 95vw"
                   format="webp"
                   loading="lazy"
-                  class="h-full w-full object-cover"
-                  style="aspect-ratio:4/3"
+                  class="h-auto w-full"
+                  style="aspect-ratio:16/9;object-fit:contain;background:#f0f0f0"
                 />
               </div>
             ))}

@@ -3,6 +3,7 @@ import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+import { getWhatsAppConfig } from '../data/whatsapp';
 import Analytics from '../components/Analytics.astro';
 import archivoLatinWghtNormal from '@fontsource-variable/archivo/files/archivo-latin-wght-normal.woff2?url';
 
@@ -26,6 +27,7 @@ const {
   schema,
   headerTransparent = false,
 } = Astro.props;
+const wa = getWhatsAppConfig(path);
 const site = Astro.site ?? new URL('https://mizar.com.co');
 const canonical = new URL(path, site).href;
 const usesGoogleMapsEmbed = path === '/contacto' || path === '/lotes-cucuta';
@@ -97,6 +99,6 @@ const orgSchema = {
       <slot />
     </main>
     <Footer />
-    <WhatsAppFloat />
+    <WhatsAppFloat phone={wa.phone} message={wa.message} />
   </body>
 </html>

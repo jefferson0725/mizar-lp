@@ -146,15 +146,41 @@ const schema = [
     </div>
   </section>
 
-  <!-- VIDEO GENERAL -->
+  <!-- VIDEO + RESPALDO -->
   <section class="py-14 md:py-20">
-    <div class="container-site">
+    <div class="container-site grid gap-12 md:grid-cols-2 md:items-center">
+      <!-- Respaldo -->
+      <div>
+        <p class="eyebrow text-teal">El respaldo</p>
+        <h2 class="display-lg mt-3 text-3xl">Detrás de Mi Lote está Grupo Mizar</h2>
+        <p class="mt-4 leading-relaxed text-ink/75">
+          Más de 20 años construyendo en Colombia y más de 100 obras entregadas.
+        </p>
+        <a href="/nosotros" class="mt-5 inline-block font-bold text-mizar hover:underline">Conoce nuestra historia →</a>
+        <div class="mt-8 grid grid-cols-2 gap-8">
+          <div>
+            <p class="stat-num text-5xl text-plum">20<span class="text-mizar">+</span></p>
+            <p class="mt-1 text-sm font-semibold tracking-wider text-ink/60 uppercase">Años construyendo en Colombia</p>
+          </div>
+          <div>
+            <p class="stat-num text-5xl text-plum">100<span class="text-mizar">+</span></p>
+            <p class="mt-1 text-sm font-semibold tracking-wider text-ink/60 uppercase">Obras entregadas</p>
+          </div>
+          <p class="col-span-2 max-w-prose text-ink/75">
+            Somos una empresa familiar de ingenieros santandereanos. Respondemos con nombre
+            propio por cada obra que entregamos, desde parques públicos premiados hasta la
+            urbanización más grande de San Cayetano.
+          </p>
+        </div>
+      </div>
+
+      <!-- Video -->
       <div class="mx-auto w-full max-w-sm">
         <div class="relative overflow-hidden rounded-2xl bg-plum-dark">
           <video
             id="video-recorrido"
             src="/videos/mi-lote-recorrido.mp4"
-            class="w-full object-cover" style="aspect-ratio:9/16"
+            class="block w-full object-cover" style="aspect-ratio:9/16"
             muted
             loop
             playsinline
@@ -171,35 +197,6 @@ const schema = [
             </svg>
           </button>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- RESPALDO -->
-  <section class="py-16 md:py-24">
-    <div class="container-site grid gap-10 md:grid-cols-3">
-      <div class="md:col-span-1">
-        <p class="eyebrow text-teal">El respaldo</p>
-        <h2 class="display-lg mt-3 text-3xl">Detrás de Mi Lote está Grupo Mizar</h2>
-        <p class="mt-4 leading-relaxed text-ink/75">
-          Más de 20 años construyendo en Colombia y más de 100 obras entregadas.
-        </p>
-        <a href="/nosotros" class="mt-5 inline-block font-bold text-mizar hover:underline">Conoce nuestra historia →</a>
-      </div>
-      <div class="grid grid-cols-2 gap-8 md:col-span-2">
-        <div>
-          <p class="stat-num text-5xl text-plum">20<span class="text-mizar">+</span></p>
-          <p class="mt-1 text-sm font-semibold tracking-wider text-ink/60 uppercase">Años construyendo en Colombia</p>
-        </div>
-        <div>
-          <p class="stat-num text-5xl text-plum">100<span class="text-mizar">+</span></p>
-          <p class="mt-1 text-sm font-semibold tracking-wider text-ink/60 uppercase">Obras entregadas</p>
-        </div>
-        <p class="col-span-2 max-w-prose text-ink/75">
-          Somos una empresa familiar de ingenieros santandereanos. Respondemos con nombre
-          propio por cada obra que entregamos, desde parques públicos premiados hasta la
-          urbanización más grande de San Cayetano.
-        </p>
       </div>
     </div>
   </section>
@@ -351,7 +348,7 @@ const schema = [
           <video
             id="video-testimonio"
             src="/videos/testimonios.mp4"
-            class="w-full object-cover" style="aspect-ratio:9/16"
+            class="block w-full object-cover" style="aspect-ratio:9/16"
             muted
             loop
             playsinline

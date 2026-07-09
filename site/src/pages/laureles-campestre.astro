@@ -13,6 +13,8 @@ import Resumen from "../landing/laureles/Resumen.astro";
 import Contacto from "../landing/laureles/Contacto.astro";
 import LandingFooter from "../landing/laureles/Footer.astro";
 import WhatsAppFloat from "../components/WhatsAppFloat.astro";
+import { getWhatsAppConfig } from "../data/whatsapp";
+const wa = getWhatsAppConfig('/laureles-campestre');
 ---
 
 <LandingReact
@@ -35,10 +37,7 @@ import WhatsAppFloat from "../components/WhatsAppFloat.astro";
   <Resumen />
   <Contacto />
   <LandingFooter />
-  <WhatsAppFloat
-    phone="573112658552"
-    message="Me interesan los apartamentos de Laureles Campestre, mi nombre es"
-  />
+  <WhatsAppFloat phone={wa.phone} message={wa.message} />
 </LandingReact>
 
 <script>
