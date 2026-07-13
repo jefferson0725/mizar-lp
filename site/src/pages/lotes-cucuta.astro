@@ -11,6 +11,13 @@ import galeriaRaw2 from '../assets/proyectos/miravista-g2.png';
 import galeriaRaw3 from '../assets/proyectos/miravista-g3.png';
 import galeriaRaw4 from '../assets/proyectos/miravista-g4.png';
 import galeriaRaw5 from '../assets/proyectos/miravista-g5.png';
+import tfRaw1 from '../assets/proyectos/testimonio-foto-1.jpg';
+import tfRaw2 from '../assets/proyectos/testimonio-foto-2.jpg';
+import tfRaw3 from '../assets/proyectos/testimonio-foto-3.jpg';
+import tfRaw4 from '../assets/proyectos/testimonio-foto-4.jpg';
+import tfRaw5 from '../assets/proyectos/testimonio-foto-5.jpg';
+import tfRaw6 from '../assets/proyectos/testimonio-foto-6.jpg';
+import tfRaw7 from '../assets/proyectos/testimonio-foto-7.jpg';
 
 const wa = (msg: string) =>
   `https://wa.me/${WHATSAPP_MILOTE}?text=${encodeURIComponent(msg)}`;
@@ -22,6 +29,12 @@ const imagen1 = (await getImage({ src: imagen1Raw, width: 900, format: 'webp' })
 const galeria = await Promise.all(
   [galeriaRaw1, galeriaRaw2, galeriaRaw3, galeriaRaw4, galeriaRaw5].map((img) =>
     getImage({ src: img, width: 900, format: 'webp' }).then((r) => r.src),
+  ),
+);
+
+const testimonioFotos = await Promise.all(
+  [tfRaw1, tfRaw2, tfRaw3, tfRaw4, tfRaw5, tfRaw6, tfRaw7].map((img) =>
+    getImage({ src: img, width: 600, format: 'webp' }).then((r) => r.src),
   ),
 );
 
@@ -44,10 +57,9 @@ const resumen = [
 ];
 
 const ubicacion = [
-  'Junto al anillo vial occidental de Cúcuta',
-  'A 100 metros de la futura Universidad Simón Bolívar',
-  'En San Cayetano, a minutos del centro de Cúcuta',
-  'Zona de crecimiento con valorización por delante',
+  { icon: 'university', text: 'A 100 metros de la futura Universidad Simón Bolívar' },
+  { icon: 'clock', text: 'A minutos del centro de Cúcuta' },
+  { icon: 'trend', text: 'Zona de crecimiento de alta valorización' },
 ];
 
 const pasos = [
@@ -153,9 +165,6 @@ const schema = [
       <div>
         <p class="eyebrow text-teal">El respaldo</p>
         <h2 class="display-lg mt-3 text-3xl">Detrás de Mi Lote está Grupo Mizar</h2>
-        <p class="mt-4 leading-relaxed text-ink/75">
-          Más de 20 años construyendo en Colombia y más de 100 obras entregadas.
-        </p>
         <a href="/nosotros" class="mt-5 inline-block font-bold text-mizar hover:underline">Conoce nuestra historia →</a>
         <div class="mt-8 grid grid-cols-2 gap-8">
           <div>
@@ -205,31 +214,58 @@ const schema = [
   <section class="py-16 md:py-24">
     <div class="container-site">
       <div class="grid items-center gap-10 md:grid-cols-[6fr_6fr]">
-        <img
-          src={imagen1}
-          alt="Vista de la urbanización Miravista en San Cayetano, Cúcuta"
-          loading="lazy"
-          class="w-full rounded-2xl"
-        />
-        <div>
+        <div class="md:order-2">
           <p class="eyebrow text-teal">Ubicación</p>
           <h2 class="display-lg mt-3 text-3xl md:text-4xl">
-            Junto al anillo vial occidental y a 100 metros de la futura Universidad Simón Bolívar
+            Junto al anillo vial occidental en San Cayetano
           </h2>
-          <ul class="mt-7 space-y-4">
-            {
-              ubicacion.map((u) => (
-                <li class="flex items-start gap-3">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#35565a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0" aria-hidden="true">
-                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 1 1 16 0Z" />
-                    <circle cx="12" cy="10" r="3" />
-                  </svg>
-                  <span class="font-medium">{u}</span>
-                </li>
-              ))
-            }
+          <ul class="mt-7 space-y-5">
+            {ubicacion.map((u) => (
+              <li class="flex items-start gap-4">
+                <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-teal/10">
+                  {u.icon === 'university' && (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#35565a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                      <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                    </svg>
+                  )}
+                  {u.icon === 'clock' && (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#35565a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10" />
+                      <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                  )}
+                  {u.icon === 'trend' && (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#35565a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <polyline points="22 7 13.5 15.5 8.5 10.5 2 17" />
+                      <polyline points="16 7 22 7 22 13" />
+                    </svg>
+                  )}
+                </div>
+                <span class="mt-2 font-medium leading-snug">{u.text}</span>
+              </li>
+            ))}
           </ul>
         </div>
+        <button
+          type="button"
+          data-lb-single={imagen1}
+          class="group relative block w-full cursor-zoom-in overflow-hidden rounded-2xl focus:outline-none md:order-1"
+          aria-label="Ver imagen en grande"
+        >
+          <img
+            src={imagen1}
+            alt="Vista de la urbanización Miravista en San Cayetano, Cúcuta"
+            loading="lazy"
+            class="w-full transition-transform duration-300 group-hover:scale-[1.02]"
+          />
+          <div class="absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-black/60 text-white opacity-0 shadow-lg ring-1 ring-white/20 transition-opacity group-hover:opacity-100">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/>
+              <line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/>
+            </svg>
+          </div>
+        </button>
       </div>
       <iframe
         src="https://www.google.com/maps?q=7.877946,-72.5468263&z=17&output=embed"
@@ -342,32 +378,210 @@ const schema = [
           Personas que trabajaron años sin tener nada a su nombre y hoy pagan su propiedad
           directo con la constructora. Dale play y escúchalos.
         </p>
+        <!-- Dots desktop -->
+        <div id="tv-dots-desktop" class="mt-6 hidden items-center gap-2 md:flex"></div>
       </div>
+
+      <!-- Carrusel -->
       <div class="mx-auto w-full max-w-xs">
-        <div class="relative overflow-hidden rounded-2xl bg-plum-dark">
-          <video
-            id="video-testimonio"
-            src="/videos/testimonios.mp4"
-            class="block w-full object-cover" style="aspect-ratio:9/16"
-            muted
-            loop
-            playsinline
-            preload="metadata"
-          ></video>
+        <div id="tv-carousel" class="relative overflow-hidden rounded-2xl bg-plum-dark">
+          <!-- Videos -->
+          {[
+            '/videos/testimonio-1.mp4',
+            '/videos/testimonio-2.mp4',
+            '/videos/testimonio-3.mp4',
+            '/videos/testimonio-4.mp4',
+            '/videos/testimonio-5.mp4',
+            '/videos/testimonio-6.mp4',
+          ].map((src, i) => (
+            <video
+              data-tv-slide={i}
+              src={src}
+              class={`block w-full object-cover transition-opacity duration-300 ${i === 0 ? '' : 'absolute inset-0 opacity-0 pointer-events-none'}`}
+              style="aspect-ratio:9/16"
+              muted
+              playsinline
+              preload={i === 0 ? 'auto' : 'none'}
+            />
+          ))}
+
+          <!-- Prev -->
           <button
-            id="video-audio-toggle"
+            id="tv-prev"
             type="button"
-            class="absolute right-4 bottom-4 flex h-12 w-12 items-center justify-center rounded-full bg-black/60 text-white"
-            aria-label="Activar sonido"
+            class="absolute top-1/2 left-2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70"
+            aria-label="Anterior"
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M11 5 6 9H2v6h4l5 4V5ZM23 9l-6 6M17 9l6 6" />
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="15 18 9 12 15 6" />
             </svg>
           </button>
+
+          <!-- Next -->
+          <button
+            id="tv-next"
+            type="button"
+            class="absolute top-1/2 right-2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full bg-black/50 text-white hover:bg-black/70"
+            aria-label="Siguiente"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+
+          <!-- Bottom controls -->
+          <div class="absolute bottom-4 left-0 right-0 flex items-center justify-between px-4">
+            <!-- Audio toggle -->
+            <button
+              id="tv-audio"
+              type="button"
+              class="flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white"
+              aria-label="Activar sonido"
+            >
+              <!-- muted icon -->
+              <svg id="tv-icon-muted" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M11 5 6 9H2v6h4l5 4V5ZM23 9l-6 6M17 9l6 6" />
+              </svg>
+              <!-- unmuted icon -->
+              <svg id="tv-icon-sound" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" class="hidden">
+                <path d="M11 5 6 9H2v6h4l5 4V5Z" />
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+              </svg>
+            </button>
+
+            <!-- Dots mobile -->
+            <div id="tv-dots-mobile" class="flex items-center gap-1.5 md:hidden"></div>
+
+            <!-- Fullscreen -->
+            <button
+              id="tv-fullscreen"
+              type="button"
+              class="flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white"
+              aria-label="Pantalla completa"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <polyline points="15 3 21 3 21 9" />
+                <polyline points="9 21 3 21 3 15" />
+                <line x1="21" y1="3" x2="14" y2="10" />
+                <line x1="3" y1="21" x2="10" y2="14" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- FOTOS TESTIMONIOS -->
+  <section class="bg-white pb-16 md:pb-24">
+    <div class="container-site">
+      <!-- Strip: mobile = 3 fotos + overlay en la 4ª | desktop = 4 fotos + overlay en la 5ª -->
+      <div class="grid grid-cols-4 gap-2 md:grid-cols-5">
+        {/* Primeras 3: visibles siempre */}
+        {testimonioFotos.slice(0, 3).map((src, i) => (
+          <button
+            type="button"
+            data-lightbox-open={i}
+            class="group overflow-hidden rounded-xl focus:outline-none"
+            aria-label={`Ver foto ${i + 1}`}
+          >
+            <img
+              src={src}
+              alt={`Foto de cliente ${i + 1}`}
+              loading="lazy"
+              class="aspect-square w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+          </button>
+        ))}
+        {/* 4ª foto: overlay "Ver más" en mobile, foto normal en desktop */}
+        <button
+          type="button"
+          data-lightbox-open="3"
+          class="group relative overflow-hidden rounded-xl focus:outline-none"
+          aria-label="Ver todas las fotos"
+        >
+          <img
+            src={testimonioFotos[3]}
+            alt="Foto de cliente 4"
+            loading="lazy"
+            class="aspect-square w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+          <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/55 text-white md:hidden">
+            <span class="text-2xl font-bold">+{testimonioFotos.length - 3}</span>
+            <span class="mt-1 text-sm font-medium">Ver más</span>
+          </div>
+        </button>
+        {/* 5ª foto: overlay "Ver más" solo en desktop */}
+        <button
+          type="button"
+          data-lightbox-open="4"
+          class="group relative hidden overflow-hidden rounded-xl focus:outline-none md:block"
+          aria-label="Ver todas las fotos"
+        >
+          <img
+            src={testimonioFotos[4]}
+            alt="Foto de cliente 5"
+            loading="lazy"
+            class="aspect-square w-full object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+          <div class="absolute inset-0 flex flex-col items-center justify-center bg-black/55 text-white">
+            <span class="text-2xl font-bold">+{testimonioFotos.length - 4}</span>
+            <span class="mt-1 text-sm font-medium">Ver más</span>
+          </div>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Inject all photo URLs for lightbox -->
+  <div id="tf-photos-data" data-photos={JSON.stringify(testimonioFotos)} style="display:none"></div>
+
+  <!-- LIGHTBOX -->
+  <div
+    id="tf-lightbox"
+    style="display:none"
+    class="fixed inset-0 z-50 items-center justify-center bg-black/90"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Galería de fotos"
+  >
+    <button
+      id="tf-lb-close"
+      type="button"
+      class="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white shadow-lg ring-1 ring-white/20 hover:bg-black/80"
+      aria-label="Cerrar"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
+    <button
+      id="tf-lb-prev"
+      type="button"
+      class="absolute left-3 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full bg-black/60 text-white shadow-lg ring-1 ring-white/20 hover:bg-black/80"
+      aria-label="Anterior"
+    >
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+
+    <img
+      id="tf-lb-img"
+      src=""
+      alt=""
+      class="max-h-[90vh] max-w-[90vw] rounded-xl object-contain shadow-2xl"
+    />
+
+    <button
+      id="tf-lb-next"
+      type="button"
+      class="absolute right-3 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full bg-black/60 text-white shadow-lg ring-1 ring-white/20 hover:bg-black/80"
+      aria-label="Siguiente"
+    >
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+
+    <span id="tf-lb-counter" class="absolute bottom-5 left-1/2 -translate-x-1/2 rounded-full bg-black/50 px-4 py-1 text-sm text-white"></span>
+  </div>
 
   <!-- COMENTARIOS -->
   <section class="py-16 md:py-24">
@@ -506,8 +720,97 @@ const schema = [
     });
   }
 
-  setupVideo('video-testimonio', 'video-audio-toggle');
   setupVideo('video-recorrido', 'recorrido-audio-toggle');
+
+  // Testimonios carousel
+  (() => {
+    const slides = Array.from(document.querySelectorAll<HTMLVideoElement>('[data-tv-slide]'));
+    const total = slides.length;
+    let current = 0;
+    let muted = true;
+
+    const dotsContainers = [
+      document.getElementById('tv-dots-mobile'),
+      document.getElementById('tv-dots-desktop'),
+    ];
+
+    // Build dots
+    const dots: HTMLButtonElement[] = [];
+    dotsContainers.forEach((container) => {
+      if (!container) return;
+      slides.forEach((_, i) => {
+        const d = document.createElement('button');
+        d.type = 'button';
+        d.className = 'h-2 w-2 rounded-full transition-all ' + (i === 0 ? 'bg-teal w-4' : 'bg-ink/30');
+        d.setAttribute('aria-label', `Video ${i + 1}`);
+        d.addEventListener('click', () => goTo(i));
+        container.appendChild(d);
+        dots.push(d);
+      });
+    });
+
+    function updateDots() {
+      // Each container has `total` dots; sync both sets
+      const allDots = dotsContainers.flatMap((c) => c ? Array.from(c.querySelectorAll('button')) : []);
+      allDots.forEach((d, idx) => {
+        const pos = idx % total;
+        d.className = 'h-2 rounded-full transition-all ' + (pos === current ? 'bg-teal w-4' : 'bg-ink/30 w-2');
+      });
+    }
+
+    function goTo(index: number) {
+      const prev = slides[current];
+      prev.pause();
+      prev.classList.add('opacity-0', 'pointer-events-none', 'absolute', 'inset-0');
+      prev.classList.remove('relative');
+
+      current = (index + total) % total;
+      const next = slides[current];
+      next.muted = muted;
+      if (next.getAttribute('preload') === 'none') next.setAttribute('preload', 'auto');
+      next.classList.remove('opacity-0', 'pointer-events-none', 'absolute', 'inset-0');
+      next.play().catch(() => {});
+      updateDots();
+    }
+
+    // Auto-advance when video ends
+    slides.forEach((v, i) => {
+      v.addEventListener('ended', () => goTo(i + 1));
+    });
+
+    document.getElementById('tv-prev')?.addEventListener('click', () => goTo(current - 1));
+    document.getElementById('tv-next')?.addEventListener('click', () => goTo(current + 1));
+
+    // Audio toggle
+    const iconMuted = document.getElementById('tv-icon-muted');
+    const iconSound = document.getElementById('tv-icon-sound');
+    document.getElementById('tv-audio')?.addEventListener('click', () => {
+      muted = !muted;
+      slides[current].muted = muted;
+      iconMuted?.classList.toggle('hidden', !muted);
+      iconSound?.classList.toggle('hidden', muted);
+      document.getElementById('tv-audio')?.setAttribute('aria-label', muted ? 'Activar sonido' : 'Silenciar');
+    });
+
+    // Fullscreen
+    const carousel = document.getElementById('tv-carousel');
+    document.getElementById('tv-fullscreen')?.addEventListener('click', () => {
+      const vid = slides[current];
+      if (vid.requestFullscreen) vid.requestFullscreen();
+      else if ((vid as any).webkitEnterFullscreen) (vid as any).webkitEnterFullscreen();
+    });
+
+    // Autoplay on scroll into view
+    new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) slides[current].play().catch(() => {});
+        else slides[current].pause();
+      },
+      { threshold: 0.4 },
+    ).observe(carousel!);
+
+    updateDots();
+  })();
 
   const form = document.getElementById('form-milote') as HTMLFormElement | null;
   form?.addEventListener('submit', (e) => {
@@ -518,4 +821,62 @@ const schema = [
       `Nombre: ${data.get('nombre')}\n${data.get('pais')}\nCelular: ${data.get('celular')}`;
     window.open(`https://wa.me/573112382253?text=${encodeURIComponent(msg)}`, '_blank');
   });
+
+  // Lightbox fotos testimonios
+  (() => {
+    const dataEl = document.getElementById('tf-photos-data') as HTMLElement | null;
+    const allSrcs: string[] = dataEl ? JSON.parse(dataEl.dataset.photos || '[]') : [];
+
+    const lb = document.getElementById('tf-lightbox') as HTMLElement | null;
+    const lbImg = document.getElementById('tf-lb-img') as HTMLImageElement | null;
+    const lbCounter = document.getElementById('tf-lb-counter') as HTMLElement | null;
+    if (!lb || !lbImg || !lbCounter || allSrcs.length === 0) return;
+
+    let current = 0;
+
+    function show(index: number) {
+      current = (index + allSrcs.length) % allSrcs.length;
+      lbImg!.src = allSrcs[current];
+      lbImg!.alt = `Foto de cliente ${current + 1}`;
+      lbCounter!.textContent = `${current + 1} / ${allSrcs.length}`;
+    }
+
+    function openLb(index: number) {
+      show(index);
+      lb!.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLb() {
+      lb!.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll<HTMLButtonElement>('[data-lightbox-open]').forEach((btn) => {
+      btn.addEventListener('click', () => openLb(Number(btn.dataset.lightboxOpen)));
+    });
+
+    // Imágenes individuales (ej: mapa de ubicación)
+    document.querySelectorAll<HTMLButtonElement>('[data-lb-single]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        lbImg!.src = btn.dataset.lbSingle!;
+        lbImg!.alt = btn.getAttribute('aria-label') || '';
+        lbCounter!.textContent = '';
+        lb!.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    document.getElementById('tf-lb-close')?.addEventListener('click', closeLb);
+    document.getElementById('tf-lb-prev')?.addEventListener('click', () => show(current - 1));
+    document.getElementById('tf-lb-next')?.addEventListener('click', () => show(current + 1));
+    lb.addEventListener('click', (e) => { if (e.target === lb) closeLb(); });
+
+    document.addEventListener('keydown', (e) => {
+      if (lb!.style.display === 'none') return;
+      if (e.key === 'Escape') closeLb();
+      if (e.key === 'ArrowLeft') show(current - 1);
+      if (e.key === 'ArrowRight') show(current + 1);
+    });
+  })();
 </script>
