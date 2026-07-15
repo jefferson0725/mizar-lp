@@ -1,4 +1,8 @@
 ---
+interface Props {
+  direccion?: string;
+}
+const { direccion = 'Calle 105A #23a-18, Provenza, Bucaramanga' } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
@@ -27,7 +31,7 @@ const year = new Date().getFullYear();
       <ul class="space-y-2 text-white/80">
         <li>
           <a href="https://maps.app.goo.gl/cjd7zaDX9qxuy5KW6" rel="noopener" target="_blank" class="hover:text-white">
-            Calle 105A #23a-18, Provenza, Bucaramanga
+            <span class="font-semibold text-white/60">Dirección:</span> {direccion}
           </a>
         </li>
         <li>

@@ -17,6 +17,8 @@ interface Props {
   schema?: object | object[];
   /** Header flotante transparente sobre el hero (páginas con hero oscuro full-bleed) */
   headerTransparent?: boolean;
+  /** Dirección que muestra el footer (sobreescribe el default de Bucaramanga) */
+  footerDireccion?: string;
 }
 
 const {
@@ -26,6 +28,7 @@ const {
   ogImage = '/og-default.jpg',
   schema,
   headerTransparent = false,
+  footerDireccion,
 } = Astro.props;
 const wa = getWhatsAppConfig(path);
 const site = Astro.site ?? new URL('https://mizar.com.co');
@@ -98,7 +101,7 @@ const orgSchema = {
     <main class:list={[!headerTransparent && 'pt-16']}>
       <slot />
     </main>
-    <Footer />
+    <Footer direccion={footerDireccion} />
     <WhatsAppFloat phone={wa.phone} message={wa.message} />
   </body>
 </html>
