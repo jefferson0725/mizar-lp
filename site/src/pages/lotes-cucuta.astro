@@ -7,7 +7,6 @@ import { WHATSAPP_MILOTE } from '../data/proyectos';
 import renderLotes from '../assets/proyectos/lotes-cucuta.png';
 import imagen1Raw from '../assets/proyectos/miravista-imagen1.png';
 import galeriaRaw1 from '../assets/proyectos/miravista-g1.png';
-import galeriaRaw2 from '../assets/proyectos/miravista-g2.png';
 import galeriaRaw3 from '../assets/proyectos/miravista-g3.png';
 import galeriaRaw4 from '../assets/proyectos/miravista-g4.png';
 import galeriaRaw5 from '../assets/proyectos/miravista-g5.png';
@@ -27,10 +26,17 @@ const renderMid = (await getImage({ src: renderLotes, width: 1200, format: 'webp
 const imagen1 = (await getImage({ src: imagen1Raw, width: 900, format: 'webp' })).src;
 
 const galeria = await Promise.all(
-  [galeriaRaw1, galeriaRaw2, galeriaRaw3, galeriaRaw4, galeriaRaw5].map((img) =>
+  [galeriaRaw1, galeriaRaw3, galeriaRaw4, galeriaRaw5].map((img) =>
     getImage({ src: img, width: 900, format: 'webp' }).then((r) => r.src),
   ),
 );
+
+const galeriaImagenes = [
+  { src: renderMid, alt: 'Render aéreo de la glorieta de entrada de Miravista' },
+  { src: imagen1,   alt: 'Vista de la urbanización Miravista' },
+  ...galeria.map((src, i) => ({ src, alt: `Avance de la urbanización Miravista ${i + 1}` })),
+];
+
 
 const testimonioFotos = await Promise.all(
   [tfRaw1, tfRaw2, tfRaw3, tfRaw4, tfRaw5, tfRaw6, tfRaw7].map((img) =>
@@ -190,11 +196,12 @@ const schema = [
           <video
             id="video-recorrido"
             src="/videos/mi-lote-recorrido.mp4"
+            poster="/videos/posters/mi-lote-recorrido.jpg"
             class="block w-full object-cover" style="aspect-ratio:9/16"
             muted
             loop
             playsinline
-            preload="metadata"
+            preload="none"
           ></video>
           <button
             id="recorrido-audio-toggle"
@@ -279,96 +286,6 @@ const schema = [
     </div>
   </section>
 
-  <!-- LO QUE INCLUYE -->
-  <section class="bg-white py-16 md:py-24" id="incluye">
-    <div class="container-site grid gap-12 md:grid-cols-[7fr_5fr]">
-      <div>
-        <p class="eyebrow text-teal">Sin letra pequeña</p>
-        <h2 class="display-lg mt-3 text-3xl md:text-4xl">Lo que incluye tu lote</h2>
-        <ul class="mt-8 space-y-4">
-          {
-            incluye.map((item) => (
-              <li class="flex items-start gap-3 border-b border-ink/10 pb-4">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d9a441" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0" aria-hidden="true">
-                  <path d="M20 6 9 17l-5-5" />
-                </svg>
-                <span class="font-medium">{item}</span>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-
-      <aside class="h-fit rounded-2xl bg-plum p-7 text-white md:sticky md:top-24">
-        <p class="eyebrow text-gold">En resumen</p>
-        <ul class="mt-5 divide-y divide-white/10">
-          {
-            resumen.map((r) => (
-              <li class="flex items-baseline justify-between gap-4 py-3.5">
-                <span class="text-sm text-white/80">{r.label}</span>
-                <span class="shrink-0 font-extrabold text-gold">{r.valor}</span>
-              </li>
-            ))
-          }
-        </ul>
-        <a href={wa('Hola, quiero saber precios y disponibilidad de los lotes en San Cayetano.')} target="_blank" rel="noopener" class="btn-primary mt-6 flex w-full justify-center" data-event="whatsapp-click">
-          Pregunta precio y disponibilidad
-        </a>
-      </aside>
-    </div>
-  </section>
-
-  <!-- GALERIA -->
-  <section class="bg-white py-16 md:py-24">
-    <div class="container-site">
-      <p class="eyebrow text-teal">La urbanización</p>
-      <h2 class="display-lg mt-3 max-w-xl text-3xl md:text-4xl">Así avanza Miravista</h2>
-      <div class="relative mt-8" data-carousel-root>
-        <div
-          data-carousel-track
-          class="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth"
-          style="scrollbar-width: none; -ms-overflow-style: none;"
-        >
-          {[
-            { src: renderMid, alt: 'Render aéreo de la glorieta de entrada de Miravista' },
-            { src: imagen1,   alt: 'Vista de la urbanización Miravista' },
-            ...galeria.map((src, i) => ({ src, alt: `Avance de la urbanización Miravista ${i + 1}` })),
-          ].map(({ src, alt }) => (
-            <img
-              src={src}
-              alt={alt}
-              loading="lazy"
-              class="w-[85%] shrink-0 snap-start rounded-2xl object-cover sm:w-[55%] lg:w-[38%]"
-              style="aspect-ratio:4/3"
-            />
-          ))}
-        </div>
-        <GalleryCarousel />
-      </div>
-      <div data-carousel-dots class="mt-5 flex items-center justify-center gap-2"></div>
-    </div>
-  </section>
-
-  <!-- ENTRAR AHORA + EXTERIOR -->
-  <section class="py-16 md:py-24">
-    <div class="container-site grid gap-10 md:grid-cols-[7fr_5fr] md:items-center">
-      <div>
-        <p class="display-lg text-2xl text-plum md:text-3xl">Entrar ahora es entrar a tiempo.</p>
-        <p class="mt-5 max-w-prose leading-relaxed text-ink/75">
-          San Cayetano está creciendo. La futura Universidad Simón Bolívar queda a 100 metros de
-          la urbanización. La tierra de hoy no va a costar lo mismo mañana.
-        </p>
-        <p class="mt-4 max-w-prose leading-relaxed text-ink/75">
-          Y si vives fuera del país, puedes invertir desde donde estés: te acompañamos en cada
-          paso del proceso.
-        </p>
-      </div>
-      <a href={wa('Hola, vivo fuera de Colombia y quiero invertir en un lote de Mi Lote en Cúcuta.')} target="_blank" rel="noopener" class="btn-primary justify-self-start md:justify-self-end" data-event="whatsapp-click">
-        Invierto desde el exterior
-      </a>
-    </div>
-  </section>
-
   <!-- TESTIMONIOS EN VIDEO -->
   <section class="bg-white py-16 md:py-24">
     <div class="container-site grid items-center gap-10 md:grid-cols-[5fr_7fr]">
@@ -398,11 +315,12 @@ const schema = [
             <video
               data-tv-slide={i}
               src={src}
+              poster={`/videos/posters/testimonio-${i + 1}.jpg`}
               class={`block w-full object-cover transition-opacity duration-300 ${i === 0 ? '' : 'absolute inset-0 opacity-0 pointer-events-none'}`}
               style="aspect-ratio:9/16"
               muted
               playsinline
-              preload={i === 0 ? 'auto' : 'none'}
+              preload="none"
             />
           ))}
 
@@ -537,6 +455,107 @@ const schema = [
 
   <!-- Inject all photo URLs for lightbox -->
   <div id="tf-photos-data" data-photos={JSON.stringify(testimonioFotos)} style="display:none"></div>
+
+  <!-- LO QUE INCLUYE -->
+  <section class="bg-white py-16 md:py-24" id="incluye">
+    <div class="container-site grid gap-12 md:grid-cols-[7fr_5fr]">
+      <div>
+        <p class="eyebrow text-teal">Sin letra pequeña</p>
+        <h2 class="display-lg mt-3 text-3xl md:text-4xl">Lo que incluye tu lote</h2>
+        <ul class="mt-8 space-y-4">
+          {
+            incluye.map((item) => (
+              <li class="flex items-start gap-3 border-b border-ink/10 pb-4">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d9a441" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 shrink-0" aria-hidden="true">
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+                <span class="font-medium">{item}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <aside class="h-fit rounded-2xl bg-plum p-7 text-white md:sticky md:top-24">
+        <p class="eyebrow text-gold">En resumen</p>
+        <ul class="mt-5 divide-y divide-white/10">
+          {
+            resumen.map((r) => (
+              <li class="flex items-baseline justify-between gap-4 py-3.5">
+                <span class="text-sm text-white/80">{r.label}</span>
+                <span class="shrink-0 font-extrabold text-gold">{r.valor}</span>
+              </li>
+            ))
+          }
+        </ul>
+        <a href={wa('Hola, quiero saber precios y disponibilidad de los lotes en San Cayetano.')} target="_blank" rel="noopener" class="btn-primary mt-6 flex w-full justify-center" data-event="whatsapp-click">
+          Pregunta precio y disponibilidad
+        </a>
+      </aside>
+    </div>
+  </section>
+
+  <!-- GALERIA -->
+  <section class="bg-white py-16 md:py-24">
+    <div class="container-site">
+      <p class="eyebrow text-teal">La urbanización</p>
+      <h2 class="display-lg mt-3 max-w-xl text-3xl md:text-4xl">Así avanza Miravista</h2>
+      <div class="relative mt-8" data-carousel-root>
+        <div
+          data-carousel-track
+          class="flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth"
+          style="scrollbar-width: none; -ms-overflow-style: none;"
+        >
+          {galeriaImagenes.map(({ src, alt }, i) => (
+            <button
+              type="button"
+              data-gallery-open={i}
+              class="group relative w-[85%] shrink-0 snap-start cursor-zoom-in overflow-hidden rounded-2xl focus:outline-none sm:w-[55%] lg:w-[38%]"
+              aria-label="Ver imagen en grande"
+              style="aspect-ratio:4/3"
+            >
+              <img
+                src={src}
+                alt={alt}
+                loading="lazy"
+                class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+              />
+              <div class="absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-black/60 text-white opacity-0 shadow-lg ring-1 ring-white/20 transition-opacity group-hover:opacity-100">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/>
+                  <line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/>
+                </svg>
+              </div>
+            </button>
+          ))}
+        </div>
+        <GalleryCarousel />
+      </div>
+      <div data-carousel-dots class="mt-5 flex items-center justify-center gap-2"></div>
+    </div>
+  </section>
+
+  <div id="gallery-photos-data" data-photos={JSON.stringify(galeriaImagenes.map(g => g.src))} style="display:none"></div>
+
+  <!-- ENTRAR AHORA + EXTERIOR -->
+  <section class="py-16 md:py-24">
+    <div class="container-site grid gap-10 md:grid-cols-[7fr_5fr] md:items-center">
+      <div>
+        <p class="display-lg text-2xl text-plum md:text-3xl">Entrar ahora es entrar a tiempo.</p>
+        <p class="mt-5 max-w-prose leading-relaxed text-ink/75">
+          San Cayetano está creciendo. La futura Universidad Simón Bolívar queda a 100 metros de
+          la urbanización. La tierra de hoy no va a costar lo mismo mañana.
+        </p>
+        <p class="mt-4 max-w-prose leading-relaxed text-ink/75">
+          Y si vives fuera del país, puedes invertir desde donde estés: te acompañamos en cada
+          paso del proceso.
+        </p>
+      </div>
+      <a href={wa('Hola, vivo fuera de Colombia y quiero invertir en un lote de Mi Lote en Cúcuta.')} target="_blank" rel="noopener" class="btn-primary justify-self-start md:justify-self-end" data-event="whatsapp-click">
+        Invierto desde el exterior
+      </a>
+    </div>
+  </section>
 
   <!-- LIGHTBOX -->
   <div
@@ -823,59 +842,62 @@ const schema = [
     window.open(`https://wa.me/573112382253?text=${encodeURIComponent(msg)}`, '_blank');
   });
 
-  // Lightbox fotos testimonios
+  // Lightbox compartido (galería + fotos de testimonios)
   (() => {
-    const dataEl = document.getElementById('tf-photos-data') as HTMLElement | null;
-    const allSrcs: string[] = dataEl ? JSON.parse(dataEl.dataset.photos || '[]') : [];
-
     const lb = document.getElementById('tf-lightbox') as HTMLElement | null;
     const lbImg = document.getElementById('tf-lb-img') as HTMLImageElement | null;
     const lbCounter = document.getElementById('tf-lb-counter') as HTMLElement | null;
-    if (!lb || !lbImg || !lbCounter || allSrcs.length === 0) return;
+    if (!lb || !lbImg || !lbCounter) return;
 
+    let srcs: string[] = [];
     let current = 0;
 
     function show(index: number) {
-      current = (index + allSrcs.length) % allSrcs.length;
-      lbImg!.src = allSrcs[current];
-      lbImg!.alt = `Foto de cliente ${current + 1}`;
-      lbCounter!.textContent = `${current + 1} / ${allSrcs.length}`;
+      current = (index + srcs.length) % srcs.length;
+      lbImg!.src = srcs[current];
+      lbImg!.alt = `Imagen ${current + 1}`;
+      lbCounter!.textContent = srcs.length > 1 ? `${current + 1} / ${srcs.length}` : '';
     }
 
-    function openLb(index: number) {
+    function open(newSrcs: string[], index: number) {
+      srcs = newSrcs;
       show(index);
       lb!.style.display = 'flex';
       document.body.style.overflow = 'hidden';
     }
 
-    function closeLb() {
+    function close() {
       lb!.style.display = 'none';
       document.body.style.overflow = '';
     }
 
+    // Galería de la urbanización
+    const galleryDataEl = document.getElementById('gallery-photos-data') as HTMLElement | null;
+    const gallerySrcs: string[] = galleryDataEl ? JSON.parse(galleryDataEl.dataset.photos || '[]') : [];
+    document.querySelectorAll<HTMLButtonElement>('[data-gallery-open]').forEach((btn) => {
+      btn.addEventListener('click', () => open(gallerySrcs, Number(btn.dataset.galleryOpen)));
+    });
+
+    // Fotos de testimonios
+    const tfDataEl = document.getElementById('tf-photos-data') as HTMLElement | null;
+    const tfSrcs: string[] = tfDataEl ? JSON.parse(tfDataEl.dataset.photos || '[]') : [];
     document.querySelectorAll<HTMLButtonElement>('[data-lightbox-open]').forEach((btn) => {
-      btn.addEventListener('click', () => openLb(Number(btn.dataset.lightboxOpen)));
+      btn.addEventListener('click', () => open(tfSrcs, Number(btn.dataset.lightboxOpen)));
     });
 
     // Imágenes individuales (ej: mapa de ubicación)
     document.querySelectorAll<HTMLButtonElement>('[data-lb-single]').forEach((btn) => {
-      btn.addEventListener('click', () => {
-        lbImg!.src = btn.dataset.lbSingle!;
-        lbImg!.alt = btn.getAttribute('aria-label') || '';
-        lbCounter!.textContent = '';
-        lb!.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-      });
+      btn.addEventListener('click', () => open([btn.dataset.lbSingle!], 0));
     });
 
-    document.getElementById('tf-lb-close')?.addEventListener('click', closeLb);
+    document.getElementById('tf-lb-close')?.addEventListener('click', close);
     document.getElementById('tf-lb-prev')?.addEventListener('click', () => show(current - 1));
     document.getElementById('tf-lb-next')?.addEventListener('click', () => show(current + 1));
-    lb.addEventListener('click', (e) => { if (e.target === lb) closeLb(); });
+    lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
 
     document.addEventListener('keydown', (e) => {
       if (lb!.style.display === 'none') return;
-      if (e.key === 'Escape') closeLb();
+      if (e.key === 'Escape') close();
       if (e.key === 'ArrowLeft') show(current - 1);
       if (e.key === 'ArrowRight') show(current + 1);
     });

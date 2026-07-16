@@ -1,47 +1,165 @@
 ---
-import { Image } from 'astro:assets';
+import { getImage } from 'astro:assets';
 import GalleryCarousel from '../GalleryCarousel.astro';
 
 const modules = import.meta.glob<{ default: ImageMetadata }>(
   '../../assets/nosotros/proyectos/*.{jpg,jpeg,png,webp}',
   { eager: true },
 );
-const fotos = Object.entries(modules).map(([path, mod]) => ({
-  src: mod.default,
-  alt: `Obra construida por Grupo Mizar: ${path.split('/').pop()!.replace(/.[^.]+$/, '').replace(/[-_]/g, ' ')}`,
+
+const fotosRaw = Object.entries(modules).map(([path, mod]) => ({
+  raw: mod.default,
+  alt: `Obra construida por Grupo Mizar: ${path.split('/').pop()!.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ')}`,
 }));
+
+const fotos = await Promise.all(
+  fotosRaw.map(async ({ raw, alt }) => ({
+    src: (await getImage({ src: raw, width: 1400, format: 'webp' })).src,
+    alt,
+  }))
+);
 ---
 
-{
-  fotos.length > 0 && (
-    <section class="pb-16 md:pb-24">
-      <div class="container-site">
-        <p class="eyebrow text-teal">Así hemos construido</p>
-        <div class="relative mt-4" data-carousel-root>
-          <div
-            data-carousel-track
-            class="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth"
-            style="scrollbar-width: none; -ms-overflow-style: none;"
-          >
-            {fotos.map((foto) => (
-              <div class="min-w-[100%] snap-start overflow-hidden rounded-2xl sm:min-w-[90%] lg:min-w-[72%]">
-                <Image
-                  src={foto.src}
-                  alt={foto.alt}
-                  widths={[800, 1400, 2000]}
-                  sizes="(min-width: 1024px) 72vw, 95vw"
-                  format="webp"
-                  loading="lazy"
-                  class="h-auto w-full"
-                  style="aspect-ratio:16/9;object-fit:contain;background:#f0f0f0"
-                />
+{fotos.length > 0 && (
+  <section class="pb-16 md:pb-24">
+    <div class="container-site">
+      <p class="eyebrow text-teal">Así hemos construido</p>
+      <div class="relative mt-4" data-carousel-root>
+        <div
+          data-carousel-track
+          class="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth"
+          style="scrollbar-width: none; -ms-overflow-style: none;"
+        >
+          {fotos.map((foto, i) => (
+            <button
+              type="button"
+              data-nosotros-open={i}
+              class="group relative min-w-[100%] snap-start cursor-zoom-in overflow-hidden rounded-2xl focus:outline-none sm:min-w-[90%] lg:min-w-[72%]"
+              aria-label="Ver imagen en grande"
+              style="aspect-ratio:16/9"
+            >
+              <img
+                src={foto.src}
+                alt={foto.alt}
+                loading="lazy"
+                class="h-full w-full object-contain transition-transform duration-300 group-hover:scale-[1.01]"
+                style="background:#f0f0f0"
+              />
+              <div class="absolute bottom-3 right-3 flex h-9 w-9 items-center justify-center rounded-full bg-black/60 text-white opacity-0 shadow-lg ring-1 ring-white/20 transition-opacity group-hover:opacity-100">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/>
+                  <line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/>
+                </svg>
               </div>
-            ))}
-          </div>
-          <GalleryCarousel />
+            </button>
+          ))}
         </div>
-        <div data-carousel-dots class="mt-5 flex items-center justify-center gap-2"></div>
+        <GalleryCarousel />
       </div>
-    </section>
-  )
-}
+      <div data-carousel-dots class="mt-5 flex items-center justify-center gap-2"></div>
+    </div>
+
+    <div id="nosotros-gallery-data" data-photos={JSON.stringify(fotos.map(f => f.src))} style="display:none"></div>
+  </section>
+)}
+
+<!-- Lightbox -->
+<div
+  id="nosotros-lb"
+  style="display:none"
+  class="fixed inset-0 z-50 items-center justify-center bg-black/90"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Galería de proyectos"
+>
+  <button
+    id="nosotros-lb-close"
+    type="button"
+    class="absolute top-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-black/60 text-white shadow-lg ring-1 ring-white/20 hover:bg-black/80"
+    aria-label="Cerrar"
+  >
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
+
+  <button
+    id="nosotros-lb-prev"
+    type="button"
+    class="absolute left-3 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full bg-black/60 text-white shadow-lg ring-1 ring-white/20 hover:bg-black/80"
+    aria-label="Anterior"
+  >
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+  </button>
+
+  <img
+    id="nosotros-lb-img"
+    src=""
+    alt=""
+    class="max-h-[90vh] max-w-[90vw] rounded-xl object-contain shadow-2xl"
+  />
+
+  <button
+    id="nosotros-lb-next"
+    type="button"
+    class="absolute right-3 top-1/2 -translate-y-1/2 flex h-11 w-11 items-center justify-center rounded-full bg-black/60 text-white shadow-lg ring-1 ring-white/20 hover:bg-black/80"
+    aria-label="Siguiente"
+  >
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="9 18 15 12 9 6"/>
+    </svg>
+  </button>
+
+  <span id="nosotros-lb-counter" class="absolute bottom-5 left-1/2 -translate-x-1/2 rounded-full bg-black/50 px-4 py-1 text-sm text-white"></span>
+</div>
+
+<script>
+  (() => {
+    const dataEl = document.getElementById('nosotros-gallery-data');
+    const srcs: string[] = dataEl ? JSON.parse(dataEl.dataset.photos || '[]') : [];
+    if (srcs.length === 0) return;
+
+    const lb = document.getElementById('nosotros-lb');
+    const lbImg = document.getElementById('nosotros-lb-img') as HTMLImageElement | null;
+    const lbCounter = document.getElementById('nosotros-lb-counter');
+    if (!lb || !lbImg || !lbCounter) return;
+
+    let current = 0;
+
+    function show(index: number) {
+      current = (index + srcs.length) % srcs.length;
+      lbImg!.src = srcs[current];
+      lbImg!.alt = `Proyecto ${current + 1}`;
+      lbCounter!.textContent = `${current + 1} / ${srcs.length}`;
+    }
+
+    function open(index: number) {
+      show(index);
+      lb!.style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function close() {
+      lb!.style.display = 'none';
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll<HTMLButtonElement>('[data-nosotros-open]').forEach((btn) => {
+      btn.addEventListener('click', () => open(Number(btn.dataset.nosotrosOpen)));
+    });
+
+    document.getElementById('nosotros-lb-close')?.addEventListener('click', close);
+    document.getElementById('nosotros-lb-prev')?.addEventListener('click', () => show(current - 1));
+    document.getElementById('nosotros-lb-next')?.addEventListener('click', () => show(current + 1));
+    lb.addEventListener('click', (e) => { if (e.target === lb) close(); });
+
+    document.addEventListener('keydown', (e) => {
+      if (lb!.style.display === 'none') return;
+      if (e.key === 'Escape') close();
+      if (e.key === 'ArrowLeft') show(current - 1);
+      if (e.key === 'ArrowRight') show(current + 1);
+    });
+  })();
+</script>
