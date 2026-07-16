@@ -608,43 +608,15 @@ const schema = [
     <div class="container-site">
       <p class="eyebrow text-teal">Comentarios</p>
       <h2 class="display-lg mt-3 max-w-xl text-3xl md:text-4xl">Lo que dicen quienes ya compraron</h2>
-      <div class="relative mt-8" data-carousel-root>
+      <div class="mt-8">
         <div
-          data-carousel-track
-          class="flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth"
-          style="scrollbar-width: none; -ms-overflow-style: none;"
-        >
-          {
-            [
-              {
-                quote: 'Compré mi lote desde Estados Unidos. Todo el proceso fue por videollamada y los documentos llegaron en regla.',
-                autor: 'Inversionista, vive en EE. UU.',
-              },
-              {
-                quote: 'Lo que me convenció fue que no hay letra pequeña: cuota fija, sin intereses, y la escritura queda a mi nombre.',
-                autor: 'Comprador en San Cayetano',
-              },
-              {
-                quote: 'Nunca había podido comprar nada porque estaba reportado. Aquí nadie me pidió puntaje de crédito.',
-                autor: 'Comprador en Cúcuta',
-              },
-              {
-                quote: 'Llevaba años pagando arriendo y pensando que sin crédito nunca iba a tener nada. Hoy tengo tierra propia.',
-                autor: 'Propietaria, Norte de Santander',
-              },
-            ].map((c) => (
-              <blockquote class="min-w-[85%] snap-start rounded-2xl border-l-2 border-gold bg-white p-6 sm:min-w-[45%] lg:min-w-[30%]">
-                <p class="leading-relaxed text-ink/85">"{c.quote}"</p>
-                <footer class="mt-4 text-sm font-bold text-teal">{c.autor}</footer>
-              </blockquote>
-            ))
-          }
-        </div>
-        <GalleryCarousel />
+          id="featurable-c29f4a7a-ea85-49fe-898f-e666bfc8983d"
+          data-featurable-async
+        ></div>
       </div>
-      <div data-carousel-dots class="mt-5 flex items-center justify-center gap-2"></div>
     </div>
   </section>
+  <script is:inline src="https://featurable.com/assets/v2/carousel_default.min.js" defer charset="UTF-8"></script>
 
   <!-- PLAN DE PAGOS -->
   <section class="bg-plum py-16 text-white md:py-24">
