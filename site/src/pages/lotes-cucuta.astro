@@ -305,17 +305,17 @@ const schema = [
         <div id="tv-carousel" class="relative overflow-hidden rounded-2xl bg-plum-dark">
           <!-- Videos -->
           {[
-            '/videos/testimonio-1.mp4',
-            '/videos/testimonio-2.mp4',
-            '/videos/testimonio-3.mp4',
-            '/videos/testimonio-4.mp4',
-            '/videos/testimonio-5.mp4',
-            '/videos/testimonio-6.mp4',
-          ].map((src, i) => (
+            { src: '/videos/testimonio-3.mp4', poster: '/videos/posters/testimonio-3.jpg' },
+            { src: '/videos/testimonio-2.mp4', poster: '/videos/posters/testimonio-2.jpg' },
+            { src: '/videos/testimonio-1.mp4', poster: '/videos/posters/testimonio-1.jpg' },
+            { src: '/videos/testimonio-5.mp4', poster: '/videos/posters/testimonio-5.jpg' },
+            { src: '/videos/testimonio-4.mp4', poster: '/videos/posters/testimonio-4.jpg' },
+            { src: '/videos/testimonio-6.mp4', poster: '/videos/posters/testimonio-6.jpg' },
+          ].map(({ src, poster }, i) => (
             <video
               data-tv-slide={i}
               src={src}
-              poster={`/videos/posters/testimonio-${i + 1}.jpg`}
+              poster={poster}
               class={`block w-full object-cover transition-opacity duration-300 ${i === 0 ? '' : 'absolute inset-0 opacity-0 pointer-events-none'}`}
               style="aspect-ratio:9/16"
               muted
