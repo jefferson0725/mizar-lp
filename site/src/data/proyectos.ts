@@ -19,6 +19,8 @@ export interface Proyecto {
   /** URL externa de landing dedicada si existe */
   lpUrl: string | null;
   destacado: boolean;
+  /** Ocultar de listados públicos (proyectos + home) sin eliminar del repositorio */
+  oculto?: boolean;
 }
 
 export const PROYECTOS_CON_LANDING_PROPIA = new Set([
@@ -72,6 +74,7 @@ export const proyectos: Proyecto[] = [
     imagen: null,
     lpUrl: null,
     destacado: true,
+    oculto: true,
   },
   {
     slug: 'parcelas-mesa-de-los-santos',
@@ -86,6 +89,7 @@ export const proyectos: Proyecto[] = [
     imagen: null,
     lpUrl: null,
     destacado: true,
+    oculto: true,
   },
   {
     slug: 'lotes-cucuta',

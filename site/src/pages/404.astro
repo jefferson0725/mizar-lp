@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Página no encontrada | Grupo Mizar"
+  description="La página que buscas no existe. Explora nuestros proyectos inmobiliarios en Colombia: apartamentos, parcelas y lotes a cuotas sin bancos."
+  path="/404"
+>
+  <section class="flex min-h-[70vh] flex-col items-center justify-center bg-cream px-6 text-center">
+    <p class="text-8xl font-black text-plum/10">404</p>
+    <h1 class="mt-4 text-3xl font-bold text-ink md:text-4xl">Esta página no existe</h1>
+    <p class="mt-4 max-w-prose text-ink/70">
+      Puede que el enlace esté desactualizado o que la dirección tenga un error.
+      Puedes volver al inicio o ir directamente a contactarnos.
+    </p>
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+      <a href="/" class="btn-primary">Ir al inicio</a>
+      <a href="/contacto" class="btn-outline">Contacto</a>
+    </div>
+  </section>
+</Base>

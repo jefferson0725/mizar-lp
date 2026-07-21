@@ -3,7 +3,11 @@
 // No usa Base.astro: estas páginas traen su propio Tailwind (@theme de la
 // landing), tipografías Fraunces/DM Sans y no llevan header/footer del sitio.
 import "../landing/index.css";
+import "@fontsource-variable/fraunces/opsz.css";
+import "@fontsource-variable/dm-sans/wght.css";
+import "@fontsource-variable/archivo";
 import Analytics from "../components/Analytics.astro";
+import { orgSchema } from "../data/schema";
 
 interface Props {
   title: string;
@@ -27,22 +31,19 @@ const canonical = new URL(path, Astro.site).href;
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0a2342" />
     <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Grupo Mizar" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(ogImage, Astro.site).href} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CO" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={new URL(ogImage, Astro.site).href} />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=DM+Sans:wght@400;500;600&family=Archivo:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
     <title>{title}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
     <style set:html={`:root{--color-plum:${headerColor};--color-plum-dark:${headerColorDark};}`}></style>
     <script is:inline type="text/javascript">
       (function(c,l,a,r,i,t,y){
@@ -60,10 +61,10 @@ const canonical = new URL(path, Astro.site).href;
       --color-mizar: #d72b47 !important;
       --color-teal: #1e3a5f !important;
       --color-ink: #1e2b2e !important;
-      font-family: "Archivo", ui-sans-serif, system-ui, sans-serif !important;
+      font-family: "Archivo Variable", ui-sans-serif, system-ui, sans-serif !important;
     }
     [data-header] a, [data-header] button, [data-header] nav {
-      font-family: "Archivo", ui-sans-serif, system-ui, sans-serif !important;
+      font-family: "Archivo Variable", ui-sans-serif, system-ui, sans-serif !important;
     }
   </style>
   <body>

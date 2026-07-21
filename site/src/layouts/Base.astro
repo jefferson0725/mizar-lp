@@ -5,6 +5,7 @@ import Footer from '../components/Footer.astro';
 import WhatsAppFloat from '../components/WhatsAppFloat.astro';
 import { getWhatsAppConfig } from '../data/whatsapp';
 import Analytics from '../components/Analytics.astro';
+import { orgSchema } from '../data/schema';
 import archivoLatinWghtNormal from '@fontsource-variable/archivo/files/archivo-latin-wght-normal.woff2?url';
 
 interface Props {
@@ -19,6 +20,8 @@ interface Props {
   headerTransparent?: boolean;
   /** Dirección que muestra el footer (sobreescribe el default de Bucaramanga) */
   footerDireccion?: string;
+  /** URL del recurso LCP para preload (hero image) */
+  preloadImage?: string;
 }
 
 const {
@@ -29,34 +32,16 @@ const {
   schema,
   headerTransparent = false,
   footerDireccion,
+  preloadImage,
 } = Astro.props;
 const wa = getWhatsAppConfig(path);
 const site = Astro.site ?? new URL('https://mizar.com.co');
 const canonical = new URL(path, site).href;
-const usesGoogleMapsEmbed = path === '/contacto' || path === '/lotes-cucuta';
-
-const orgSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'RealEstateAgent',
-  name: 'Grupo Mizar',
-  alternateName: 'Mizar Diseño y Construcción',
-  url: site.href,
-  logo: new URL('/logo-mizar.webp', site).href,
-  description:
-    'Constructora e inmobiliaria con más de 20 años en Colombia. Apartamentos, parcelas campestres y lotes urbanos a cuotas, sin bancos.',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'Calle 105A #23a-18, Provenza',
-    addressLocality: 'Bucaramanga',
-    addressRegion: 'Santander',
-    addressCountry: 'CO',
-  },
-  areaServed: ['Santander', 'Norte de Santander', 'Colombia'],
-  sameAs: [
-    'https://www.facebook.com/mizarconstructora',
-    'https://www.instagram.com/mizarconstructora',
-  ],
-};
+const usesGoogleMapsEmbed =
+  path === '/contacto' ||
+  path === '/lotes-cucuta' ||
+  path === '/apartamentos-piedecuesta' ||
+  path === '/apartamentos-giron';
 ---
 
 <!doctype html>
@@ -69,6 +54,7 @@ const orgSchema = {
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    {preloadImage && <link rel="preload" as="image" fetchpriority="high" href={preloadImage} />}
     <link
       rel="preload"
       href={archivoLatinWghtNormal}

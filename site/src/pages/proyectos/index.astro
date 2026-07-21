@@ -10,7 +10,7 @@ const imagenes = import.meta.glob<{ default: ImageMetadata }>(
 );
 
 const items = await Promise.all(
-  proyectos.map(async (p) => {
+  proyectos.filter((p) => !p.oculto).map(async (p) => {
     const mod = p.imagen ? imagenes[`../../assets/proyectos/${p.imagen}`] : null;
     const imgSrc = mod
       ? (await getImage({ src: mod.default, width: 800, format: 'webp' })).src

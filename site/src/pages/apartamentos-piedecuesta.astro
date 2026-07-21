@@ -85,6 +85,7 @@ const schema = [
   description="Apartamentos sobre planos en el centro de Piedecuesta, frente al Cerro de La Cantera, con financiación directa, cuotas fijas y sin bancos."
   path="/apartamentos-piedecuesta"
   schema={schema}
+  preloadImage={heroBg}
 >
   <section class="relative flex min-h-[88vh] flex-col justify-end overflow-hidden bg-neutral-950 text-white">
     <img src={heroBg} alt="Render de apartamentos Terrazas de la Cantera en Piedecuesta" loading="eager" fetchpriority="high" class="absolute inset-0 h-full w-full object-cover" />
@@ -119,7 +120,7 @@ const schema = [
   <section class="bg-white py-16 md:py-24">
     <div class="container-site grid items-center gap-10 md:grid-cols-[5fr_7fr]">
       <div><p class="eyebrow text-teal">Testimonios</p><h2 class="display-lg mt-3 text-3xl md:text-4xl">Ellos ya dieron el paso</h2><p class="mt-4 max-w-prose leading-relaxed text-ink/75">Personas que compran a cuotas directo con la constructora. Dale play y escúchalos.</p></div>
-      <div class="relative overflow-hidden rounded-2xl bg-plum-dark"><video id="video-testimonio" src="/videos/testimonios.mp4" class="aspect-video w-full object-cover" muted loop playsinline preload="metadata"></video><button id="video-audio-toggle" type="button" class="absolute right-4 bottom-4 flex h-12 w-12 items-center justify-center rounded-full bg-black/60 text-white" aria-label="Activar sonido"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5ZM23 9l-6 6M17 9l6 6" /></svg></button></div>
+      <div class="relative overflow-hidden rounded-2xl bg-plum-dark"><video id="video-testimonio" src="/videos/testimonios.mp4" poster="/videos/posters/testimonios.jpg" class="aspect-video w-full object-cover" muted loop playsinline preload="metadata"></video><button id="video-audio-toggle" type="button" class="absolute right-4 bottom-4 flex h-12 w-12 items-center justify-center rounded-full bg-black/60 text-white" aria-label="Activar sonido"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5ZM23 9l-6 6M17 9l6 6" /></svg></button></div>
     </div>
   </section>
 

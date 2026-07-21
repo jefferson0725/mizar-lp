@@ -21,7 +21,7 @@ async function resolveImg(nombre: string | null, width = 800) {
 }
 
 const items = await Promise.all(
-  proyectos.map(async (p) => ({
+  proyectos.filter((p) => !p.oculto).map(async (p) => ({
     slug: p.slug,
     nombre: p.nombre,
     tipo: p.tipo,
@@ -86,6 +86,7 @@ const carouselSlides = [
   description="Apartamentos, parcelas y lotes urbanos en Santander y Norte de Santander. +20 años construyendo en Colombia y +100 proyectos entregados, a cuotas y sin bancos."
   path="/"
   headerTransparent
+  preloadImage={heroSlides[0]?.src}
 >
   <!-- HERO: video de fondo, header flotante encima, contenido anclado abajo -->
   <section class="relative flex min-h-[80svh] flex-col justify-end overflow-hidden bg-neutral-950 text-white md:min-h-[90vh] md:justify-center">

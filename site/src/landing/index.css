@@ -55,8 +55,8 @@
   --color-plum-dark: #17333a;
 
   /* Tipografía */
-  --font-serif: "Fraunces", "Playfair Display", Georgia, serif;
-  --font-sans: "DM Sans", system-ui, sans-serif;
+  --font-serif: "Fraunces Variable", "Fraunces", Georgia, serif;
+  --font-sans: "DM Sans Variable", "DM Sans", system-ui, sans-serif;
 
   /* Sombras de marca */
   --shadow-card: 0 4px 16px rgba(10, 35, 66, 0.1);
