@@ -43,7 +43,6 @@ export default function VideoCarousel({ slides }) {
     });
   }, [idx]);
 
-  // pausa por interacción del usuario
   const pause = () => {
     pausedRef.current = true;
     clearTimeout(timerRef.current);
@@ -53,9 +52,11 @@ export default function VideoCarousel({ slides }) {
     go(idx);
   };
 
+  const prev = () => { pause(); go(idx - 1); };
+  const next = () => { pause(); go(idx + 1); };
+
   return (
     <div
-      onPointerDown={pause}
       onPointerLeave={resume}
       onTouchEnd={() => setTimeout(resume, 4000)}
     >
@@ -69,7 +70,8 @@ export default function VideoCarousel({ slides }) {
         {slides.map((s, i) => (
           <figure
             key={s.src}
-            className="relative aspect-[9/16] min-w-[68%] snap-start overflow-hidden rounded-2xl bg-plum-dark sm:min-w-[42%] md:min-w-[30%] lg:min-w-[23%]"
+            onClick={() => { pause(); go(i); }}
+            className="relative aspect-[9/16] min-w-[68%] snap-start overflow-hidden rounded-2xl bg-plum-dark cursor-pointer sm:min-w-[42%] md:min-w-[30%] lg:min-w-[23%]"
           >
             {s.type === 'video' ? (
               <>
@@ -83,22 +85,37 @@ export default function VideoCarousel({ slides }) {
                   preload="metadata"
                   className="h-full w-full object-cover"
                 />
-                <button
-                  type="button"
-                  onClick={() => setMuted((m) => !m)}
-                  className="absolute right-3 bottom-3 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-black/60 text-white"
-                  aria-label={muted ? 'Activar sonido' : 'Silenciar'}
-                >
-                  {muted ? (
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M11 5 6 9H2v6h4l5 4V5ZM23 9l-6 6M17 9l6 6" />
-                    </svg>
-                  ) : (
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M11 5 6 9H2v6h4l5 4V5ZM15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14" />
-                    </svg>
-                  )}
-                </button>
+
+                {/* Overlay + play icon en videos inactivos */}
+                {i !== idx && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/55 transition-opacity duration-300">
+                    <span className="flex h-16 w-16 items-center justify-center rounded-full bg-white/20 backdrop-blur-sm ring-2 ring-white/40">
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="white" className="ml-1">
+                        <polygon points="5,3 19,12 5,21" />
+                      </svg>
+                    </span>
+                  </div>
+                )}
+
+                {/* Botón de sonido solo en el activo */}
+                {i === idx && (
+                  <button
+                    type="button"
+                    onClick={(e) => { e.stopPropagation(); setMuted((m) => !m); }}
+                    className="absolute right-3 bottom-3 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-black/60 text-white"
+                    aria-label={muted ? 'Activar sonido' : 'Silenciar'}
+                  >
+                    {muted ? (
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M11 5 6 9H2v6h4l5 4V5ZM23 9l-6 6M17 9l6 6" />
+                      </svg>
+                    ) : (
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M11 5 6 9H2v6h4l5 4V5ZM15.5 8.5a5 5 0 0 1 0 7M19 5a9 9 0 0 1 0 14" />
+                      </svg>
+                    )}
+                  </button>
+                )}
               </>
             ) : (
               <img src={s.src} alt={s.alt ?? s.label} loading="lazy" className="h-full w-full object-cover" />
@@ -106,30 +123,52 @@ export default function VideoCarousel({ slides }) {
 
             <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent p-5 pt-14 text-white">
               <p className="eyebrow text-gold">{s.label}</p>
-              {s.quote && <p className="mt-1.5 max-w-md text-sm leading-relaxed">“{s.quote}”</p>}
+              {s.quote && <p className="mt-1.5 max-w-md text-sm leading-relaxed">"{s.quote}"</p>}
               {s.autor && <p className="mt-1 text-xs font-bold text-white/70">{s.autor}</p>}
             </figcaption>
           </figure>
         ))}
       </div>
 
-      <div className="mt-4 flex items-center justify-center gap-2" role="tablist" aria-label="Ir a slide">
-        {slides.map((s, i) => (
-          <button
-            key={s.src}
-            type="button"
-            role="tab"
-            aria-selected={i === idx}
-            aria-label={`Slide ${i + 1}: ${s.label}`}
-            onClick={() => {
-              pause();
-              go(i);
-            }}
-            className={`h-1.5 rounded-full transition-all ${
-              i === idx ? 'w-8 bg-mizar' : 'w-3 bg-ink/25 hover:bg-ink/40'
-            }`}
-          />
-        ))}
+      {/* Controles: flechas + dots */}
+      <div className="mt-5 flex items-center justify-center gap-4">
+        <button
+          type="button"
+          onClick={prev}
+          aria-label="Video anterior"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-ink/20 bg-white text-ink shadow-sm transition hover:bg-ink hover:text-white"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+
+        <div className="flex items-center gap-2" role="tablist" aria-label="Ir a slide">
+          {slides.map((s, i) => (
+            <button
+              key={s.src}
+              type="button"
+              role="tab"
+              aria-selected={i === idx}
+              aria-label={`Slide ${i + 1}: ${s.label}`}
+              onClick={() => { pause(); go(i); }}
+              className={`h-1.5 rounded-full transition-all ${
+                i === idx ? 'w-8 bg-mizar' : 'w-3 bg-ink/25 hover:bg-ink/40'
+              }`}
+            />
+          ))}
+        </div>
+
+        <button
+          type="button"
+          onClick={next}
+          aria-label="Siguiente video"
+          className="flex h-10 w-10 items-center justify-center rounded-full border border-ink/20 bg-white text-ink shadow-sm transition hover:bg-ink hover:text-white"
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </button>
       </div>
     </div>
   );
