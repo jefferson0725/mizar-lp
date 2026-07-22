@@ -1,0 +1,39 @@
+---
+const pasos = [
+  {
+    numero: "1",
+    titulo: "Separas con $3.000.000",
+    descripcion: "Aseguras tu lote hoy mismo, sin bancos de por medio.",
+  },
+  {
+    numero: "2",
+    titulo: "Firmas directo con nosotros",
+    descripcion: "Acordamos un plan de pagos claro y a tu medida.",
+  },
+  {
+    numero: "3",
+    titulo: "Empiezas a construir",
+    descripcion: "Recibes tu lote demarcado, con servicios y planos listos.",
+  },
+];
+---
+
+<section class="bg-crema py-20 px-6">
+  <div class="max-w-4xl mx-auto">
+    <h2 class="reveal font-serif text-navy text-3xl md:text-5xl text-center mb-12 leading-tight">
+      Así de fácil es empezar
+    </h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+      {pasos.map(({ numero, titulo, descripcion }, i) => (
+        <div class="reveal text-center" style={`transition-delay: ${i * 0.15}s`}>
+          <div class="bg-rojo text-white w-12 h-12 rounded-full flex items-center justify-center font-black text-xl mx-auto mb-4">
+            {numero}
+          </div>
+          <h3 class="font-bold text-navy text-xl text-center mb-2">{titulo}</h3>
+          <p class="text-gris-oscuro/70 text-center leading-relaxed">{descripcion}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

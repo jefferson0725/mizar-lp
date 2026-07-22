@@ -3,9 +3,9 @@ import { useState } from 'react';
 const WHATSAPP = '573112382253';
 
 const TIPOS = [
-  { id: 'apartamento', label: 'Apartamento' },
-  { id: 'parcela', label: 'Parcela' },
-  { id: 'lote', label: 'Lote urbano' },
+  { id: 'apartamento', label: 'Apartamento', ubicaciones: ['Girón', 'Piedecuesta'] },
+  { id: 'parcela', label: 'Parcela', ubicaciones: ['Mesa de los Santos', 'Charta'] },
+  { id: 'lote', label: 'Lote urbano', ubicaciones: ['Norte de Santander'] },
 ];
 
 const PROPOSITOS = [
@@ -22,7 +22,14 @@ const PAISES = [
 
 export default function HeroForm() {
   const [tipo, setTipo] = useState('apartamento');
+  const [ubicacion, setUbicacion] = useState('Girón');
   const [proposito, setProposito] = useState('inversion');
+
+  function handleTipo(id) {
+    setTipo(id);
+    const t = TIPOS.find((t) => t.id === id);
+    setUbicacion(t?.ubicaciones[0] ?? '');
+  }
   const [nombre, setNombre] = useState('');
   const [email, setEmail] = useState('');
   const [pais, setPais] = useState('+57');
@@ -34,7 +41,7 @@ export default function HeroForm() {
     const propLabel = PROPOSITOS.find((p) => p.id === proposito)?.label ?? proposito;
     const msg =
       `Hola, vengo de la web de Grupo Mizar.\n` +
-      `Busco: ${tipoLabel} para ${propLabel.toLowerCase()}.\n` +
+      `Busco: ${tipoLabel} en ${ubicacion} para ${propLabel.toLowerCase()}.\n` +
       `Nombre: ${nombre}\nEmail: ${email}\nCelular: ${pais} ${celular}`;
     window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, '_blank');
   }
@@ -66,9 +73,24 @@ export default function HeroForm() {
               role="radio"
               aria-checked={tipo === t.id}
               className={chip(tipo === t.id)}
-              onClick={() => setTipo(t.id)}
+              onClick={() => handleTipo(t.id)}
             >
               {t.label}
+            </button>
+          ))}
+        </div>
+        <p className="eyebrow mt-3 mb-1.5 text-gold">Proyecto</p>
+        <div className="flex flex-wrap gap-1.5" role="radiogroup" aria-label="Proyecto">
+          {TIPOS.find((t) => t.id === tipo)?.ubicaciones.map((u) => (
+            <button
+              key={u}
+              type="button"
+              role="radio"
+              aria-checked={ubicacion === u}
+              className={chip(ubicacion === u)}
+              onClick={() => setUbicacion(u)}
+            >
+              {u}
             </button>
           ))}
         </div>

@@ -35,22 +35,22 @@ const pasos = [
 const marcas = [
   {
     href: '/proyectos',
-    eyebrow: 'Mizar',
+    eyebrow: 'Mizar · Santander',
     eyebrowClass: 'text-gold',
     titulo: 'Apartamentos, cabañas y parcelas campestres',
-    texto: 'En Girón, Piedecuesta, Charta y la Mesa de los Santos. Sobre planos y terminados.',
+    texto: 'En Girón, Piedecuesta, Charta y la Mesa de los Santos, Santander. Sobre planos y terminados.',
     cta: 'Ver proyectos',
-    cardClass: 'bg-plum-dark hover:bg-plum',
+    cardClass: 'bg-plum-dark hover:bg-plum rounded-2xl',
     ctaClass: 'text-gold',
   },
   {
     href: '/lotes-cucuta',
-    eyebrow: 'Mi Lote',
+    eyebrow: 'Mi Lote · Norte de Santander',
     eyebrowClass: 'text-white/70',
     titulo: 'Lotes urbanos en Cúcuta',
-    texto: 'Tierra propia con escritura independiente en San Cayetano, para quienes quieren invertir en tierra.',
+    texto: 'Tierra propia con escritura independiente en San Cayetano, Norte de Santander, para quienes quieren invertir en tierra.',
     cta: 'Conocer Mi Lote',
-    cardClass: 'bg-teal hover:opacity-90',
+    cardClass: 'bg-teal hover:opacity-90 rounded-2xl',
     ctaClass: 'text-white',
   },
 ];
@@ -88,9 +88,10 @@ const schema = {
           <dd class="mt-1 text-[11px] font-semibold tracking-wide text-ink/60 uppercase">Obras entregadas</dd>
         </div>
         <div>
-          <dt class="sr-only">Reconocimiento</dt>
+          <dt class="sr-only">Reconocimiento Bienal Colombiana de Arquitectura y Urbanismo</dt>
+          <dd class="text-[11px] font-semibold tracking-wide text-ink/60 uppercase">Nominación</dd>
           <dd class="stat-num text-2xl text-plum sm:text-3xl">Bienal</dd>
-          <dd class="mt-1 text-[11px] font-semibold tracking-wide text-ink/60 uppercase">Col. de Arquitectura</dd>
+          <dd class="mt-1 text-[11px] font-semibold tracking-wide text-ink/60 uppercase">de arquitectura y urbanismo</dd>
         </div>
       </dl>
     </div>
@@ -104,13 +105,12 @@ const schema = {
         de trabajar.
       </p>
       <p>
-        Hace más de veinte años, un grupo de ingenieros santandereanos comenzó a levantar
-        obras para el Estado: parques, centros de convenciones, espacios públicos. Uno de
-        esos proyectos, el Parque Metropolitano Bosque Encantado en Bucaramanga, llegó
-        hasta la Bienal Colombiana de Arquitectura. Otro nos llevó a la Sierra Nevada, a
-        construir el Centro de Interpretación Arhuaca en Nabusimake. Ese no se podía hacer
-        con planos estándar: había que escuchar a la comunidad, entender su cultura y
-        construir a su medida.
+        Hace más de veinte años, comenzamos construyendo obras para el Estado: parques,
+        centros de convenciones, espacios públicos. Uno de esos proyectos, el Parque
+        Metropolitano Bosque Encantado en Bucaramanga, llegó hasta la Bienal Colombiana de
+        Arquitectura y urbanismo. Otro nos llevó a la Sierra Nevada, a construir el Centro
+        de Interpretación Arhuaca en Nabusimake. Y otras decenas de proyectos que impactan
+        aún hoy en día a miles de personas.
       </p>
       <p>
         Con los años entregamos más de cien obras en distintas regiones de Colombia. Pero
@@ -185,7 +185,7 @@ const schema = {
       <div class="mt-14">
         <p class="eyebrow text-teal">Proyectos disponibles</p>
         <div class="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {proyectos.map((p) => <ProyectoCard proyecto={p} />)}
+          {proyectos.filter((p) => !p.oculto).map((p) => <ProyectoCard proyecto={p} />)}
         </div>
         <div class="mt-8 text-center">
           <a href="/proyectos" class="btn-primary">Ver todos los proyectos</a>

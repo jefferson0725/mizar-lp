@@ -25,6 +25,7 @@ export interface Proyecto {
 
 export const PROYECTOS_CON_LANDING_PROPIA = new Set([
   'lotes-cucuta',
+  'mirador-de-la-montana',
 ]);
 
 export function getProyectoHref(proyecto: Pick<Proyecto, 'slug' | 'lpUrl'>) {
@@ -102,6 +103,19 @@ export const proyectos: Proyecto[] = [
     resumen:
       'La urbanización más grande de San Cayetano: lotes de 7x10 y 7x16 con escritura independiente, a 100 m de la futura Universidad Simón Bolívar.',
     imagen: 'lotes-cucuta.png',
+    lpUrl: null,
+    destacado: true,
+  },
+  {
+    slug: 'mirador-de-la-montana',
+    nombre: 'Mirador de la Montaña — Mesa de los Santos',
+    tipo: 'lote',
+    ubicacion: 'Mesa de los Santos, Santander',
+    ciudad: 'Mesa de los Santos',
+    estado: 'disponible',
+    propositos: ['inversion', 'vivienda'],
+    resumen: 'Lotes campestres desde $75 millones a 15 min del peaje hacia Mesa de los Santos. Financiación directa sin bancos ni codeudores, con vías empedradas, servicios y planos listos.',
+    imagen: 'mirador.png',
     lpUrl: null,
     destacado: true,
   },

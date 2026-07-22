@@ -44,12 +44,6 @@ const heroSlides = (
   ])
 ).filter((slide): slide is { src: string; alt: string } => Boolean(slide.src));
 
-const equipoSrc = (await getImage({ src: equipoImg, width: 1200, format: 'webp' })).src;
-const gironSrc = await resolveImg('giron.png', 1200);
-const lotesSrc = await resolveImg('lotes-cucuta.png', 1200);
-
-// Carrusel de videos: 1 video real de testimonios; el resto marcado para
-// reemplazar por los videos de Drive (personas, grupos, proyectos)
 const carouselSlides = [
   {
     type: 'video',
@@ -58,25 +52,28 @@ const carouselSlides = [
     quote: 'Historias reales de quienes ya pagan su propiedad directo con la constructora.',
   },
   {
-    type: 'image',
-    src: equipoSrc,
-    label: 'Nuestro equipo',
-    quote: 'Una empresa familiar que responde con nombre propio por lo que construye.',
-    autor: 'Grupo Mizar · Bucaramanga',
+    type: 'video',
+    src: '/videos/testimonio-mayra.mp4',
+    label: 'Testimonio',
+    quote: '',
   },
   {
-    type: 'image',
-    src: gironSrc,
-    label: 'Proyectos',
-    quote: 'Llevaba años pagando arriendo y pensando que sin crédito nunca iba a tener nada. Hoy pago la cuota de mi apartamento directo con la constructora.',
-    autor: 'Propietaria en Girón',
+    type: 'video',
+    src: '/videos/testimonio-cliente2.mp4',
+    label: 'Testimonio',
+    quote: '',
   },
   {
-    type: 'image',
-    src: lotesSrc,
-    label: 'Inversionistas',
-    quote: 'Compré mi lote desde Estados Unidos. Todo el proceso fue por videollamada y los documentos llegaron en regla.',
-    autor: 'Inversionista en Cúcuta, vive en EE. UU.',
+    type: 'video',
+    src: '/videos/testimonio-cliente3.mp4',
+    label: 'Testimonio',
+    quote: '',
+  },
+  {
+    type: 'video',
+    src: '/videos/testimonio-andres.mp4',
+    label: 'Testimonio',
+    quote: '',
   },
 ];
 ---

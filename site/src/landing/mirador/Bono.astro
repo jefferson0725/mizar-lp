@@ -1,0 +1,37 @@
+---
+import { Image } from 'astro:assets';
+import bonImg from '../../assets/mirador/Bono-5-millones-.webp';
+
+const WA_URL = "https://wa.me/573102941376?text=Hola%2C%20me%20interesan%20los%20lotes%20de%20Mirador%20de%20la%20Monta%C3%B1a%2C%20mi%20nombre%20es%20";
+---
+
+<section class="bg-navy py-16 px-6 text-center">
+  <div class="max-w-3xl mx-auto">
+    <p class="text-dorado uppercase tracking-widest text-sm font-semibold mb-4">
+      Oferta por tiempo limitado
+    </p>
+    <p class="text-white text-xl mb-4">
+      Por tiempo limitado, tu lote incluye un bono especial de
+    </p>
+    <p class="text-dorado font-black text-5xl md:text-6xl mb-2">
+      $5.000.000
+    </p>
+
+    <Image
+      src={bonImg}
+      alt="Bono especial de $5.000.000 en Mirador de la Montaña"
+      class="mx-auto rounded-2xl my-8 max-w-sm w-full"
+      loading="lazy"
+    />
+
+    <a
+      href={WA_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-block bg-rojo hover:bg-rojo-dark text-white font-bold px-10 py-4 rounded-lg text-lg transition-colors duration-300 shadow-hover"
+      data-event="whatsapp-click"
+    >
+      Quiero mi bono
+    </a>
+  </div>
+</section>

@@ -1,0 +1,87 @@
+---
+import { Image } from 'astro:assets';
+import mapa from '../../assets/mirador/mapa.webp';
+
+const puntos = [
+  "Clima fresco de montaña todo el año",
+  "Zona de alta valorización campestre",
+  "Cerca de restaurantes y atractivos de la Mesa",
+];
+---
+
+<section class="bg-gris-claro py-20 px-6">
+  <div class="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
+    <!-- Columna texto -->
+    <div>
+      <p class="text-rojo font-semibold tracking-widest uppercase text-xs md:text-sm mb-4">
+        A 15 minutos del peaje
+      </p>
+      <h2 class="reveal font-serif text-navy text-3xl md:text-5xl leading-[1.1] mb-6">
+        Mesa de los Santos, el destino campestre de Santander
+      </h2>
+      <p class="text-gris-oscuro/80 text-lg mb-8 leading-relaxed">
+        A solo 15 minutos del peaje hacia la Mesa de los Santos: clima de montaña, naturaleza y una de las zonas de mayor valorización campestre de Santander.
+      </p>
+      <ul class="space-y-4">
+        {puntos.map((punto) => (
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-rojo flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="m9 12 2 2 4-4"/>
+            </svg>
+            <span class="text-gris-oscuro text-base">{punto}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <!-- Columna mapa -->
+    <div class="reveal">
+      <button
+        id="mapa-zoom-btn"
+        type="button"
+        aria-label="Ampliar mapa"
+        class="group relative w-full cursor-zoom-in focus:outline-none"
+      >
+        <Image
+          src={mapa}
+          alt="Mapa de ubicación de Mirador de la Montaña en Mesa de los Santos"
+          class="rounded-2xl shadow-card w-full transition-transform duration-300 group-hover:scale-[1.02]"
+          loading="lazy"
+        />
+        <span class="absolute bottom-3 right-3 bg-black/50 text-white text-xs font-semibold px-2.5 py-1 rounded-full backdrop-blur-sm pointer-events-none">
+          🔍 Ampliar
+        </span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<dialog
+  id="mapa-dialog"
+  class="fixed inset-0 m-auto max-w-[95vw] max-h-[95vh] bg-transparent p-0 border-0 backdrop:bg-black/80 backdrop:backdrop-blur-sm"
+>
+  <button
+    id="mapa-dialog-close"
+    type="button"
+    aria-label="Cerrar"
+    class="absolute top-2 right-2 z-10 bg-black/60 text-white rounded-full w-9 h-9 flex items-center justify-center text-xl hover:bg-black/80"
+  >✕</button>
+  <Image
+    src={mapa}
+    alt="Mapa de ubicación de Mirador de la Montaña en Mesa de los Santos"
+    class="rounded-xl max-w-[95vw] max-h-[95vh] object-contain"
+  />
+</dialog>
+
+<script>
+  const btn = document.getElementById('mapa-zoom-btn');
+  const dialog = document.getElementById('mapa-dialog') as HTMLDialogElement;
+  const closeBtn = document.getElementById('mapa-dialog-close');
+
+  btn?.addEventListener('click', () => dialog?.showModal());
+  closeBtn?.addEventListener('click', () => dialog?.close());
+  dialog?.addEventListener('click', (e) => {
+    if (e.target === dialog) dialog.close();
+  });
+</script>

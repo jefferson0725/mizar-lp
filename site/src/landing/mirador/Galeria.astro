@@ -1,0 +1,42 @@
+---
+import { Image } from 'astro:assets';
+import img1 from '../../assets/mirador/slider-1.webp';
+import img2 from '../../assets/mirador/slider-2.webp';
+import img3 from '../../assets/mirador/slider-3.webp';
+import img4 from '../../assets/mirador/slider-4.webp';
+import img7 from '../../assets/mirador/slider-7.webp';
+import img8 from '../../assets/mirador/slider-8.webp';
+
+const imagenes = [
+  { src: img1, alt: "Entrada de Mirador de la Montaña" },
+  { src: img2, alt: "Vías empedradas del proyecto" },
+  { src: img3, alt: "Vista de los lotes demarcados" },
+  { src: img4, alt: "Paisaje de la montaña" },
+  { src: img7, alt: "Área verde del proyecto" },
+  { src: img8, alt: "Vista panorámica de Mesa de los Santos" },
+];
+---
+
+<section class="bg-crema py-20 px-6">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="reveal font-serif text-navy text-3xl md:text-5xl text-center mb-4 leading-tight">
+      Conoce Mirador de la Montaña
+    </h2>
+    <p class="text-gris-oscuro/70 text-center mb-10 text-lg">
+      Vías empedradas, entrada con muro en piedra natural y lotes con vista.
+    </p>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      {imagenes.map(({ src, alt }, i) => (
+        <div class="reveal overflow-hidden rounded-xl" style={`transition-delay: ${i * 0.08}s`}>
+          <Image
+            src={src}
+            alt={alt}
+            class="rounded-xl object-cover w-full h-64"
+            loading="lazy"
+          />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

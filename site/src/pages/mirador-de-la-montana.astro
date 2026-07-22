@@ -1,0 +1,62 @@
+---
+import LandingReact from "../layouts/LandingReact.astro";
+import Header from "../components/Header.astro";
+import Hero from "../landing/mirador/Hero.astro";
+import Propuesta from "../landing/mirador/Propuesta.astro";
+import Galeria from "../landing/mirador/Galeria.astro";
+import Caracteristicas from "../landing/mirador/Caracteristicas.astro";
+import Ubicacion from "../landing/mirador/Ubicacion.astro";
+import Bono from "../landing/mirador/Bono.astro";
+import Precios from "../landing/mirador/Precios.astro";
+import Financiacion from "../landing/mirador/Financiacion.astro";
+import FAQ from "../landing/mirador/FAQ.astro";
+import Contacto from "../landing/mirador/Contacto.astro";
+import LandingFooter from "../landing/mirador/Footer.astro";
+import WhatsAppFloat from "../components/WhatsAppFloat.astro";
+import { getWhatsAppConfig } from "../data/whatsapp";
+const wa = getWhatsAppConfig('/mirador-de-la-montana');
+---
+
+<LandingReact
+  title="Mirador de la Montaña · Lotes campestres en Mesa de los Santos | Mizar"
+  description="Lotes campestres desde $75 millones a 15 min del peaje hacia Mesa de los Santos, Santander. Financiación directa sin bancos ni codeudores. Separa con $3.000.000."
+  ogImage="/assets/mirador-de-la-montana.png"
+  path="/mirador-de-la-montana"
+  headerColor="#2f4a3c"
+  headerColorDark="#1e3327"
+>
+  <div class="theme-mirador">
+    <Header transparent />
+    <Hero />
+    <Propuesta />
+    <Galeria />
+    <Caracteristicas />
+    <Ubicacion />
+    <Bono />
+    <Precios />
+    <Financiacion />
+    <FAQ />
+    <Contacto />
+    <LandingFooter />
+  </div>
+  <WhatsAppFloat phone={wa.phone} message={wa.message} />
+</LandingReact>
+
+<script>
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduced) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach((el) => el.classList.add('in-view'));
+  }
+</script>

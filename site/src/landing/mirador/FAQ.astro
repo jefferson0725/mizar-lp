@@ -1,0 +1,51 @@
+---
+const FAQ_ITEMS = [
+  {
+    pregunta: "¿Necesito banco o codeudor?",
+    respuesta: "No. La financiación es directa con nosotros: sin bancos, sin codeudores y sin papeleos bancarios.",
+  },
+  {
+    pregunta: "¿Cuánto necesito para separar?",
+    respuesta: "Separas tu lote con $3.000.000 y luego defines un plan de pagos a tu medida.",
+  },
+  {
+    pregunta: "¿Los lotes están listos para construir?",
+    respuesta: "Sí. Están demarcados, con vías empedradas, agua potable y acceso a energía eléctrica.",
+  },
+  {
+    pregunta: "¿Dónde queda exactamente?",
+    respuesta: "A 15 minutos del peaje hacia la Mesa de los Santos, Santander.",
+  },
+  {
+    pregunta: "¿Qué incluye el bono?",
+    respuesta: "Un bono especial de $5.000.000 por tiempo limitado, además de los planos arquitectónicos.",
+  },
+  {
+    pregunta: "¿Puedo usarlo como inversión?",
+    respuesta: "Sí. Es una de las zonas campestres de mayor valorización de Santander.",
+  },
+];
+---
+
+<section id="preguntas-frecuentes" class="py-20 px-6 bg-white">
+  <div class="max-w-3xl mx-auto">
+    <h2 class="reveal font-serif text-navy text-3xl sm:text-4xl md:text-5xl text-center mb-12">
+      Preguntas frecuentes
+    </h2>
+
+    <div class="bg-crema rounded-2xl px-6 py-2 shadow-sm">
+      {FAQ_ITEMS.map(({ pregunta, respuesta }) => (
+        <details class="border-b border-navy/10 last:border-0 group">
+          <summary class="flex items-center justify-between py-5 cursor-pointer gap-4 [list-style:none] [&::-webkit-details-marker]:hidden">
+            <span class="font-semibold text-navy text-base md:text-lg">{pregunta}</span>
+            <span
+              class="faq-icon text-navy text-2xl flex-shrink-0 transition-transform duration-300 group-open:rotate-45"
+              aria-hidden="true"
+            >+</span>
+          </summary>
+          <p class="text-gris-oscuro/80 pb-5 leading-relaxed">{respuesta}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

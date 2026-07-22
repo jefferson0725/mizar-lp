@@ -1,0 +1,31 @@
+---
+import { Image } from 'astro:assets';
+import slider1 from '../../assets/mirador/slider-1.webp';
+---
+
+<section class="bg-navy py-20 px-6">
+  <div class="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
+    <!-- Columna texto -->
+    <div>
+      <p class="text-rojo-light font-semibold tracking-widest uppercase text-xs md:text-sm mb-5">
+        Un lugar para lo que sigue
+      </p>
+      <h2 class="font-serif font-black text-white text-3xl md:text-5xl leading-[1.1] mb-6">
+        Deja de arrendar tierra ajena.
+        <span class="text-white/55">La montaña ya tiene tu nombre.</span>
+      </h2>
+      <p class="text-white/80 text-lg md:text-xl leading-relaxed">
+        Un lote propio, escriturado y listo para construir tu casa de campo, tu proyecto o tu inversión. Clima de montaña, aire limpio y valorización antes de que todos lo descubran.
+      </p>
+    </div>
+    <!-- Columna imagen -->
+    <div>
+      <Image
+        src={slider1}
+        alt="Vista del terreno en Mirador de la Montaña, Mesa de los Santos"
+        class="rounded-2xl shadow-dark object-cover w-full"
+        loading="lazy"
+      />
+    </div>
+  </div>
+</section>

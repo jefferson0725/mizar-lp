@@ -17,6 +17,7 @@ const PHONES = {
   laureles: "573112658552",
   terrazas: "573112658552",
   milote: "573112382253",
+  mirador: "573102941376",
 } as const;
 
 /** Mensajes por ruta — la clave es el pathname exacto o un prefijo */
@@ -70,6 +71,11 @@ const CONFIG: Record<string, WhatsAppConfig> = {
     phone: PHONES.general,
     message:
       "Hola, vivo en el exterior y quiero invertir en Colombia con Grupo Mizar, mi nombre es",
+  },
+  "/mirador-de-la-montana": {
+    phone: PHONES.mirador,
+    message:
+      "Hola, me interesan los lotes campestres de Mirador de la Montaña en Mesa de los Santos, mi nombre es",
   },
 };
 

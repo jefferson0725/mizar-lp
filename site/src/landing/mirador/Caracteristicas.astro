@@ -1,0 +1,68 @@
+---
+const caracteristicas = [
+  {
+    titulo: "Entrada con muro en piedra natural",
+    descripcion: "Una entrada imponente en piedra que le da carácter y seguridad al proyecto.",
+    iconPath: `<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>`,
+  },
+  {
+    titulo: "Vías internas empedradas",
+    descripcion: "Circula cómodo por vías internas empedradas, hechas para durar.",
+    iconPath: `<path d="M3 17l9-9 9 9"/><path d="M3 7l9 9 9-9"/>`,
+  },
+  {
+    titulo: "Lotes demarcados y listos",
+    descripcion: "Cada lote está delimitado y listo para empezar a construir de inmediato.",
+    iconPath: `<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>`,
+  },
+  {
+    titulo: "Agua potable y energía",
+    descripcion: "Acceso a agua potable y a energía eléctrica para tu proyecto.",
+    iconPath: `<path d="M12 2v6"/><path d="M5.2 9.2l4.2 4.2"/><path d="M2 16h6"/><path d="M18.8 9.2l-4.2 4.2"/><path d="M22 16h-6"/><path d="M12 18a6 6 0 0 0 0-12"/><circle cx="12" cy="16" r="2"/>`,
+  },
+  {
+    titulo: "Planos arquitectónicos disponibles",
+    descripcion: "Te entregamos planos arquitectónicos para que arranques sin trámites extra.",
+    iconPath: `<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>`,
+  },
+  {
+    titulo: "Escritura y respaldo",
+    descripcion: "Compra directa con nosotros, con reglas claras desde el primer día.",
+    iconPath: `<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>`,
+  },
+];
+---
+
+<section class="bg-white py-20 px-6">
+  <div class="max-w-5xl mx-auto">
+    <p class="text-rojo font-semibold tracking-widest uppercase text-xs md:text-sm text-center mb-4">
+      El proyecto
+    </p>
+    <h2 class="reveal font-serif text-navy text-3xl md:text-5xl mb-12 text-center leading-tight">
+      Todo listo para que solo pienses en construir
+    </h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {caracteristicas.map(({ titulo, descripcion, iconPath }, i) => (
+        <div
+          class="reveal bg-crema border border-navy/5 rounded-2xl p-8"
+          style={`transition-delay: ${i * 0.1}s`}
+        >
+          <svg
+            class="w-8 h-8 text-rojo mb-4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            set:html={iconPath}
+          ></svg>
+          <h3 class="text-navy font-bold text-xl mb-2">{titulo}</h3>
+          <p class="text-gris-oscuro/70 leading-relaxed">{descripcion}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
