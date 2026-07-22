@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import { Image, getImage } from 'astro:assets';
 import img1 from '../../assets/mirador/slider-1.webp';
 import img2 from '../../assets/mirador/slider-2.webp';
 import img3 from '../../assets/mirador/slider-3.webp';
@@ -15,6 +15,13 @@ const imagenes = [
   { src: img7, alt: "Área verde del proyecto" },
   { src: img8, alt: "Vista panorámica de Mesa de los Santos" },
 ];
+
+// Resolver URLs optimizadas para el lightbox
+const fullSrcs = await Promise.all(
+  imagenes.map(({ src, alt }) =>
+    getImage({ src, format: 'webp' }).then((r) => ({ src: r.src, alt }))
+  )
+);
 ---
 
 <section class="bg-crema py-20 px-6">
@@ -28,15 +35,105 @@ const imagenes = [
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
       {imagenes.map(({ src, alt }, i) => (
-        <div class="reveal overflow-hidden rounded-xl" style={`transition-delay: ${i * 0.08}s`}>
+        <button
+          type="button"
+          data-lightbox-index={i}
+          aria-label={`Ver imagen ampliada: ${alt}`}
+          class="reveal group overflow-hidden rounded-xl cursor-zoom-in focus:outline-none"
+          style={`transition-delay: ${i * 0.08}s`}
+        >
           <Image
             src={src}
             alt={alt}
-            class="rounded-xl object-cover w-full h-64"
+            class="rounded-xl object-cover w-full h-64 transition-transform duration-300 group-hover:scale-105"
             loading="lazy"
           />
-        </div>
+        </button>
       ))}
     </div>
   </div>
 </section>
+
+<!-- Lightbox -->
+<dialog
+  id="galeria-dialog"
+  class="fixed inset-0 m-auto w-full max-w-5xl bg-transparent p-0 border-0 backdrop:bg-black/90 backdrop:backdrop-blur-sm"
+>
+  <div class="relative flex items-center justify-center min-h-[60vh] px-14">
+    <!-- Imagen principal -->
+    <img
+      id="galeria-img"
+      src=""
+      alt=""
+      class="max-h-[85vh] max-w-full rounded-xl object-contain shadow-2xl"
+    />
+
+    <!-- Cerrar -->
+    <button
+      id="galeria-close"
+      type="button"
+      aria-label="Cerrar"
+      class="absolute top-2 right-2 z-10 bg-black/60 text-white rounded-full w-10 h-10 flex items-center justify-center text-xl hover:bg-black/80 transition-colors"
+    >✕</button>
+
+    <!-- Anterior -->
+    <button
+      id="galeria-prev"
+      type="button"
+      aria-label="Imagen anterior"
+      class="absolute left-1 top-1/2 -translate-y-1/2 z-10 bg-black/50 text-white rounded-full w-11 h-11 flex items-center justify-center hover:bg-black/80 transition-colors"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M15 18l-6-6 6-6"/>
+      </svg>
+    </button>
+
+    <!-- Siguiente -->
+    <button
+      id="galeria-next"
+      type="button"
+      aria-label="Siguiente imagen"
+      class="absolute right-1 top-1/2 -translate-y-1/2 z-10 bg-black/50 text-white rounded-full w-11 h-11 flex items-center justify-center hover:bg-black/80 transition-colors"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 18l6-6-6-6"/>
+      </svg>
+    </button>
+
+    <!-- Contador -->
+    <p id="galeria-counter" class="absolute bottom-3 left-1/2 -translate-x-1/2 text-white/70 text-sm tabular-nums"></p>
+  </div>
+</dialog>
+
+<script define:vars={{ fullSrcs }}>
+  const dialog = document.getElementById('galeria-dialog');
+  const img = document.getElementById('galeria-img');
+  const counter = document.getElementById('galeria-counter');
+  let current = 0;
+
+  function show(i) {
+    current = (i + fullSrcs.length) % fullSrcs.length;
+    img.src = fullSrcs[current].src;
+    img.alt = fullSrcs[current].alt;
+    counter.textContent = `${current + 1} / ${fullSrcs.length}`;
+  }
+
+  document.querySelectorAll('[data-lightbox-index]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      show(Number(btn.dataset.lightboxIndex));
+      dialog.showModal();
+    });
+  });
+
+  document.getElementById('galeria-close').addEventListener('click', () => dialog.close());
+  document.getElementById('galeria-prev').addEventListener('click', () => show(current - 1));
+  document.getElementById('galeria-next').addEventListener('click', () => show(current + 1));
+
+  dialog.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
+
+  document.addEventListener('keydown', (e) => {
+    if (!dialog.open) return;
+    if (e.key === 'ArrowLeft') show(current - 1);
+    if (e.key === 'ArrowRight') show(current + 1);
+  });
+</script>
