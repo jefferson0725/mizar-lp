@@ -115,7 +115,7 @@ export const proyectos: Proyecto[] = [
     estado: 'disponible',
     propositos: ['inversion', 'vivienda'],
     resumen: 'Lotes campestres desde $75 millones a 15 min del peaje hacia Mesa de los Santos. Financiación directa sin bancos ni codeudores, con vías empedradas, servicios y planos listos.',
-    imagen: 'mirador.png',
+    imagen: 'mirador-thumb.webp',
     lpUrl: null,
     destacado: true,
   },

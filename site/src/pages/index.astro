@@ -8,7 +8,7 @@ import { getProyectoHref, proyectos } from '../data/proyectos';
 import equipoImg from '../assets/equipo.jpg';
 
 const imagenes = import.meta.glob<{ default: ImageMetadata }>(
-  '../assets/proyectos/*.png',
+  '../assets/proyectos/*.{png,webp}',
   { eager: true },
 );
 

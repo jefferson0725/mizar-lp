@@ -8,7 +8,7 @@ interface Props {
 const { proyecto: p } = Astro.props;
 
 const imagenes = import.meta.glob<{ default: ImageMetadata }>(
-  '../../assets/proyectos/*.png',
+  '../../assets/proyectos/*.{png,webp}',
   { eager: true },
 );
 const img = p.imagen ? imagenes[`../../assets/proyectos/${p.imagen}`]?.default : null;

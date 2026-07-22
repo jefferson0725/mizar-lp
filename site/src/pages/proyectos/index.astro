@@ -5,7 +5,7 @@ import ProyectoSelector from '../../components/islands/ProyectoSelector.jsx';
 import { getProyectoHref, proyectos, WHATSAPP_GENERAL } from '../../data/proyectos';
 
 const imagenes = import.meta.glob<{ default: ImageMetadata }>(
-  '../../assets/proyectos/*.png',
+  '../../assets/proyectos/*.{png,webp}',
   { eager: true },
 );
 
