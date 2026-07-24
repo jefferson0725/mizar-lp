@@ -1,0 +1,178 @@
+---
+export const prerender = false;
+import { checkAuth } from '../../../lib/auth';
+import { getPostById } from '../../../lib/db';
+
+if (!checkAuth(Astro.request)) {
+  return Astro.redirect('/admin');
+}
+
+const id = Number(Astro.params.id);
+const post = getPostById(id);
+
+if (!post) {
+  return Astro.redirect('/admin/posts');
+}
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Editar artículo · Admin Mizar</title>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      body { font-family: system-ui, sans-serif; background: #f5f5f0; min-height: 100vh; }
+      header { background: #1a1035; color: white; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between; }
+      .header-left { display: flex; align-items: center; gap: 1rem; }
+      header a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.9rem; }
+      header a:hover { color: white; }
+      header span { color: rgba(255,255,255,0.3); }
+      header h1 { font-size: 1rem; font-weight: 700; }
+      .btn-delete { background: transparent; border: 1px solid rgba(255,100,100,0.4); color: rgba(255,150,150,0.9); padding: 0.4rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.85rem; }
+      .btn-delete:hover { background: rgba(255,0,0,0.15); border-color: rgba(255,100,100,0.7); color: white; }
+      main { max-width: 860px; margin: 0 auto; padding: 2rem 1rem; }
+      .card { background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+      .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+      .field { margin-bottom: 1.25rem; }
+      label { display: block; font-size: 0.82rem; font-weight: 700; color: #555; margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.04em; }
+      input[type=text], input[type=date], textarea {
+        width: 100%; padding: 0.7rem 0.9rem; border: 1.5px solid #e0e0e0;
+        border-radius: 8px; font-size: 0.95rem; font-family: inherit; outline: none;
+        transition: border-color 0.2s;
+      }
+      input:focus, textarea:focus { border-color: #c0392b; }
+      textarea { resize: vertical; min-height: 420px; font-family: 'Courier New', monospace; font-size: 0.9rem; line-height: 1.6; }
+      .check-row { display: flex; align-items: center; gap: 0.5rem; }
+      .check-row input { width: auto; }
+      .check-row label { margin: 0; text-transform: none; font-size: 0.9rem; }
+      .actions { display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
+      .btn-pub { background: #c0392b; color: white; font-weight: 700; padding: 0.8rem 1.75rem; border: none; border-radius: 8px; cursor: pointer; font-size: 0.95rem; }
+      .btn-pub:hover { background: #a93226; }
+      .btn-draft { background: white; color: #444; font-weight: 700; padding: 0.8rem 1.75rem; border: 1.5px solid #ddd; border-radius: 8px; cursor: pointer; font-size: 0.95rem; }
+      .btn-draft:hover { border-color: #aaa; }
+      .btn-cancel { color: #888; text-decoration: none; display: flex; align-items: center; padding: 0.8rem; font-size: 0.9rem; }
+      .btn-cancel:hover { color: #444; }
+      #status-msg { padding: 0.7rem 1rem; border-radius: 8px; font-size: 0.9rem; display: none; margin-top: 1rem; }
+      #status-msg.error { background: #fff0f0; color: #c0392b; display: block; }
+      #status-msg.ok { background: #e6f9f0; color: #1a7a4a; display: block; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-left">
+        <a href="/admin/posts">← Artículos</a>
+        <span>/</span>
+        <h1>Editar artículo</h1>
+      </div>
+      <button type="button" class="btn-delete" id="btn-delete">Eliminar</button>
+    </header>
+    <main>
+      <div class="card">
+        <form id="post-form">
+          <div class="field">
+            <label for="title">Título *</label>
+            <input type="text" id="title" name="title" required value={post.title} />
+          </div>
+          <div class="field">
+            <label for="description">Descripción / meta *</label>
+            <input type="text" id="description" name="description" required value={post.description} />
+          </div>
+          <div class="grid2">
+            <div class="field">
+              <label for="slug">Slug (URL)</label>
+              <input type="text" id="slug" name="slug" value={post.slug} />
+            </div>
+            <div class="field">
+              <label for="pub_date">Fecha de publicación</label>
+              <input type="date" id="pub_date" name="pub_date" value={post.pub_date} />
+            </div>
+          </div>
+          <div class="grid2">
+            <div class="field">
+              <label for="frente">Frente / categoría</label>
+              <input type="text" id="frente" name="frente" value={post.frente} />
+            </div>
+            <div class="field">
+              <label for="author">Autor</label>
+              <input type="text" id="author" name="author" value={post.author} />
+            </div>
+          </div>
+          <div class="field">
+            <label for="tags">Tags (separados por coma)</label>
+            <input type="text" id="tags" name="tags" value={post.tags.join(', ')} />
+          </div>
+          <div class="field">
+            <label for="content">Contenido (Markdown) *</label>
+            <textarea id="content" name="content" required>{post.content}</textarea>
+          </div>
+          <div class="check-row">
+            <input type="checkbox" id="draft" name="draft" checked={post.draft} />
+            <label for="draft">Borrador (no visible en el blog)</label>
+          </div>
+          <div id="status-msg"></div>
+          <div class="actions">
+            <button type="submit" class="btn-pub">Guardar cambios</button>
+            <a href="/admin/posts" class="btn-cancel">Cancelar</a>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <script define:vars={{ postId: post.id }}>
+      async function save() {
+        const form = document.getElementById('post-form');
+        const data = {
+          title: form.title.value.trim(),
+          description: form.description.value.trim(),
+          slug: form.slug.value.trim(),
+          pub_date: form.pub_date.value,
+          frente: form.frente.value.trim() || 'blog',
+          author: form.author.value.trim() || 'Grupo Mizar',
+          tags: form.tags.value.split(',').map(t => t.trim()).filter(Boolean),
+          content: form.content.value,
+          draft: form.draft.checked,
+        };
+
+        const msg = document.getElementById('status-msg');
+        msg.className = '';
+        msg.style.display = 'none';
+
+        try {
+          const res = await fetch(`/api/posts/${postId}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+          });
+          const json = await res.json();
+          if (json.ok) {
+            msg.textContent = 'Cambios guardados correctamente.';
+            msg.className = 'ok';
+            msg.style.display = 'block';
+          } else {
+            msg.textContent = json.error ?? 'Error al guardar.';
+            msg.className = 'error';
+            msg.style.display = 'block';
+          }
+        } catch {
+          msg.textContent = 'Error de red. Intenta de nuevo.';
+          msg.className = 'error';
+          msg.style.display = 'block';
+        }
+      }
+
+      document.getElementById('post-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        save();
+      });
+
+      document.getElementById('btn-delete').addEventListener('click', async () => {
+        if (!confirm('¿Eliminar este artículo? Esta acción no se puede deshacer.')) return;
+        const res = await fetch(`/api/posts/${postId}`, { method: 'DELETE' });
+        const json = await res.json();
+        if (json.ok) window.location.href = '/admin/posts';
+      });
+    </script>
+  </body>
+</html>
