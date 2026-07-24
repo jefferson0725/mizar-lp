@@ -1,0 +1,14 @@
+Options -MultiViews
+
+RewriteEngine On
+
+# Si el archivo o directorio existe, sírvelo directamente
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Intenta con /ruta/index.html (rutas de Astro)
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}/index.html -f
+RewriteRule ^(.+)$ $1/index.html [L]
+
+# Si no existe, devuelve 404 personalizado
+ErrorDocument 404 /404.html
