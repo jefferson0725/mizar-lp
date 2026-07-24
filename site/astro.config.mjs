@@ -10,6 +10,7 @@ import node from '@astrojs/node';
 export default defineConfig({
   site: 'https://mizar.com.co',
   adapter: node({ mode: 'standalone' }),
+  security: { checkOrigin: false },
   compressHTML: true,
   vite: {
     plugins: [tailwindcss()],
