@@ -1,15 +1,43 @@
 ---
-export const prerender = false;
 import { marked } from 'marked';
 import Base from '../../layouts/Base.astro';
-import { getPostBySlug } from '../../lib/db';
 
-const { slug } = Astro.params;
-const post = getPostBySlug(slug!);
+const BLOG_API_URL = import.meta.env.BLOG_API_URL ?? '';
 
-if (!post || post.draft) {
-  return Astro.redirect('/404');
+export async function getStaticPaths() {
+  const apiUrl = import.meta.env.BLOG_API_URL ?? '';
+  if (!apiUrl) return [];
+
+  try {
+    const res = await fetch(`${apiUrl}/api/posts`);
+    if (!res.ok) return [];
+    const posts: Array<Record<string, unknown>> = await res.json();
+    return posts.map((post) => ({
+      params: { slug: post.slug as string },
+      props: { post },
+    }));
+  } catch (e) {
+    console.warn('[blog/[slug]] No se pudo obtener posts de la API:', e);
+    return [];
+  }
 }
+
+interface Post {
+  id: number;
+  slug: string;
+  title: string;
+  description: string;
+  content: string;
+  author: string;
+  frente: string;
+  tags: string[];
+  hero_image: string | null;
+  draft: boolean;
+  pub_date: string;
+  updated_date: string | null;
+}
+
+const { post } = Astro.props as { post: Post };
 
 const content = marked.parse(post.content) as string;
 const site = Astro.site ?? new URL('https://mizar.com.co');
