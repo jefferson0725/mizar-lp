@@ -31,12 +31,13 @@ jobs:
         env:
           STRAPI_URL: ${{ secrets.STRAPI_URL }}
 
-      - name: Deploy via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: site/dist/
-          server-dir: public_html/
-          dangerous-clean-slate: false
+      - name: Deploy via SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p 65002 82.25.83.112 >> ~/.ssh/known_hosts
+          rsync -avzr --delete \
+            -e "ssh -p 65002 -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
+            site/dist/ \
+            u564846756@82.25.83.112:~/public_html/
