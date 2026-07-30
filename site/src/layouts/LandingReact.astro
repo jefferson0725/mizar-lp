@@ -46,11 +46,15 @@ const canonical = new URL(path, Astro.site).href;
     <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
     <style set:html={`:root{--color-plum:${headerColor};--color-plum-dark:${headerColorDark};}`}></style>
     <script is:inline type="text/javascript">
-      (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "x4jt12aihp");
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          (function(c,l,a,r,i,t,y){
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+          })(window, document, "clarity", "script", "x4jt12aihp");
+        }, 3000);
+      });
     </script>
     <Analytics />
   </head>

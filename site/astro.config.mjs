@@ -2,7 +2,7 @@
 import { defineConfig } from 'astro/config';
 
 import tailwindcss from '@tailwindcss/vite';
-import react from '@astrojs/react';
+import preact from '@astrojs/preact';
 import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
@@ -14,10 +14,7 @@ export default defineConfig({
     server: {
       allowedHosts: ['.trycloudflare.com', '.loca.lt']
     },
-    optimizeDeps: {
-      exclude: ['react/jsx-dev-runtime'],
-    },
   },
 
-  integrations: [react(), sitemap()]
+  integrations: [preact(), sitemap()]
 });

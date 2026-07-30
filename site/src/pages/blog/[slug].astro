@@ -1,45 +1,63 @@
 ---
-import { marked } from 'marked';
+import { renderBlocks } from '../../lib/renderBlocks';
 import Base from '../../layouts/Base.astro';
 
-const BLOG_API_URL = import.meta.env.BLOG_API_URL ?? '';
+const STRAPI_URL = import.meta.env.STRAPI_URL ?? 'http://localhost:1337';
 
 export async function getStaticPaths() {
-  const apiUrl = import.meta.env.BLOG_API_URL ?? '';
-  if (!apiUrl) return [];
-
+  const strapiUrl = import.meta.env.STRAPI_URL ?? 'http://localhost:1337';
   try {
-    const res = await fetch(`${apiUrl}/api/posts`);
+    const res = await fetch(
+      `${strapiUrl}/api/posts?populate=hero_image&sort=pub_date:desc&pagination[pageSize]=100`,
+    );
     if (!res.ok) return [];
-    const posts: Array<Record<string, unknown>> = await res.json();
-    return posts.map((post) => ({
+    const { data } = await res.json();
+    return (data ?? []).map((post: Record<string, unknown>) => ({
       params: { slug: post.slug as string },
       props: { post },
     }));
   } catch (e) {
-    console.warn('[blog/[slug]] No se pudo obtener posts de la API:', e);
+    console.warn('[blog/[slug]] No se pudo obtener posts de Strapi:', e);
     return [];
   }
 }
 
+interface HeroImage {
+  url: string;
+  alternativeText?: string;
+  width?: number;
+  height?: number;
+}
+
 interface Post {
   id: number;
+  documentId: string;
   slug: string;
   title: string;
   description: string;
-  content: string;
+  content: unknown[];
   author: string;
   frente: string;
-  tags: string[];
-  hero_image: string | null;
-  draft: boolean;
+  tags: string;
+  hero_image: HeroImage | null;
   pub_date: string;
-  updated_date: string | null;
+  publishedAt: string;
+  updatedAt: string;
 }
 
 const { post } = Astro.props as { post: Post };
 
-const content = marked.parse(post.content) as string;
+// Resolver URL de hero_image (Strapi puede devolver rutas relativas)
+const heroUrl = post.hero_image
+  ? post.hero_image.url.startsWith('http')
+    ? post.hero_image.url
+    : `${STRAPI_URL}${post.hero_image.url}`
+  : null;
+const heroAlt = post.hero_image?.alternativeText || post.title;
+
+// Bloques JSON de Strapi → HTML
+const content = renderBlocks((post.content ?? []) as Parameters<typeof renderBlocks>[0]);
+
 const site = Astro.site ?? new URL('https://mizar.com.co');
 const path = `/blog/${post.slug}`;
 const canonical = new URL(path, site).href;
@@ -56,21 +74,21 @@ const articleSchema: Record<string, unknown> = {
   '@type': 'Article',
   headline: post.title,
   description: post.description,
-  author: { '@type': 'Organization', name: post.author },
+  author: { '@type': 'Organization', name: post.author ?? 'Grupo Mizar' },
   publisher: {
     '@type': 'Organization',
     name: 'Grupo Mizar',
     logo: { '@type': 'ImageObject', url: new URL('/logo-mizar.webp', site).href },
   },
   datePublished: new Date(post.pub_date).toISOString(),
-  dateModified: new Date(post.updated_date ?? post.pub_date).toISOString(),
+  dateModified: new Date(post.updatedAt ?? post.pub_date).toISOString(),
   mainEntityOfPage: canonical,
   url: canonical,
-  keywords: post.tags,
+  keywords: (post.tags ?? '').split(',').map((t) => t.trim()).filter(Boolean),
 };
 
-if (post.hero_image) {
-  articleSchema.image = [new URL(post.hero_image, site).href];
+if (heroUrl) {
+  articleSchema.image = [heroUrl];
 }
 
 const breadcrumbSchema = {
@@ -88,44 +106,91 @@ const breadcrumbSchema = {
   title={`${post.title} | Grupo Mizar`}
   description={post.description}
   path={path}
-  ogImage={post.hero_image ?? undefined}
+  ogImage={heroUrl ?? undefined}
   schema={[articleSchema, breadcrumbSchema]}
 >
   <article class="bg-cream">
     <header class="bg-plum-dark py-16 text-white md:py-24">
       <div class="container-site max-w-prose">
-        <p class="eyebrow text-gold">{post.frente.replace('-', ' ')}</p>
+        <p class="eyebrow text-gold">{post.frente?.replace(/-/g, ' ')}</p>
         <h1 class="display-xl mt-4 text-4xl md:text-6xl">{post.title}</h1>
         <p class="mt-6 text-lg text-white/80">{post.description}</p>
         <p class="mt-6 text-sm font-semibold text-white/65">
-          {formatDate(post.pub_date)} · {post.author}
+          {formatDate(post.pub_date)} · {post.author ?? 'Grupo Mizar'}
         </p>
       </div>
     </header>
 
+    {heroUrl && (
+      <img
+        class="w-full max-h-[480px] object-cover"
+        src={heroUrl}
+        alt={heroAlt}
+        loading="eager"
+        width="1200"
+        height="480"
+      />
+    )}
+
     <div class="container-site max-w-prose py-12 md:py-16">
-      <div class="article-body" set:html={content} />
+      <div class="prose prose-lg max-w-none article-body" set:html={content} />
     </div>
   </article>
 </Base>
 
 <style>
-  .article-body {
-    color: var(--color-ink);
-    font-size: 1.075rem;
-    line-height: 1.8;
+  /* YouTube facade */
+  .article-body :global(.yt-facade) {
+    position: relative;
+    margin-top: 1.5rem;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    cursor: pointer;
   }
-  .article-body :global(h2) {
-    margin-top: 2.5rem;
-    margin-bottom: 0.75rem;
-    color: var(--color-plum);
-    font-size: clamp(1.6rem, 3vw, 2.25rem);
-    font-variation-settings: "wdth" 112;
-    font-weight: 800;
-    line-height: 1.12;
+  .article-body :global(.yt-facade img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
-  .article-body :global(p) { margin-top: 1rem; }
-  .article-body :global(ul) { margin-top: 1rem; padding-left: 1.25rem; list-style: square; }
-  .article-body :global(li) { margin-top: 0.5rem; }
-  .article-body :global(strong) { color: var(--color-plum); font-weight: 800; }
+  .article-body :global(.yt-play) {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.35);
+    border: none;
+    color: white;
+    font-size: 3.5rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .article-body :global(.yt-play:hover) { background: rgba(0, 0, 0, 0.55); }
+  .article-body :global(.yt-facade iframe) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
 </style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.yt-facade').forEach((el) => {
+    el.querySelector('.yt-play')?.addEventListener('click', () => {
+      const id = el.dataset.id;
+      if (!id) return;
+      const iframe = document.createElement('iframe');
+      iframe.src = `https://www.youtube.com/embed/${id}?autoplay=1`;
+      iframe.allow =
+        'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      iframe.allowFullscreen = true;
+      el.innerHTML = '';
+      el.appendChild(iframe);
+    });
+  });
+</script>

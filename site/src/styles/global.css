@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "@fontsource-variable/archivo";
+@plugin "@tailwindcss/typography";
 
 @theme {
   /* Paleta corporativa REAL extraída del CSS de mizar.com.co (kit Elementor post-16):
@@ -139,4 +140,19 @@ body {
     transform: none;
     transition: none;
   }
+}
+
+/* Prose Mizar — personalización del plugin @tailwindcss/typography */
+.prose {
+  --tw-prose-body: var(--color-ink);
+  --tw-prose-headings: var(--color-plum);
+  --tw-prose-bold: var(--color-plum);
+  --tw-prose-links: var(--color-teal);
+  --tw-prose-quotes: var(--color-ink);
+  --tw-prose-quote-borders: var(--color-gold);
+  --tw-prose-code: var(--color-plum);
+  --tw-prose-counters: var(--color-plum);
+  --tw-prose-bullets: var(--color-gold);
+  font-size: 1.075rem;
+  line-height: 1.8;
 }

@@ -20,6 +20,20 @@ async function resolveImg(nombre: string | null, width = 800) {
   return img.src;
 }
 
+async function resolveHeroImg(nombre: string) {
+  const mod = imagenes[`../assets/proyectos/${nombre}`];
+  if (!mod) return null;
+  const [w640, w960, w1600] = await Promise.all([
+    getImage({ src: mod.default, width: 640,  format: 'webp', quality: 55 }),
+    getImage({ src: mod.default, width: 960,  format: 'webp', quality: 60 }),
+    getImage({ src: mod.default, width: 1600, format: 'webp', quality: 70 }),
+  ]);
+  return {
+    src: w1600.src,
+    srcset: `${w640.src} 640w, ${w960.src} 960w, ${w1600.src} 1600w`,
+  };
+}
+
 const items = await Promise.all(
   proyectos.filter((p) => !p.oculto).map(async (p) => ({
     slug: p.slug,
@@ -38,11 +52,11 @@ const items = await Promise.all(
 // TODO: sumar fotos reales de Drive (personas, obras) cuando lleguen
 const heroSlides = (
   await Promise.all([
-    { src: await resolveImg('piedecuesta.png', 1600), alt: 'Render de apartamentos Terrazas de la Cantera en Piedecuesta' },
-    { src: await resolveImg('giron.png', 1600), alt: 'Render de apartamentos Laureles Campestre en Girón' },
-    { src: await resolveImg('lotes-cucuta.png', 1600), alt: 'Render aéreo de lotes urbanos Mi Lote en San Cayetano, Cúcuta' },
+    resolveHeroImg('piedecuesta.png').then(r => r && { ...r, alt: 'Render de apartamentos Terrazas de la Cantera en Piedecuesta' }),
+    resolveHeroImg('giron.png').then(r => r && { ...r, alt: 'Render de apartamentos Laureles Campestre en Girón' }),
+    resolveHeroImg('lotes-cucuta.png').then(r => r && { ...r, alt: 'Render aéreo de lotes urbanos Mi Lote en San Cayetano, Cúcuta' }),
   ])
-).filter((slide): slide is { src: string; alt: string } => Boolean(slide.src));
+).filter((slide): slide is { src: string; srcset: string; alt: string } => Boolean(slide?.src));
 
 const carouselSlides = [
   {
@@ -92,6 +106,8 @@ const carouselSlides = [
         heroSlides.map((slide, i) => (
           <img
             src={slide.src}
+            srcset={slide.srcset}
+            sizes="100vw"
             alt={slide.alt}
             class="absolute inset-0 h-full w-full object-cover transition-opacity duration-500"
             style={`opacity:${i === 0 ? 1 : 0};`}
@@ -173,7 +189,16 @@ const carouselSlides = [
       <div id="featurable-c29f4a7a-ea85-49fe-898f-e666bfc8983d" data-featurable-async></div>
     </div>
   </section>
-  <script is:inline src="https://featurable.com/assets/v2/carousel_default.min.js" defer charset="UTF-8"></script>
+  <script is:inline>
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      var s = document.createElement('script');
+      s.src = 'https://featurable.com/assets/v2/carousel_default.min.js';
+      s.charset = 'UTF-8';
+      document.body.appendChild(s);
+    }, 3000);
+  });
+</script>
 
   <!-- FOTO DEL EQUIPO -->
   <section class="relative overflow-hidden bg-plum text-white">

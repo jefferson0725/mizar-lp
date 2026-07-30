@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from "preact/hooks";
 import { APARTAMENTOS, WHATSAPP_URL } from "../constants";
 
 function AptoCard({ apto, imagenes }) {

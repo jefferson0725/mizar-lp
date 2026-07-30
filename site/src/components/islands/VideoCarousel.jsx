@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'preact/hooks';
 
 /**
  * Carrusel automático de videos e imágenes (personas, grupos, proyectos).
@@ -19,8 +19,8 @@ export default function VideoCarousel({ slides }) {
     setIdx(n);
     const track = trackRef.current;
     if (track) {
-      const slide = track.children[n];
-      track.scrollTo({ left: slide.offsetLeft - track.offsetLeft, behavior: 'smooth' });
+      // scrollIntoView avoids reading offsetLeft (which forces a synchronous layout)
+      track.children[n]?.scrollIntoView({ inline: 'start', behavior: 'smooth', block: 'nearest' });
     }
   };
 
@@ -34,13 +34,16 @@ export default function VideoCarousel({ slides }) {
     return () => clearTimeout(timerRef.current);
   }, [idx, slides]);
 
-  // reproducir solo el video visible
+  // reproducir solo el video visible; defer play until after paint to avoid forced layout
   useEffect(() => {
-    Object.entries(videoRefs.current).forEach(([i, v]) => {
-      if (!v) return;
-      if (Number(i) === idx) v.play().catch(() => {});
-      else v.pause();
+    const raf = requestAnimationFrame(() => {
+      Object.entries(videoRefs.current).forEach(([i, v]) => {
+        if (!v) return;
+        if (Number(i) === idx) v.play().catch(() => {});
+        else v.pause();
+      });
     });
+    return () => cancelAnimationFrame(raf);
   }, [idx]);
 
   const pause = () => {
@@ -82,7 +85,7 @@ export default function VideoCarousel({ slides }) {
                   muted={muted}
                   loop
                   playsInline
-                  preload="metadata"
+                  preload="none"
                   className="h-full w-full object-cover"
                 />
 
