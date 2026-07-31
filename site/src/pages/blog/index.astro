@@ -80,7 +80,7 @@ const schema = {
                     {p.title}
                   </a>
                 </h2>
-                <p class="mt-3 text-sm font-semibold text-ink/60">{formatDate(p.pub_date)}</p>
+                {p.pub_date && <p class="mt-3 text-sm font-semibold text-ink/60">{formatDate(p.pub_date)}</p>}
                 <p class="mt-4 text-ink/75">{p.description}</p>
                 <div class="mt-6 flex flex-wrap gap-2">
                   {(p.tags ?? '').split(',').map((t) => t.trim()).filter(Boolean).map((t) => (

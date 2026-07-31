@@ -80,7 +80,7 @@ const articleSchema: Record<string, unknown> = {
     name: 'Grupo Mizar',
     logo: { '@type': 'ImageObject', url: new URL('/logo-mizar.webp', site).href },
   },
-  datePublished: new Date(post.pub_date).toISOString(),
+  datePublished: post.pub_date ? new Date(post.pub_date).toISOString() : new Date(post.publishedAt).toISOString(),
   dateModified: new Date(post.updatedAt ?? post.pub_date).toISOString(),
   mainEntityOfPage: canonical,
   url: canonical,
@@ -116,7 +116,7 @@ const breadcrumbSchema = {
         <h1 class="display-xl mt-4 text-4xl md:text-6xl">{post.title}</h1>
         <p class="mt-6 text-lg text-white/80">{post.description}</p>
         <p class="mt-6 text-sm font-semibold text-white/65">
-          {formatDate(post.pub_date)} · {post.author ?? 'Grupo Mizar'}
+          {post.pub_date ? formatDate(post.pub_date) : ''}{post.pub_date ? ' · ' : ''}{post.author ?? 'Grupo Mizar'}
         </p>
       </div>
     </header>
