@@ -2,10 +2,10 @@
 import { renderBlocks } from '../../lib/renderBlocks';
 import Base from '../../layouts/Base.astro';
 
-const STRAPI_URL = import.meta.env.STRAPI_URL ?? 'http://localhost:1337';
+const STRAPI_URL = (import.meta.env.STRAPI_URL ?? 'http://localhost:1337').trim();
 
 export async function getStaticPaths() {
-  const strapiUrl = import.meta.env.STRAPI_URL ?? 'http://localhost:1337';
+  const strapiUrl = (import.meta.env.STRAPI_URL ?? 'http://localhost:1337').trim();
   try {
     const res = await fetch(
       `${strapiUrl}/api/posts?populate=hero_image&sort=pub_date:desc&pagination[pageSize]=100`,

@@ -1,7 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
 
-const STRAPI_URL = import.meta.env.STRAPI_URL ?? 'http://localhost:1337';
+const STRAPI_URL = (import.meta.env.STRAPI_URL ?? 'http://localhost:1337').trim();
 
 interface Post {
   id: number;

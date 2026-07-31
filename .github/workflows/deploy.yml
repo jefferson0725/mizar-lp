@@ -37,7 +37,11 @@ jobs:
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -p 65002 82.25.83.112 >> ~/.ssh/known_hosts
+          echo "=== Estructura de directorios en el servidor ==="
+          ssh -p 65002 -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no \
+            u564846756@82.25.83.112 \
+            "echo HOME=\$HOME; ls ~/; echo '--- ~/domains/ ---'; ls ~/domains/ 2>/dev/null || echo 'sin ~/domains/'; echo '--- ~/public_html/ ---'; ls ~/public_html/ 2>/dev/null | head -5"
           rsync -avzr --delete \
             -e "ssh -p 65002 -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no" \
             site/dist/ \
-            u564846756@82.25.83.112:~/public_html/
+            u564846756@82.25.83.112:~/domains/grupomizar.com.co/public_html/
