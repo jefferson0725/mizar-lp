@@ -1,39 +1,42 @@
 ---
-const pasos = [
-  {
-    numero: "1",
-    titulo: "Separas con $3.000.000",
-    descripcion: "Aseguras tu lote hoy mismo, sin bancos de por medio.",
-  },
-  {
-    numero: "2",
-    titulo: "Firmas directo con nosotros",
-    descripcion: "Acordamos un plan de pagos claro y a tu medida.",
-  },
-  {
-    numero: "3",
-    titulo: "Empiezas a construir",
-    descripcion: "Recibes tu lote demarcado, con servicios y planos listos.",
-  },
+const WA_URL = "https://wa.me/573102941376?text=Hola%2C%20me%20interesan%20los%20lotes%20de%20Mirador%20de%20la%20Monta%C3%B1a%2C%20mi%20nombre%20es%20";
+
+const beneficios = [
+  "Cuotas cómodas y adaptadas a ti.",
+  "Sin bancos ni intermediarios, proceso sencillo y directo.",
+  "Tasa de interés más baja del mercado.",
+  "Aprovecha los precios especiales de lanzamiento y asegura el lote perfecto para tu proyecto de vida.",
 ];
 ---
 
 <section class="bg-crema py-20 px-6">
-  <div class="max-w-4xl mx-auto">
-    <h2 class="reveal font-serif text-navy text-3xl md:text-5xl text-center mb-12 leading-tight">
-      Así de fácil es empezar
+  <div class="max-w-3xl mx-auto text-center">
+    <h2 class="reveal font-serif text-navy text-3xl sm:text-4xl md:text-5xl mb-10 leading-tight">
+      Facilidades de Pago Exclusivas
     </h2>
 
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
-      {pasos.map(({ numero, titulo, descripcion }, i) => (
-        <div class="reveal text-center" style={`transition-delay: ${i * 0.15}s`}>
-          <div class="bg-rojo text-white w-12 h-12 rounded-full flex items-center justify-center font-black text-xl mx-auto mb-4">
-            {numero}
-          </div>
-          <h3 class="font-bold text-navy text-xl text-center mb-2">{titulo}</h3>
-          <p class="text-gris-oscuro/70 text-center leading-relaxed">{descripcion}</p>
-        </div>
+    <ul class="space-y-4 mb-4 text-left">
+      {beneficios.map((item, i) => (
+        <li class="reveal flex items-start gap-3" style={`transition-delay: ${i * 0.1}s`}>
+          <svg class="w-5 h-5 text-rojo flex-shrink-0 mt-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+          <p class="text-gris-oscuro text-base leading-relaxed">{item}</p>
+        </li>
       ))}
-    </div>
+    </ul>
+
+    <p class="text-navy font-semibold text-base mb-10 text-left">Asesoría inmediata:</p>
+
+    <a
+      href={WA_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="inline-block bg-rojo hover:bg-rojo-dark text-white font-bold px-8 py-4 rounded-lg text-base transition-colors duration-300 shadow-hover"
+      data-event="whatsapp-click"
+    >
+      ¡Contáctanos ahora mismo y descubre cómo adquirir tu lote con las mejores condiciones del mercado!
+    </a>
   </div>
 </section>
