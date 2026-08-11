@@ -21,7 +21,7 @@ const PHONES = {
   laureles: "573112658552",
   terrazas: "573112658552",
   milote: "573112382253",
-  mirador: "573102941376",
+  mirador: "573112658552",
 } as const;
 
 /** Configuración por ruta — la clave es el pathname exacto o un prefijo */
