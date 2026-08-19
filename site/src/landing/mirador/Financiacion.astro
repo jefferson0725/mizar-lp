@@ -1,5 +1,25 @@
 ---
+import { getImage } from 'astro:assets';
+import bannerBg from '../../assets/mirador/banner2-scaled.webp';
+import imgS7 from '../../assets/mirador/slider-7.webp';
+import imgS8 from '../../assets/mirador/slider-8.webp';
+import imgS1 from '../../assets/mirador/slider-1.webp';
+import imgS2 from '../../assets/mirador/slider-2.webp';
+import imgS4 from '../../assets/mirador/slider-4.webp';
+import imgS3 from '../../assets/mirador/slider-3.webp';
+
 const WA_URL = "https://wa.me/573112658552?text=Hola%2C%20me%20interesan%20los%20lotes%20de%20Mirador%20de%20la%20Monta%C3%B1a%2C%20mi%20nombre%20es%20";
+
+const bg = await getImage({ src: bannerBg, format: 'webp' });
+
+const slides = await Promise.all([
+  getImage({ src: imgS7, format: 'webp' }).then(r => ({ src: r.src, alt: 'Área verde del proyecto' })),
+  getImage({ src: imgS8, format: 'webp' }).then(r => ({ src: r.src, alt: 'Vista panorámica de Mesa de los Santos' })),
+  getImage({ src: imgS1, format: 'webp' }).then(r => ({ src: r.src, alt: 'Entrada de Mirador de la Montaña' })),
+  getImage({ src: imgS2, format: 'webp' }).then(r => ({ src: r.src, alt: 'Vías empedradas del proyecto' })),
+  getImage({ src: imgS4, format: 'webp' }).then(r => ({ src: r.src, alt: 'Paisaje de la montaña' })),
+  getImage({ src: imgS3, format: 'webp' }).then(r => ({ src: r.src, alt: 'Vista de los lotes demarcados' })),
+]);
 
 const beneficios = [
   "Cuotas cómodas y adaptadas a ti.",
@@ -9,34 +29,121 @@ const beneficios = [
 ];
 ---
 
-<section class="bg-crema py-20 px-6">
-  <div class="max-w-3xl mx-auto text-center">
-    <h2 class="reveal font-serif text-navy text-3xl sm:text-4xl md:text-5xl mb-10 leading-tight">
+<section class="relative py-20 md:py-28 px-6 md:px-16 overflow-hidden">
+  <!-- Fondo foto sin overlay pesado — el paisaje debe verse -->
+  <div
+    class="absolute inset-0 bg-cover bg-center"
+    style={`background-image: url('${bg.src}')`}
+    aria-hidden="true"
+  ></div>
+  <!-- Sombra sutil para mejorar legibilidad del texto blanco -->
+  <div class="absolute inset-0 bg-black/20" aria-hidden="true"></div>
+
+  <div class="relative z-10 max-w-5xl mx-auto">
+
+    <h2
+      class="reveal font-serif text-white text-2xl sm:text-3xl md:text-4xl text-center font-bold mb-12 leading-tight"
+      style="text-shadow: 0 2px 10px rgba(0,0,0,0.6);"
+    >
       Facilidades de Pago Exclusivas
     </h2>
 
-    <ul class="space-y-4 mb-4 text-left">
-      {beneficios.map((item, i) => (
-        <li class="reveal flex items-start gap-3" style={`transition-delay: ${i * 0.1}s`}>
-          <svg class="w-5 h-5 text-rojo flex-shrink-0 mt-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="m9 12 2 2 4-4"/>
-          </svg>
-          <p class="text-gris-oscuro text-base leading-relaxed">{item}</p>
-        </li>
-      ))}
-    </ul>
+    <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-center">
 
-    <p class="text-navy font-semibold text-base mb-10 text-left">Asesoría inmediata:</p>
+      <!-- Columna izquierda 60% — texto centrado igual que la referencia -->
+      <div class="w-full md:w-3/5 text-center">
+        <ul class="space-y-5 mb-6">
+          {beneficios.map((item, i) => (
+            <li class="reveal flex items-start justify-center gap-3" style={`transition-delay: ${i * 0.1}s`}>
+              <!-- Doble chevron (angle-double-right) en rojo terracota -->
+              <svg class="w-5 h-5 text-rojo flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 448 512" aria-hidden="true">
+                <path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34zm192-34l-136-136c-9.4-9.4-24.6-9.4-33.9 0l-22.6 22.6c-9.4 9.4-9.4 24.6 0 33.9l96.4 96.4-96.4 96.4c-9.4 9.4-9.4 24.6 0 33.9l22.6 22.6c9.4 9.4 24.6 9.4 33.9 0l136-136c9.4-9.5 9.4-24.7 0-34z"/>
+              </svg>
+              <p class="text-white text-base leading-relaxed text-left" style="text-shadow: 0 1px 6px rgba(0,0,0,0.5);">{item}</p>
+            </li>
+          ))}
+        </ul>
 
-    <a
-      href={WA_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="inline-block bg-rojo hover:bg-rojo-dark text-white font-bold px-8 py-4 rounded-lg text-base transition-colors duration-300 shadow-hover"
-      data-event="whatsapp-click"
-    >
-      ¡Contáctanos ahora mismo y descubre cómo adquirir tu lote con las mejores condiciones del mercado!
-    </a>
+        <p class="text-white font-semibold text-base mb-4" style="text-shadow: 0 1px 6px rgba(0,0,0,0.5);">Asesoría inmediata:</p>
+
+        <a
+          href={WA_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="block bg-rojo hover:bg-rojo-dark text-white font-bold py-4 px-6 rounded-lg text-base text-center transition-colors duration-300 shadow-hover"
+          data-event="whatsapp-click"
+        >
+          ¡Contáctanos ahora mismo y descubre cómo adquirir tu lote con las mejores condiciones del mercado!
+        </a>
+      </div>
+
+      <!-- Columna derecha 40% — marco blanco estilo fotografía física (imágenes portrait 800×1138) -->
+      <div class="w-full md:w-2/5">
+        <div class="bg-white p-3 shadow-2xl">
+          <div id="financiacion-slider" class="relative overflow-hidden">
+            <div id="fin-track" class="flex transition-transform duration-500 ease-in-out">
+              {slides.map((slide) => (
+                <div class="min-w-full">
+                  <img
+                    src={slide.src}
+                    alt={slide.alt}
+                    class="w-full block object-cover aspect-[800/1138]"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Puntos de navegación -->
+          <div class="flex justify-center gap-2 mt-3 pb-1">
+            {slides.map((_, i) => (
+              <button
+                type="button"
+                data-fin-dot={i}
+                aria-label={`Imagen ${i + 1}`}
+                class="w-2.5 h-2.5 rounded-full bg-gray-300 transition-colors duration-200 cursor-pointer"
+              ></button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
+
+<script>
+  const track = document.getElementById('fin-track') as HTMLElement | null;
+  const dots = document.querySelectorAll<HTMLElement>('[data-fin-dot]');
+  const total = dots.length;
+  let current = 0;
+  let timer: ReturnType<typeof setInterval>;
+
+  function goTo(i: number) {
+    current = ((i % total) + total) % total;
+    if (track) track.style.transform = `translateX(-${current * 100}%)`;
+    dots.forEach((d, idx) => {
+      d.style.backgroundColor = idx === current ? 'var(--color-rojo)' : '';
+    });
+  }
+
+  function start() {
+    timer = setInterval(() => goTo(current + 1), 5000);
+  }
+
+  dots.forEach((dot) => {
+    dot.addEventListener('click', () => {
+      clearInterval(timer);
+      goTo(Number(dot.dataset.finDot));
+      start();
+    });
+  });
+
+  const slider = document.getElementById('financiacion-slider');
+  slider?.addEventListener('mouseenter', () => clearInterval(timer));
+  slider?.addEventListener('mouseleave', () => start());
+
+  goTo(0);
+  start();
+</script>

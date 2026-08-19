@@ -5,6 +5,8 @@ import mapa from '../../assets/mirador/mapa.webp';
 
 const WA_URL = "https://wa.me/573112658552?text=Hola%2C%20me%20interesan%20los%20lotes%20de%20Mirador%20de%20la%20Monta%C3%B1a%2C%20mi%20nombre%20es%20";
 
+const VIDEO_URL = "https://mizar.com.co/wp-content/uploads/2025/04/MIRADOR-DE-LA-MONTANA-.mp4";
+
 const caracteristicas = [
   {
     label: "Financiación Directa",
@@ -35,43 +37,65 @@ const caracteristicas = [
 
 <section id="opciones" class="bg-white py-20 px-6">
   <div class="max-w-5xl mx-auto">
-    <h2 class="reveal font-serif text-navy text-3xl md:text-5xl mb-12 text-center leading-tight">
-      ¿Por qué elegir Mirador de la Montaña?
-    </h2>
 
-    <div class="grid md:grid-cols-2 gap-8 mb-12">
-      <div class="reveal flex justify-center">
+    <!-- Título centrado -->
+    <div class="mb-10">
+      <h2 class="reveal font-serif text-navy text-xl sm:text-2xl md:text-3xl text-center leading-tight">
+        ¿Por qué elegir Mirador de la Montaña?
+      </h2>
+    </div>
+
+    <!-- Video full-width con bono encima (esquina superior derecha) -->
+    <div class="reveal relative mb-10 rounded-2xl overflow-visible shadow-card">
+      <video
+        src={VIDEO_URL}
+        controls
+        preload="metadata"
+        controlsList="nodownload"
+        class="w-full block rounded-2xl"
+      ></video>
+      <!-- Bono badge solapando la esquina superior derecha del video -->
+      <div class="absolute -top-6 right-2 md:right-0 md:translate-x-1/2 z-10">
         <Image
           src={bonImg}
           alt="Bono especial de $5.000.000 en Mirador de la Montaña"
-          class="rounded-2xl shadow-card w-full max-w-sm"
-          loading="lazy"
-        />
-      </div>
-      <div class="reveal flex justify-center">
-        <Image
-          src={mapa}
-          alt="Mapa de ubicación de Mirador de la Montaña en Mesa de los Santos"
-          class="rounded-2xl shadow-card w-full max-w-sm"
+          class="w-20 md:w-40"
           loading="lazy"
         />
       </div>
     </div>
 
-    <ul class="space-y-4 mb-12 max-w-3xl mx-auto">
-      {caracteristicas.map(({ label, descripcion }, i) => (
-        <li class="reveal flex items-start gap-3" style={`transition-delay: ${i * 0.08}s`}>
-          <svg class="w-5 h-5 text-rojo flex-shrink-0 mt-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="m9 12 2 2 4-4"/>
-          </svg>
-          <p class="text-gris-oscuro text-base leading-relaxed">
-            <strong class="text-navy">{label}:</strong> {descripcion}
-          </p>
-        </li>
-      ))}
-    </ul>
+    <!-- Mapa (izquierda) + Características (derecha) -->
+    <div class="reveal flex flex-col md:flex-row gap-8 md:gap-12 items-start mb-12">
 
+      <!-- Mapa — ocupa la mitad izquierda -->
+      <div class="w-full md:w-1/2">
+        <Image
+          src={mapa}
+          alt="Mapa de lotes de Mirador de la Montaña en Mesa de los Santos"
+          class="rounded-2xl shadow-card w-full"
+          loading="lazy"
+        />
+      </div>
+
+      <!-- Lista de características — mitad derecha -->
+      <ul class="w-full md:w-1/2 space-y-5">
+        {caracteristicas.map(({ label, descripcion }, i) => (
+          <li class="reveal flex items-start gap-3" style={`transition-delay: ${i * 0.08}s`}>
+            <svg class="w-5 h-5 text-rojo flex-shrink-0 mt-1" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="m9 12 2 2 4-4"/>
+            </svg>
+            <p class="text-gris-oscuro text-base leading-relaxed">
+              <strong class="text-navy">{label}:</strong> {descripcion}
+            </p>
+          </li>
+        ))}
+      </ul>
+
+    </div>
+
+    <!-- CTA centrado bajo el grid -->
     <div class="text-center">
       <a
         href={WA_URL}
