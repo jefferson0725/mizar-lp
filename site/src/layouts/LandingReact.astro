@@ -19,7 +19,9 @@ interface Props {
 }
 
 const { title, description, ogImage, path, headerColor = '#22484c', headerColorDark = '#17333a' } = Astro.props;
-const canonical = new URL(path, Astro.site).href;
+const site = Astro.site ?? new URL('https://grupomizar.com.co');
+const canonicalPath = path === '/' ? '/' : `${path.replace(/\/+$/, '')}/`;
+const canonical = new URL(canonicalPath, site).href;
 ---
 
 <!doctype html>
@@ -37,13 +39,13 @@ const canonical = new URL(path, Astro.site).href;
     <meta property="og:site_name" content="Grupo Mizar" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content={new URL(ogImage, Astro.site).href} />
+    <meta property="og:image" content={new URL(ogImage, site).href} />
     <meta property="og:url" content={canonical} />
     <meta property="og:locale" content="es_CO" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
-    <meta property="twitter:image" content={new URL(ogImage, Astro.site).href} />
+    <meta property="twitter:image" content={new URL(ogImage, site).href} />
     <title>{title}</title>
     <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
     <style set:html={`:root{--color-plum:${headerColor};--color-plum-dark:${headerColorDark};}`}></style>

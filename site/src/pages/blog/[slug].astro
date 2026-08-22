@@ -58,7 +58,7 @@ const heroAlt = post.hero_image?.alternativeText || post.title;
 // Bloques JSON de Strapi → HTML
 const content = renderBlocks((post.content ?? []) as Parameters<typeof renderBlocks>[0]);
 
-const site = Astro.site ?? new URL('https://mizar.com.co');
+const site = Astro.site ?? new URL('https://grupomizar.com.co');
 const path = `/blog/${post.slug}`;
 const canonical = new URL(path, site).href;
 

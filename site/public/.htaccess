@@ -2,6 +2,17 @@ Options -MultiViews
 
 RewriteEngine On
 
+# Dominio canónico: conserva ruta y query string al pasar de www al apex.
+RewriteCond %{HTTP_HOST} ^www\.grupomizar\.com\.co(?::\d+)?$ [NC]
+RewriteRule ^ https://grupomizar.com.co%{REQUEST_URI} [R=301,L,NE]
+
+# Las rutas estáticas de Astro se publican como directorios; una sola variante
+# con barra final hace que cada canonical coincida con la URL publicada.
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_URI} !/$
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}/index.html -f
+RewriteRule ^ %{REQUEST_URI}/ [R=301,L,NE]
+
 # Si el archivo o directorio existe, sírvelo directamente
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

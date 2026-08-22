@@ -13,16 +13,16 @@ Sede: Calle 105A #23a-18, Provenza, Bucaramanga, Santander, Colombia.
 
 ## Páginas principales
 
-- [Inicio](https://mizar.com.co/): presentación general del modelo de pago a cuotas y portafolio de proyectos.
-- [Nosotros](https://mizar.com.co/nosotros): historia de la empresa, equipo y modelo de negocio.
-- [Proyectos](https://mizar.com.co/proyectos): portafolio completo de apartamentos, parcelas y lotes.
-- [Mi Lote — Cúcuta](https://mizar.com.co/lotes-cucuta): lotes urbanos en San Cayetano, Cúcuta.
-- [Apartamentos VIS en Girón](https://mizar.com.co/apartamentos-vis-giron): apartamentos a cuotas sin banco en Girón, Santander.
-- [Apartamentos VIS en Piedecuesta](https://mizar.com.co/apartamentos-vis-piedecuesta): apartamentos a cuotas sin banco en Piedecuesta, Santander.
-- [Parcelas campestres en Santander](https://mizar.com.co/parcelas-campestres-santander): parcelas en Charta y Mesa de los Santos.
-- [Invertir desde el exterior](https://mizar.com.co/inversion-inmobiliaria-colombia-exterior): guía para colombianos en EE. UU. y España que quieren invertir en Colombia.
-- [Blog](https://mizar.com.co/blog): artículos sobre compra de propiedad a cuotas, inversión desde el exterior y respaldo de constructora.
-- [Contacto](https://mizar.com.co/contacto): formulario, WhatsApp y ubicación de oficinas.
+- [Inicio](https://grupomizar.com.co/): presentación general del modelo de pago a cuotas y portafolio de proyectos.
+- [Nosotros](https://grupomizar.com.co/nosotros): historia de la empresa, equipo y modelo de negocio.
+- [Proyectos](https://grupomizar.com.co/proyectos): portafolio completo de apartamentos, parcelas y lotes.
+- [Mi Lote — Cúcuta](https://grupomizar.com.co/lotes-cucuta): lotes urbanos en San Cayetano, Cúcuta.
+- [Apartamentos VIS en Girón](https://grupomizar.com.co/apartamentos-vis-giron): apartamentos a cuotas sin banco en Girón, Santander.
+- [Apartamentos VIS en Piedecuesta](https://grupomizar.com.co/apartamentos-vis-piedecuesta): apartamentos a cuotas sin banco en Piedecuesta, Santander.
+- [Parcelas campestres en Santander](https://grupomizar.com.co/parcelas-campestres-santander): parcelas en Charta y Mesa de los Santos.
+- [Invertir desde el exterior](https://grupomizar.com.co/inversion-inmobiliaria-colombia-exterior): guía para colombianos en EE. UU. y España que quieren invertir en Colombia.
+- [Blog](https://grupomizar.com.co/blog): artículos sobre compra de propiedad a cuotas, inversión desde el exterior y respaldo de constructora.
+- [Contacto](https://grupomizar.com.co/contacto): formulario, WhatsApp y ubicación de oficinas.
 
 ## Modelo de negocio
 

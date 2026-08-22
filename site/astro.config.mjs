@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://mizar.com.co',
+  site: 'https://grupomizar.com.co',
   compressHTML: true,
   vite: {
     plugins: [tailwindcss()],

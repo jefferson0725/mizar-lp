@@ -24,7 +24,7 @@ const { path, title, description, eyebrow, h1, respuesta, beneficios, proyectoSl
 const relacionados = proyectos.filter((p) => proyectoSlugs.includes(p.slug));
 const wa = `https://wa.me/${WHATSAPP_GENERAL}?text=${encodeURIComponent(ctaMensaje)}`;
 
-const site = Astro.site ?? new URL('https://mizar.com.co');
+const site = Astro.site ?? new URL('https://grupomizar.com.co');
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',

@@ -3,8 +3,8 @@ export const orgSchema = {
   '@type': 'RealEstateAgent',
   name: 'Grupo Mizar',
   alternateName: 'Mizar Diseño y Construcción',
-  url: 'https://mizar.com.co',
-  logo: 'https://mizar.com.co/logo-mizar.webp',
+  url: 'https://grupomizar.com.co',
+  logo: 'https://grupomizar.com.co/logo-mizar.webp',
   description:
     'Constructora e inmobiliaria con más de 20 años en Colombia. Apartamentos, parcelas campestres y lotes urbanos a cuotas, sin bancos.',
   address: {

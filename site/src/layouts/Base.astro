@@ -35,8 +35,9 @@ const {
   preloadImage,
 } = Astro.props;
 const wa = getWhatsAppConfig(path);
-const site = Astro.site ?? new URL('https://mizar.com.co');
-const canonical = new URL(path, site).href;
+const site = Astro.site ?? new URL('https://grupomizar.com.co');
+const canonicalPath = path === '/' ? '/' : `${path.replace(/\/+$/, '')}/`;
+const canonical = new URL(canonicalPath, site).href;
 const usesGoogleMapsEmbed =
   path === '/contacto' ||
   path === '/lotes-cucuta' ||

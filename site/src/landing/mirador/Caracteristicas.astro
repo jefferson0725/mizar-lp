@@ -2,10 +2,9 @@
 import { Image } from 'astro:assets';
 import bonImg from '../../assets/mirador/Bono-5-millones-.webp';
 import mapa from '../../assets/mirador/mapa.webp';
+import videoCover from '../../assets/mirador/mirador-de-la-montana.png';
 
 const WA_URL = "https://wa.me/573112658552?text=Hola%2C%20me%20interesan%20los%20lotes%20de%20Mirador%20de%20la%20Monta%C3%B1a%2C%20mi%20nombre%20es%20";
-
-const VIDEO_URL = "https://mizar.com.co/wp-content/uploads/2025/04/MIRADOR-DE-LA-MONTANA-.mp4";
 
 const caracteristicas = [
   {
@@ -45,16 +44,15 @@ const caracteristicas = [
       </h2>
     </div>
 
-    <!-- Video full-width con bono encima (esquina superior derecha) -->
+    <!-- Imagen local del proyecto con bono encima (esquina superior derecha) -->
     <div class="reveal relative mb-10 rounded-2xl overflow-visible shadow-card">
-      <video
-        src={VIDEO_URL}
-        controls
-        preload="metadata"
-        controlsList="nodownload"
+      <Image
+        src={videoCover}
+        alt="Mirador de la Montaña"
         class="w-full block rounded-2xl"
-      ></video>
-      <!-- Bono badge solapando la esquina superior derecha del video -->
+        loading="lazy"
+      />
+      <!-- Bono badge solapando la esquina superior derecha de la imagen -->
       <div class="absolute -top-6 right-2 md:right-0 md:translate-x-1/2 z-10">
         <Image
           src={bonImg}
