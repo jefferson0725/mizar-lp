@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 # Optimiza los videos de Mi Lote: re-encodea a H.264 720p + genera posters
 # Uso: bash optimize-videos.sh
-# Los originales se guardan en /videos/originals/ por si necesitas revertir.
+# Los originales se guardan en site/videos-originals/ (fuera de public/, no se publican).
 
 set -e
 
 VIDEOS_DIR="public/videos"
 POSTERS_DIR="public/videos/posters"
-ORIGINALS_DIR="public/videos/originals"
+ORIGINALS_DIR="videos-originals"
 
 mkdir -p "$POSTERS_DIR" "$ORIGINALS_DIR"
 

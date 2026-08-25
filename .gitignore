@@ -24,3 +24,15 @@ dist-ssr
 *.sln
 *.sw?
 site/src/assets/mirador/mirador-video.mp4
+
+# Herramientas de trabajo internas (no forman parte de la entrega)
+.claude/
+CLAUDE.md
+
+# Archivos fuente sueltos en la raíz (brochures, renders, audios sin procesar)
+/*.png
+/*.jpg
+/*.jpeg
+/*.mp3
+/*.mp4
+/*.zip
