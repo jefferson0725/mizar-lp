@@ -1,0 +1,100 @@
+---
+import { getWhatsAppConfig } from "../../data/whatsapp";
+const wa = getWhatsAppConfig("/parcelas-charta");
+const WA_URL = `https://wa.me/${wa.phone}?text=${encodeURIComponent(wa.message)}`;
+---
+
+<section class="relative min-h-[100svh] flex items-end overflow-hidden bg-navy-dark text-white">
+  <!-- Fallback estático (se ve antes de que el video cargue / en conexiones lentas) -->
+  <img
+    src="/videos/posters/charta-hero.jpg"
+    alt=""
+    class="absolute inset-0 w-full h-full object-cover"
+    aria-hidden="true"
+  />
+
+  <!-- Video de fondo (sin src: lo asigna el script según el viewport) -->
+  <video
+    class="absolute inset-0 w-full h-full object-cover motion-reduce:hidden"
+    muted
+    loop
+    playsinline
+    autoplay
+    preload="metadata"
+    poster="/videos/posters/charta-hero.jpg"
+    data-src-desktop="/videos/charta-hero-1080.mp4"
+    data-src-mobile="/videos/charta-hero-720.mp4"
+    aria-hidden="true"
+  ></video>
+
+  <!-- Degradado para legibilidad del texto -->
+  <div class="absolute inset-0 bg-gradient-to-t from-navy-dark/90 via-navy-dark/40 to-navy-dark/20"></div>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-6 pt-32 pb-10 md:pb-16 w-full">
+    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-dorado">
+      Charta · Santander · A 1 hora de Bucaramanga
+    </p>
+    <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.05] max-w-4xl mt-4">
+      Tu parcela de retiro en el Rincón Florido de Santander
+    </h1>
+    <p class="text-lg md:text-2xl text-white/85 max-w-2xl mt-6">
+      A 1 hora de Bucaramanga, a 5 minutos del pueblo. Tu cabaña de tranquilidad, sin dejar de estar cerca de todo.
+    </p>
+
+    <div class="mt-8 flex flex-wrap gap-4">
+      <a
+        href={WA_URL}
+        target="_blank"
+        rel="noopener"
+        data-event="whatsapp-click"
+        class="inline-flex items-center justify-center gap-2 bg-rojo hover:bg-rojo-dark text-white font-bold px-8 md:px-10 py-4 rounded-lg text-lg transition-colors duration-300 shadow-hover"
+      >
+        <svg viewBox="0 0 32 32" width="22" height="22" fill="currentColor" aria-hidden="true">
+          <path d="M16 3C9.373 3 4 8.373 4 15c0 2.25.62 4.36 1.7 6.16L4 29l8.05-1.65A11.9 11.9 0 0 0 16 27c6.627 0 12-5.373 12-12S22.627 3 16 3zm0 21.8c-1.9 0-3.68-.53-5.2-1.45l-.37-.22-4.78.98 1-4.65-.24-.39A9.77 9.77 0 0 1 6.2 15c0-5.4 4.4-9.8 9.8-9.8s9.8 4.4 9.8 9.8-4.4 9.8-9.8 9.8zm5.38-7.34c-.3-.15-1.74-.86-2-.96-.27-.1-.47-.15-.66.15-.2.29-.76.95-.93 1.15-.17.2-.34.22-.64.07-.3-.14-1.24-.45-2.36-1.45-.87-.78-1.46-1.74-1.63-2.03-.17-.3-.02-.46.13-.6.13-.14.3-.35.44-.52.15-.17.2-.3.3-.5.1-.19.05-.36-.02-.5-.08-.15-.67-1.6-.91-2.2-.24-.57-.48-.5-.66-.5h-.56c-.2 0-.5.07-.77.36-.26.29-1 .98-1 2.4 0 1.4 1.03 2.77 1.17 2.96.15.2 2.03 3.1 4.92 4.34.69.3 1.22.47 1.64.6.69.22 1.32.19 1.81.12.55-.08 1.74-.71 1.98-1.4.25-.68.25-1.27.17-1.4-.07-.12-.27-.2-.57-.34z"/>
+        </svg>
+        Quiero conocer mi parcela
+      </a>
+      <a
+        href="#parcela"
+        class="inline-flex items-center justify-center gap-2 border-2 border-white/70 text-white hover:bg-white hover:text-navy-dark font-bold px-8 py-4 rounded-lg text-lg transition-colors duration-300"
+      >
+        Ver la parcela
+      </a>
+    </div>
+
+    <div class="mt-12 md:mt-16 border-t border-white/15 pt-6 grid grid-cols-2 gap-6">
+      <div>
+        <span class="font-serif text-3xl md:text-5xl text-dorado">20 años</span>
+        <p class="text-sm uppercase tracking-[0.15em] text-white/70 mt-1">construyendo en Colombia</p>
+      </div>
+      <div>
+        <span class="font-serif text-3xl md:text-5xl text-dorado">+100 obras</span>
+        <p class="text-sm uppercase tracking-[0.15em] text-white/70 mt-1">entregadas en todo el país</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const video = document.querySelector<HTMLVideoElement>('section video[data-src-desktop]');
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const saveData = (navigator as any).connection?.saveData;
+
+  if (video && !reduced && !saveData) {
+    const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+    const src = isDesktop ? video.dataset.srcDesktop : video.dataset.srcMobile;
+    if (src) {
+      const tryPlay = () => {
+        if (video.paused) video.play().catch(() => {});
+      };
+      video.src = src;
+      video.load();
+      video.addEventListener('canplay', tryPlay, { once: true });
+      tryPlay();
+      // Algunos navegadores (iOS en ahorro de energía) solo permiten reproducir tras un gesto.
+      ['pointerdown', 'touchstart', 'scroll', 'keydown'].forEach((ev) =>
+        window.addEventListener(ev, tryPlay, { once: true, passive: true })
+      );
+    }
+  }
+</script>

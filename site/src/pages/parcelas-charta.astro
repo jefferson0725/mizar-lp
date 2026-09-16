@@ -1,0 +1,58 @@
+---
+import LandingReact from "../layouts/LandingReact.astro";
+import Header from "../components/Header.astro";
+import Hero from "../landing/charta/Hero.astro";
+import Sonando from "../landing/charta/Sonando.astro";
+import Galeria from "../landing/charta/Galeria.astro";
+import Parcela from "../landing/charta/Parcela.astro";
+import Mapa from "../landing/charta/Mapa.astro";
+import Financiacion from "../landing/charta/Financiacion.astro";
+import Cabana from "../landing/charta/Cabana.astro";
+import Cierre from "../landing/charta/Cierre.astro";
+import LandingFooter from "../landing/charta/Footer.astro";
+import WhatsAppFloat from "../components/WhatsAppFloat.astro";
+import { getWhatsAppConfig } from "../data/whatsapp";
+const wa = getWhatsAppConfig('/parcelas-charta');
+---
+
+<LandingReact
+  title="Parcelas campestres en Charta, Santander · A cuotas y sin bancos | Grupo Mizar"
+  description="Parcelas desde 650 m² en Charta, a 1 hora de Bucaramanga: agua, luz, alcantarillado y planos de tu cabaña incluidos. Cuotas desde $3.000.000 directo con Mizar."
+  ogImage="/assets/parcelas-charta.jpg"
+  path="/parcelas-charta"
+  headerColor="#1f3a31"
+  headerColorDark="#142720"
+>
+  <div class="theme-charta">
+    <Header transparent />
+    <Hero />
+    <Sonando />
+    <Galeria />
+    <Parcela />
+    <Mapa />
+    <Financiacion />
+    <Cabana />
+    <Cierre />
+    <LandingFooter />
+  </div>
+  <WhatsAppFloat phone={wa.phone} message={wa.message} />
+</LandingReact>
+
+<script>
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduced) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  } else {
+    document.querySelectorAll('.reveal').forEach((el) => el.classList.add('in-view'));
+  }
+</script>

@@ -17,6 +17,7 @@ Sede: Calle 105A #23a-18, Provenza, Bucaramanga, Santander, Colombia.
 - [Nosotros](https://grupomizar.com.co/nosotros): historia de la empresa, equipo y modelo de negocio.
 - [Proyectos](https://grupomizar.com.co/proyectos): portafolio completo de apartamentos, parcelas y lotes.
 - [Mi Lote — Cúcuta](https://grupomizar.com.co/lotes-cucuta): lotes urbanos en San Cayetano, Cúcuta.
+- [Parcelas campestres en Charta](https://grupomizar.com.co/parcelas-charta): parcelas desde 650 m² a 1 hora de Bucaramanga, con servicios y planos de cabaña incluidos, a cuotas sin bancos.
 - [Apartamentos VIS en Girón](https://grupomizar.com.co/apartamentos-vis-giron): apartamentos a cuotas sin banco en Girón, Santander.
 - [Apartamentos VIS en Piedecuesta](https://grupomizar.com.co/apartamentos-vis-piedecuesta): apartamentos a cuotas sin banco en Piedecuesta, Santander.
 - [Parcelas campestres en Santander](https://grupomizar.com.co/parcelas-campestres-santander): parcelas en Charta y Mesa de los Santos.

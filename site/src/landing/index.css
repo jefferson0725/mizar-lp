@@ -127,6 +127,27 @@
   background-image: linear-gradient(135deg, #e85c70 0%, #d72b47 100%);
 }
 
+/* ===================================================================
+   Tema Parcelas Charta — verde pino profundo + rojo Mizar + crema cálida.
+   =================================================================== */
+.theme-charta {
+  --color-navy: #1f3a31;
+  --color-navy-light: #2d5244;
+  --color-navy-dark: #142720;
+  --color-rojo: #d72b47;
+  --color-rojo-light: #e85c70;
+  --color-rojo-dark: #a41b30;
+  --color-gris-claro: #f1ede4;
+  --color-crema: #f7f3ea;
+  --shadow-card: 0 4px 16px rgba(31, 58, 49, 0.10);
+  --shadow-hover: 0 10px 28px rgba(215, 43, 71, 0.20);
+  --shadow-dark: 0 6px 20px rgba(20, 39, 32, 0.30);
+}
+.theme-charta .bg-gradient-cta,
+.theme-charta [class*="bg-gradient-cta"] {
+  background-image: linear-gradient(135deg, #e85c70 0%, #d72b47 100%);
+}
+
 * {
   box-sizing: border-box;
 }

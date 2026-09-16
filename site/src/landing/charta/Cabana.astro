@@ -1,0 +1,87 @@
+---
+import { Image } from "astro:assets";
+import renderExterior from "../../assets/charta/charta-render-exterior.jpg";
+import renderInterior from "../../assets/charta/charta-render-interior.jpg";
+import { getWhatsAppConfig } from "../../data/whatsapp";
+const wa = getWhatsAppConfig("/parcelas-charta");
+const WA_URL = `https://wa.me/${wa.phone}?text=${encodeURIComponent(wa.message)}`;
+
+const pasos = [
+  {
+    numero: "01",
+    titulo: "Nos cuentas cómo la sueñas",
+    texto: "Espacios, estilo, cuántas personas, cómo quieres vivirla.",
+  },
+  {
+    numero: "02",
+    titulo: "La diseñamos a tu medida",
+    texto: "Planos arquitectónicos incluidos con tu parcela.",
+  },
+  {
+    numero: "03",
+    titulo: "La construimos por ti",
+    texto: "Si quieres, Mizar la construye con 20 años de experiencia.",
+  },
+];
+---
+
+<section class="bg-crema py-20 md:py-28 px-6">
+  <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+    <div class="order-2 lg:order-1 relative">
+      <span class="absolute top-4 left-4 z-10 bg-navy-dark/80 text-white text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full">
+        Render · Cabaña tipo
+      </span>
+      <Image
+        src={renderExterior}
+        alt="Render del exterior de una cabaña de Mizar en Charta al atardecer"
+        widths={[400, 640, 900]}
+        sizes="(min-width:1024px) 35vw, 70vw"
+        format="webp"
+        class="w-[78%] aspect-[3/4] object-cover rounded-3xl shadow-dark"
+      />
+      <Image
+        src={renderInterior}
+        alt="Render del interior del comedor y la cocina de una cabaña de Mizar"
+        widths={[300, 480, 640]}
+        sizes="(min-width:1024px) 22vw, 45vw"
+        format="webp"
+        class="absolute right-0 bottom-[-8%] w-[48%] aspect-[3/4] object-cover rounded-3xl shadow-dark ring-8 ring-crema"
+      />
+    </div>
+
+    <div class="order-1 lg:order-2">
+      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-rojo">Diseño a tu medida</p>
+      <h2 class="font-serif text-3xl md:text-5xl font-semibold leading-tight text-navy mt-4">
+        ¿Siempre imaginaste tu cabaña de retiro? Solo dinos cómo la sueñas
+      </h2>
+      <p class="text-lg text-gris-oscuro mt-5">
+        Nuestro equipo de arquitectura la diseña a tu medida. Y sí, también la construimos por ti.
+      </p>
+
+      <ol class="mt-8 space-y-5">
+        {pasos.map((paso, i) => (
+          <li class="reveal flex gap-5" style={`transition-delay:${i * 0.08}s`}>
+            <span class="font-serif text-4xl text-rojo leading-none w-12 flex-shrink-0">{paso.numero}</span>
+            <div>
+              <h3 class="font-semibold text-navy text-lg">{paso.titulo}</h3>
+              <p class="text-gris-oscuro">{paso.texto}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+
+      <a
+        href={WA_URL}
+        target="_blank"
+        rel="noopener"
+        data-event="whatsapp-click"
+        class="inline-flex items-center justify-center gap-2 bg-rojo hover:bg-rojo-dark text-white font-bold px-8 md:px-10 py-4 rounded-lg text-lg transition-colors duration-300 shadow-hover mt-10"
+      >
+        <svg viewBox="0 0 32 32" width="22" height="22" fill="currentColor" aria-hidden="true">
+          <path d="M16 3C9.373 3 4 8.373 4 15c0 2.25.62 4.36 1.7 6.16L4 29l8.05-1.65A11.9 11.9 0 0 0 16 27c6.627 0 12-5.373 12-12S22.627 3 16 3zm0 21.8c-1.9 0-3.68-.53-5.2-1.45l-.37-.22-4.78.98 1-4.65-.24-.39A9.77 9.77 0 0 1 6.2 15c0-5.4 4.4-9.8 9.8-9.8s9.8 4.4 9.8 9.8-4.4 9.8-9.8 9.8zm5.38-7.34c-.3-.15-1.74-.86-2-.96-.27-.1-.47-.15-.66.15-.2.29-.76.95-.93 1.15-.17.2-.34.22-.64.07-.3-.14-1.24-.45-2.36-1.45-.87-.78-1.46-1.74-1.63-2.03-.17-.3-.02-.46.13-.6.13-.14.3-.35.44-.52.15-.17.2-.3.3-.5.1-.19.05-.36-.02-.5-.08-.15-.67-1.6-.91-2.2-.24-.57-.48-.5-.66-.5h-.56c-.2 0-.5.07-.77.36-.26.29-1 .98-1 2.4 0 1.4 1.03 2.77 1.17 2.96.15.2 2.03 3.1 4.92 4.34.69.3 1.22.47 1.64.6.69.22 1.32.19 1.81.12.55-.08 1.74-.71 1.98-1.4.25-.68.25-1.27.17-1.4-.07-.12-.27-.2-.57-.34z"/>
+        </svg>
+        Quiero diseñar mi cabaña
+      </a>
+    </div>
+  </div>
+</section>

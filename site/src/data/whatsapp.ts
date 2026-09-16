@@ -22,6 +22,7 @@ const PHONES = {
   terrazas: "573112658552",
   milote: "573112382253",
   mirador: "573112658552",
+  charta: "573112658552",
 } as const;
 
 /** Configuración por ruta — la clave es el pathname exacto o un prefijo */
@@ -84,6 +85,11 @@ const CONFIG: Record<string, WhatsAppConfig> = {
     page: "Mirador de la Montaña — Mesa de los Santos",
     message:
       "me interesan los lotes campestres de Mirador de la Montaña en Mesa de los Santos, mi nombre es",
+  },
+  "/parcelas-charta": {
+    phone: PHONES.charta,
+    page: "Parcelas campestres — Charta",
+    message: "me interesan las parcelas campestres en Charta, mi nombre es",
   },
 };
 

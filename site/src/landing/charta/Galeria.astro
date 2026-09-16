@@ -1,0 +1,226 @@
+---
+import { Image, getImage } from "astro:assets";
+import aerea from "../../assets/charta/charta-cabana-aerea.jpg";
+import ladera1 from "../../assets/charta/charta-cabana-ladera-1.jpg";
+import ladera2 from "../../assets/charta/charta-cabana-ladera-2.jpg";
+import interiorJacuzzi from "../../assets/charta/charta-interior-jacuzzi.jpg";
+import vistaPueblo from "../../assets/charta/charta-vista-pueblo.jpg";
+import atardecerPueblo from "../../assets/charta/charta-atardecer-pueblo.jpg";
+import agricultura from "../../assets/charta/charta-agricultura-organica.jpg";
+import construccion from "../../assets/charta/charta-cabana-construccion.jpg";
+import renderExterior from "../../assets/charta/charta-render-exterior.jpg";
+import renderInterior from "../../assets/charta/charta-render-interior.jpg";
+
+const imagenes = [
+  {
+    src: aerea,
+    alt: "Vista aérea de una cabaña tipo A ya construida en Charta",
+    span: "col-span-2 row-span-2",
+    render: false,
+  },
+  {
+    src: ladera2,
+    alt: "Cabaña tipo A-frame construida en la ladera de la montaña",
+    span: "row-span-2",
+    render: false,
+  },
+  {
+    src: interiorJacuzzi,
+    alt: "Interior de una cabaña con jacuzzi y ventanal a la montaña",
+    span: "row-span-2",
+    render: false,
+  },
+  {
+    src: vistaPueblo,
+    alt: "Vista del pueblo de Charta entre montañas de Santander",
+    span: "col-span-2",
+    render: false,
+  },
+  {
+    src: atardecerPueblo,
+    alt: "Atardecer con las luces del pueblo de Charta encendidas",
+    span: "col-span-2",
+    render: false,
+  },
+  {
+    src: ladera1,
+    alt: "Cabaña construida en la ladera con vista al valle de Charta",
+    span: "row-span-2",
+    render: false,
+  },
+  {
+    src: agricultura,
+    alt: "Canasta de verduras de agricultura orgánica cultivada en la zona",
+    span: "row-span-2",
+    render: false,
+  },
+  {
+    src: renderExterior,
+    alt: "Render del exterior de una cabaña de Charta al atardecer",
+    span: "row-span-2",
+    render: true,
+  },
+  {
+    src: renderInterior,
+    alt: "Render del interior del comedor y la cocina de una cabaña de Charta",
+    span: "row-span-2",
+    render: true,
+  },
+  {
+    src: construccion,
+    alt: "Cabaña en proceso de construcción en Charta",
+    span: "col-span-2",
+    render: false,
+  },
+];
+
+const fullSrcs = await Promise.all(
+  imagenes.map(({ src, alt }) =>
+    getImage({ src, format: "webp", width: 1600 }).then((r) => ({ src: r.src, alt }))
+  )
+);
+const alts = imagenes.map((i) => i.alt);
+---
+
+<section id="galeria" class="bg-white py-20 md:py-28 px-6">
+  <div class="max-w-6xl mx-auto">
+    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-rojo">Galería</p>
+    <h2 class="font-serif text-3xl md:text-5xl font-semibold leading-tight text-navy mt-4">
+      Así se vive en Charta
+    </h2>
+    <p class="text-lg text-gris-oscuro mt-5 max-w-2xl">
+      Fotos reales del entorno y de las cabañas que ya construimos, y renders de lo que viene.
+    </p>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 auto-rows-[180px] md:auto-rows-[240px] gap-3 md:gap-4 mt-12">
+      {imagenes.map((item, i) => (
+        <button
+          type="button"
+          data-lightbox-index={i}
+          aria-label={`Ver imagen ampliada: ${item.alt}`}
+          class={`group relative overflow-hidden rounded-2xl reveal ${item.span}`}
+          style={`transition-delay:${i * 0.05}s`}
+        >
+          <Image
+            src={item.src}
+            alt={item.alt}
+            widths={[480, 800, 1200]}
+            sizes="(min-width:768px) 25vw, 50vw"
+            format="webp"
+            loading="lazy"
+            class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+          />
+          {item.render && (
+            <span class="absolute top-3 left-3 bg-navy-dark/80 text-white text-[11px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full">
+              Render
+            </span>
+          )}
+        </button>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<dialog
+  id="charta-galeria-dialog"
+  class="fixed inset-0 m-auto w-full max-w-5xl bg-transparent p-0 border-0 backdrop:bg-black/90 backdrop:backdrop-blur-sm"
+>
+  <div class="relative flex items-center justify-center min-h-[60vh] px-14">
+    <img
+      id="charta-galeria-img"
+      src=""
+      alt=""
+      class="max-h-[85vh] max-w-full rounded-xl object-contain shadow-2xl"
+    />
+
+    <button
+      id="charta-galeria-close"
+      type="button"
+      aria-label="Cerrar"
+      class="absolute top-2 right-2 z-10 bg-black/60 text-white rounded-full w-10 h-10 flex items-center justify-center hover:bg-black/80 transition-colors"
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+      </svg>
+    </button>
+
+    <button
+      id="charta-galeria-prev"
+      type="button"
+      aria-label="Imagen anterior"
+      class="absolute left-1 top-1/2 -translate-y-1/2 z-10 bg-black/50 text-white rounded-full w-11 h-11 flex items-center justify-center hover:bg-black/80 transition-colors"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M15 18l-6-6 6-6"/>
+      </svg>
+    </button>
+
+    <button
+      id="charta-galeria-next"
+      type="button"
+      aria-label="Siguiente imagen"
+      class="absolute right-1 top-1/2 -translate-y-1/2 z-10 bg-black/50 text-white rounded-full w-11 h-11 flex items-center justify-center hover:bg-black/80 transition-colors"
+    >
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M9 18l6-6-6-6"/>
+      </svg>
+    </button>
+
+    <p id="charta-galeria-counter" class="absolute bottom-3 left-1/2 -translate-x-1/2 text-white/70 text-sm tabular-nums"></p>
+  </div>
+</dialog>
+
+<script define:vars={{ fullSrcs, alts }}>
+  const dialog = document.getElementById('charta-galeria-dialog');
+  const img = document.getElementById('charta-galeria-img');
+  const counter = document.getElementById('charta-galeria-counter');
+  let current = 0;
+  let touchStartX = 0;
+
+  function show(i) {
+    current = (i + fullSrcs.length) % fullSrcs.length;
+    img.src = fullSrcs[current].src;
+    img.alt = alts[current];
+    counter.textContent = `${current + 1} / ${fullSrcs.length}`;
+  }
+
+  document.querySelectorAll('[data-lightbox-index]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      show(Number(btn.dataset.lightboxIndex));
+      dialog.showModal();
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function closeDialog() {
+    dialog.close();
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('charta-galeria-close').addEventListener('click', closeDialog);
+  document.getElementById('charta-galeria-prev').addEventListener('click', () => show(current - 1));
+  document.getElementById('charta-galeria-next').addEventListener('click', () => show(current + 1));
+
+  dialog.addEventListener('click', (e) => { if (e.target === dialog) closeDialog(); });
+  dialog.addEventListener('close', () => { document.body.style.overflow = ''; });
+
+  document.addEventListener('keydown', (e) => {
+    if (!dialog.open) return;
+    if (e.key === 'Escape') closeDialog();
+    if (e.key === 'ArrowLeft') show(current - 1);
+    if (e.key === 'ArrowRight') show(current + 1);
+  });
+
+  dialog.addEventListener('touchstart', (e) => {
+    touchStartX = e.changedTouches[0].clientX;
+  }, { passive: true });
+
+  dialog.addEventListener('touchend', (e) => {
+    const deltaX = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(deltaX) > 40) {
+      if (deltaX > 0) show(current - 1);
+      else show(current + 1);
+    }
+  }, { passive: true });
+</script>

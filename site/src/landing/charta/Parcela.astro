@@ -1,0 +1,81 @@
+---
+import { Image } from "astro:assets";
+import atardecer from "../../assets/charta/charta-atardecer-pueblo.jpg";
+import { getWhatsAppConfig } from "../../data/whatsapp";
+const wa = getWhatsAppConfig("/parcelas-charta");
+const WA_URL = `https://wa.me/${wa.phone}?text=${encodeURIComponent(wa.message)}`;
+
+const cards = [
+  {
+    titulo: "Desde 650 m²",
+    texto: "Parcelas amplias, con espacio para tu cabaña, tu huerta y tu jardín.",
+    icon: `<path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/>`,
+  },
+  {
+    titulo: "Servicios incluidos",
+    texto: "Punto de agua, luz, alcantarillado y planos arquitectónicos de tu cabaña.",
+    icon: `<path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>`,
+  },
+  {
+    titulo: "Cerca de todo",
+    texto: "A 1 hora de Bucaramanga y a 5 minutos del pueblo de Charta.",
+    icon: `<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>`,
+  },
+  {
+    titulo: "Vistas al pueblo y a los atardeceres",
+    texto: "Cada tarde, el valle y las luces del pueblo desde tu parcela.",
+    icon: `<path d="M12 10V2"/><path d="m4.93 10.93 1.41 1.41"/><path d="M2 18h2"/><path d="M20 18h2"/><path d="m19.07 10.93-1.41 1.41"/><path d="M22 22H2"/><path d="m16 6-4 4-4-4"/><path d="M16 18a4 4 0 0 0-8 0"/>`,
+  },
+];
+---
+
+<section id="parcela" class="bg-gris-claro py-20 md:py-28 px-6">
+  <div class="max-w-6xl mx-auto grid lg:grid-cols-[1fr_0.85fr] gap-12 items-center">
+    <div>
+      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-rojo">Lista para construir</p>
+      <h2 class="font-serif text-3xl md:text-5xl font-semibold leading-tight text-navy mt-4">
+        Tu parcela, lista para que construyas cuando quieras
+      </h2>
+      <p class="text-lg text-gris-oscuro mt-5">
+        Compras hoy y construyes a tu ritmo. Cada parcela se entrega con lo necesario para empezar.
+      </p>
+
+      <div class="grid sm:grid-cols-2 gap-4 mt-10">
+        {cards.map((card, i) => (
+          <div class="reveal bg-white rounded-2xl shadow-card p-6" style={`transition-delay:${i * 0.08}s`}>
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-rojo" aria-hidden="true" set:html={card.icon}></svg>
+            <h3 class="font-serif text-2xl text-navy mt-3">{card.titulo}</h3>
+            <p class="text-gris-oscuro mt-2">{card.texto}</p>
+          </div>
+        ))}
+      </div>
+
+      <a
+        href={WA_URL}
+        target="_blank"
+        rel="noopener"
+        data-event="whatsapp-click"
+        class="inline-flex items-center justify-center gap-2 bg-rojo hover:bg-rojo-dark text-white font-bold px-8 md:px-10 py-4 rounded-lg text-lg transition-colors duration-300 shadow-hover mt-10"
+      >
+        <svg viewBox="0 0 32 32" width="22" height="22" fill="currentColor" aria-hidden="true">
+          <path d="M16 3C9.373 3 4 8.373 4 15c0 2.25.62 4.36 1.7 6.16L4 29l8.05-1.65A11.9 11.9 0 0 0 16 27c6.627 0 12-5.373 12-12S22.627 3 16 3zm0 21.8c-1.9 0-3.68-.53-5.2-1.45l-.37-.22-4.78.98 1-4.65-.24-.39A9.77 9.77 0 0 1 6.2 15c0-5.4 4.4-9.8 9.8-9.8s9.8 4.4 9.8 9.8-4.4 9.8-9.8 9.8zm5.38-7.34c-.3-.15-1.74-.86-2-.96-.27-.1-.47-.15-.66.15-.2.29-.76.95-.93 1.15-.17.2-.34.22-.64.07-.3-.14-1.24-.45-2.36-1.45-.87-.78-1.46-1.74-1.63-2.03-.17-.3-.02-.46.13-.6.13-.14.3-.35.44-.52.15-.17.2-.3.3-.5.1-.19.05-.36-.02-.5-.08-.15-.67-1.6-.91-2.2-.24-.57-.48-.5-.66-.5h-.56c-.2 0-.5.07-.77.36-.26.29-1 .98-1 2.4 0 1.4 1.03 2.77 1.17 2.96.15.2 2.03 3.1 4.92 4.34.69.3 1.22.47 1.64.6.69.22 1.32.19 1.81.12.55-.08 1.74-.71 1.98-1.4.25-.68.25-1.27.17-1.4-.07-.12-.27-.2-.57-.34z"/>
+        </svg>
+        Quiero conocer mi parcela
+      </a>
+    </div>
+
+    <div class="relative">
+      <Image
+        src={atardecer}
+        alt="Atardecer con las luces del pueblo de Charta visto desde las parcelas"
+        widths={[480, 768, 1024]}
+        sizes="(min-width:1024px) 40vw, 90vw"
+        format="webp"
+        class="rounded-3xl shadow-dark w-full aspect-[4/5] object-cover"
+      />
+      <span class="absolute bottom-5 left-5 bg-white/90 text-navy text-sm font-semibold px-4 py-2 rounded-full">
+        Vista real desde las parcelas
+      </span>
+    </div>
+  </div>
+</section>

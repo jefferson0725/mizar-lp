@@ -26,6 +26,7 @@ export interface Proyecto {
 export const PROYECTOS_CON_LANDING_PROPIA = new Set([
   'lotes-cucuta',
   'mirador-de-la-montana',
+  'parcelas-charta',
 ]);
 
 export function getProyectoHref(proyecto: Pick<Proyecto, 'slug' | 'lpUrl'>) {
@@ -71,11 +72,10 @@ export const proyectos: Proyecto[] = [
     estado: 'disponible',
     propositos: ['inversion', 'vivienda'],
     resumen:
-      'Parcelas campestres en Charta, Santander: naturaleza, clima de montaña y una inversión que se valoriza antes de que todos la vean.',
-    imagen: null,
+      'Parcelas desde 650 m² a 1 hora de Bucaramanga y a 5 minutos del pueblo de Charta, con agua, luz, alcantarillado y planos de tu cabaña incluidos. A cuotas directo con Mizar, sin bancos.',
+    imagen: 'charta-thumb.webp',
     lpUrl: null,
     destacado: true,
-    oculto: true,
   },
   {
     slug: 'parcelas-mesa-de-los-santos',
