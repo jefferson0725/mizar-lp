@@ -148,6 +148,21 @@
   background-image: linear-gradient(135deg, #e85c70 0%, #d72b47 100%);
 }
 
+/* ===================================================================
+   Tema Enlaces (link in bio) — colores oficiales del manual de marca:
+   verde azulado #22484C + rojo #D72B47.
+   =================================================================== */
+.theme-links {
+  --color-navy: #22484c;
+  --color-navy-light: #2f5d62;
+  --color-navy-dark: #17333a;
+  --color-rojo: #d72b47;
+  --color-rojo-light: #e85c70;
+  --color-rojo-dark: #a41b30;
+  --shadow-card: 0 6px 20px rgba(10, 30, 34, 0.25);
+  --shadow-hover: 0 10px 28px rgba(215, 43, 71, 0.30);
+}
+
 * {
   box-sizing: border-box;
 }

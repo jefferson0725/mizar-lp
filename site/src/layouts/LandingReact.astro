@@ -16,9 +16,10 @@ interface Props {
   path: string;
   headerColor?: string;
   headerColorDark?: string;
+  noindex?: boolean;
 }
 
-const { title, description, ogImage, path, headerColor = '#22484c', headerColorDark = '#17333a' } = Astro.props;
+const { title, description, ogImage, path, headerColor = '#22484c', headerColorDark = '#17333a', noindex = false } = Astro.props;
 const site = Astro.site ?? new URL('https://grupomizar.com.co');
 const canonicalPath = path === '/' ? '/' : `${path.replace(/\/+$/, '')}/`;
 const canonical = new URL(canonicalPath, site).href;
@@ -33,6 +34,7 @@ const canonical = new URL(canonicalPath, site).href;
     <link rel="apple-touch-icon" href="/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <meta name="theme-color" content="#0a2342" />
     <link rel="canonical" href={canonical} />
     <meta property="og:type" content="website" />

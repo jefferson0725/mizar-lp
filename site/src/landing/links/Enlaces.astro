@@ -1,0 +1,236 @@
+---
+/**
+ * Enlaces oficiales (link in bio) de Mizar. Reemplaza el Linktree de @mizar.col.
+ * Vive en src/landing/ para que el Tailwind de las landings escanee sus clases
+ * (index.css usa source(".")).
+ */
+import { Image, getImage } from "astro:assets";
+import { getWhatsAppConfig } from "../../data/whatsapp";
+
+import piedecuesta from "../../assets/proyectos/piedecuesta.png";
+import giron from "../../assets/proyectos/giron.png";
+import mirador from "../../assets/proyectos/mirador-thumb.webp";
+import charta from "../../assets/proyectos/charta-thumb.webp";
+import fondo from "../../assets/charta/charta-atardecer-pueblo.jpg";
+
+const wa = getWhatsAppConfig("/links");
+const WA_URL = `https://wa.me/${wa.phone}?text=${encodeURIComponent(wa.message)}`;
+
+const bg = await getImage({ src: fondo, format: "webp", width: 1200 });
+
+const proyectos = [
+  {
+    titulo: "Parcelas en Charta",
+    detalle: "Desde 650 m² · A 1 hora de Bucaramanga",
+    href: "/parcelas-charta/",
+    img: charta,
+    alt: "Cabaña campestre en Charta, Santander",
+    nuevo: true,
+  },
+  {
+    titulo: "Apartamentos en Piedecuesta",
+    detalle: "Terrazas de la Cantera · Sobre planos",
+    href: "/terrazas/",
+    img: piedecuesta,
+    alt: "Proyecto Terrazas de la Cantera en Piedecuesta",
+  },
+  {
+    titulo: "Apartamentos en Girón",
+    detalle: "Laureles Campestre · A 150 m del futuro anillo vial",
+    href: "/laureles-campestre/",
+    img: giron,
+    alt: "Proyecto Laureles Campestre en Girón",
+  },
+  {
+    titulo: "Parcelas Mesa de los Santos",
+    detalle: "Mirador de la Montaña · Desde $75 millones",
+    href: "/mirador-de-la-montana/",
+    img: mirador,
+    alt: "Lotes campestres Mirador de la Montaña",
+  },
+];
+
+const redes = [
+  {
+    nombre: "WhatsApp",
+    viewBox: "0 0 32 32",
+    href: WA_URL,
+    event: "whatsapp-click",
+    svgPath:
+      "M16 3C9.373 3 4 8.373 4 15c0 2.25.62 4.36 1.7 6.16L4 29l8.05-1.65A11.9 11.9 0 0 0 16 27c6.627 0 12-5.373 12-12S22.627 3 16 3zm0 21.8c-1.9 0-3.68-.53-5.2-1.45l-.37-.22-4.78.98 1-4.65-.24-.39A9.77 9.77 0 0 1 6.2 15c0-5.4 4.4-9.8 9.8-9.8s9.8 4.4 9.8 9.8-4.4 9.8-9.8 9.8zm5.38-7.34c-.3-.15-1.74-.86-2-.96-.27-.1-.47-.15-.66.15-.2.29-.76.95-.93 1.15-.17.2-.34.22-.64.07-.3-.14-1.24-.45-2.36-1.45-.87-.78-1.46-1.74-1.63-2.03-.17-.3-.02-.46.13-.6.13-.14.3-.35.44-.52.15-.17.2-.3.3-.5.1-.19.05-.36-.02-.5-.08-.15-.67-1.6-.91-2.2-.24-.57-.48-.5-.66-.5h-.56c-.2 0-.5.07-.77.36-.26.29-1 .98-1 2.4 0 1.4 1.03 2.77 1.17 2.96.15.2 2.03 3.1 4.92 4.34.69.3 1.22.47 1.64.6.69.22 1.32.19 1.81.12.55-.08 1.74-.71 1.98-1.4.25-.68.25-1.27.17-1.4-.07-.12-.27-.2-.57-.34z",
+  },
+  {
+    nombre: "Instagram",
+    viewBox: "0 0 24 24",
+    href: "https://www.instagram.com/mizar.col/",
+    event: "social-click",
+    svgPath:
+      "M12 0C8.74 0 8.333.014 7.053.072 5.775.131 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.014 8.333 0 8.74 0 12s.014 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.458 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.986 8.74 24 12 24s3.667-.014 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.458-.718 2.126-1.384.666-.668 1.079-1.338 1.384-2.126.296-.765.499-1.636.558-2.913.058-1.28.072-1.687.072-4.947s-.014-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.318 1.347 20.65.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.014 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227a3.81 3.81 0 0 1-.9 1.382c-.42.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421a3.83 3.83 0 0 1-1.393-.9c-.42-.419-.687-.824-.9-1.38-.165-.42-.36-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.845 0-3.196.016-3.586.061-4.86.06-1.17.255-1.814.42-2.234.213-.567.48-.94.9-1.394.421-.419.807-.681 1.393-.9.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06z M12 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm7.846-10.405a1.44 1.44 0 1 1-2.88 0 1.44 1.44 0 0 1 2.88 0z",
+  },
+  {
+    nombre: "TikTok",
+    viewBox: "0 0 24 24",
+    href: "https://www.tiktok.com/@mizar.col",
+    event: "social-click",
+    svgPath:
+      "M12.53.02C13.84 0 15.14.01 16.44 0c.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z",
+  },
+  {
+    nombre: "Facebook",
+    viewBox: "0 0 24 24",
+    href: "https://www.facebook.com/mizar.arq",
+    event: "social-click",
+    svgPath:
+      "M22.675 0h-21.35C.6 0 0 .6 0 1.326v21.348C0 23.4.6 24 1.326 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.4 24 24 23.4 24 22.674V1.326C24 .6 23.4 0 22.675 0z",
+  },
+];
+---
+
+<div class="theme-links relative min-h-[100svh] overflow-hidden bg-navy-dark text-white">
+  <div
+    aria-hidden="true"
+    class="absolute inset-x-0 top-0 h-[55svh] bg-cover bg-center opacity-40"
+    style={`background-image:url(${bg.src})`}
+  >
+  </div>
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 bg-gradient-to-b from-navy/40 via-navy-dark/90 to-navy-dark"
+  >
+  </div>
+
+  <main class="relative z-10 mx-auto w-full max-w-[480px] px-5 pt-12 pb-10 flex flex-col items-center">
+    <img
+      src="/assets/logo-mizar.webp"
+      alt="Mizar Diseño y Construcción"
+      width="799"
+      height="170"
+      class="h-11 w-auto lnk-in"
+      style="animation-delay:0s"
+    />
+
+    <p
+      class="mt-6 text-xs font-semibold uppercase tracking-[0.2em] text-white/60 lnk-in"
+      style="animation-delay:0.05s"
+    >
+      @mizar.col
+    </p>
+
+    <h1
+      class="mt-2 text-center font-serif text-2xl sm:text-[1.7rem] font-semibold leading-snug lnk-in"
+      style="animation-delay:0.1s"
+    >
+      Convertimos tu esfuerzo en propiedades, a cuotas y sin bancos.
+    </h1>
+
+    <ul class="mt-6 flex items-center gap-3 lnk-in" style="animation-delay:0.15s">
+      {redes.map((r) => (
+        <li>
+          <a
+            href={r.href}
+            target="_blank"
+            rel="noopener"
+            aria-label={`Mizar en ${r.nombre}`}
+            data-event={r.event}
+            class="grid place-items-center w-12 h-12 rounded-full bg-white/10 ring-1 ring-white/15 hover:bg-white hover:text-navy-dark transition-colors"
+          >
+            <svg viewBox={r.viewBox} width="22" height="22" fill="currentColor" aria-hidden="true">
+              <path d={r.svgPath}></path>
+            </svg>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <a
+      href={WA_URL}
+      target="_blank"
+      rel="noopener"
+      data-event="whatsapp-click"
+      class="mt-8 w-full flex items-center justify-center gap-3 bg-rojo hover:bg-rojo-dark text-white font-bold text-lg px-6 py-4 rounded-2xl shadow-hover transition-colors lnk-in"
+      style="animation-delay:0.2s"
+    >
+      <svg viewBox="0 0 32 32" width="24" height="24" fill="currentColor" aria-hidden="true">
+        <path d="M16 3C9.373 3 4 8.373 4 15c0 2.25.62 4.36 1.7 6.16L4 29l8.05-1.65A11.9 11.9 0 0 0 16 27c6.627 0 12-5.373 12-12S22.627 3 16 3zm0 21.8c-1.9 0-3.68-.53-5.2-1.45l-.37-.22-4.78.98 1-4.65-.24-.39A9.77 9.77 0 0 1 6.2 15c0-5.4 4.4-9.8 9.8-9.8s9.8 4.4 9.8 9.8-4.4 9.8-9.8 9.8zm5.38-7.34c-.3-.15-1.74-.86-2-.96-.27-.1-.47-.15-.66.15-.2.29-.76.95-.93 1.15-.17.2-.34.22-.64.07-.3-.14-1.24-.45-2.36-1.45-.87-.78-1.46-1.74-1.63-2.03-.17-.3-.02-.46.13-.6.13-.14.3-.35.44-.52.15-.17.2-.3.3-.5.1-.19.05-.36-.02-.5-.08-.15-.67-1.6-.91-2.2-.24-.57-.48-.5-.66-.5h-.56c-.2 0-.5.07-.77.36-.26.29-1 .98-1 2.4 0 1.4 1.03 2.77 1.17 2.96.15.2 2.03 3.1 4.92 4.34.69.3 1.22.47 1.64.6.69.22 1.32.19 1.81.12.55-.08 1.74-.71 1.98-1.4.25-.68.25-1.27.17-1.4-.07-.12-.27-.2-.57-.34z"></path>
+      </svg>
+      Escríbenos por WhatsApp
+    </a>
+
+    <h2 class="mt-9 mb-3 self-start text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
+      Nuestros proyectos
+    </h2>
+
+    <ul class="w-full flex flex-col gap-3">
+      {proyectos.map((p, i) => (
+        <li class="lnk-in" style={`animation-delay:${0.25 + i * 0.07}s`}>
+          <a
+            href={p.href}
+            data-event="linkinbio-click"
+            class="group flex items-center gap-4 w-full rounded-2xl bg-white p-3 pr-4 text-navy-dark shadow-card ring-2 ring-transparent hover:ring-rojo hover:-translate-y-0.5 transition-all"
+          >
+            <Image
+              src={p.img}
+              alt={p.alt}
+              width={128}
+              height={128}
+              format="webp"
+              class="w-16 h-16 rounded-xl object-cover flex-shrink-0"
+            />
+            <span class="flex-1 min-w-0">
+              {p.nuevo && (
+                <span class="inline-block mb-1 rounded-full bg-rojo px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-white">
+                  Nuevo
+                </span>
+              )}
+              <span class="block font-semibold text-base leading-tight">{p.titulo}</span>
+              <span class="block text-sm text-gris-oscuro/80 mt-0.5 leading-snug">{p.detalle}</span>
+            </span>
+            <svg
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="w-5 h-5 text-navy/40 group-hover:text-rojo group-hover:translate-x-0.5 transition flex-shrink-0"
+              aria-hidden="true"
+            >
+              <path d="m9 18 6-6-6-6"></path>
+            </svg>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <a
+      href="/"
+      data-event="linkinbio-click"
+      class="lnk-in mt-3 flex items-center justify-center gap-2 w-full rounded-2xl border border-white/25 px-5 py-4 font-semibold text-white hover:bg-white/10 transition-colors"
+      style={`animation-delay:${0.25 + proyectos.length * 0.07}s`}
+    >
+      <svg
+        viewBox="0 0 24 24"
+        width="20"
+        height="20"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <circle cx="12" cy="12" r="10"></circle>
+        <line x1="2" y1="12" x2="22" y2="12"></line>
+        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+      </svg>
+      Visita nuestra página web
+    </a>
+
+    <p class="mt-10 text-center text-xs text-white/45">
+      © 2026 Grupo Mizar · Diseño y Construcción<br />
+      Bucaramanga, Santander
+    </p>
+  </main>
+</div>

@@ -91,6 +91,11 @@ const CONFIG: Record<string, WhatsAppConfig> = {
     page: "Parcelas campestres — Charta",
     message: "me interesan las parcelas campestres en Charta, mi nombre es",
   },
+  "/links": {
+    phone: PHONES.laureles,
+    page: "Enlaces de redes sociales",
+    message: "quiero información sobre sus proyectos, mi nombre es",
+  },
 };
 
 /** Fallback para páginas no listadas (ej. /proyectos/[slug], /blog/[slug]) */

@@ -1,0 +1,23 @@
+---
+import LandingReact from "../layouts/LandingReact.astro";
+import Enlaces from "../landing/links/Enlaces.astro";
+---
+
+<LandingReact
+  title="Mizar · Apartamentos, parcelas y lotes a cuotas y sin bancos | Enlaces"
+  description="Enlaces oficiales de Grupo Mizar: apartamentos en Piedecuesta y Girón, parcelas en Charta y Mesa de los Santos, WhatsApp y redes sociales. A cuotas y sin bancos."
+  ogImage="/og-default.jpg"
+  path="/links"
+  headerColor="#22484c"
+  headerColorDark="#17333a"
+  noindex
+>
+  <Enlaces />
+</LandingReact>
+
+<style is:global>
+  html, body { background-color: #17333a; }
+  .lnk-in { opacity: 0; transform: translateY(12px); animation: lnk-in 0.5s ease forwards; }
+  @keyframes lnk-in { to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .lnk-in { opacity: 1; transform: none; animation: none; } }
+</style>

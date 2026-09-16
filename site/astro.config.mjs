@@ -16,5 +16,5 @@ export default defineConfig({
     },
   },
 
-  integrations: [preact(), sitemap()]
+  integrations: [preact(), sitemap({ filter: (page) => !/\/links\/?$/.test(page) })]
 });
