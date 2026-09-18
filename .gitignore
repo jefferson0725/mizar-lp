@@ -25,9 +25,6 @@ dist-ssr
 *.sw?
 site/src/assets/mirador/mirador-video.mp4
 
-# Herramientas de trabajo internas (no forman parte de la entrega)
-.claude/
-CLAUDE.md
 
 # Archivos fuente sueltos en la raíz (brochures, renders, audios sin procesar)
 /*.png
@@ -36,3 +33,8 @@ CLAUDE.md
 /*.mp3
 /*.mp4
 /*.zip
+
+# Estado local de Claude Code (no compartir entre máquinas)
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
+.claude/tunnel/*.log
