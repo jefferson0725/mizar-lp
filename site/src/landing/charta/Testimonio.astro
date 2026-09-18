@@ -1,0 +1,90 @@
+---
+/**
+ * Testimonio en video de un cliente que ya construyó su cabaña en Charta.
+ * La sección solo se renderiza si el video existe en public/videos/, para no
+ * publicar un reproductor vacío. Para activarla basta con dejar ahí el .mp4
+ * (y su poster en public/videos/posters/) y recompilar.
+ */
+import fs from "node:fs";
+import path from "node:path";
+
+const VIDEO = "/videos/charta-testimonio-efren.mp4";
+const POSTER = "/videos/posters/charta-testimonio-efren.jpg";
+// true si el video es vertical (9:16); false si es horizontal (16:9).
+const VERTICAL = true;
+
+const existe = fs.existsSync(path.join(process.cwd(), "public", VIDEO));
+const tienePoster = fs.existsSync(path.join(process.cwd(), "public", POSTER));
+
+---
+
+{existe && (
+  <section id="testimonio" class="bg-white py-20 md:py-28 px-6">
+    <div class={`max-w-6xl mx-auto grid gap-12 items-center ${VERTICAL ? "lg:grid-cols-[1fr_0.8fr]" : "lg:grid-cols-[0.8fr_1.2fr]"}`}>
+      <div class="reveal">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-rojo">Testimonio</p>
+        <h2 class="font-serif text-3xl md:text-5xl font-semibold leading-tight text-navy mt-4">
+          Don Efrén ya construyó su cabaña en Charta
+        </h2>
+        <p class="text-lg text-gris-oscuro mt-5">
+          Compró su parcela con Mizar y hoy ya disfruta su cabaña. Escúchalo contar cómo fue el proceso, en sus propias palabras.
+        </p>
+        <div class="mt-8 flex items-center gap-4">
+          <span class="grid place-items-center w-12 h-12 rounded-full bg-navy text-white font-serif text-xl" aria-hidden="true">E</span>
+          <div>
+            <p class="font-semibold text-navy">Don Efrén</p>
+            <p class="text-sm text-gris-oscuro/80">Propietario de una cabaña en Charta</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class={`relative mx-auto w-full overflow-hidden rounded-3xl shadow-dark ring-8 ring-crema bg-black ${VERTICAL ? "max-w-[360px] aspect-[9/16]" : "aspect-video"}`}>
+          <video
+            id="charta-testimonio"
+            class="w-full h-full object-cover"
+            playsinline
+            preload="none"
+            poster={tienePoster ? POSTER : undefined}
+            data-src={VIDEO}
+          ></video>
+          <button
+            type="button"
+            data-play
+            aria-label="Reproducir el testimonio de Don Efrén"
+            class="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-navy-dark/30 hover:bg-navy-dark/20 transition-colors"
+          >
+            <span class="flex items-center justify-center w-[72px] h-[72px] rounded-full bg-white">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" class="text-navy translate-x-0.5" aria-hidden="true">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </span>
+            <span class="text-white font-semibold">Ver testimonio</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+)}
+
+<script>
+  const video = document.getElementById('charta-testimonio') as HTMLVideoElement | null;
+  const button = document.querySelector<HTMLButtonElement>('#charta-testimonio ~ [data-play]');
+
+  button?.addEventListener('click', () => {
+    if (video) {
+      if (!video.src) {
+        const src = video.dataset.src;
+        if (src) video.src = src;
+      }
+      video.muted = false;
+      video.controls = true;
+      video.play().catch(() => {});
+    }
+    button.style.display = 'none';
+  });
+
+  video?.addEventListener('ended', () => {
+    if (button) button.style.display = 'flex';
+  });
+</script>

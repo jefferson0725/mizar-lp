@@ -82,7 +82,7 @@ const items = [
 
 <script>
   const video = document.getElementById('charta-recorrido') as HTMLVideoElement | null;
-  const button = document.querySelector<HTMLButtonElement>('[data-play]');
+  const button = document.querySelector<HTMLButtonElement>('#charta-recorrido ~ [data-play]');
 
   button?.addEventListener('click', () => {
     if (video) {
