@@ -11,7 +11,7 @@ import piedecuesta from "../../assets/proyectos/piedecuesta.png";
 import giron from "../../assets/proyectos/giron.png";
 import mirador from "../../assets/proyectos/mirador-thumb.webp";
 import charta from "../../assets/proyectos/charta-thumb.webp";
-import fondo from "../../assets/charta/charta-atardecer-pueblo.jpg";
+import fondo from "../../assets/mirador/bannerweb-mirador.webp";
 
 const wa = getWhatsAppConfig("/links");
 const WA_URL = `https://wa.me/${wa.phone}?text=${encodeURIComponent(wa.message)}`;
@@ -21,7 +21,7 @@ const bg = await getImage({ src: fondo, format: "webp", width: 1200 });
 const proyectos = [
   {
     titulo: "Parcelas en Charta",
-    detalle: "Desde 650 m² · A 1 hora de Bucaramanga",
+    detalle: "Desde 650 m² · Charta, Santander",
     href: "/parcelas-charta/",
     img: charta,
     alt: "Cabaña campestre en Charta, Santander",
@@ -123,46 +123,13 @@ const redes = [
       Convertimos tu esfuerzo en propiedades, a cuotas y sin bancos.
     </h1>
 
-    <ul class="mt-6 flex items-center gap-3 lnk-in" style="animation-delay:0.15s">
-      {redes.map((r) => (
-        <li>
-          <a
-            href={r.href}
-            target="_blank"
-            rel="noopener"
-            aria-label={`Mizar en ${r.nombre}`}
-            data-event={r.event}
-            class="grid place-items-center w-12 h-12 rounded-full bg-white/10 ring-1 ring-white/15 hover:bg-white hover:text-navy-dark transition-colors"
-          >
-            <svg viewBox={r.viewBox} width="22" height="22" fill="currentColor" aria-hidden="true">
-              <path d={r.svgPath}></path>
-            </svg>
-          </a>
-        </li>
-      ))}
-    </ul>
-
-    <a
-      href={WA_URL}
-      target="_blank"
-      rel="noopener"
-      data-event="whatsapp-click"
-      class="mt-8 w-full flex items-center justify-center gap-3 bg-rojo hover:bg-rojo-dark text-white font-bold text-lg px-6 py-4 rounded-2xl shadow-hover transition-colors lnk-in"
-      style="animation-delay:0.2s"
-    >
-      <svg viewBox="0 0 32 32" width="24" height="24" fill="currentColor" aria-hidden="true">
-        <path d="M16 3C9.373 3 4 8.373 4 15c0 2.25.62 4.36 1.7 6.16L4 29l8.05-1.65A11.9 11.9 0 0 0 16 27c6.627 0 12-5.373 12-12S22.627 3 16 3zm0 21.8c-1.9 0-3.68-.53-5.2-1.45l-.37-.22-4.78.98 1-4.65-.24-.39A9.77 9.77 0 0 1 6.2 15c0-5.4 4.4-9.8 9.8-9.8s9.8 4.4 9.8 9.8-4.4 9.8-9.8 9.8zm5.38-7.34c-.3-.15-1.74-.86-2-.96-.27-.1-.47-.15-.66.15-.2.29-.76.95-.93 1.15-.17.2-.34.22-.64.07-.3-.14-1.24-.45-2.36-1.45-.87-.78-1.46-1.74-1.63-2.03-.17-.3-.02-.46.13-.6.13-.14.3-.35.44-.52.15-.17.2-.3.3-.5.1-.19.05-.36-.02-.5-.08-.15-.67-1.6-.91-2.2-.24-.57-.48-.5-.66-.5h-.56c-.2 0-.5.07-.77.36-.26.29-1 .98-1 2.4 0 1.4 1.03 2.77 1.17 2.96.15.2 2.03 3.1 4.92 4.34.69.3 1.22.47 1.64.6.69.22 1.32.19 1.81.12.55-.08 1.74-.71 1.98-1.4.25-.68.25-1.27.17-1.4-.07-.12-.27-.2-.57-.34z"></path>
-      </svg>
-      Escríbenos por WhatsApp
-    </a>
-
-    <h2 class="mt-9 mb-3 self-start text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
+    <h2 class="mt-8 mb-3 self-start text-xs font-semibold uppercase tracking-[0.2em] text-white/60">
       Nuestros proyectos
     </h2>
 
     <ul class="w-full flex flex-col gap-3">
       {proyectos.map((p, i) => (
-        <li class="lnk-in" style={`animation-delay:${0.25 + i * 0.07}s`}>
+        <li class="lnk-in" style={`animation-delay:${0.15 + i * 0.07}s`}>
           <a
             href={p.href}
             data-event="linkinbio-click"
@@ -205,10 +172,43 @@ const redes = [
     </ul>
 
     <a
+      href={WA_URL}
+      target="_blank"
+      rel="noopener"
+      data-event="whatsapp-click"
+      class="mt-6 w-full flex items-center justify-center gap-3 bg-rojo hover:bg-rojo-dark text-white font-bold text-lg px-6 py-4 rounded-2xl shadow-hover transition-colors lnk-in"
+      style={`animation-delay:${0.15 + proyectos.length * 0.07}s`}
+    >
+      <svg viewBox="0 0 32 32" width="24" height="24" fill="currentColor" aria-hidden="true">
+        <path d="M16 3C9.373 3 4 8.373 4 15c0 2.25.62 4.36 1.7 6.16L4 29l8.05-1.65A11.9 11.9 0 0 0 16 27c6.627 0 12-5.373 12-12S22.627 3 16 3zm0 21.8c-1.9 0-3.68-.53-5.2-1.45l-.37-.22-4.78.98 1-4.65-.24-.39A9.77 9.77 0 0 1 6.2 15c0-5.4 4.4-9.8 9.8-9.8s9.8 4.4 9.8 9.8-4.4 9.8-9.8 9.8zm5.38-7.34c-.3-.15-1.74-.86-2-.96-.27-.1-.47-.15-.66.15-.2.29-.76.95-.93 1.15-.17.2-.34.22-.64.07-.3-.14-1.24-.45-2.36-1.45-.87-.78-1.46-1.74-1.63-2.03-.17-.3-.02-.46.13-.6.13-.14.3-.35.44-.52.15-.17.2-.3.3-.5.1-.19.05-.36-.02-.5-.08-.15-.67-1.6-.91-2.2-.24-.57-.48-.5-.66-.5h-.56c-.2 0-.5.07-.77.36-.26.29-1 .98-1 2.4 0 1.4 1.03 2.77 1.17 2.96.15.2 2.03 3.1 4.92 4.34.69.3 1.22.47 1.64.6.69.22 1.32.19 1.81.12.55-.08 1.74-.71 1.98-1.4.25-.68.25-1.27.17-1.4-.07-.12-.27-.2-.57-.34z"></path>
+      </svg>
+      Escríbenos por WhatsApp
+    </a>
+
+    <ul class="mt-5 flex items-center gap-3 lnk-in" style={`animation-delay:${0.22 + proyectos.length * 0.07}s`}>
+      {redes.map((r) => (
+        <li>
+          <a
+            href={r.href}
+            target="_blank"
+            rel="noopener"
+            aria-label={`Mizar en ${r.nombre}`}
+            data-event={r.event}
+            class="grid place-items-center w-12 h-12 rounded-full bg-white/10 ring-1 ring-white/15 hover:bg-white hover:text-navy-dark transition-colors"
+          >
+            <svg viewBox={r.viewBox} width="22" height="22" fill="currentColor" aria-hidden="true">
+              <path d={r.svgPath}></path>
+            </svg>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <a
       href="/"
       data-event="linkinbio-click"
-      class="lnk-in mt-3 flex items-center justify-center gap-2 w-full rounded-2xl border border-white/25 px-5 py-4 font-semibold text-white hover:bg-white/10 transition-colors"
-      style={`animation-delay:${0.25 + proyectos.length * 0.07}s`}
+      class="lnk-in mt-5 flex items-center justify-center gap-2 w-full rounded-2xl border border-white/25 px-5 py-4 font-semibold text-white hover:bg-white/10 transition-colors"
+      style={`animation-delay:${0.29 + proyectos.length * 0.07}s`}
     >
       <svg
         viewBox="0 0 24 24"
