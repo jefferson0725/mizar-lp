@@ -3,7 +3,12 @@
 # Uso: bash .claude/deploy-preview.sh
 set -euo pipefail
 cd "$(dirname "$0")/.."
-KEY=/c/Users/samue/.ssh/sixteam_vps_root_ed25519
+# La clave no está en el repo: cópiala a ~/.ssh/ en cada equipo o indica otra ruta con MIZAR_VPS_KEY.
+KEY="${MIZAR_VPS_KEY:-$HOME/.ssh/sixteam_vps_root_ed25519}"
+if [ ! -f "$KEY" ]; then
+  echo "✗ No encuentro la clave SSH del VPS en $KEY" >&2
+  exit 1
+fi
 echo "▶ Compilando..."
 npm --prefix site run build >/dev/null
 echo "▶ Subiendo al VPS..."
