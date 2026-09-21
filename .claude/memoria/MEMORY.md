@@ -1,3 +1,4 @@
 - [Brief real del cliente (reunión 2026-07-01)](mizar_client_brief_20260701.md) — qué quiere/no quiere Juliana Parada para el sitio Grupo Mizar
 - [Brochure PDF de Mizar](mizar_brochure_asset.md) — fuente de fotos reales de proyectos, pendiente de usar en Nosotros
 - [Landing Charta, página /links y vista previa fija](landing_parcelas_charta.md) — https://preview-mizar.sixteam.pro (VPS), supuestos por confirmar y trampas de Tailwind, cloudflared y DNS
+- [Inventario de hosting y deploy de Mizar (2026-09-21)](mizar_hosting_inventario.md) — producción en hosting de la clienta, deploy manual y automático

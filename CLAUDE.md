@@ -30,5 +30,6 @@ Estos archivos son la memoria de trabajo de sesiones anteriores. Léelos antes d
 @.claude/memoria/mizar_client_brief_20260701.md
 @.claude/memoria/landing_parcelas_charta.md
 @.claude/memoria/mizar_brochure_asset.md
+@.claude/memoria/mizar_hosting_inventario.md
 
 Notas de portabilidad: las rutas absolutas `C:\Users\samue\...` de esos archivos y de `.claude/deploy-preview.sh` (clave SSH, carpeta Downloads con los originales de Charta) son de la máquina anterior; ajústalas a esta. Las claves SSH NO están en el repo.
