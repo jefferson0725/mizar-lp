@@ -1,5 +1,13 @@
 name: Build & Deploy to Hostinger
 
+# Publica https://grupomizar.com.co (hosting Premium de Hostinger) por rsync sobre SSH.
+#  - push a main que toque site/**  → compila y publica
+#  - Strapi publica un post         → repository_dispatch "strapi-publish" → compila y publica
+#  - Manual (Actions → Run workflow) → por defecto SIMULA (dry_run): compila y lista cambios, no publica
+#
+# Secrets del repo:   SSH_PRIVATE_KEY (clave de deploy registrada en hPanel → Acceso SSH), STRAPI_URL
+# Variable (opcional): PUBLIC_GA4_ID
+
 on:
   push:
     branches: [main]
@@ -9,11 +17,53 @@ on:
   repository_dispatch:
     types: [strapi-publish]
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Simular (rsync --dry-run): compila y lista cambios, no publica'
+        type: boolean
+        default: true
+
+# Un solo deploy a la vez; si llega otro, espera (nunca se cancela uno a medias).
+concurrency:
+  group: deploy-hostinger
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  SSH_HOST: 82.25.83.112
+  SSH_PORT: '65002'
+  SSH_USER: u564846756
+  REMOTE_DIR: domains/grupomizar.com.co/public_html/
+  SITE_URL: https://grupomizar.com.co
+  # Huella pública del servidor (fijada para no aceptar un host distinto). Si Hostinger migra el
+  # servidor, el deploy falla a propósito: actualizar esta línea.
+  HOST_KEY: 'ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAKts5zq5UDqy8+83vRPuPmzR2fg3n2jB4/GD3WuOtIm'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
+      - name: Comprobar secrets
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          if [ -z "$SSH_PRIVATE_KEY" ]; then
+            echo "::error::Falta el secret SSH_PRIVATE_KEY (Settings → Secrets and variables → Actions)."
+            exit 1
+          fi
+
+      - name: Decidir modo
+        id: mode
+        run: |
+          DRY=false
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.dry_run }}" = "true" ]; then DRY=true; fi
+          if [ "${{ github.ref }}" != "refs/heads/main" ]; then DRY=true; fi
+          echo "dry=$DRY" >> "$GITHUB_OUTPUT"
+          echo "Modo simulación: $DRY"
+
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
@@ -23,7 +73,7 @@ jobs:
           cache-dependency-path: site/package-lock.json
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
         working-directory: site
 
       - name: Build
@@ -31,17 +81,45 @@ jobs:
         working-directory: site
         env:
           STRAPI_URL: ${{ secrets.STRAPI_URL }}
+          PUBLIC_GA4_ID: ${{ vars.PUBLIC_GA4_ID }}
 
-      - name: Deploy via SSH
+      - name: Verificar el build
+        env:
+          STRAPI_URL: ${{ secrets.STRAPI_URL }}
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+          # rsync --delete vacía el destino: no publicar un build roto.
+          for f in index.html .htaccess parcelas-charta/index.html links/index.html sitemap-index.xml 404.html; do
+            test -s "site/dist/$f" || { echo "::error::Falta site/dist/$f"; exit 1; }
+          done
+          N=$(find site/dist -name '*.html' | wc -l)
+          echo "Páginas HTML: $N"
+          [ "$N" -ge 20 ] || { echo "::error::Solo $N páginas HTML (se esperaban ≥20)"; exit 1; }
+          [ -n "$STRAPI_URL" ] || echo "::warning::STRAPI_URL vacío: el blog se publica sin artículos"
+
+      - name: Publicar (rsync)
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          echo "=== Estructura de directorios en el servidor ==="
-          ssh -p 65002 -i ~/.ssh/deploy_key -o StrictHostKeyChecking=accept-new \
-            u564846756@82.25.83.112 \
-            "echo HOME=\$HOME; ls ~/; echo '--- ~/domains/ ---'; ls ~/domains/ 2>/dev/null || echo 'sin ~/domains/'; echo '--- ~/public_html/ ---'; ls ~/public_html/ 2>/dev/null | head -5"
-          rsync -avzr --delete \
-            -e "ssh -p 65002 -i ~/.ssh/deploy_key -o StrictHostKeyChecking=accept-new" \
-            site/dist/ \
-            u564846756@82.25.83.112:~/domains/grupomizar.com.co/public_html/
+          echo "[$SSH_HOST]:$SSH_PORT $HOST_KEY" > ~/.ssh/known_hosts
+          FLAGS="-rlptz --checksum --delete-after --itemize-changes --stats"
+          FLAGS="$FLAGS --exclude=.well-known/ --exclude=cgi-bin/ --skip-compress=mp4/mov/webp/jpg/png/woff2"
+          if [ "${{ steps.mode.outputs.dry }}" = "true" ]; then FLAGS="$FLAGS --dry-run"; fi
+          rsync $FLAGS \
+            -e "ssh -p $SSH_PORT -i $HOME/.ssh/deploy_key -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts" \
+            site/dist/ "$SSH_USER@$SSH_HOST:$REMOTE_DIR"
+          rm -f ~/.ssh/deploy_key
+
+      - name: Comprobar el sitio publicado
+        if: steps.mode.outputs.dry == 'false'
+        run: |
+          sleep 5
+          FAIL=0
+          for p in / /parcelas-charta/ /links/ /nosotros/ /proyectos/ /sitemap-index.xml; do
+            code=$(curl -s -o /dev/null -m 30 -w '%{http_code}' "$SITE_URL$p")
+            echo "$p -> $code"
+            [ "$code" = 200 ] || FAIL=1
+          done
+          exit $FAIL
