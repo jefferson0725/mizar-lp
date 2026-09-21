@@ -1,7 +1,7 @@
 ---
 ---
 
-<section class="relative min-h-[100svh] flex items-end overflow-hidden bg-navy-dark text-white">
+<section class="relative min-h-[100svh] flex items-end lg:items-center overflow-hidden bg-navy-dark text-white">
   <!-- Fallback estático (se ve antes de que el video cargue / en conexiones lentas) -->
   <img
     src="/videos/posters/charta-hero.jpg"
@@ -25,27 +25,30 @@
   ></video>
 
   <!-- Degradado para legibilidad del texto -->
-  <div class="absolute inset-0 bg-gradient-to-t from-navy-dark/90 via-navy-dark/40 to-navy-dark/20"></div>
+  <div class="absolute inset-0 bg-gradient-to-t from-navy-dark/90 via-navy-dark/40 to-navy-dark/20 lg:bg-gradient-to-r lg:from-navy-dark/85 lg:via-navy-dark/45 lg:to-navy-dark/10"></div>
 
-  <div class="relative z-10 max-w-6xl mx-auto px-6 pt-32 pb-10 md:pb-16 w-full">
-    <p class="text-xs font-semibold uppercase tracking-[0.2em] text-dorado">
-      Charta · Santander
-    </p>
-    <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.05] max-w-4xl mt-4">
-      Tu parcela de retiro en el Rincón Florido de Santander
-    </h1>
-    <p class="text-lg md:text-2xl text-white/85 max-w-2xl mt-6">
-      A 5 minutos del pueblo. Tu cabaña de tranquilidad, sin dejar de estar cerca de todo.
-    </p>
+  <!-- En escritorio el contenido va centrado en vertical y alineado a la izquierda -->
+  <div class="relative z-10 max-w-6xl mx-auto px-6 pt-32 pb-10 md:pb-16 lg:py-32 w-full">
+    <div class="lg:max-w-2xl">
+      <p class="text-xs font-semibold uppercase tracking-[0.2em] text-dorado">
+        Charta · Santander
+      </p>
+      <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.05] max-w-4xl mt-4">
+        Tu parcela de retiro en el Rincón Florido de Santander
+      </h1>
+      <p class="text-lg md:text-2xl text-white/85 max-w-2xl mt-6">
+        A 5 minutos del pueblo. Tu cabaña de tranquilidad, sin dejar de estar cerca de todo.
+      </p>
 
-    <div class="mt-12 md:mt-16 border-t border-white/15 pt-6 grid grid-cols-2 gap-6">
-      <div>
-        <span class="font-serif text-3xl md:text-5xl text-dorado">20 años</span>
-        <p class="text-sm uppercase tracking-[0.15em] text-white/70 mt-1">construyendo en Colombia</p>
-      </div>
-      <div>
-        <span class="font-serif text-3xl md:text-5xl text-dorado">+100 obras</span>
-        <p class="text-sm uppercase tracking-[0.15em] text-white/70 mt-1">entregadas en todo el país</p>
+      <div class="mt-12 md:mt-16 border-t border-white/15 pt-6 grid grid-cols-2 gap-6">
+        <div>
+          <span class="font-serif text-3xl md:text-5xl text-dorado">20 años</span>
+          <p class="text-sm uppercase tracking-[0.15em] text-white/70 mt-1">construyendo en Colombia</p>
+        </div>
+        <div>
+          <span class="font-serif text-3xl md:text-5xl text-dorado">+100 obras</span>
+          <p class="text-sm uppercase tracking-[0.15em] text-white/70 mt-1">entregadas en todo el país</p>
+        </div>
       </div>
     </div>
   </div>

@@ -91,6 +91,11 @@ const CONFIG: Record<string, WhatsAppConfig> = {
     page: "Parcelas campestres — Charta",
     message: "me interesan las parcelas campestres en Charta, mi nombre es",
   },
+  "/milote/links": {
+    phone: PHONES.milote,
+    page: "Enlaces de redes de Mi Lote",
+    message: "quiero información sobre los lotes de Mi Lote en Cúcuta, mi nombre es",
+  },
   "/links": {
     phone: PHONES.laureles,
     page: "Enlaces de redes sociales",
