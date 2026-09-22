@@ -18,9 +18,13 @@ export default function VideoCarousel({ slides }) {
     const n = (i + slides.length) % slides.length;
     setIdx(n);
     const track = trackRef.current;
-    if (track) {
-      // scrollIntoView avoids reading offsetLeft (which forces a synchronous layout)
-      track.children[n]?.scrollIntoView({ inline: 'start', behavior: 'smooth', block: 'nearest' });
+    const child = track?.children[n];
+    if (track && child) {
+      // Desplaza solo el carrusel (horizontal). scrollIntoView con block:'nearest'
+      // también movía la página vertical cuando la sección no estaba a la vista,
+      // "secuestrando" el scroll del usuario al bajar por el home.
+      const delta = child.getBoundingClientRect().left - track.getBoundingClientRect().left;
+      track.scrollTo({ left: track.scrollLeft + delta, behavior: 'smooth' });
     }
   };
 
