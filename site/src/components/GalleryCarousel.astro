@@ -70,7 +70,12 @@
 
     function goTo(i) {
       var el = items[i];
-      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+      if (!el) return;
+      // Mueve solo el carrusel (horizontal). scrollIntoView(block:'nearest') también
+      // desplaza la página verticalmente cuando la galería no está del todo a la vista,
+      // provocando un salto que el usuario no pidió (mismo fallo que tenía VideoCarousel).
+      var delta = el.getBoundingClientRect().left - track.getBoundingClientRect().left;
+      track.scrollTo({ left: track.scrollLeft + delta, behavior: 'smooth' });
     }
 
     track.addEventListener('scroll', function() { updateDots(getActive()); }, { passive: true });
