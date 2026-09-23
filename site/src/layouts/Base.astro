@@ -41,11 +41,7 @@ const wa = getWhatsAppConfig(path);
 const site = Astro.site ?? new URL('https://grupomizar.com.co');
 const canonicalPath = path === '/' ? '/' : `${path.replace(/\/+$/, '')}/`;
 const canonical = new URL(canonicalPath, site).href;
-const usesGoogleMapsEmbed =
-  path === '/contacto' ||
-  path === '/lotes-cucuta' ||
-  path === '/apartamentos-piedecuesta' ||
-  path === '/apartamentos-giron';
+const usesGoogleMapsEmbed = path === '/contacto' || path === '/lotes-cucuta';
 ---
 
 <!doctype html>

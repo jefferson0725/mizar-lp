@@ -14,6 +14,11 @@ RewriteRule ^proyectos/lotes-cucuta/?$ /lotes-cucuta/ [R=301,L]
 RewriteRule ^proyectos/apartamentos-giron/?$ /laureles-campestre/ [R=301,L]
 RewriteRule ^proyectos/apartamentos-piedecuesta/?$ /terrazas/ [R=301,L]
 
+# Primeros borradores de Laureles Campestre y Terrazas (jul-2026), reemplazados
+# al día siguiente por la landing definitiva: 301 a la vigente.
+RewriteRule ^apartamentos-giron/?$ /laureles-campestre/ [R=301,L]
+RewriteRule ^apartamentos-piedecuesta/?$ /terrazas/ [R=301,L]
+
 # Las rutas estáticas de Astro se publican como directorios; una sola variante
 # con barra final hace que cada canonical coincida con la URL publicada.
 RewriteCond %{REQUEST_FILENAME} !-f

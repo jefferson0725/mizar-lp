@@ -21,11 +21,8 @@ export default defineConfig({
   integrations: [
     preact(),
     sitemap({
-      // Fuera del sitemap: páginas de enlaces de redes y las landings que
-      // duplican la ficha de un proyecto (llevan noindex, ver Base.astro).
-      filter: (page) =>
-        !/\/links\/?$/.test(page) &&
-        !/\/(apartamentos-giron|apartamentos-piedecuesta)\/?$/.test(page),
+      // Fuera del sitemap: páginas de enlaces de redes.
+      filter: (page) => !/\/links\/?$/.test(page),
     }),
   ]
 });
