@@ -99,7 +99,7 @@ export default function Apartamentos() {
     <section className="py-20 px-6 bg-gris-claro">
       <div className="max-w-5xl mx-auto">
         <h2 className="font-serif text-navy text-3xl sm:text-4xl md:text-5xl text-center mb-10">
-          Conoce los apartamentos
+          Conoce los apartamentos sobre planos en Piedecuesta
         </h2>
 
         <div className="flex justify-center mb-10">

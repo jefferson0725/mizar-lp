@@ -94,7 +94,7 @@ export default function Apartamentos() {
     <section id="apartamentos" className="py-20 px-6 bg-gris-claro">
       <div className="max-w-5xl mx-auto">
         <h2 className="font-serif text-navy text-3xl sm:text-4xl md:text-5xl text-center mb-10">
-          Los apartamentos
+          Los apartamentos sobre planos en Girón
         </h2>
 
         {/* Toggle acabados / obra gris */}

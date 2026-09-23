@@ -30,8 +30,8 @@ export const PROYECTOS_CON_LANDING_PROPIA = new Set([
 ]);
 
 export function getProyectoHref(proyecto: Pick<Proyecto, 'slug' | 'lpUrl'>) {
-  if (PROYECTOS_CON_LANDING_PROPIA.has(proyecto.slug)) return `/${proyecto.slug}`;
-  return proyecto.lpUrl ?? `/proyectos/${proyecto.slug}`;
+  if (PROYECTOS_CON_LANDING_PROPIA.has(proyecto.slug)) return `/${proyecto.slug}/`;
+  return proyecto.lpUrl ?? `/proyectos/${proyecto.slug}/`;
 }
 
 export const proyectos: Proyecto[] = [
@@ -46,7 +46,7 @@ export const proyectos: Proyecto[] = [
     resumen:
       'Apartamentos sobre planos a 150 m del futuro anillo vial, en la zona de mayor crecimiento de Girón. A cuotas y sin bancos.',
     imagen: 'giron.png',
-    lpUrl: '/laureles-campestre',
+    lpUrl: '/laureles-campestre/',
     destacado: true,
   },
   {
@@ -60,7 +60,7 @@ export const proyectos: Proyecto[] = [
     resumen:
       'Apartamentos sobre planos en el centro de Piedecuesta con financiación directa: cuotas fijas, sin intereses bancarios ni intermediarios.',
     imagen: 'piedecuesta.png',
-    lpUrl: '/terrazas',
+    lpUrl: '/terrazas/',
     destacado: true,
   },
   {

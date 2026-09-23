@@ -9,20 +9,27 @@ import Mapa from "../landing/charta/Mapa.astro";
 import Financiacion from "../landing/charta/Financiacion.astro";
 import Cabana from "../landing/charta/Cabana.astro";
 import Testimonio from "../landing/charta/Testimonio.astro";
+import FAQ from "../landing/charta/FAQ.astro";
 import Cierre from "../landing/charta/Cierre.astro";
 import LandingFooter from "../landing/charta/Footer.astro";
+import { breadcrumbSchema, faqSchema } from "../data/schema";
+import { faqCharta } from "../landing/charta/faq";
 import WhatsAppFloat from "../components/WhatsAppFloat.astro";
 import { getWhatsAppConfig } from "../data/whatsapp";
 const wa = getWhatsAppConfig('/parcelas-charta');
 ---
 
 <LandingReact
-  title="Parcelas campestres en Charta, Santander · A cuotas y sin bancos | Grupo Mizar"
-  description="Parcelas desde 650 m² en Charta, a 1 hora de Bucaramanga: agua, luz, alcantarillado y planos de tu cabaña incluidos. Cuotas desde $3.000.000 directo con Mizar."
+  title="Parcelas en Charta, Santander, a cuotas y sin bancos | Mizar"
+  description="Parcelas en Charta, Santander, desde 650 m² y a 1 hora de Bucaramanga, con agua, luz, alcantarillado y planos de tu cabaña. A cuotas con Mizar, sin bancos."
   ogImage="/assets/parcelas-charta.jpg"
   path="/parcelas-charta"
   headerColor="#1f3a31"
   headerColorDark="#142720"
+  schema={[
+    breadcrumbSchema([["Proyectos", "/proyectos/"], ["Parcelas en Charta", "/parcelas-charta/"]]),
+    faqSchema(faqCharta),
+  ]}
 >
   <div class="theme-charta">
     <Header transparent />
@@ -34,6 +41,7 @@ const wa = getWhatsAppConfig('/parcelas-charta');
     <Financiacion />
     <Cabana />
     <Testimonio />
+    <FAQ />
     <Cierre />
     <LandingFooter />
   </div>

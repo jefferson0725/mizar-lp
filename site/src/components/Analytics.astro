@@ -21,21 +21,40 @@ const ga4Snippet = ga4Id
     if (typeof window.gtag === 'function') window.gtag('event', nombre, props);
   }
 
-  // Listener delegado: clicks en cualquier elemento con data-event
+  // Evento para enlaces sin data-event: cubre botones flotantes y landings
+  // cuyo marcado no se etiquetó a mano. Estos nombres son los que se marcan
+  // como eventos clave en GA4.
+  function _autoEvent(a) {
+    var href = a.getAttribute('href') || '';
+    if (/^https?:\/\/(wa\.me|api\.whatsapp\.com|web\.whatsapp\.com)\//i.test(href)) return 'whatsapp-click';
+    if (/^tel:/i.test(href)) return 'phone-click';
+    if (/^mailto:/i.test(href)) return 'email-click';
+    return null;
+  }
+
+  // Listener delegado: clicks en elementos con data-event o en enlaces de contacto
   document.addEventListener('click', function (e) {
-    var el = e.target ? e.target.closest('[data-event]') : null;
-    if (!el) return;
+    if (!e.target || !e.target.closest) return;
+    var el = e.target.closest('[data-event]');
+    var nombre = el ? el.getAttribute('data-event') : null;
+    if (!el) {
+      el = e.target.closest('a[href]');
+      nombre = el ? _autoEvent(el) : null;
+    }
+    if (!nombre) return;
     var props = { page_path: window.location.pathname };
     if (el.tagName === 'A' && el.href) props.link_url = el.href;
     var txt = (el.textContent || '').trim();
     if (txt) props.link_text = txt.slice(0, 100);
-    _pushEvent(el.getAttribute('data-event'), props);
+    _pushEvent(nombre, props);
   });
 
-  // Listener delegado: envíos de formularios con data-event
+  // Listener delegado: envío de cualquier formulario (form-submit por defecto)
   document.addEventListener('submit', function (e) {
-    var form = e.target ? e.target.closest('[data-event]') : null;
+    var form = e.target && e.target.closest ? e.target.closest('form') : null;
     if (!form) return;
-    _pushEvent(form.getAttribute('data-event'), { page_path: window.location.pathname });
+    var props = { page_path: window.location.pathname };
+    if (form.id) props.form_id = form.id;
+    _pushEvent(form.getAttribute('data-event') || 'form-submit', props);
   });
 </script>

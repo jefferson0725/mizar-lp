@@ -123,7 +123,7 @@ export default function ProyectoSelector({ items, singleRow = false }) {
       {visibles.length === 0 && (
         <p className="py-10 text-center text-ink/60">
           No hay proyectos con esos filtros por ahora.{' '}
-          <a href="/contacto" className="font-semibold text-mizar underline">
+          <a href="/contacto/" className="font-semibold text-mizar underline">
             Cuéntanos qué buscas
           </a>{' '}
           y te avisamos primero.

@@ -12,18 +12,24 @@ import FAQ from "../landing/terrazas/FAQ.astro";
 import Resumen from "../landing/terrazas/Resumen.astro";
 import Contacto from "../landing/terrazas/Contacto.astro";
 import TerrazasFooter from "../landing/terrazas/Footer.astro";
+import { breadcrumbSchema, faqSchema } from "../data/schema";
+import { faqTerrazas } from "../landing/terrazas/faq";
 import WhatsAppFloat from "../components/WhatsAppFloat.astro";
 import { getWhatsAppConfig } from "../data/whatsapp";
 const wa = getWhatsAppConfig('/terrazas');
 ---
 
 <LandingReact
-  title="Terrazas de la Cantera · Apartamentos en Piedecuesta | Mizar"
-  description="Apartamentos propios en Piedecuesta con vista al Cerro de La Cantera. Sin bancos y a cuotas, directo con Mizar. 60 m², 3 alcobas. Entrega diciembre 2027."
+  title="Apartamentos sobre planos en Piedecuesta | Terrazas de la Cantera"
+  description="Apartamentos sobre planos en Piedecuesta con vista al Cerro de La Cantera: 60 m², 3 alcobas, a cuotas y sin bancos, directo con Mizar. Entrega diciembre 2027."
   ogImage="/assets/terrazas-fachada.webp"
   path="/terrazas"
   headerColor="#025362"
   headerColorDark="#013a45"
+  schema={[
+    breadcrumbSchema([["Proyectos", "/proyectos/"], ["Terrazas de la Cantera", "/terrazas/"]]),
+    faqSchema(faqTerrazas),
+  ]}
 >
   <Header transparent />
   <!-- .theme-terrazas sobreescribe los tokens CSS (navy → teal, rojo → lima) -->

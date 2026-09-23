@@ -9,6 +9,8 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://grupomizar.com.co',
   compressHTML: true,
+  // Las páginas se publican como /ruta/ (directorio): una sola variante de URL.
+  trailingSlash: 'always',
   vite: {
     plugins: [tailwindcss()],
     server: {
@@ -16,5 +18,14 @@ export default defineConfig({
     },
   },
 
-  integrations: [preact(), sitemap({ filter: (page) => !/\/links\/?$/.test(page) })]
+  integrations: [
+    preact(),
+    sitemap({
+      // Fuera del sitemap: páginas de enlaces de redes y las landings que
+      // duplican la ficha de un proyecto (llevan noindex, ver Base.astro).
+      filter: (page) =>
+        !/\/links\/?$/.test(page) &&
+        !/\/(apartamentos-giron|apartamentos-piedecuesta)\/?$/.test(page),
+    }),
+  ]
 });

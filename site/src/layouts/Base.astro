@@ -22,6 +22,8 @@ interface Props {
   footerDireccion?: string;
   /** URL del recurso LCP para preload (hero image) */
   preloadImage?: string;
+  /** Excluir de Google (landings que duplican la ficha de un proyecto) */
+  noindex?: boolean;
 }
 
 const {
@@ -33,6 +35,7 @@ const {
   headerTransparent = false,
   footerDireccion,
   preloadImage,
+  noindex = false,
 } = Astro.props;
 const wa = getWhatsAppConfig(path);
 const site = Astro.site ?? new URL('https://grupomizar.com.co');
@@ -52,6 +55,7 @@ const usesGoogleMapsEmbed =
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/png" href="/favicon.png" sizes="512x512" />

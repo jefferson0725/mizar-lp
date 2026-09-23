@@ -5,19 +5,26 @@ import Hero from "../landing/mirador/Hero.astro";
 import Caracteristicas from "../landing/mirador/Caracteristicas.astro";
 import Financiacion from "../landing/mirador/Financiacion.astro";
 import Mapa from "../landing/mirador/Mapa.astro";
+import FAQ from "../landing/mirador/FAQ.astro";
 import LandingFooter from "../landing/mirador/Footer.astro";
+import { breadcrumbSchema, faqSchema } from "../data/schema";
+import { faqMirador } from "../landing/mirador/faq";
 import WhatsAppFloat from "../components/WhatsAppFloat.astro";
 import { getWhatsAppConfig } from "../data/whatsapp";
 const wa = getWhatsAppConfig('/mirador-de-la-montana');
 ---
 
 <LandingReact
-  title="Mirador de la Montaña · Lotes campestres en Mesa de los Santos | Mizar"
-  description="Lotes campestres desde $75 millones a 15 min del peaje hacia Mesa de los Santos, Santander. Financiación directa sin bancos ni codeudores. Separa con $3.000.000."
+  title="Lotes en Mesa de los Santos desde $75 millones | Mirador"
+  description="Lotes campestres en Mesa de los Santos desde $75 millones, a 15 min del peaje. Vías empedradas, agua potable y planos. Separa con $3.000.000, sin bancos."
   ogImage="/assets/mirador-de-la-montana.png"
   path="/mirador-de-la-montana"
   headerColor="#2f4a3c"
   headerColorDark="#1e3327"
+  schema={[
+    breadcrumbSchema([["Proyectos", "/proyectos/"], ["Mirador de la Montaña", "/mirador-de-la-montana/"]]),
+    faqSchema(faqMirador),
+  ]}
 >
   <div class="theme-mirador">
     <Header transparent />
@@ -25,6 +32,7 @@ const wa = getWhatsAppConfig('/mirador-de-la-montana');
     <Caracteristicas />
     <Financiacion />
     <Mapa />
+    <FAQ />
     <LandingFooter />
   </div>
   <WhatsAppFloat phone={wa.phone} message={wa.message} />

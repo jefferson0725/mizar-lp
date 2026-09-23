@@ -12,18 +12,24 @@ import FAQ from "../landing/laureles/FAQ.astro";
 import Resumen from "../landing/laureles/Resumen.astro";
 import Contacto from "../landing/laureles/Contacto.astro";
 import LandingFooter from "../landing/laureles/Footer.astro";
+import { breadcrumbSchema, faqSchema } from "../data/schema";
+import { faqLaureles } from "../landing/laureles/faq";
 import WhatsAppFloat from "../components/WhatsAppFloat.astro";
 import { getWhatsAppConfig } from "../data/whatsapp";
 const wa = getWhatsAppConfig('/laureles-campestre');
 ---
 
 <LandingReact
-  title="Laureles Campestre · Apartamentos en Girón | Mizar"
-  description="Apartamentos sobre planos en Girón, a 150 m del futuro anillo vial. Sin bancos y a cuotas, directo con Mizar. Separa con $3.000.000. Entregas 2027–2028."
+  title="Apartamentos sobre planos en Girón | Laureles Campestre"
+  description="Apartamentos sobre planos en Girón, a 150 m del futuro anillo vial. A cuotas y sin bancos, directo con Mizar, financiación hasta 20 años. Entregas 2027-2028."
   ogImage="/assets/hero-fachada.webp"
   path="/laureles-campestre"
   headerColor="#0a2342"
   headerColorDark="#061629"
+  schema={[
+    breadcrumbSchema([["Proyectos", "/proyectos/"], ["Laureles Campestre", "/laureles-campestre/"]]),
+    faqSchema(faqLaureles),
+  ]}
 >
   <Header transparent />
   <IntroParallax />

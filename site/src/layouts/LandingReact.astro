@@ -17,9 +17,11 @@ interface Props {
   headerColor?: string;
   headerColorDark?: string;
   noindex?: boolean;
+  /** JSON-LD adicional de la página (Organization ya va global) */
+  schema?: object | object[];
 }
 
-const { title, description, ogImage, path, headerColor = '#22484c', headerColorDark = '#17333a', noindex = false } = Astro.props;
+const { title, description, ogImage, path, headerColor = '#22484c', headerColorDark = '#17333a', noindex = false, schema } = Astro.props;
 const site = Astro.site ?? new URL('https://grupomizar.com.co');
 const canonicalPath = path === '/' ? '/' : `${path.replace(/\/+$/, '')}/`;
 const canonical = new URL(canonicalPath, site).href;
@@ -50,6 +52,7 @@ const canonical = new URL(canonicalPath, site).href;
     <meta property="twitter:image" content={new URL(ogImage, site).href} />
     <title>{title}</title>
     <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
+    {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
     <style set:html={`:root{--color-plum:${headerColor};--color-plum-dark:${headerColorDark};}`}></style>
     <script is:inline type="text/javascript">
       window.addEventListener('load', function() {

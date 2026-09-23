@@ -6,6 +6,14 @@ RewriteEngine On
 RewriteCond %{HTTP_HOST} ^www\.grupomizar\.com\.co(?::\d+)?$ [NC]
 RewriteRule ^ https://grupomizar.com.co%{REQUEST_URI} [R=301,L,NE]
 
+# Fichas /proyectos/<slug>/ que ya no existen o duplicaban la landing del
+# proyecto: 301 a la landing propia para no canibalizar búsquedas.
+RewriteRule ^proyectos/parcelas-charta/?$ /parcelas-charta/ [R=301,L]
+RewriteRule ^proyectos/(parcelas-mesa-de-los-santos|mirador-de-la-montana)/?$ /mirador-de-la-montana/ [R=301,L]
+RewriteRule ^proyectos/lotes-cucuta/?$ /lotes-cucuta/ [R=301,L]
+RewriteRule ^proyectos/apartamentos-giron/?$ /laureles-campestre/ [R=301,L]
+RewriteRule ^proyectos/apartamentos-piedecuesta/?$ /terrazas/ [R=301,L]
+
 # Las rutas estáticas de Astro se publican como directorios; una sola variante
 # con barra final hace que cada canonical coincida con la URL publicada.
 RewriteCond %{REQUEST_FILENAME} !-f

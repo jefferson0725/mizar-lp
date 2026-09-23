@@ -6,13 +6,14 @@ const { transparent = false } = Astro.props;
 
 const links = [
   { href: '/', label: 'Inicio' },
-  { href: '/nosotros', label: 'Nosotros' },
-  { href: '/proyectos', label: 'Proyectos' },
-  { href: '/blog', label: 'Blog' },
+  { href: '/nosotros/', label: 'Nosotros' },
+  { href: '/proyectos/', label: 'Proyectos' },
+  { href: '/blog/', label: 'Blog' },
 ];
 const current = Astro.url.pathname;
+const stripTrailingSlash = (p: string) => (p.length > 1 ? p.replace(/\/+$/, '') : p);
 const isActive = (href: string) =>
-  href === '/' ? current === '/' : current.startsWith(href);
+  href === '/' ? current === '/' : stripTrailingSlash(current).startsWith(stripTrailingSlash(href));
 ---
 
 <header
@@ -40,7 +41,7 @@ const isActive = (href: string) =>
           </a>
         ))
       }
-      <a href="/contacto" class="btn-primary !py-2 !px-5 text-sm">Contáctanos</a>
+      <a href="/contacto/" class="btn-primary !py-2 !px-5 text-sm">Contáctanos</a>
     </nav>
 
     <button
@@ -71,7 +72,7 @@ const isActive = (href: string) =>
           </a>
         ))
       }
-      <a href="/contacto" class="btn-primary mt-2 justify-center">Contáctanos</a>
+      <a href="/contacto/" class="btn-primary mt-2 justify-center">Contáctanos</a>
     </div>
   </nav>
 </header>

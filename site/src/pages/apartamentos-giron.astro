@@ -73,7 +73,7 @@ const schema = [
     '@type': 'BreadcrumbList',
     itemListElement: [
       { '@type': 'ListItem', position: 1, name: 'Inicio', item: 'https://grupomizar.com.co/' },
-      { '@type': 'ListItem', position: 2, name: 'Laureles Campestre', item: 'https://grupomizar.com.co/apartamentos-giron' },
+      { '@type': 'ListItem', position: 2, name: 'Laureles Campestre', item: 'https://grupomizar.com.co/apartamentos-giron/' },
     ],
   },
 ];
@@ -83,6 +83,7 @@ const schema = [
   title="Laureles Campestre — Apartamentos en Girón, a cuotas y sin bancos"
   description="Apartamentos sobre planos en Girón a 150 m del futuro anillo vial metropolitano Piedecuesta-Girón, con pago directo a cuotas y sin bancos."
   path="/apartamentos-giron"
+  noindex
   schema={schema}
   preloadImage={heroBg}
 >
@@ -209,7 +210,7 @@ const schema = [
 
   <section class="py-16 md:py-24"><div class="container-site grid gap-10 md:grid-cols-[7fr_5fr] md:items-center"><div><p class="eyebrow text-teal">Para colombianos en el exterior</p><h2 class="display-lg mt-3 text-3xl md:text-4xl">¿Vives fuera del país? Puedes comprar desde donde estés</h2><p class="mt-5 max-w-prose leading-relaxed text-ink/75">Muy buena experiencia, especialmente para quienes vivimos fuera del país y queremos invertir en nuestra tierra. Te atendemos por videollamada, WhatsApp y documentos digitales.</p></div><a href={wa('Hola, vivo fuera de Colombia y quiero invertir en Laureles Campestre en Girón.')} target="_blank" rel="noopener" class="btn-primary justify-self-start md:justify-self-end" data-event="whatsapp-click">Invierto desde el exterior</a></div></section>
 
-  <section class="bg-white py-16 md:py-24"><div class="container-site grid gap-10 md:grid-cols-3"><div class="md:col-span-1"><p class="eyebrow text-teal">El respaldo</p><h2 class="display-lg mt-3 text-3xl">Detrás de Laureles Campestre está Grupo Mizar</h2><a href="/nosotros" class="mt-5 inline-block font-bold text-mizar hover:underline">Conoce nuestra historia →</a></div><div class="grid grid-cols-2 gap-8 md:col-span-2"><div><p class="stat-num text-5xl text-plum">20<span class="text-mizar">+</span></p><p class="mt-1 text-sm font-semibold tracking-wider text-ink/60 uppercase">Años construyendo en Colombia</p></div><div><p class="stat-num text-5xl text-plum">100<span class="text-mizar">+</span></p><p class="mt-1 text-sm font-semibold tracking-wider text-ink/60 uppercase">Obras entregadas</p></div><p class="col-span-2 max-w-prose text-ink/75">Somos una empresa familiar de ingenieros santandereanos. Respondemos con nombre propio por cada obra que entregamos.</p></div></div></section>
+  <section class="bg-white py-16 md:py-24"><div class="container-site grid gap-10 md:grid-cols-3"><div class="md:col-span-1"><p class="eyebrow text-teal">El respaldo</p><h2 class="display-lg mt-3 text-3xl">Detrás de Laureles Campestre está Grupo Mizar</h2><a href="/nosotros/" class="mt-5 inline-block font-bold text-mizar hover:underline">Conoce nuestra historia →</a></div><div class="grid grid-cols-2 gap-8 md:col-span-2"><div><p class="stat-num text-5xl text-plum">20<span class="text-mizar">+</span></p><p class="mt-1 text-sm font-semibold tracking-wider text-ink/60 uppercase">Años construyendo en Colombia</p></div><div><p class="stat-num text-5xl text-plum">100<span class="text-mizar">+</span></p><p class="mt-1 text-sm font-semibold tracking-wider text-ink/60 uppercase">Obras entregadas</p></div><p class="col-span-2 max-w-prose text-ink/75">Somos una empresa familiar de ingenieros santandereanos. Respondemos con nombre propio por cada obra que entregamos.</p></div></div></section>
 
   <section class="py-16 md:py-24" id="faq"><div class="container-site max-w-3xl"><p class="eyebrow text-teal">Preguntas frecuentes</p><h2 class="display-lg mt-3 text-3xl md:text-4xl">Lo que todos preguntan antes de decidir</h2><div class="mt-8"><FaqAccordion items={faq} /></div></div></section>
 

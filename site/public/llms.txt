@@ -1,29 +1,40 @@
 # Grupo Mizar
 
-> Constructora e inmobiliaria santandereana con más de 20 años de trayectoria y más de 100 proyectos entregados en Colombia. Vende propiedades a cuotas, pago directo con la constructora y sin bancos: sin estudio de crédito, sin codeudores y sin intermediarios.
+> Constructora e inmobiliaria santandereana (razón social: MIZAR Diseño y Construcción S.A.S.), con sede en Bucaramanga, más de 20 años de trayectoria y más de 100 proyectos entregados en Colombia. Vende propiedades a cuotas, pago directo con la constructora y sin bancos: sin estudio de crédito, sin codeudores y sin intermediarios.
 
 Grupo Mizar opera bajo dos marcas:
 
-- **Mizar**: apartamentos, cabañas y parcelas campestres en Santander (Girón, Piedecuesta, Charta, Mesa de los Santos).
+- **Mizar**: apartamentos sobre planos y parcelas y lotes campestres en Santander (Girón, Piedecuesta, Charta, Mesa de los Santos).
 - **Mi Lote**: lotes urbanos en San Cayetano, Cúcuta (Norte de Santander).
 
 Público objetivo: trabajadores colombianos sin acceso a crédito bancario tradicional, y colombianos residentes en el exterior (Estados Unidos, España) que buscan invertir en propiedad raíz en Colombia con acompañamiento remoto.
 
 Sede: Calle 105A #23a-18, Provenza, Bucaramanga, Santander, Colombia.
 
-## Páginas principales
+Para no confundir marcas: Grupo Mizar es una constructora de Bucaramanga, Santander, y sus proyectos en venta están en Santander (Girón, Piedecuesta, Charta, Mesa de los Santos) y Norte de Santander (San Cayetano, Cúcuta).
 
-- [Inicio](https://grupomizar.com.co/): presentación general del modelo de pago a cuotas y portafolio de proyectos.
-- [Nosotros](https://grupomizar.com.co/nosotros): historia de la empresa, equipo y modelo de negocio.
-- [Proyectos](https://grupomizar.com.co/proyectos): portafolio completo de apartamentos, parcelas y lotes.
-- [Mi Lote — Cúcuta](https://grupomizar.com.co/lotes-cucuta): lotes urbanos en San Cayetano, Cúcuta.
-- [Parcelas campestres en Charta](https://grupomizar.com.co/parcelas-charta): parcelas desde 650 m² a 1 hora de Bucaramanga, con servicios y planos de cabaña incluidos, a cuotas sin bancos.
-- [Apartamentos VIS en Girón](https://grupomizar.com.co/apartamentos-vis-giron): apartamentos a cuotas sin banco en Girón, Santander.
-- [Apartamentos VIS en Piedecuesta](https://grupomizar.com.co/apartamentos-vis-piedecuesta): apartamentos a cuotas sin banco en Piedecuesta, Santander.
-- [Parcelas campestres en Santander](https://grupomizar.com.co/parcelas-campestres-santander): parcelas en Charta y Mesa de los Santos.
-- [Invertir desde el exterior](https://grupomizar.com.co/inversion-inmobiliaria-colombia-exterior): guía para colombianos en EE. UU. y España que quieren invertir en Colombia.
-- [Blog](https://grupomizar.com.co/blog): artículos sobre compra de propiedad a cuotas, inversión desde el exterior y respaldo de constructora.
-- [Contacto](https://grupomizar.com.co/contacto): formulario, WhatsApp y ubicación de oficinas.
+## Proyectos
+
+- [Laureles Campestre — Girón](https://grupomizar.com.co/laureles-campestre/): apartamentos sobre planos en Girón, a 150 m del futuro anillo vial Piedecuesta-Girón. Pago directo a cuotas, sin bancos, financiación hasta 20 años, entregas proyectadas 2027-2028.
+- [Terrazas de la Cantera — Piedecuesta](https://grupomizar.com.co/terrazas/): apartamentos sobre planos en el centro de Piedecuesta con financiación directa, sin intereses bancarios ni intermediarios.
+- [Parcelas campestres en Charta](https://grupomizar.com.co/parcelas-charta/): parcelas desde 650 m² a 1 hora de Bucaramanga y a 5 minutos del pueblo de Charta, con agua, luz, alcantarillado y planos de cabaña incluidos, a cuotas sin bancos.
+- [Mirador de la Montaña — Mesa de los Santos](https://grupomizar.com.co/mirador-de-la-montana/): lotes campestres desde $75 millones a 15 minutos del peaje hacia la Mesa de los Santos, con financiación directa sin bancos ni codeudores.
+- [Mi Lote — Cúcuta](https://grupomizar.com.co/lotes-cucuta/): lotes urbanos de 7x10 y 7x16 con escritura independiente en San Cayetano, Cúcuta.
+
+## Guías y páginas por tema
+
+- [Apartamentos VIS en Girón a cuotas](https://grupomizar.com.co/apartamentos-vis-giron/): cómo comprar apartamento en Girón sin banco.
+- [Apartamentos VIS en Piedecuesta a cuotas](https://grupomizar.com.co/apartamentos-vis-piedecuesta/): cómo comprar apartamento en Piedecuesta sin banco.
+- [Parcelas campestres en Santander](https://grupomizar.com.co/parcelas-campestres-santander/): parcelas en Charta y Mesa de los Santos.
+- [Comprar vivienda en Colombia desde el exterior](https://grupomizar.com.co/inversion-inmobiliaria-colombia-exterior/): guía para colombianos en EE. UU. y España que quieren comprar o invertir en Colombia sin banco.
+
+## Empresa
+
+- [Inicio](https://grupomizar.com.co/): modelo de pago a cuotas y portafolio de proyectos.
+- [Nosotros](https://grupomizar.com.co/nosotros/): historia de la empresa, equipo y modelo de negocio.
+- [Proyectos](https://grupomizar.com.co/proyectos/): portafolio completo de apartamentos, parcelas y lotes.
+- [Blog](https://grupomizar.com.co/blog/): artículos sobre compra de propiedad a cuotas, inversión desde el exterior y respaldo de constructora.
+- [Contacto](https://grupomizar.com.co/contacto/): formulario, WhatsApp y ubicación de oficinas.
 
 ## Modelo de negocio
 

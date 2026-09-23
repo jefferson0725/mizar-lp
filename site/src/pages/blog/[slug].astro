@@ -59,7 +59,7 @@ const heroAlt = post.hero_image?.alternativeText || post.title;
 const content = renderBlocks((post.content ?? []) as Parameters<typeof renderBlocks>[0]);
 
 const site = Astro.site ?? new URL('https://grupomizar.com.co');
-const path = `/blog/${post.slug}`;
+const path = `/blog/${post.slug}/`;
 const canonical = new URL(path, site).href;
 
 const formatDate = (date: string) =>
@@ -96,7 +96,7 @@ const breadcrumbSchema = {
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Inicio', item: new URL('/', site).href },
-    { '@type': 'ListItem', position: 2, name: 'Blog', item: new URL('/blog', site).href },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: new URL('/blog/', site).href },
     { '@type': 'ListItem', position: 3, name: post.title, item: canonical },
   ],
 };
