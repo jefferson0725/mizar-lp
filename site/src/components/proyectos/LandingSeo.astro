@@ -75,6 +75,9 @@ const schema = [faqSchema, breadcrumbSchema];
     </div>
   </section>
 
+  {/* Contenido de guía opcional (secciones extra). Las páginas que no lo usan no cambian. */}
+  <slot name="guia" />
+
   {
     relacionados.length > 0 && (
       <section class="bg-white py-14 md:py-20">

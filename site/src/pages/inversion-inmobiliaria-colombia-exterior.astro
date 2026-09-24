@@ -1,5 +1,59 @@
 ---
 import LandingSeo from '../components/proyectos/LandingSeo.astro';
+
+const pasos = [
+  {
+    t: 'Define qué buscas y habla con un asesor',
+    d: 'Cuéntanos si quieres vivienda para volver, un lote para construir o una parcela de descanso. Te atendemos por WhatsApp o videollamada, en tu horario.',
+  },
+  {
+    t: 'Conoce el proyecto a distancia',
+    d: 'Revisa fotos, planos y ubicación, y pide una videollamada. Si tienes un familiar en Colombia, también puede visitar el proyecto por ti.',
+  },
+  {
+    t: 'Revisa los documentos antes de pagar',
+    d: 'Pide el certificado de tradición y libertad del inmueble, el borrador de la promesa de compraventa y el plan de pagos por escrito.',
+  },
+  {
+    t: 'Separa y firma la promesa de compraventa',
+    d: 'La promesa fija el inmueble, el precio, la forma de pago y cuándo se firma la escritura. Puedes firmarla tú o un apoderado.',
+  },
+  {
+    t: 'Paga tus cuotas por canales formales',
+    d: 'Transfiere siempre a cuentas a nombre de la empresa y guarda cada comprobante.',
+  },
+  {
+    t: 'Firma la escritura y regístrala',
+    d: 'La escritura pública se firma en una notaría y luego se inscribe en la Oficina de Registro de Instrumentos Públicos. Desde ese registro la propiedad figura a tu nombre.',
+  },
+];
+
+const faq = [
+  {
+    q: '¿Puedo comprar propiedad en Colombia sin volver al país?',
+    a: 'Sí. El proceso completo puede hacerse de forma remota: reuniones por videollamada, revisión digital de documentos y firma mediante apoderado si lo necesitas.',
+  },
+  {
+    q: '¿Puedo comprar casa en Colombia si vivo en Estados Unidos o España?',
+    a: 'Sí. Vivir fuera del país no te impide ser propietario en Colombia. Con Grupo Mizar separas, pagas tus cuotas y haces el seguimiento a distancia, y la firma puede hacerla un apoderado de tu confianza.',
+  },
+  {
+    q: '¿Necesito viajar a Colombia para firmar la escritura?',
+    a: 'No es obligatorio. Puedes otorgar un poder especial ante el consulado de Colombia o ante un notario de tu país, con apostilla, para que una persona de tu confianza firme por ti.',
+  },
+  {
+    q: '¿Cómo envío los pagos desde el exterior?',
+    a: 'Acordamos contigo el canal más conveniente y seguro según tu país. Nuestro equipo te guía paso a paso para que cada pago quede documentado.',
+  },
+  {
+    q: '¿Qué pasa si no tengo historial crediticio en Colombia?',
+    a: 'No lo necesitas. Nuestro modelo es pago directo a cuotas con la constructora: sin bancos, sin estudio de crédito y sin codeudores.',
+  },
+  {
+    q: '¿Cómo evito una estafa si compro desde el exterior?',
+    a: 'Verifica que la empresa exista y esté registrada, pide el certificado de tradición y libertad del inmueble, paga solo a cuentas a nombre de la empresa y pide ver el proyecto en persona o por videollamada.',
+  },
+];
 ---
 
 <LandingSeo
@@ -8,27 +62,243 @@ import LandingSeo from '../components/proyectos/LandingSeo.astro';
   description="Comprar vivienda en Colombia desde el exterior (EE. UU., España): apartamentos, parcelas o lotes a cuotas, sin banco y con acompañamiento remoto de Mizar."
   eyebrow="Para colombianos en el exterior"
   h1="Compra vivienda en Colombia desde el exterior, sin volver al país"
-  respuesta="Puedes comprar propiedad en Colombia sin volver al país: con Grupo Mizar todo el proceso se hace de forma remota — videollamadas, documentos digitales y, si lo prefieres, un apoderado de tu confianza. Pagas a cuotas directo con la constructora, sin bancos colombianos ni historial crediticio local."
+  respuesta="Puedes comprar vivienda, lote o parcela en Colombia sin volver al país. Con Grupo Mizar todo el proceso se hace de forma remota: WhatsApp o videollamada, documentos digitales y, si lo prefieres, firma mediante un apoderado de tu confianza. Pagas a cuotas directo con la constructora, sin bancos colombianos ni historial crediticio local."
   beneficios={[
     { t: 'Sin volver a Colombia', d: 'Videollamadas, firma con apoderado y documentación digital: avanzas desde EE. UU., España o donde estés.' },
     { t: 'Tu esfuerzo en dólares o euros rinde más', d: 'Conviertes ingresos en el exterior en propiedad que se valoriza en Colombia.' },
     { t: 'Sin bancos ni papeleo imposible', d: 'No necesitas historial crediticio colombiano: el plan de cuotas se acuerda directo con nosotros.' },
     { t: 'Alguien de confianza al otro lado', d: 'Empresa familiar con +20 años: te asignamos un asesor que te acompaña todo el proceso.' },
   ]}
-  proyectoSlugs={['lotes-cucuta', 'mirador-de-la-montana', 'apartamentos-giron']}
-  faq={[
-    {
-      q: '¿Puedo comprar propiedad en Colombia sin volver al país?',
-      a: 'Sí. El proceso completo puede hacerse de forma remota: reuniones por videollamada, revisión digital de documentos y firma mediante apoderado si lo necesitas.',
-    },
-    {
-      q: '¿Cómo envío los pagos desde el exterior?',
-      a: 'Acordamos contigo el canal más conveniente y seguro según tu país. Nuestro equipo te guía paso a paso para que cada pago quede documentado.',
-    },
-    {
-      q: '¿Qué pasa si no tengo historial crediticio en Colombia?',
-      a: 'No lo necesitas. Nuestro modelo es pago directo a cuotas con la constructora: sin bancos, sin estudio de crédito y sin codeudores.',
-    },
-  ]}
+  proyectoSlugs={['apartamentos-giron', 'apartamentos-piedecuesta', 'parcelas-charta', 'mirador-de-la-montana', 'lotes-cucuta']}
+  faq={faq}
   ctaMensaje="Hola, vivo fuera de Colombia y quiero invertir en una propiedad con Grupo Mizar."
-/>
+>
+  <Fragment slot="guia">
+    <section class="bg-white py-14 md:py-20" aria-labelledby="guia-se-puede">
+      <div class="container-site max-w-3xl">
+        <p class="eyebrow text-teal">Guía para comprar desde el exterior</p>
+        <h2 id="guia-se-puede" class="display-lg mt-3 text-3xl md:text-4xl">
+          ¿Se puede comprar vivienda en Colombia viviendo en Estados Unidos o España?
+        </h2>
+        <div class="mt-6 space-y-4 leading-relaxed text-ink/80">
+          <p>
+            Sí: vivir fuera del país no te impide comprar casa, apartamento, lote o parcela en Colombia. Lo que
+            cambia no es tu derecho a ser propietario, sino la forma de hacer los trámites a distancia: cómo conoces
+            el inmueble, cómo envías el dinero y quién firma si no puedes viajar.
+          </p>
+          <p>
+            En la práctica, el obstáculo más común no es la ley sino la financiación. Un crédito hipotecario suele
+            exigir estudio de crédito y soportes de ingresos que, desde el exterior, cuesta reunir. Por eso en Grupo
+            Mizar el modelo es distinto: pagas a cuotas directo con la constructora, sin bancos, sin estudio de
+            crédito y sin codeudores.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-14 md:py-20" aria-labelledby="guia-proceso">
+      <div class="container-site max-w-3xl">
+        <h2 id="guia-proceso" class="display-lg text-3xl md:text-4xl">¿Cómo es el proceso paso a paso?</h2>
+        <p class="mt-6 leading-relaxed text-ink/80">
+          Comprar desde el exterior se resume en seis pasos: eliges, conoces el proyecto, revisas documentos, firmas
+          la promesa, pagas tus cuotas y, al final, firmas y registras la escritura.
+        </p>
+        <ol class="mt-8 space-y-6">
+          {
+            pasos.map((p, i) => (
+              <li class="flex gap-4">
+                <span class="stat-num w-8 shrink-0 text-3xl leading-none text-gold" aria-hidden="true">
+                  {i + 1}
+                </span>
+                <div>
+                  <h3 class="font-bold">{p.t}</h3>
+                  <p class="mt-1.5 leading-relaxed text-ink/75">{p.d}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section class="bg-white py-14 md:py-20" aria-labelledby="guia-firmar">
+      <div class="container-site max-w-3xl">
+        <h2 id="guia-firmar" class="display-lg text-3xl md:text-4xl">¿Necesito ir a Colombia a firmar?</h2>
+        <div class="mt-6 space-y-4 leading-relaxed text-ink/80">
+          <p>
+            No es obligatorio: puedes firmar mediante un apoderado, es decir, una persona de tu confianza a quien
+            autorizas para firmar por ti. Si prefieres hacerlo en persona, también puedes aprovechar un viaje a
+            Colombia para la firma.
+          </p>
+          <p>
+            Para eso se usa un <strong>poder especial</strong>: un documento en el que indicas quién te representa,
+            para qué inmueble y qué puede hacer en tu nombre (por ejemplo, firmar la promesa de compraventa o la
+            escritura). Desde el exterior se otorga ante el consulado de Colombia o ante un notario del país donde
+            vives; en este segundo caso, normalmente debe llevar apostilla para que tenga validez en Colombia.
+          </p>
+          <p>
+            Antes de otorgarlo, confirma con la notaría en Colombia qué formato y qué datos necesita, para no tener
+            que repetir el trámite. En Grupo Mizar la firma con apoderado es una opción habitual para quienes compran
+            desde fuera.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-14 md:py-20" aria-labelledby="guia-dinero">
+      <div class="container-site max-w-3xl">
+        <h2 id="guia-dinero" class="display-lg text-3xl md:text-4xl">¿Cómo envío el dinero desde el exterior?</h2>
+        <div class="mt-6 space-y-4 leading-relaxed text-ink/80">
+          <p>
+            Envíalo siempre por canales formales, como una transferencia bancaria internacional, y a una cuenta a
+            nombre de la empresa vendedora. Evita el efectivo, los intermediarios y las consignaciones a cuentas de
+            personas.
+          </p>
+          <ul class="space-y-2 pl-5 marker:text-gold list-disc">
+            <li>Guarda el comprobante de cada pago: es tu prueba de lo que has abonado y del origen del dinero.</li>
+            <li>Al calcular cuánto envías, ten en cuenta el tipo de cambio y las comisiones de tu banco o servicio de envío.</li>
+            <li>Pide que cada pago recibido quede reflejado por escrito frente a tu plan de cuotas.</li>
+          </ul>
+          <p>
+            Con Grupo Mizar acordamos contigo el canal más conveniente según tu país y te guiamos para que cada pago
+            quede documentado. Comprar desde el exterior puede implicar obligaciones cambiarias o tributarias, en
+            Colombia o en tu país de residencia: conviene confirmarlas con un contador o abogado antes de empezar.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white py-14 md:py-20" aria-labelledby="guia-documentos">
+      <div class="container-site max-w-3xl">
+        <h2 id="guia-documentos" class="display-lg text-3xl md:text-4xl">¿Qué documentos necesito?</h2>
+        <p class="mt-6 leading-relaxed text-ink/80">
+          Para empezar basta con tu cédula de ciudadanía colombiana; el resto se reúne durante el proceso. Estos son
+          los documentos que suelen intervenir en una compra a distancia:
+        </p>
+        <div class="mt-8 grid gap-8 md:grid-cols-2">
+          <div class="border-l-2 border-gold pl-5">
+            <h3 class="font-bold">Los que aportas tú</h3>
+            <ul class="mt-3 space-y-2 pl-5 leading-relaxed text-ink/75 marker:text-gold list-disc">
+              <li>Copia de tu cédula de ciudadanía.</li>
+              <li>Tus datos de contacto y dirección en el exterior.</li>
+              <li>Si firmas por apoderado: el poder especial y la cédula de tu apoderado.</li>
+              <li>Los comprobantes de tus pagos.</li>
+            </ul>
+          </div>
+          <div class="border-l-2 border-gold pl-5">
+            <h3 class="font-bold">Los que debes recibir</h3>
+            <ul class="mt-3 space-y-2 pl-5 leading-relaxed text-ink/75 marker:text-gold list-disc">
+              <li>Certificado de tradición y libertad del inmueble.</li>
+              <li>Promesa de compraventa firmada, con el plan de pagos.</li>
+              <li>Soporte de cada pago recibido.</li>
+              <li>Al final, la escritura pública registrada a tu nombre.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-14 md:py-20" aria-labelledby="guia-historial">
+      <div class="container-site max-w-3xl">
+        <h2 id="guia-historial" class="display-lg text-3xl md:text-4xl">
+          ¿Qué pasa si no tengo historial crediticio en Colombia?
+        </h2>
+        <div class="mt-6 space-y-4 leading-relaxed text-ink/80">
+          <p>
+            Con Grupo Mizar no lo necesitas: pagas a cuotas directo con la constructora, sin bancos, sin estudio de
+            crédito y sin codeudores. El plan de cuotas se acuerda contigo según tu capacidad real de pago.
+          </p>
+          <p>
+            Esto es lo que diferencia comprar sin banco: no dependes de que una entidad financiera en Colombia
+            apruebe tu perfil, ni de conseguir un codeudor que viva en el país. El acuerdo es entre tú y la empresa
+            que construye el proyecto, y la propiedad queda escriturada a tu nombre.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="bg-white py-14 md:py-20" aria-labelledby="guia-tipo">
+      <div class="container-site max-w-3xl">
+        <h2 id="guia-tipo" class="display-lg text-3xl md:text-4xl">¿Qué conviene más: apartamento, lote o parcela?</h2>
+        <p class="mt-6 leading-relaxed text-ink/80">
+          Depende de para qué la quieres: un apartamento si piensas en vivienda lista, un lote si quieres construir
+          a tu ritmo y una parcela si buscas un lugar de descanso en el campo.
+        </p>
+        <div class="mt-8 space-y-8">
+          <div class="border-l-2 border-gold pl-5">
+            <h3 class="font-bold">Apartamento sobre planos</h3>
+            <p class="mt-1.5 leading-relaxed text-ink/75">
+              Pagas tus cuotas mientras avanza la obra y recibes el apartamento terminado. En Girón está
+              <a href="/laureles-campestre/" class="font-bold text-teal underline">Laureles Campestre</a>, a 150 m del
+              futuro anillo vial, con entregas proyectadas para 2027 y 2028. En el centro de Piedecuesta está
+              <a href="/terrazas/" class="font-bold text-teal underline">Terrazas de la Cantera</a>, con financiación
+              directa y sin intereses bancarios.
+            </p>
+          </div>
+          <div class="border-l-2 border-gold pl-5">
+            <h3 class="font-bold">Lote</h3>
+            <p class="mt-1.5 leading-relaxed text-ink/75">
+              Tierra propia para construir cuando decidas. En Cúcuta,
+              <a href="/lotes-cucuta/" class="font-bold text-teal underline">Mi Lote</a> ofrece lotes urbanos de 7x10 y
+              7x16 con escritura independiente en San Cayetano. En la Mesa de los Santos,
+              <a href="/mirador-de-la-montana/" class="font-bold text-teal underline">Mirador de la Montaña</a> tiene lotes
+              campestres a 15 minutos del peaje.
+            </p>
+          </div>
+          <div class="border-l-2 border-gold pl-5">
+            <h3 class="font-bold">Parcela campestre</h3>
+            <p class="mt-1.5 leading-relaxed text-ink/75">
+              Para una casa de campo o de descanso. Las
+              <a href="/parcelas-charta/" class="font-bold text-teal underline">Parcelas campestres de Charta</a> van desde
+              650 m², a 1 hora de Bucaramanga, con agua, luz, alcantarillado y planos de cabaña incluidos.
+            </p>
+          </div>
+        </div>
+        <p class="mt-8 leading-relaxed text-ink/80">
+          Todas se pagan a cuotas directo con Grupo Mizar. Si aún no lo tienes claro, cuéntale al asesor qué quieres
+          lograr y te orienta sobre la opción que mejor encaja.
+        </p>
+      </div>
+    </section>
+
+    <section class="py-14 md:py-20" aria-labelledby="guia-estafas">
+      <div class="container-site max-w-3xl">
+        <h2 id="guia-estafas" class="display-lg text-3xl md:text-4xl">¿Cómo evitar estafas al comprar desde el exterior?</h2>
+        <p class="mt-6 leading-relaxed text-ink/80">
+          Verifica a quién le compras y qué compras antes de enviar dinero. Estas comprobaciones sirven con cualquier
+          vendedor, también con nosotros:
+        </p>
+        <ul class="mt-6 space-y-3 pl-5 leading-relaxed text-ink/80 marker:text-gold list-disc">
+          <li>
+            <strong>Verifica la empresa.</strong> Consulta que esté registrada en la Cámara de Comercio y que tenga una
+            dirección física y canales oficiales.
+          </li>
+          <li>
+            <strong>Pide el certificado de tradición y libertad.</strong> Muestra quién es el propietario del inmueble y
+            si tiene limitaciones, como embargos o hipotecas.
+          </li>
+          <li>
+            <strong>Paga solo a cuentas de la empresa.</strong> Nunca a cuentas de personas, aunque digan ser asesores,
+            ni a cuentas que te lleguen por un chat sin confirmarlas por un canal oficial.
+          </li>
+          <li>
+            <strong>Ve el proyecto.</strong> Visítalo tú o un familiar, o pide una videollamada desde el lugar.
+          </li>
+          <li>
+            <strong>Exige todo por escrito.</strong> Promesa de compraventa, plan de pagos y soporte de cada abono.
+          </li>
+          <li>
+            <strong>Desconfía de la prisa.</strong> Presiones del tipo «solo por hoy» o precios muy por debajo del
+            mercado son una señal de alerta.
+          </li>
+        </ul>
+        <p class="mt-6 leading-relaxed text-ink/80">
+          Grupo Mizar es una empresa familiar santandereana con más de 20 años y más de 100 obras entregadas, con sede
+          en Provenza, Bucaramanga. Revisas la documentación antes de decidir y puedes
+          <a href="/contacto/" class="font-bold text-teal underline">contactarnos por nuestros canales oficiales</a>
+          para confirmar cualquier dato.
+        </p>
+      </div>
+    </section>
+  </Fragment>
+</LandingSeo>
