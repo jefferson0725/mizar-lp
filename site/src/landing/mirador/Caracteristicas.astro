@@ -2,7 +2,6 @@
 import { Image } from 'astro:assets';
 import bonImg from '../../assets/mirador/Bono-5-millones-.webp';
 import mapa from '../../assets/mirador/mapa.webp';
-import videoCover from '../../assets/mirador/mirador-de-la-montana.png';
 
 const WA_URL = "https://wa.me/573112658552?text=Hola%2C%20me%20interesan%20los%20lotes%20de%20Mirador%20de%20la%20Monta%C3%B1a%2C%20mi%20nombre%20es%20";
 
@@ -44,14 +43,22 @@ const caracteristicas = [
       </h2>
     </div>
 
-    <!-- Imagen local del proyecto con bono encima (esquina superior derecha) -->
+    <!-- Video del proyecto (alojado en el propio sitio) con bono encima (esquina superior derecha).
+         Antes apuntaba al WordPress viejo (mizar.com.co) y se sustituyó por error por el logo en
+         blanco (mirador-de-la-montana.png), que es invisible sobre fondo blanco. -->
     <div class="reveal relative mb-10 rounded-2xl overflow-visible shadow-card">
-      <Image
-        src={videoCover}
-        alt="Mirador de la Montaña"
-        class="w-full block rounded-2xl"
-        loading="lazy"
-      />
+      <video
+        src="/videos/mirador-de-la-montana.mp4"
+        poster="/videos/posters/mirador-de-la-montana.jpg"
+        controls
+        playsinline
+        preload="none"
+        controlslist="nodownload"
+        width="1280"
+        height="720"
+        aria-label="Video de presentación de Mirador de la Montaña"
+        class="w-full aspect-video block rounded-2xl bg-navy object-cover"
+      ></video>
       <!-- Bono badge solapando la esquina superior derecha de la imagen -->
       <div class="absolute -top-6 right-2 md:right-0 md:translate-x-1/2 z-10">
         <Image
