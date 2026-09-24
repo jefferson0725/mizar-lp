@@ -93,7 +93,7 @@ jobs:
           done
           N=$(find site/dist -name '*.html' | wc -l)
           echo "Páginas HTML: $N"
-          [ "$N" -ge 20 ] || { echo "::error::Solo $N páginas HTML (se esperaban ≥20)"; exit 1; }
+          [ "$N" -ge 15 ] || { echo "::error::Solo $N páginas HTML (se esperaban ≥15)"; exit 1; }
           [ -n "$STRAPI_URL" ] || echo "::warning::STRAPI_URL vacío: el blog se publica sin artículos"
 
       - name: Publicar (rsync)

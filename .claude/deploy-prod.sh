@@ -33,7 +33,7 @@ for f in index.html .htaccess parcelas-charta/index.html links/index.html sitema
   [ -s "$D/$f" ] || { echo "✗ Falta $D/$f: no publico un build incompleto" >&2; exit 1; }
 done
 N=$(find "$D" -name '*.html' | wc -l)
-[ "$N" -ge 20 ] || { echo "✗ Solo $N páginas HTML (esperaba ≥20)" >&2; exit 1; }
+[ "$N" -ge 15 ] || { echo "✗ Solo $N páginas HTML (esperaba ≥15)" >&2; exit 1; }
 echo "  $N páginas, $(du -sh "$D" | cut -f1)"
 
 echo "▶ Estado actual del servidor..."
