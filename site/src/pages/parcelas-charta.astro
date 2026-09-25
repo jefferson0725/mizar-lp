@@ -9,11 +9,9 @@ import Mapa from "../landing/charta/Mapa.astro";
 import Financiacion from "../landing/charta/Financiacion.astro";
 import Cabana from "../landing/charta/Cabana.astro";
 import Testimonio from "../landing/charta/Testimonio.astro";
-import FAQ from "../landing/charta/FAQ.astro";
 import Cierre from "../landing/charta/Cierre.astro";
 import LandingFooter from "../landing/charta/Footer.astro";
-import { breadcrumbSchema, faqSchema } from "../data/schema";
-import { faqCharta } from "../landing/charta/faq";
+import { breadcrumbSchema } from "../data/schema";
 import WhatsAppFloat from "../components/WhatsAppFloat.astro";
 import { getWhatsAppConfig } from "../data/whatsapp";
 const wa = getWhatsAppConfig('/parcelas-charta');
@@ -28,7 +26,6 @@ const wa = getWhatsAppConfig('/parcelas-charta');
   headerColorDark="#142720"
   schema={[
     breadcrumbSchema([["Proyectos", "/proyectos/"], ["Parcelas en Charta", "/parcelas-charta/"]]),
-    faqSchema(faqCharta),
   ]}
 >
   <div class="theme-charta">
@@ -41,7 +38,6 @@ const wa = getWhatsAppConfig('/parcelas-charta');
     <Financiacion />
     <Cabana />
     <Testimonio />
-    <FAQ />
     <Cierre />
     <LandingFooter />
   </div>

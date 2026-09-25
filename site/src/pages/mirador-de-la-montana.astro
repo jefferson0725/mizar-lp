@@ -5,10 +5,8 @@ import Hero from "../landing/mirador/Hero.astro";
 import Caracteristicas from "../landing/mirador/Caracteristicas.astro";
 import Financiacion from "../landing/mirador/Financiacion.astro";
 import Mapa from "../landing/mirador/Mapa.astro";
-import FAQ from "../landing/mirador/FAQ.astro";
 import LandingFooter from "../landing/mirador/Footer.astro";
-import { breadcrumbSchema, faqSchema } from "../data/schema";
-import { faqMirador } from "../landing/mirador/faq";
+import { breadcrumbSchema } from "../data/schema";
 import WhatsAppFloat from "../components/WhatsAppFloat.astro";
 import { getWhatsAppConfig } from "../data/whatsapp";
 const wa = getWhatsAppConfig('/mirador-de-la-montana');
@@ -23,7 +21,6 @@ const wa = getWhatsAppConfig('/mirador-de-la-montana');
   headerColorDark="#1e3327"
   schema={[
     breadcrumbSchema([["Proyectos", "/proyectos/"], ["Mirador de la Montaña", "/mirador-de-la-montana/"]]),
-    faqSchema(faqMirador),
   ]}
 >
   <div class="theme-mirador">
@@ -32,7 +29,6 @@ const wa = getWhatsAppConfig('/mirador-de-la-montana');
     <Caracteristicas />
     <Financiacion />
     <Mapa />
-    <FAQ />
     <LandingFooter />
   </div>
   <WhatsAppFloat phone={wa.phone} message={wa.message} />

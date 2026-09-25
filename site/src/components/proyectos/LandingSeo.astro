@@ -21,7 +21,7 @@ interface Props {
 const { path, title, description, eyebrow, h1, respuesta, beneficios, proyectoSlugs, faq, ctaMensaje } =
   Astro.props;
 
-const relacionados = proyectos.filter((p) => proyectoSlugs.includes(p.slug) && !p.oculto);
+const relacionados = proyectos.filter((p) => proyectoSlugs.includes(p.slug));
 const wa = `https://wa.me/${WHATSAPP_GENERAL}?text=${encodeURIComponent(ctaMensaje)}`;
 
 const site = Astro.site ?? new URL('https://grupomizar.com.co');
@@ -74,9 +74,6 @@ const schema = [faqSchema, breadcrumbSchema];
       </div>
     </div>
   </section>
-
-  {/* Contenido de guía opcional (secciones extra). Las páginas que no lo usan no cambian. */}
-  <slot name="guia" />
 
   {
     relacionados.length > 0 && (
