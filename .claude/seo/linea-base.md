@@ -45,3 +45,17 @@ Comparar siempre contra esto. Ignorar movimientos de menos de 2 semanas.
 - Etiquetas: GA4 configuración (G-GWQ7NGBXFW), Meta Pixel base, Meta Pixel "Contact" por clic a WhatsApp.
 - **No hay ninguna etiqueta que mande eventos a GA4** → por eso GA4 tiene 0 eventos clave.
 - El "Contact" de Meta tiene dos disparadores (clic en enlace wa.me y evento whatsapp-click): con el código nuevo contaría doble.
+
+## GA4 por canal (28 días, 28-ago a 24-sep-2026)
+- Directo 211 · Orgánico 83 · Social 48 · **Asistentes de IA 19 (todas de chatgpt.com; 84 % de interacción, la más alta)** · Pauta social 15 · Referidos 11. Bing orgánico: 5.
+- ChatGPT llevó a: inicio 15, /lotes-cucuta/ 2, /proyectos/ 2.
+- **Las landings de pauta (Laureles, Terrazas, Mirador, Charta, /links) no cargaban GTM**: sus visitas no están en estas cifras (por eso "pauta social" = 15). Corregido en rama `gtm-en-landings`, sin publicar al 25-sep.
+- Tag Manager versión 6 (25-sep): etiqueta GA4 Event con whatsapp-click/form-submit/phone-click/email-click. Probado en /lotes-cucuta/: llega a GA4 y Meta Contact una vez. Falta marcarlos como eventos clave en GA4 cuando aparezcan (≤24 h).
+
+## Prueba de IA (25-sep-2026, línea base; repetir cada mes con las mismas preguntas)
+| Pregunta | ChatGPT (chat temporal) | Gemini | Claude (incógnito) |
+|---|---|---|---|
+| ¿Qué constructoras venden apartamentos a cuotas sin banco en Bucaramanga? | **Mizar 1.º** (cita grupomizar.com.co; Laureles, separación $3 M, hasta 20 años) | No lo nombra (Marval, Fénix, Urbanas, HG, Inacar) | No lo nombra (Constructora Santander, Inrale, Mardel) |
+| ¿Qué es Grupo Mizar y es confiable? | Lo describe bien; cita mizar.com.co (sitio viejo), NIT 901815016, S.A.S. constituida 21-mar-2024 vs "+20 años" | Lo describe bien (Santander, +20 años, financiación directa); lo mezcla con Mizar MX (México) | No se preguntó (límite de uso) |
+| ¿Dónde comprar un lote en Cúcuta a cuotas sin banco? | **Mi Lote 1.º**, pero "precio: consultar"; recomienda primero a competidores que publican precio y plazo | — | — |
+Nota: la cuenta de ChatGPT es de Sixteam y el chat temporal puede usar memoria; Claude en incógnito no.
