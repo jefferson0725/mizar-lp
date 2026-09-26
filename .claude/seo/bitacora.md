@@ -26,3 +26,11 @@
 **Publicación:** el push a main no disparó el despliegue automático; se publicó a mano con `.claude/deploy-prod.sh --apply` (copia en ~/backups/public_html-20260924-220127.tgz).
 **Tag Manager:** versión 5 publicada con Meta "Contact" en un solo disparador; falta la etiqueta GA4 Event (Analytics sigue en 0 conversiones).
 **Método:** skill `seo-sixteam` en ~/.claude/skills/seo-sixteam.
+
+## 2026-09-25 — Medición completa e IndexNow (publicado)
+- **Tag Manager v6:** etiqueta GA4 Event (whatsapp-click, form-submit, phone-click, email-click). Meta "Contact" con un solo disparador.
+- **Landings de proyecto** (Laureles, Terrazas, Mirador, Charta, /links) no cargaban GTM desde su creación: se agregó. Probado en vivo en /laureles-campestre/: GA4 page_view + whatsapp-click, Meta PageView + Contact (una vez). Esperar un salto en visitas y conversiones de pauta desde el 25-sep: no es crecimiento, es medición que antes faltaba.
+- **Bing Webmaster Tools:** sitio dado de alta (importado de Search Console), sitemap importado. Tiene reporte "AI Performance" (citas en Copilot).
+- **IndexNow:** clave en site/public/, `.claude/indexnow.sh`, llamado al final de deploy-prod.sh. Primer aviso: 14 URLs, HTTP 202.
+- **Search Console:** indexación pedida para /apartamentos-vis-giron/ y /apartamentos-vis-piedecuesta/.
+- **Pendiente:** marcar eventos clave en GA4 (26-sep, cuando aparezcan); indexación de /parcelas-campestres-santander/ y reenvío del sitemap en Search Console (a mano).
