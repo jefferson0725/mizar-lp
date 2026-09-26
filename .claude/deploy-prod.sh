@@ -58,3 +58,6 @@ for p in / /parcelas-charta/ /links/ /milote/links/ /nosotros/ /proyectos/ /site
   [ "$code" = 200 ] || FAIL=1
 done
 [ "$FAIL" -eq 0 ] && echo "✓ Publicado: $SITE_URL" || { echo "✗ Alguna ruta no respondió 200 (copia en ~/backups/public_html-$STAMP.tgz)" >&2; exit 1; }
+
+# Avisar a Bing/IndexNow de los cambios (no bloquea la publicación si falla).
+bash "$(dirname "$0")/indexnow.sh" || echo "⚠ No se pudo avisar a IndexNow" >&2
