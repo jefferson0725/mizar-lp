@@ -136,3 +136,8 @@ jobs:
             [ "$code" = 200 ] || FAIL=1
           done
           exit $FAIL
+
+      # Bing alimenta la búsqueda de ChatGPT y Copilot: avisarle que el sitio cambió.
+      - name: Avisar a IndexNow
+        if: success()
+        run: bash "$GITHUB_WORKSPACE/.claude/indexnow.sh" || echo "::warning::No se pudo avisar a IndexNow"
