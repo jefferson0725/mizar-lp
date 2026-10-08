@@ -39,7 +39,7 @@ interface Post {
   author: string;
   frente: string;
   tags: string;
-  hero_image: HeroImage | null;
+  hero_image: (HeroImage & { formats?: Record<string, HeroImage> }) | null;
   pub_date: string;
   publishedAt: string;
   updatedAt: string;
@@ -48,10 +48,12 @@ interface Post {
 const { post } = Astro.props as { post: Post };
 
 // Resolver URL de hero_image (Strapi puede devolver rutas relativas)
-const heroUrl = post.hero_image
-  ? post.hero_image.url.startsWith('http')
-    ? post.hero_image.url
-    : `${STRAPI_URL}${post.hero_image.url}`
+// Se usa la versión grande que genera Strapi (~1000 px): la original puede pesar varios MB.
+const heroSrc = post.hero_image?.formats?.large?.url ?? post.hero_image?.url;
+const heroUrl = heroSrc
+  ? heroSrc.startsWith('http')
+    ? heroSrc
+    : `${STRAPI_URL}${heroSrc}`
   : null;
 const heroAlt = post.hero_image?.alternativeText || post.title;
 
@@ -67,6 +69,7 @@ const formatDate = (date: string) =>
     year: 'numeric',
     month: 'long',
     day: 'numeric',
+    timeZone: 'UTC', // pub_date es solo fecha: sin esto, compilar en Colombia la corre un día
   }).format(new Date(date));
 
 const articleSchema: Record<string, unknown> = {

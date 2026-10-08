@@ -44,7 +44,10 @@ function renderInline(nodes: InlineNode[]): string {
         );
       }
       const label = renderInline(node.children);
-      return `<a href="${esc(node.url)}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+      // Enlaces del propio sitio en la misma pestaña; los externos en una nueva.
+      const internal = /^(\/(?!\/)|https?:\/\/(www\.)?grupomizar\.com\.co)/.test(node.url);
+      const attrs = internal ? '' : ' target="_blank" rel="noopener noreferrer"';
+      return `<a href="${esc(node.url)}"${attrs}>${label}</a>`;
     }
 
     let text = esc(node.text);
