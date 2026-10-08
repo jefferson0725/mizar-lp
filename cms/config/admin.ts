@@ -1,4 +1,5 @@
 import crypto from 'node:crypto';
+import fs from 'node:fs';
 import type { Core } from '@strapi/strapi';
 
 /**
@@ -10,13 +11,27 @@ import type { Core } from '@strapi/strapi';
  * Firma: HMAC-SHA256(PREVIEW_SECRET, "v1:<documentId>:<status>:<exp>") en base64url
  * (mismo formato que site/src/lib/previewToken.ts).
  *
- * Variables: PREVIEW_SECRET (mismo valor que en Cloudflare Pages; si falta, la vista previa se
- * desactiva) y PREVIEW_SITE_URL (opcional, por defecto https://grupomizar.com.co).
+ * Secreto: archivo /run/secrets/preview_secret (o la ruta de PREVIEW_SECRET_FILE), igual que el
+ * token de GitHub; si no existe, variable PREVIEW_SECRET. Mismo valor que en Cloudflare Pages.
+ * Si falta o mide menos de 32 caracteres, la vista previa se desactiva.
+ * PREVIEW_SITE_URL: opcional, por defecto https://grupomizar.com.co.
+ * (En EasyPanel las variables de entorno viajan como --build-arg y se ven en «ps»: mejor archivo.)
  */
 const PREVIEW_TTL_SECONDS = 2 * 60 * 60; // el enlace vale 2 h; al reabrir la vista previa se genera otro
 
+function readPreviewSecret(env: Core.Config.Shared.ConfigParams['env']): string {
+  const file = env('PREVIEW_SECRET_FILE', '/run/secrets/preview_secret');
+  try {
+    const fromFile = fs.readFileSync(file, 'utf8').trim();
+    if (fromFile) return fromFile;
+  } catch {
+    // sin archivo de secreto: se usa la variable de entorno
+  }
+  return env('PREVIEW_SECRET', '').trim();
+}
+
 const config = ({ env }: Core.Config.Shared.ConfigParams): Core.Config.Admin => {
-  const previewSecret = env('PREVIEW_SECRET', '').trim();
+  const previewSecret = readPreviewSecret(env);
   const previewSite = new URL(env('PREVIEW_SITE_URL', 'https://grupomizar.com.co')).origin;
 
   return {
