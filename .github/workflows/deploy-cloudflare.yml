@@ -68,6 +68,7 @@ jobs:
         id: strapi
         env:
           STRAPI_URL: ${{ secrets.STRAPI_URL }}
+          EVENT_NAME: ${{ github.event_name }}
         run: |
           if [ -z "$STRAPI_URL" ]; then
             echo "::error::El secret STRAPI_URL está vacío o no existe. Se cancela el deploy para no publicar el blog vacío."
@@ -82,7 +83,15 @@ jobs:
           fi
           TOTAL=$(jq -r '.meta.pagination.total // 0' strapi-check.json 2>/dev/null || echo 0)
           echo "Artículos publicados en Strapi: $TOTAL"
-          echo "total=$TOTAL" >> "$GITHUB_OUTPUT"
+          STRAPI_TOTAL="$TOTAL"
+          # Comparar con el sitio publicado: si Strapi dice 0 pero el sitio ya tiene artículos, algo falló.
+          LIVE=$(curl -s "$SITE_URL/sitemap-0.xml" | grep -c '/blog/[^<]*/</loc>' || true)
+          echo "Artículos en el sitio publicado: $LIVE"
+          if [ "$STRAPI_TOTAL" -eq 0 ] && [ "${LIVE:-0}" -gt 0 ] && [ "$EVENT_NAME" != "workflow_dispatch" ]; then
+            echo "::error::Strapi devuelve 0 artículos pero el sitio publicado tiene $LIVE. No se publica para no vaciar el blog. Si de verdad se retiraron todos, ejecuta el workflow a mano."
+            exit 1
+          fi
+          echo "total=$STRAPI_TOTAL" >> "$GITHUB_OUTPUT"
 
       - name: Build
         run: npm run build
@@ -102,11 +111,13 @@ jobs:
           echo "Páginas HTML: $N"
           [ "$N" -ge 15 ] || { echo "::error::Solo $N páginas HTML (se esperaban >=15)"; exit 1; }
           # Si Strapi tiene artículos, el build debe haber generado sus páginas (si no, el blog salió vacío).
-          if [ "${STRAPI_TOTAL:-0}" -gt 0 ]; then
-            P=$(find site/dist/blog -mindepth 2 -name index.html | wc -l)
-            echo "Páginas de artículos: $P (Strapi: $STRAPI_TOTAL)"
-            [ "$P" -ge 1 ] || { echo "::error::Strapi tiene $STRAPI_TOTAL artículos pero el build no generó ninguno. Se cancela el deploy."; exit 1; }
-          fi
+          STRAPI_TOTAL="${STRAPI_TOTAL:-0}"
+          P=$(find site/dist/blog -mindepth 2 -name index.html | wc -l)
+          echo "Páginas de artículos: $P (Strapi: $STRAPI_TOTAL)"
+          [ "$P" -ge "$STRAPI_TOTAL" ] || { echo "::error::Strapi tiene $STRAPI_TOTAL artículos pero el build solo generó $P. Se cancela el deploy."; exit 1; }
+          # El índice del blog debe listar todos los artículos construidos.
+          L=$(grep -o 'href="/blog/[^"]*/"' site/dist/blog/index.html | sort -u | wc -l)
+          [ "$L" -ge "$P" ] || { echo "::error::El índice del blog lista $L artículos y hay $P páginas"; exit 1; }
 
       - name: Preparar carpeta de publicación
         run: |

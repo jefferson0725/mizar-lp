@@ -8,14 +8,8 @@ name: Build & Deploy to Hostinger
 # Secrets del repo:   SSH_PRIVATE_KEY (clave de deploy registrada en hPanel → Acceso SSH), STRAPI_URL
 # Variable (opcional): PUBLIC_GA4_ID
 
+# Respaldo en Hostinger: solo a mano. Producción se publica con deploy-cloudflare.yml.
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'site/**'
-      - '.github/workflows/deploy.yml'
-  repository_dispatch:
-    types: [strapi-publish]
   workflow_dispatch:
     inputs:
       dry_run:
