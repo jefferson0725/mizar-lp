@@ -11,12 +11,20 @@ interface Post {
   frente: string;
   tags: string;
   pub_date: string;
+  hero_image?: { url: string; alternativeText?: string; formats?: Record<string, { url: string }> } | null;
+}
+
+// Portada de la tarjeta: versión mediana de Strapi (~750 px), no la original.
+function cardImage(p: Post): string | null {
+  const src = p.hero_image?.formats?.medium?.url ?? p.hero_image?.formats?.small?.url ?? p.hero_image?.url;
+  if (!src) return null;
+  return src.startsWith('http') ? src : `${STRAPI_URL}${src}`;
 }
 
 let posts: Post[] = [];
 try {
   const res = await fetch(
-    `${STRAPI_URL}/api/posts?sort=pub_date:desc&pagination[pageSize]=100`,
+    `${STRAPI_URL}/api/posts?populate=hero_image&sort=pub_date:desc&pagination[pageSize]=100`,
   );
   if (res.ok) {
     const { data } = await res.json();
@@ -74,7 +82,20 @@ const schema = {
         ) : (
           <div class="grid gap-6 md:grid-cols-3">
             {posts.map((p) => (
-              <article class="rounded-2xl border border-ink/10 bg-white p-6">
+              <article class="overflow-hidden rounded-2xl border border-ink/10 bg-white">
+                {cardImage(p) && (
+                  <a href={`/blog/${p.slug}/`} tabindex="-1" aria-hidden="true">
+                    <img
+                      class="aspect-[16/9] w-full object-cover"
+                      src={cardImage(p)}
+                      alt={p.hero_image?.alternativeText || p.title}
+                      loading="lazy"
+                      width="750"
+                      height="422"
+                    />
+                  </a>
+                )}
+                <div class="p-6">
                 <p class="eyebrow text-teal">{p.frente?.replace(/-/g, ' ')}</p>
                 <h2 class="display-lg mt-4 text-2xl">
                   <a class="hover:text-mizar" href={`/blog/${p.slug}/`}>
@@ -89,6 +110,7 @@ const schema = {
                       {t}
                     </span>
                   ))}
+                </div>
                 </div>
               </article>
             ))}

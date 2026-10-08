@@ -157,7 +157,8 @@ jobs:
           done
           # La vista previa sin firma debe rechazarse (401; 503 si aún faltan sus variables).
           # Un 200 significaría que la Function no se publicó y se ve la plantilla vacía.
-          code=$(curl -s -o /dev/null -m 30 --retry 3 --retry-delay 5 -w '%{http_code}' "$SITE_URL/vista-previa/blog/")
+          # Sin --retry: curl reintenta los 503 y termina con error aunque la respuesta sea la esperada.
+          code=$(curl -s -o /dev/null -m 30 -w '%{http_code}' "$SITE_URL/vista-previa/blog/" || true)
           echo "/vista-previa/blog/ (sin firma) -> $code"
           case "$code" in 401|503) ;; *) echo "::error::/vista-previa/blog/ respondió $code (se esperaba 401 o 503)"; FAIL=1 ;; esac
           exit $FAIL
