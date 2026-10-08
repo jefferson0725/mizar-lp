@@ -1,8 +1,11 @@
 ---
 interface Props {
   direccion?: string;
+  phone?: string;
 }
-const { direccion = 'Calle 105A #23a-18, Provenza, Bucaramanga' } = Astro.props;
+const { direccion = 'Calle 105A #23a-18, Provenza, Bucaramanga', phone = '573112658552' } = Astro.props;
+// 573112658552 → +57 311 265 8552
+const phoneLabel = phone.replace(/^57(\d{3})(\d{3})(\d{4})$/, '+57 $1 $2 $3');
 const year = new Date().getFullYear();
 ---
 
@@ -35,8 +38,8 @@ const year = new Date().getFullYear();
           </a>
         </li>
         <li>
-          <a href="https://wa.me/573112382253" rel="noopener" target="_blank" class="hover:text-white">
-            WhatsApp: +57 311 238 2253
+          <a href={`https://wa.me/${phone}`} rel="noopener" target="_blank" class="hover:text-white">
+            WhatsApp: {phoneLabel}
           </a>
         </li>
       </ul>

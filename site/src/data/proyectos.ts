@@ -121,5 +121,5 @@ export const proyectos: Proyecto[] = [
   },
 ];
 
-export const WHATSAPP_GENERAL = '573112382253'; // TODO: confirmar número general de Mizar (este es el de Mi Lote)
+export const WHATSAPP_GENERAL = '573112658552'; // línea general de Grupo Mizar (Mi Lote usa la suya)
 export const WHATSAPP_MILOTE = '573112382253';

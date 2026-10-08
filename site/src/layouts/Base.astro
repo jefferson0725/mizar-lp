@@ -113,7 +113,7 @@ const usesGoogleMapsEmbed = path === '/contacto' || path === '/lotes-cucuta';
     <main class:list={[!headerTransparent && 'pt-16']}>
       <slot />
     </main>
-    <Footer direccion={footerDireccion} />
+    <Footer direccion={footerDireccion} phone={wa.phone} />
     <WhatsAppFloat phone={wa.phone} message={wa.message} />
   </body>
 </html>

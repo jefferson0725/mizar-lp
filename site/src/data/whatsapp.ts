@@ -2,7 +2,7 @@
  * Configuración de WhatsApp por vista.
  * Edita aquí el teléfono, el mensaje y el nombre de la página de cada ruta.
  *
- * - `phone`   : número en formato internacional sin + (ej. 573112382253)
+ * - `phone`   : número en formato internacional sin + (ej. 573112658552)
  * - `page`    : nombre legible de la página/proyecto de origen. Se antepone
  *               automáticamente al mensaje para que el equipo comercial sepa
  *               desde qué página del sitio escribe la persona.
@@ -17,7 +17,7 @@ export interface WhatsAppConfig {
 
 /** Teléfonos disponibles */
 const PHONES = {
-  general: "573112382253",
+  general: "573112658552",
   laureles: "573112658552",
   terrazas: "573112658552",
   milote: "573112382253",

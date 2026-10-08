@@ -1,6 +1,6 @@
 import { useState } from 'preact/hooks';
 
-const WHATSAPP = '573112382253';
+const WHATSAPP = '573112658552';
 
 const TIPOS = [
   { id: 'apartamento', label: 'Apartamento', ubicaciones: ['Girón', 'Piedecuesta'] },
