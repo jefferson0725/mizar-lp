@@ -12,7 +12,8 @@ fi
 echo "▶ Compilando..."
 npm --prefix site run build >/dev/null
 echo "▶ Subiendo al VPS..."
-tar czf - -C site/dist . | ssh -i "$KEY" root@72.60.67.214 \
+# /vista-previa/ (plantilla de la vista previa del blog) solo funciona en Cloudflare: no se sube.
+tar czf - --exclude=./vista-previa -C site/dist . | ssh -i "$KEY" root@72.60.67.214 \
   'rm -rf /opt/mizar-preview/site/* && tar xzf - -C /opt/mizar-preview/site && du -sh /opt/mizar-preview/site'
 echo "▶ Comprobando..."
 curl -s -o /dev/null -m 30 -w "  parcelas-charta: %{http_code}\n" https://preview-mizar.sixteam.pro/parcelas-charta/

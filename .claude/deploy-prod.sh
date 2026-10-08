@@ -49,7 +49,8 @@ echo "▶ Copia de seguridad en ~/backups/public_html-$STAMP.tgz ..."
 "${SSH[@]}" "mkdir -p ~/backups && tar czf ~/backups/public_html-$STAMP.tgz -C ~/domains/grupomizar.com.co public_html && ls -1t ~/backups/public_html-*.tgz | tail -n +4 | xargs -r rm -f && ls -lh ~/backups | tail -4"
 
 echo "▶ Subiendo a producción..."
-tar czf - -C "$D" . | "${SSH[@]}" "cd $REMOTE_DIR && tar xzf - --no-same-owner && du -sh ."
+# /vista-previa/ (plantilla de la vista previa del blog) solo funciona en Cloudflare: no se sube.
+tar czf - --exclude=./vista-previa -C "$D" . | "${SSH[@]}" "cd $REMOTE_DIR && tar xzf - --no-same-owner && du -sh ."
 
 echo "▶ Comprobando..."
 FAIL=0

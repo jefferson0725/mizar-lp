@@ -1,8 +1,10 @@
 ---
 interface Props {
   transparent?: boolean;
+  /** Ruta para marcar el enlace activo (por defecto, la de la página). La vista previa del blog usa "/blog/". */
+  currentPath?: string;
 }
-const { transparent = false } = Astro.props;
+const { transparent = false, currentPath } = Astro.props;
 
 const links = [
   { href: '/', label: 'Inicio' },
@@ -10,7 +12,7 @@ const links = [
   { href: '/proyectos/', label: 'Proyectos' },
   { href: '/blog/', label: 'Blog' },
 ];
-const current = Astro.url.pathname;
+const current = currentPath ?? Astro.url.pathname;
 const stripTrailingSlash = (p: string) => (p.length > 1 ? p.replace(/\/+$/, '') : p);
 const isActive = (href: string) =>
   href === '/' ? current === '/' : stripTrailingSlash(current).startsWith(stripTrailingSlash(href));

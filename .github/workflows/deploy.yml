@@ -99,7 +99,8 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           echo "[$SSH_HOST]:$SSH_PORT $HOST_KEY" > ~/.ssh/known_hosts
           FLAGS="-rlptz --checksum --delete-after --itemize-changes --stats"
-          FLAGS="$FLAGS --exclude=.well-known/ --exclude=cgi-bin/ --skip-compress=mp4/mov/webp/jpg/png/woff2"
+          # /vista-previa/ es la plantilla de la vista previa del blog: solo funciona en Cloudflare.
+          FLAGS="$FLAGS --exclude=.well-known/ --exclude=cgi-bin/ --exclude=/vista-previa/ --skip-compress=mp4/mov/webp/jpg/png/woff2"
           if [ "${{ steps.mode.outputs.dry }}" = "true" ]; then FLAGS="$FLAGS --dry-run"; fi
           rsync $FLAGS \
             -e "ssh -p $SSH_PORT -i $HOME/.ssh/deploy_key -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts" \

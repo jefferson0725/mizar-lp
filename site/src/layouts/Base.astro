@@ -24,6 +24,10 @@ interface Props {
   preloadImage?: string;
   /** Excluir de Google (landings que duplican la ficha de un proyecto) */
   noindex?: boolean;
+  /** Cargar GTM, GA4 y Clarity (false en la vista previa de borradores: no ensuciar las métricas) */
+  analytics?: boolean;
+  /** Ruta para marcar el enlace activo del menú (por defecto, la de la página) */
+  navPath?: string;
 }
 
 const {
@@ -36,6 +40,8 @@ const {
   footerDireccion,
   preloadImage,
   noindex = false,
+  analytics = true,
+  navPath,
 } = Astro.props;
 const wa = getWhatsAppConfig(path);
 const site = Astro.site ?? new URL('https://grupomizar.com.co');
@@ -85,14 +91,17 @@ const usesGoogleMapsEmbed = path === '/contacto' || path === '/lotes-cucuta';
     <script type="application/ld+json" set:html={JSON.stringify(orgSchema)} />
     {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
     <!-- Google Tag Manager -->
-    <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    {analytics && (
+      <script is:inline>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-PH7QMF29');</script>
+    )}
     <!-- End Google Tag Manager -->
-    <Analytics />
-    <script is:inline type="text/javascript">
+    {analytics && <Analytics />}
+    {analytics && (
+      <script is:inline type="text/javascript">
       window.addEventListener('load', function() {
         setTimeout(function() {
           (function(c,l,a,r,i,t,y){
@@ -103,13 +112,16 @@ const usesGoogleMapsEmbed = path === '/contacto' || path === '/lotes-cucuta';
         }, 3000);
       });
     </script>
+    )}
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PH7QMF29"
+    {analytics && (
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PH7QMF29"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    )}
     <!-- End Google Tag Manager (noscript) -->
-    <Header transparent={headerTransparent} />
+    <Header transparent={headerTransparent} currentPath={navPath} />
     <main class:list={[!headerTransparent && 'pt-16']}>
       <slot />
     </main>

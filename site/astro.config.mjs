@@ -22,7 +22,8 @@ export default defineConfig({
     preact(),
     sitemap({
       // Fuera del sitemap: páginas de enlaces de redes.
-      filter: (page) => !/\/links\/?$/.test(page),
+      // La plantilla de vista previa del blog (/vista-previa/) tampoco va.
+      filter: (page) => !/\/links\/?$/.test(page) && !/\/vista-previa\//.test(page),
     }),
   ]
 });

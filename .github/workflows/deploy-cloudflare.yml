@@ -13,6 +13,11 @@ name: Build & Deploy to Cloudflare Pages
 #   STRAPI_URL            https://cms.grupomizar.com.co
 # Variable (opcional):    PUBLIC_GA4_ID
 #
+# Vista previa de borradores (botón «Previsualización» de Strapi): Cloudflare Pages Function en
+# site/functions/vista-previa/ — solo atiende /vista-previa/* (.claude/cloudflare/_routes.json).
+# Sus variables NO van aquí, van en Cloudflare (Pages -> grupomizar -> Configuración ->
+# Variables y secretos, entorno Production): PREVIEW_SECRET, STRAPI_URL, STRAPI_PREVIEW_TOKEN.
+#
 # Hostinger (deploy.yml) queda como respaldo.
 
 on:
@@ -104,7 +109,7 @@ jobs:
         env:
           STRAPI_TOTAL: ${{ steps.strapi.outputs.total }}
         run: |
-          for f in index.html .htaccess parcelas-charta/index.html links/index.html blog/index.html sitemap-index.xml 404.html; do
+          for f in index.html .htaccess parcelas-charta/index.html links/index.html blog/index.html sitemap-index.xml 404.html vista-previa/blog/index.html; do
             test -s "site/dist/$f" || { echo "::error::Falta site/dist/$f"; exit 1; }
           done
           N=$(find site/dist -name '*.html' | wc -l)
@@ -126,12 +131,16 @@ jobs:
           rm -f publish/.htaccess
           cp .claude/cloudflare/_redirects publish/_redirects
           cp .claude/cloudflare/_headers publish/_headers
+          # Solo /vista-previa/* pasa por la Function; todo lo demás se sirve estático.
+          cp .claude/cloudflare/_routes.json publish/_routes.json
 
+      # Se lanza desde site/ para que wrangler encuentre y empaquete site/functions/.
       - name: Publicar en Cloudflare Pages
+        working-directory: site
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
         run: |
-          npx --yes wrangler@4 pages deploy publish \
+          npx --yes wrangler@4 pages deploy ../publish \
             --project-name grupomizar \
             --branch main \
             --commit-hash "${{ github.sha }}" \
@@ -146,6 +155,11 @@ jobs:
             echo "$p -> $code"
             [ "$code" = 200 ] || FAIL=1
           done
+          # La vista previa sin firma debe rechazarse (401; 503 si aún faltan sus variables).
+          # Un 200 significaría que la Function no se publicó y se ve la plantilla vacía.
+          code=$(curl -s -o /dev/null -m 30 --retry 3 --retry-delay 5 -w '%{http_code}' "$SITE_URL/vista-previa/blog/")
+          echo "/vista-previa/blog/ (sin firma) -> $code"
+          case "$code" in 401|503) ;; *) echo "::error::/vista-previa/blog/ respondió $code (se esperaba 401 o 503)"; FAIL=1 ;; esac
           exit $FAIL
 
       # Bing alimenta la búsqueda de ChatGPT y Copilot: avisarle que el sitio cambió.
