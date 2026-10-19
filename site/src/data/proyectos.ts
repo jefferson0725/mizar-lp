@@ -72,7 +72,7 @@ export const proyectos: Proyecto[] = [
     estado: 'disponible',
     propositos: ['inversion', 'vivienda'],
     resumen:
-      'Parcelas desde 1.250 m² a 1 hora de Bucaramanga y a 5 minutos del pueblo de Charta, con vista al pueblo o al bosque. A cuotas directo con Mizar, sin bancos.',
+      'Parcelas desde 1.250 m² a 1 hora de Bucaramanga y a 5 minutos del pueblo de Charta, con vista al pueblo o al bosque. Diseños arquitectónicos incluidos: nuestro equipo de arquitectura te asesora para que sepas desde el día 1 cómo se verá tu cabaña de campo. A cuotas directo con Mizar, sin bancos.',
     imagen: 'charta-thumb.webp',
     lpUrl: null,
     destacado: true,
