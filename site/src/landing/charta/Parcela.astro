@@ -4,14 +4,9 @@ import atardecer from "../../assets/charta/charta-atardecer-pueblo.jpg";
 
 const cards = [
   {
-    titulo: "Desde 650 m²",
+    titulo: "Desde 1.250 m²",
     texto: "Parcelas amplias, con espacio para tu cabaña, tu huerta y tu jardín.",
     icon: `<path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/>`,
-  },
-  {
-    titulo: "Servicios incluidos",
-    texto: "Punto de agua, luz, alcantarillado y planos arquitectónicos de tu cabaña.",
-    icon: `<path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>`,
   },
   {
     titulo: "Cerca de todo",
@@ -19,8 +14,8 @@ const cards = [
     icon: `<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>`,
   },
   {
-    titulo: "Vistas al pueblo y a los atardeceres",
-    texto: "Cada tarde, el valle y las luces del pueblo desde tu parcela.",
+    titulo: "Vista al pueblo o al bosque",
+    texto: "Disfruta de los atardeceres o del canto de las aves.",
     icon: `<path d="M12 10V2"/><path d="m4.93 10.93 1.41 1.41"/><path d="M2 18h2"/><path d="M20 18h2"/><path d="m19.07 10.93-1.41 1.41"/><path d="M22 22H2"/><path d="m16 6-4 4-4-4"/><path d="M16 18a4 4 0 0 0-8 0"/>`,
   },
 ];
@@ -39,7 +34,7 @@ const cards = [
 
       <div class="grid sm:grid-cols-2 gap-4 mt-10">
         {cards.map((card, i) => (
-          <div class="reveal bg-white rounded-2xl shadow-card p-6" style={`transition-delay:${i * 0.08}s`}>
+          <div class:list={["reveal bg-white rounded-2xl shadow-card p-6", cards.length % 2 === 1 && i === cards.length - 1 && "sm:col-span-2"]} style={`transition-delay:${i * 0.08}s`}>
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="text-rojo" aria-hidden="true" set:html={card.icon}></svg>
             <h3 class="font-serif text-2xl text-navy mt-3">{card.titulo}</h3>
             <p class="text-gris-oscuro mt-2">{card.texto}</p>
