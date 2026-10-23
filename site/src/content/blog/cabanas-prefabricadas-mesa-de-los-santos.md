@@ -1,5 +1,5 @@
 ---
-title: "Cabañas prefabricadas o construidas en la Mesa de los Santos"
+title: "Cabañas prefabricadas o construidas: ¿qué conviene más en la Mesa de los Santos?"
 seo_title: "Cabañas prefabricadas o construidas en la Mesa de los Santos"
 slug: cabanas-prefabricadas-mesa-de-los-santos
 description: "Cabañas prefabricadas o construidas en la Mesa de los Santos: diferencias, costos que no salen en el catálogo y cuál conviene si piensas rentarla."

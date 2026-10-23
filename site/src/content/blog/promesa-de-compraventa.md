@@ -1,5 +1,5 @@
 ---
-title: "Promesa de compraventa: qué es, requisitos y qué revisar"
+title: "Promesa de compraventa: qué es, requisitos y qué revisar antes de firmar"
 seo_title: "Promesa de compraventa: qué es, requisitos y qué revisar"
 slug: promesa-de-compraventa
 description: "Qué es una promesa de compraventa de inmueble en Colombia, los 4 requisitos que la hacen válida, las señales de alerta y qué pasa si alguien incumple."

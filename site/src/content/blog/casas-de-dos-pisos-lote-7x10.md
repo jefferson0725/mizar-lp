@@ -1,5 +1,5 @@
 ---
-title: "Casas de dos pisos en lote de 7x10: diseños y etapas"
+title: "Casas de dos pisos en un lote de 7x10: diseños y cómo construirla por etapas"
 seo_title: "Casas de dos pisos en lote de 7x10: diseños y etapas"
 slug: casas-de-dos-pisos-lote-7x10
 description: "Casas de dos pisos en lotes de 7x10: cuántas habitaciones caben, ideas de distribución y cómo construir por etapas sin rehacer nada al subir."

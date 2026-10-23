@@ -1,5 +1,5 @@
 ---
-title: "San Cayetano, Norte de Santander: cómo llegar y qué saber"
+title: "San Cayetano, Norte de Santander: cómo llegar, qué hay y qué saber antes de comprar"
 seo_title: "San Cayetano, Norte de Santander: cómo llegar y qué saber"
 slug: san-cayetano-norte-de-santander
 description: "Dónde queda San Cayetano, Norte de Santander, cómo llegar desde Cúcuta por el anillo vial occidental, si es seguro y qué revisar antes de comprar un lote."

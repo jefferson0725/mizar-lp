@@ -10,7 +10,7 @@ Copia esto en un archivo nuevo, por ejemplo `como-elegir-parcela.md`:
 
 ```md
 ---
-title: "Cómo elegir una parcela en Santander"      # H1 y tarjeta. Máx. 55 caracteres (el sistema acepta hasta 60)
+title: "Cómo elegir una parcela en Santander"      # H1 y tarjeta. Hasta 100 caracteres; si pasa de 55, pon seo_title para Google
 seo_title: "Cómo elegir una parcela en Santander | Mizar"   # OPCIONAL. Título de Google y de redes (<title> y og:title), máx. 60. Si se omite: "<title> | Grupo Mizar"
 slug: como-elegir-parcela                           # opcional; si se omite se usa el nombre del archivo
 description: "Entre 140 y 155 caracteres: qué responde el artículo y para quién."
