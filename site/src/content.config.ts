@@ -26,6 +26,8 @@ const blog = defineCollection({
         updated: z.coerce.date().optional(),
         hero_image: image().optional(),
         hero_alt: z.string().optional(),
+        // Qué parte de la foto se ve en la franja de portada (CSS object-position), p. ej. "center 22%" para que salgan las caras.
+        hero_position: z.string().optional(),
         // Un borrador nunca se publica.
         draft: z.boolean().default(false),
       })

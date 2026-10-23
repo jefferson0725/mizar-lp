@@ -11,6 +11,7 @@ tags:
 pub_date: 2026-10-08
 hero_image: ../../assets/equipo.jpg
 hero_alt: "Equipo de Grupo Mizar frente a sus oficinas en Bucaramanga"
+hero_position: "center 22%"
 draft: false
 ---
 

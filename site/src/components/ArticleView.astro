@@ -16,9 +16,10 @@ type Props = Omit<ArticleView, 'contentHtml' | 'heroUrl'> & {
   contentHtml?: string;
   heroUrl?: string | null;
   heroImage?: ImageMetadata;
+  heroPosition?: string;
 };
 
-const { eyebrow, title, description, meta, heroUrl, heroAlt, contentHtml, heroImage } = Astro.props;
+const { eyebrow, title, description, meta, heroUrl, heroAlt, contentHtml, heroImage, heroPosition } = Astro.props;
 ---
 
 <article class="bg-cream">
@@ -38,6 +39,7 @@ const { eyebrow, title, description, meta, heroUrl, heroAlt, contentHtml, heroIm
       class="w-full max-h-[480px] object-cover"
       src={heroImage}
       alt={heroAlt}
+      style={heroPosition ? `object-position: ${heroPosition}` : undefined}
       width={1200}
       format="webp"
       loading="eager"

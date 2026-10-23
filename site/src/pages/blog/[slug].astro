@@ -21,7 +21,7 @@ let heroUrl: string | null = null;
 let Content: Awaited<ReturnType<typeof render>>['Content'] | undefined;
 
 if (post.file) {
-  const { hero_image, hero_alt } = post.file.data;
+  const { hero_image, hero_alt, hero_position } = post.file.data;
   ({ Content } = await render(post.file));
   view = {
     eyebrow: post.frente.replace(/-/g, ' '),
@@ -30,6 +30,7 @@ if (post.file) {
     meta: `${formatDate(post.pubDate)} · ${post.author}`,
     heroAlt: hero_alt || post.title,
     heroImage: hero_image,
+    heroPosition: hero_position,
   };
   if (hero_image) {
     // Imagen para Open Graph y JSON-LD: JPG (WhatsApp y LinkedIn no siempre leen webp).
