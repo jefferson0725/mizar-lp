@@ -13,8 +13,6 @@ tags:
   - dónde queda la mesa de los santos
   - lotes mesa de los santos
 pub_date: 2026-10-23
-hero_image: ../../assets/mirador/banner2-scaled.webp
-hero_alt: "Vista aérea de una ladera de la Mesa de los Santos con casas dispersas, caminos de tierra y montañas al fondo"
 draft: false
 ---
 

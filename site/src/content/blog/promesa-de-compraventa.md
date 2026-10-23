@@ -13,8 +13,6 @@ tags:
   - qué pasa si una promesa de compraventa no se cumple
   - cómo desistir de una promesa de compraventa
 pub_date: 2026-10-23
-hero_image: ../../landing/assets/tipo-2/obra-1.jpg
-hero_alt: "Render del interior de un apartamento de Mizar: comedor junto a un ventanal, escritorio y muros de ladrillo a la vista"
 draft: false
 ---
 

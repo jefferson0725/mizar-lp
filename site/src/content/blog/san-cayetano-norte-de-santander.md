@@ -13,8 +13,6 @@ tags:
   - anillo vial occidental
   - lotes cerca de Cúcuta
 pub_date: 2026-10-23
-hero_image: ../../assets/proyectos/miravista-imagen1.png
-hero_alt: "Vista aérea de San Cayetano con el anillo vial occidental, la estación de servicio San Isidro, la Universidad Simón Bolívar y los lotes de Mi Lote señalados"
 draft: false
 ---
 
@@ -88,7 +86,7 @@ Tres factores explican por qué San Cayetano está en el radar del desarrollo re
 
 ## Qué revisar antes de comprar un lote en San Cayetano, Norte de Santander
 
-Antes de separar un lote, haz estas cinco preguntas:
+Antes de separar un lote, haz estas cuatro preguntas:
 
 1. **¿Es un lote urbano?** Solo así podrás construir tu casa con licencia, en una zona con proyección.
 

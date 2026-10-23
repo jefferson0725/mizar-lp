@@ -13,8 +13,6 @@ tags:
   - cuánto cuestan las cabañas prefabricadas
   - vale la pena una casa prefabricada
 pub_date: 2026-10-23
-hero_image: ../../assets/mirador/slider-1.webp
-hero_alt: "Render de una cabaña de techo de teja y muros blancos en una ladera, con terraza elevada, escalera de caracol y jacuzzi"
 draft: false
 ---
 
@@ -79,11 +77,11 @@ Toda cabaña, prefabricada o construida, tiene una parte que no se ve en las fot
 
 Con una prefabricada, esa parte suele quedar en tus manos: coordinar al fabricante, a quien firma los cálculos, el transporte y la instalación. Y el equipo que la monta importa tanto como el modelo, porque un detalle mal resuelto puede hacer que los muros se agrieten o que la cabaña se sienta endeble. Generalmente se requiere personal altamente calificado para poder hacer realizar este tipo de viviendas.
 
-Con una cabaña construida en sitio, el constructor responde por todo el proceso, desde el diseño hasta la entrega. Tú defines cómo la quieres. Y para el constructor, conseguir mano de obra es mas sencillo, ya que son sistemas mas convencionales.
+Con una cabaña construida en sitio, el constructor responde por todo el proceso, desde el diseño hasta la entrega. Tú defines cómo la quieres. Y para el constructor, conseguir mano de obra es más sencillo, ya que son sistemas más convencionales.
 
 ## ¿Más barato construir directamente con un maestro de obra?
 
-Esta es un arma de doble filo, si bien hay personas que se dedican a esto y lo hacen muy bien, usualmente se presentan los mismos desafíos como: descuadres en en el presupuesto e incrementos considerables de los costos de una construcción, decisiones arbitrarias en obra: no seguir planos, diseños o incluso buscar ahorrar poniendo materiales de peor calidad, retrasos en las entregas, también la falta de respaldo que tiene una persona vs realizarlo con una empresa, en donde trabaja un equipo especializado en las distintas áreas, arquitectura, presupuesto, ingeniería. Esto resulta de vital importancia si lo que quiere es construir una vivienda duradera, con garantía y si cuentas con poco tiempo o estás fuera del país.
+Esta es un arma de doble filo, si bien hay personas que se dedican a esto y lo hacen muy bien, usualmente se presentan los mismos desafíos como: descuadres en el presupuesto e incrementos considerables de los costos de una construcción, decisiones arbitrarias en obra: no seguir planos, diseños o incluso buscar ahorrar poniendo materiales de peor calidad, retrasos en las entregas, también la falta de respaldo que tiene una persona vs realizarlo con una empresa, en donde trabaja un equipo especializado en las distintas áreas, arquitectura, presupuesto, ingeniería. Esto resulta de vital importancia si lo que quiere es construir una vivienda duradera, con garantía y si cuentas con poco tiempo o estás fuera del país.
 
 ## ¿Y el glamping?
 

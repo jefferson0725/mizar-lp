@@ -13,8 +13,6 @@ tags:
   - comprar vivienda a cuotas
   - financiación directa
 pub_date: 2026-10-23
-hero_image: ../../assets/nosotros/proyectos/apartamentos-full-acabados.webp
-hero_alt: "Cocina con muebles de madera clara y sala con ventanal y balcón en un apartamento de Mizar con acabados completos"
 draft: false
 ---
 

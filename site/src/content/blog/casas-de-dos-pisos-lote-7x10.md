@@ -13,8 +13,6 @@ tags:
   - diseño casa 7x10
   - casa 7x10 3 dormitorios
 pub_date: 2026-10-23
-hero_image: ../../assets/proyectos/miravista-g5.png
-hero_alt: "Render de casas de dos pisos con balcones en una urbanización de Mi Lote, con árboles y dos personas trotando por un sendero"
 draft: false
 ---
 
