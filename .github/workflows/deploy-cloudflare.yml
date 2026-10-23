@@ -5,8 +5,10 @@ name: Build & Deploy to Cloudflare Pages
 #  - Strapi publica un artículo (webhook)                    -> repository_dispatch "strapi-publish" -> compila y publica
 #  - Manual (Actions -> Run workflow)                        -> compila y publica
 #
-# Los artículos del blog se leen de Strapi al compilar. Si Strapi no responde, el sitio se
-# compilaría con el blog VACÍO: por eso hay una comprobación previa que aborta el deploy.
+# Los artículos del blog viven como archivos en site/src/content/blog/ (guía en su README.md).
+# Strapi es OPCIONAL: si responde al compilar, sus artículos se suman (el archivo gana si el slug
+# se repite); si no responde, el deploy sigue con los archivos. Para no publicar nunca menos
+# artículos de los que ya están en línea, "Verificar el build" compara con el sitemap publicado.
 #
 # Secrets del repo (Settings -> Secrets and variables -> Actions):
 #   CLOUDFLARE_API_TOKEN  token de Cloudflare con el permiso "Cloudflare Pages: Edit"
@@ -69,34 +71,24 @@ jobs:
         run: npm ci
         working-directory: site
 
-      - name: Comprobar que Strapi responde (no publicar un blog vacío)
-        id: strapi
+      # Strapi ya no bloquea el deploy: los artículos están en el repo. Solo informa.
+      - name: Comprobar Strapi (opcional)
         env:
           STRAPI_URL: ${{ secrets.STRAPI_URL }}
-          EVENT_NAME: ${{ github.event_name }}
         run: |
           if [ -z "$STRAPI_URL" ]; then
-            echo "::error::El secret STRAPI_URL está vacío o no existe. Se cancela el deploy para no publicar el blog vacío."
-            exit 1
+            echo "::warning::El secret STRAPI_URL no está definido: se publica solo con los artículos del repo (site/src/content/blog)."
+            exit 0
           fi
           URL="${STRAPI_URL%/}/api/posts?pagination[pageSize]=1"
-          CODE=$(curl -g -s -o strapi-check.json -m 30 --retry 3 --retry-delay 10 --retry-all-errors -w '%{http_code}' "$URL" || true)
+          CODE=$(curl -g -s -o strapi-check.json -m 30 --retry 2 --retry-delay 5 --retry-all-errors -w '%{http_code}' "$URL" || true)
           echo "Strapi /api/posts -> $CODE"
-          if [ "$CODE" != "200" ]; then
-            echo "::error::Strapi no respondió 200 (respondió '$CODE'). Se cancela el deploy para no publicar el blog vacío. Revisa que el CMS esté arriba."
-            exit 1
+          if [ "$CODE" = "200" ]; then
+            TOTAL=$(jq -r '.meta.pagination.total // 0' strapi-check.json 2>/dev/null || echo 0)
+            echo "Artículos publicados en Strapi: $TOTAL"
+          else
+            echo "::warning::Strapi no respondió 200 (respondió '$CODE'). Se continúa solo con los artículos del repo."
           fi
-          TOTAL=$(jq -r '.meta.pagination.total // 0' strapi-check.json 2>/dev/null || echo 0)
-          echo "Artículos publicados en Strapi: $TOTAL"
-          STRAPI_TOTAL="$TOTAL"
-          # Comparar con el sitio publicado: si Strapi dice 0 pero el sitio ya tiene artículos, algo falló.
-          LIVE=$(curl -s "$SITE_URL/sitemap-0.xml" | grep -c '/blog/[^<]*/</loc>' || true)
-          echo "Artículos en el sitio publicado: $LIVE"
-          if [ "$STRAPI_TOTAL" -eq 0 ] && [ "${LIVE:-0}" -gt 0 ] && [ "$EVENT_NAME" != "workflow_dispatch" ]; then
-            echo "::error::Strapi devuelve 0 artículos pero el sitio publicado tiene $LIVE. No se publica para no vaciar el blog. Si de verdad se retiraron todos, ejecuta el workflow a mano."
-            exit 1
-          fi
-          echo "total=$STRAPI_TOTAL" >> "$GITHUB_OUTPUT"
 
       - name: Build
         run: npm run build
@@ -107,7 +99,7 @@ jobs:
 
       - name: Verificar el build
         env:
-          STRAPI_TOTAL: ${{ steps.strapi.outputs.total }}
+          EVENT_NAME: ${{ github.event_name }}
         run: |
           for f in index.html .htaccess parcelas-charta/index.html links/index.html blog/index.html sitemap-index.xml 404.html vista-previa/blog/index.html; do
             test -s "site/dist/$f" || { echo "::error::Falta site/dist/$f"; exit 1; }
@@ -115,11 +107,14 @@ jobs:
           N=$(find site/dist -name '*.html' | wc -l)
           echo "Páginas HTML: $N"
           [ "$N" -ge 15 ] || { echo "::error::Solo $N páginas HTML (se esperaban >=15)"; exit 1; }
-          # Si Strapi tiene artículos, el build debe haber generado sus páginas (si no, el blog salió vacío).
-          STRAPI_TOTAL="${STRAPI_TOTAL:-0}"
+          # Nunca publicar menos artículos de los que ya están en línea.
           P=$(find site/dist/blog -mindepth 2 -name index.html | wc -l)
-          echo "Páginas de artículos: $P (Strapi: $STRAPI_TOTAL)"
-          [ "$P" -ge "$STRAPI_TOTAL" ] || { echo "::error::Strapi tiene $STRAPI_TOTAL artículos pero el build solo generó $P. Se cancela el deploy."; exit 1; }
+          LIVE=$(curl -s -m 30 --retry 3 --retry-delay 5 "$SITE_URL/sitemap-0.xml" | grep -c '/blog/[^<]*/</loc>' || true)
+          echo "Páginas de artículos construidas: $P · artículos en línea: ${LIVE:-0}"
+          if [ "$P" -lt "${LIVE:-0}" ] && [ "$EVENT_NAME" != "workflow_dispatch" ]; then
+            echo "::error::El build tiene $P artículos y el sitio publicado tiene $LIVE. No se publica para no quitar artículos. Si retiraste alguno a propósito, ejecuta el workflow a mano (Run workflow)."
+            exit 1
+          fi
           # El índice del blog debe listar todos los artículos construidos.
           L=$(grep -o 'href="/blog/[^"]*/"' site/dist/blog/index.html | sort -u | wc -l)
           [ "$L" -ge "$P" ] || { echo "::error::El índice del blog lista $L artículos y hay $P páginas"; exit 1; }
