@@ -1,46 +1,18 @@
 ---
+import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
+import { formatDate } from '../../lib/article';
+import { getAllPosts, STRAPI_URL, type BlogItem } from '../../lib/posts';
 
-const STRAPI_URL = (import.meta.env.STRAPI_URL ?? 'http://localhost:1337').trim();
+// Archivos del repo + Strapi (opcional), sin repetidos y el más reciente primero.
+const posts: BlogItem[] = await getAllPosts();
 
-interface Post {
-  id: number;
-  slug: string;
-  title: string;
-  description: string;
-  frente: string;
-  tags: string;
-  pub_date: string;
-  hero_image?: { url: string; alternativeText?: string; formats?: Record<string, { url: string }> } | null;
-}
-
-// Portada de la tarjeta: versión mediana de Strapi (~750 px), no la original.
-function cardImage(p: Post): string | null {
-  const src = p.hero_image?.formats?.medium?.url ?? p.hero_image?.formats?.small?.url ?? p.hero_image?.url;
+// Portada de la tarjeta de Strapi: versión mediana (~750 px), no la original.
+function strapiCardImage(p: BlogItem): string | null {
+  const h = p.strapi?.hero_image;
+  const src = h?.formats?.medium?.url ?? h?.formats?.small?.url ?? h?.url;
   if (!src) return null;
   return src.startsWith('http') ? src : `${STRAPI_URL}${src}`;
-}
-
-let posts: Post[] = [];
-try {
-  const res = await fetch(
-    `${STRAPI_URL}/api/posts?populate=hero_image&sort=pub_date:desc&pagination[pageSize]=100`,
-  );
-  if (res.ok) {
-    const { data } = await res.json();
-    posts = data ?? [];
-  }
-} catch (e) {
-  console.warn('[blog/index] No se pudo cargar posts de Strapi en build:', e);
-}
-
-function formatDate(d: string) {
-  return new Intl.DateTimeFormat('es-CO', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    timeZone: 'UTC', // pub_date es solo fecha: sin esto, compilar en Colombia la corre un día
-  }).format(new Date(d));
 }
 
 const site = Astro.site ?? new URL('https://grupomizar.com.co');
@@ -83,29 +55,43 @@ const schema = {
           <div class="grid gap-6 md:grid-cols-3">
             {posts.map((p) => (
               <article class="overflow-hidden rounded-2xl border border-ink/10 bg-white">
-                {cardImage(p) && (
+                {p.file?.data.hero_image ? (
                   <a href={`/blog/${p.slug}/`} tabindex="-1" aria-hidden="true">
-                    <img
+                    <Image
                       class="aspect-[16/9] w-full object-cover"
-                      src={cardImage(p)}
-                      alt={p.hero_image?.alternativeText || p.title}
+                      src={p.file.data.hero_image}
+                      alt={p.file.data.hero_alt || p.title}
+                      width={750}
+                      height={422}
+                      format="webp"
                       loading="lazy"
-                      width="750"
-                      height="422"
                     />
                   </a>
+                ) : (
+                  strapiCardImage(p) && (
+                    <a href={`/blog/${p.slug}/`} tabindex="-1" aria-hidden="true">
+                      <img
+                        class="aspect-[16/9] w-full object-cover"
+                        src={strapiCardImage(p)}
+                        alt={p.strapi?.hero_image?.alternativeText || p.title}
+                        loading="lazy"
+                        width="750"
+                        height="422"
+                      />
+                    </a>
+                  )
                 )}
                 <div class="p-6">
-                <p class="eyebrow text-teal">{p.frente?.replace(/-/g, ' ')}</p>
+                <p class="eyebrow text-teal">{p.frente.replace(/-/g, ' ')}</p>
                 <h2 class="display-lg mt-4 text-2xl">
                   <a class="hover:text-mizar" href={`/blog/${p.slug}/`}>
                     {p.title}
                   </a>
                 </h2>
-                {p.pub_date && <p class="mt-3 text-sm font-semibold text-ink/60">{formatDate(p.pub_date)}</p>}
+                <p class="mt-3 text-sm font-semibold text-ink/60">{formatDate(p.pubDate)}</p>
                 <p class="mt-4 text-ink/75">{p.description}</p>
                 <div class="mt-6 flex flex-wrap gap-2">
-                  {(p.tags ?? '').split(',').map((t) => t.trim()).filter(Boolean).map((t) => (
+                  {p.tags.map((t) => (
                     <span class="rounded-full bg-cream px-3 py-1 text-sm font-semibold text-plum">
                       {t}
                     </span>
