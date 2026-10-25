@@ -59,3 +59,9 @@ Valores de `frente`: `consejos`, `parcelas-charta`, `laureles-campestre`, `terra
 - Los enlaces del texto se abren en la misma pestaña.
 - Si dos artículos (archivo y Strapi) tienen el mismo slug, gana el archivo.
 - Antes de subir: `npm run build` en `site/` debe pasar. Si un campo está mal, el error dice cuál.
+
+## llms.txt y sitemap
+
+- El sitemap (`/sitemap-0.xml`) toma solo la fecha de cada artículo (`updated` o, si no hay, `pub_date`): no hace falta tocar nada.
+- `site/public/llms.txt` lleva una lista fija de artículos en la sección «## Artículos del blog». **Cada artículo nuevo debe añadirse ahí a mano** con el formato `- [título](https://grupomizar.com.co/blog/<slug>/): <description>` (título y descripción exactos del frontmatter).
+- Si el artículo tiene una sección «Preguntas frecuentes», el sitio genera solo el marcado FAQPage a partir de ese texto (pregunta en `###` o en negrita sola en su línea, respuesta en los párrafos siguientes).

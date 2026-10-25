@@ -5,6 +5,7 @@ import Base from '../../layouts/Base.astro';
 import ArticleView from '../../components/ArticleView.astro';
 import { toArticleView, formatDate } from '../../lib/article';
 import { getAllPosts, STRAPI_URL, type BlogItem } from '../../lib/posts';
+import { extractFaq, faqSchema } from '../../lib/faq';
 
 export async function getStaticPaths() {
   const posts = await getAllPosts();
@@ -46,19 +47,32 @@ if (post.file) {
 const path = `/blog/${post.slug}/`;
 const canonical = new URL(path, site).href;
 
+// Fechas planas (YYYY-MM-DD): con hora UTC "T00:00Z" Colombia las leería como el día anterior.
+const datePublished = post.pubDate.slice(0, 10);
+const dateModified = post.modDate.slice(0, 10);
+
+const ORG_ID = 'https://grupomizar.com.co/#organizacion'; // mismo @id que orgSchema (src/data/schema.ts)
+const publisher = {
+  '@type': 'Organization',
+  '@id': ORG_ID,
+  name: 'Grupo Mizar',
+  logo: { '@type': 'ImageObject', url: new URL('/logo-mizar.webp', site).href },
+};
+const author =
+  post.author === 'Grupo Mizar'
+    ? { '@type': 'Organization', '@id': ORG_ID, name: 'Grupo Mizar', url: new URL('/nosotros/', site).href }
+    : { '@type': 'Person', name: post.author };
+
 const articleSchema: Record<string, unknown> = {
   '@context': 'https://schema.org',
   '@type': 'Article',
   headline: post.title,
   description: post.description,
-  author: { '@type': 'Organization', name: post.author },
-  publisher: {
-    '@type': 'Organization',
-    name: 'Grupo Mizar',
-    logo: { '@type': 'ImageObject', url: new URL('/logo-mizar.webp', site).href },
-  },
-  datePublished: post.pubDate,
-  dateModified: post.modDate,
+  author,
+  publisher,
+  datePublished,
+  dateModified,
+  inLanguage: 'es-CO',
   mainEntityOfPage: canonical,
   url: canonical,
   keywords: post.tags,
@@ -66,6 +80,17 @@ const articleSchema: Record<string, unknown> = {
 
 if (heroUrl) {
   articleSchema.image = [heroUrl];
+}
+
+// FAQPage: solo artículos en archivo con sección «Preguntas frecuentes»; se arma desde el HTML renderizado.
+const schemas: object[] = [articleSchema];
+if (post.file) {
+  const faq = extractFaq(post.file.rendered?.html ?? '');
+  console.log(`[faq] ${post.slug}: ${faq.length} pregunta(s) encontradas`);
+  if (faq.length >= 2) schemas.push(faqSchema(faq));
+  else if (/Preguntas frecuentes/i.test(post.file.body ?? '')) {
+    console.warn(`[faq] ${post.slug}: menos de 2 pares P/R, no se emite FAQPage`);
+  }
 }
 
 const breadcrumbSchema = {
@@ -84,7 +109,10 @@ const breadcrumbSchema = {
   description={post.description}
   path={path}
   ogImage={heroUrl ?? undefined}
-  schema={[articleSchema, breadcrumbSchema]}
+  schema={[...schemas, breadcrumbSchema]}
+  ogType="article"
+  articlePublished={datePublished}
+  articleModified={dateModified}
 >
   <ArticleView {...view}>
     {Content && <Content />}

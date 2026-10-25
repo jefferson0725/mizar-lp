@@ -90,6 +90,12 @@ jobs:
             echo "::warning::Strapi no respondió 200 (respondió '$CODE'). Se continúa solo con los artículos del repo."
           fi
 
+      # Copia del sitemap publicado ANTES de desplegar: IndexNow solo avisa de lo que cambió.
+      - name: Guardar el sitemap publicado
+        run: |
+          curl -s -m 30 --retry 3 --retry-delay 5 -o "$RUNNER_TEMP/sitemap-live.xml" "$SITE_URL/sitemap-0.xml" || : > "$RUNNER_TEMP/sitemap-live.xml"
+          echo "URLs en el sitemap publicado: $(grep -o "<loc>" "$RUNNER_TEMP/sitemap-live.xml" | wc -l)"
+
       - name: Build
         run: npm run build
         working-directory: site
@@ -158,7 +164,33 @@ jobs:
           case "$code" in 401|503) ;; *) echo "::error::/vista-previa/blog/ respondió $code (se esperaba 401 o 503)"; FAIL=1 ;; esac
           exit $FAIL
 
-      # Bing alimenta la búsqueda de ChatGPT y Copilot: avisarle que el sitio cambió.
+      # Bing alimenta la búsqueda de ChatGPT y Copilot: avisarle SOLO de lo que cambió en este deploy
+      # (URLs nuevas, lastmod distinto, o páginas de artículos cuyo .md cambió; ver .claude/indexnow-urls.sh).
+      # Un cambio en site/ que no sea un artículo avisa de todo el sitemap (comportamiento anterior).
       - name: Avisar a IndexNow
         if: success()
-        run: bash "$GITHUB_WORKSPACE/.claude/indexnow.sh" || echo "::warning::No se pudo avisar a IndexNow"
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BEFORE: ${{ github.event.before }}
+          SHA: ${{ github.sha }}
+        run: |
+          CHANGES=NONE
+          if [ "$EVENT_NAME" = push ]; then
+            CHANGES=ALL
+            if [ -n "$BEFORE" ] && [ "$BEFORE" != "0000000000000000000000000000000000000000" ] \
+               && git fetch --no-tags --depth=1 origin "$BEFORE" 2>/dev/null \
+               && git diff --name-only "$BEFORE" "$SHA" > "$RUNNER_TEMP/changed.txt"; then
+              CHANGES="$RUNNER_TEMP/changed.txt"
+              echo "Archivos cambiados en el push:"; cat "$CHANGES"
+            else
+              echo "No se pudo comparar con el push anterior: se avisa de todo el sitemap."
+            fi
+          fi
+          mapfile -t URLS < <(bash "$GITHUB_WORKSPACE/.claude/indexnow-urls.sh" "$RUNNER_TEMP/sitemap-live.xml" "$GITHUB_WORKSPACE/site/dist/sitemap-0.xml" "$CHANGES")
+          if [ "${#URLS[@]}" -eq 0 ]; then
+            echo "Ninguna URL cambió: no se avisa a IndexNow."
+            exit 0
+          fi
+          echo "Se avisan ${#URLS[@]} URL(s):"
+          printf '  %s\n' "${URLS[@]}"
+          bash "$GITHUB_WORKSPACE/.claude/indexnow.sh" "${URLS[@]}" || echo "::warning::No se pudo avisar a IndexNow"

@@ -28,6 +28,11 @@ interface Props {
   analytics?: boolean;
   /** Ruta para marcar el enlace activo del menú (por defecto, la de la página) */
   navPath?: string;
+  /** Tipo Open Graph (por defecto "website"; los artículos usan "article") */
+  ogType?: 'website' | 'article';
+  /** Solo artículos: fechas YYYY-MM-DD para article:published_time / article:modified_time */
+  articlePublished?: string;
+  articleModified?: string;
 }
 
 const {
@@ -42,6 +47,9 @@ const {
   noindex = false,
   analytics = true,
   navPath,
+  ogType = 'website',
+  articlePublished,
+  articleModified,
 } = Astro.props;
 const wa = getWhatsAppConfig(path);
 const site = Astro.site ?? new URL('https://grupomizar.com.co');
@@ -79,7 +87,9 @@ const usesGoogleMapsEmbed = path === '/contacto' || path === '/lotes-cucuta';
     {usesGoogleMapsEmbed && <link rel="preconnect" href="https://www.google.com" crossorigin />}
     <meta name="generator" content={Astro.generator} />
 
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    {ogType === 'article' && articlePublished && <meta property="article:published_time" content={articlePublished} />}
+    {ogType === 'article' && articleModified && <meta property="article:modified_time" content={articleModified} />}
     <meta property="og:site_name" content="Grupo Mizar" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
