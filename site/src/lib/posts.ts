@@ -82,6 +82,9 @@ export function getAllPosts(): Promise<BlogItem[]> {
     const bySlug = new Map<string, BlogItem>();
     for (const p of strapi) bySlug.set(p.slug, p);
     for (const p of files) bySlug.set(p.slug, p); // el archivo gana
+    // Un archivo en borrador retira el artículo aunque Strapi tenga una copia con la misma dirección.
+    const drafts = await getCollection('blog', (e) => e.data.draft);
+    for (const e of drafts) bySlug.delete(e.data.slug ?? e.id);
     return [...bySlug.values()].sort((a, b) => b.pubDate.localeCompare(a.pubDate));
   })();
   return cache;

@@ -12,7 +12,7 @@ pub_date: 2026-10-08
 hero_image: ../../assets/equipo.jpg
 hero_alt: "Equipo de Grupo Mizar frente a sus oficinas en Bucaramanga"
 hero_position: "center 22%"
-draft: false
+draft: true
 ---
 
 Una constructora es confiable cuando puede demostrar su trayectoria, enseñar obras entregadas y explicarte con claridad cómo se paga y cómo queda la propiedad a tu nombre. En Grupo Mizar llevamos más de 20 años construyendo en Colombia y hemos entregado más de 100 obras.
