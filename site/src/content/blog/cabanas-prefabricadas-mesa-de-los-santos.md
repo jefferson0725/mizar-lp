@@ -100,9 +100,15 @@ En los dos casos, todo empieza por el mismo lugar: el terreno. Y en una cabaña 
 
 En una cabaña para rentar, la vista es lo que más vende: es lo primero que ve el huésped en las fotos y lo que lo hace volver. En la Mesa, las mejores vistas al cañón suelen estar en terrenos con pendiente, justo donde una cabaña construida en sitio funciona mejor. Y la demanda existe: la Mesa se llena en puentes, festivos y temporadas de vacaciones. Una cabaña tiene potencial de renta, aunque nadie puede garantizarte cuánto va a producir.
 
+![Vista desde una ladera de la Mesa de los Santos, con casas campestres, caminos y montañas al fondo](../../assets/blog/cabanas/vista-ladera-mesa-de-los-santos.jpg)
+
 En [Mirador de la Montaña](/mirador-de-la-montana/), en la zona del Salto del Duende, compras tu parcela campestre sin crédito hipotecario y la pagas a cuotas directamente a Grupo Mizar ([así funciona](/blog/vivienda-sin-cuota-inicial/)) sin intereses por un año. El proyecto ya tiene sus licencias, así que al terminar de pagar escrituras tu parcela a tu nombre.
 
 Y de la cabaña nos encargamos nosotros: la diseñamos orientada hacia el cañón, nos ocupamos de los permisos y la construimos. También la pagas a cuotas, con las condiciones que te explica un asesor. Tú solo te ocupas de pagar tus cuotas y de revisar los acabados.
+
+![Cabaña en A en construcción, con estructura metálica negra y muro de piedra, en una ladera con montañas al fondo](../../assets/blog/cabanas/cabana-en-construccion.jpg)
+
+![Cabaña en A terminada, con ventanales y balcones, entre árboles en lo alto de una ladera](../../assets/blog/cabanas/cabana-terminada.jpg)
 
 Llevamos más de 20 años construyendo en Colombia, con más de 100 obras entregadas, y hemos entregado parcelaciones y apartamentos en Piedecuesta, Girón y la propia Mesa de los Santos. [Conoce quiénes somos](/nosotros/).
 
