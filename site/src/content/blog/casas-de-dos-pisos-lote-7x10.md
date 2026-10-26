@@ -38,6 +38,8 @@ Un lote de 7x10 tiene 70 m². No todo se puede construir: la norma de cada munic
 
 Con dos pisos, el área construida casi se duplica. Por eso las casas de dos pisos son la opción más común en lotes urbanos pequeños: creces hacia arriba, no hacia los lados.
 
+![Render de una casa de dos pisos con fachada blanca y de ladrillo, ventanales y balcón con baranda de vidrio en el segundo piso](../../assets/blog/casas-7x10/render-casa-dos-pisos-fachada.webp)
+
 Si tu lote es de 7x16 (112 m²), tienes más margen para un patio grande, un parqueadero o un local al frente.
 
 ## ¿Cuántas habitaciones caben en una casa de dos pisos de 7x10?
