@@ -18,6 +18,8 @@ draft: false
 
 **¿Cómo sería despertar con el cañón del Chicamocha al frente y estar en Bucaramanga en menos de una hora?** Esa pregunta es la que trae a la Mesa de los Santos a familias que buscan una segunda casa, a quienes trabajan desde su computador y a colombianos que viven fuera y quieren un lugar al cual volver.
 
+![Vista desde una ladera de la Mesa de los Santos, con casas campestres, caminos y montañas al fondo](../../assets/blog/cabanas/vista-ladera-mesa-de-los-santos.jpg)
+
 La respuesta corta es que sí se puede, pero no en cualquier predio ni de cualquier manera. La Mesa tiene sectores muy distintos entre sí, y lo que encuentras en uno no siempre está en el otro.
 
 En esta guía te contamos dónde queda, cómo es su clima, en qué se diferencian sus sectores, cómo es vivir ahí, qué riesgos debes conocer y qué revisar antes de comprar.
@@ -57,6 +59,8 @@ Uno de los errores más comunes es hablar de la Mesa como si fuera un solo lugar
 * **El casco urbano de Los Santos.** El pueblo, con su mercado campesino de fin de semana.
 
 Saber en qué sector está un lote te dice mucho sobre cómo será vivir ahí: cuánto movimiento habrá, qué servicios tendrás cerca y cómo se verá la zona en unos años.
+
+<video controls muted loop playsinline preload="none" poster="/blog/videos/salto-del-duende-mesa-de-los-santos.jpg" width="720" height="1280" aria-label="Video de la cascada del Salto del Duende y el cañón con neblina, en la Mesa de los Santos" style="display:block;margin:2rem auto;width:auto;max-width:100%;max-height:80vh;height:auto;border-radius:12px;background:#000"><source src="/blog/videos/salto-del-duende-mesa-de-los-santos.mp4" type="video/mp4"></video>
 
 ## Cómo es vivir en la Mesa de los Santos
 
