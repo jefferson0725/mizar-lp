@@ -98,6 +98,8 @@ Como no hay estudio de crédito bancario, Es la opción que menos requisitos fin
 
 * **Ten en cuenta que** recibes tu vivienda cuando termina la obra y que la financiación solo aplica a los proyectos de esa constructora. Por eso conviene verificar a quién le compras: su trayectoria, sus obras entregadas y el contrato que te hace firmar.
 
+<video controls playsinline preload="none" poster="/blog/videos/recorrido-apartamento-entregado.jpg" width="576" height="1024" aria-label="Video: recorrido por un apartamento terminado, con habitaciones, baño y balcón con vista a la ciudad" style="display:block;margin:2rem auto;width:auto;max-width:100%;max-height:80vh;height:auto;border-radius:12px;background:#000"><source src="/blog/videos/recorrido-apartamento-entregado.mp4" type="video/mp4"></video>
+
 ## Cuál te conviene según tu caso
 
 | Tu situación | Por dónde empezar |
