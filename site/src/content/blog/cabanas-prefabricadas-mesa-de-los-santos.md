@@ -13,6 +13,9 @@ tags:
   - cuánto cuestan las cabañas prefabricadas
   - vale la pena una casa prefabricada
 pub_date: 2026-10-23
+card_image: ../../assets/blog/cabanas/cabana-terminada.jpg
+card_alt: "Cabaña en A terminada, con ventanales y balcones, entre árboles en lo alto de una ladera"
+card_position: "center 45%"
 draft: false
 ---
 

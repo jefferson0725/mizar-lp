@@ -13,6 +13,9 @@ tags:
   - dónde queda la mesa de los santos
   - lotes mesa de los santos
 pub_date: 2026-10-23
+card_image: ../../assets/blog/mesa/canon-del-chicamocha.jpg
+card_alt: "Cañón del Chicamocha con el río en el fondo del valle, montañas y un parapente en el cielo"
+card_position: "center 65%"
 draft: false
 ---
 

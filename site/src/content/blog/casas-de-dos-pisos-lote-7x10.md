@@ -13,6 +13,9 @@ tags:
   - diseño casa 7x10
   - casa 7x10 3 dormitorios
 pub_date: 2026-10-23
+card_image: ../../assets/blog/casas-7x10/render-casa-dos-pisos-fachada.webp
+card_alt: "Render de una casa de dos pisos con fachada blanca y de ladrillo y balcón con baranda de vidrio"
+card_position: "center 55%"
 draft: false
 ---
 

@@ -13,6 +13,9 @@ tags:
   - anillo vial occidental
   - lotes cerca de Cúcuta
 pub_date: 2026-10-23
+card_image: ../../assets/blog/san-cayetano/calle-barrio.jpg
+card_alt: "Calle de barrio con árboles, casas de colores y carros estacionados"
+card_position: "center 55%"
 draft: false
 ---
 
