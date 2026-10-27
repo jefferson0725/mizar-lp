@@ -110,6 +110,8 @@ En Grupo Mizar trabajamos así: el terreno del proyecto está a nombre de Mizar,
 
 ## Cómo firmar una promesa de compraventa si vives en el exterior
 
+<video controls playsinline preload="none" poster="/blog/videos/firmar-desde-el-exterior-videollamada.jpg" width="720" height="1280" aria-label="Video: una clienta que vive fuera del país conversa por videollamada con una asesora de Grupo Mizar sobre su compra" style="display:block;margin:2rem auto;width:auto;max-width:100%;max-height:80vh;height:auto;border-radius:12px;background:#000"><source src="/blog/videos/firmar-desde-el-exterior-videollamada.mp4" type="video/mp4"></video>
+
 No necesitas viajar a Colombia. Lo que cambia es el trámite, según si tu compra incluye o no un crédito hipotecario.
 
 **Si compras con crédito hipotecario**, necesitas otorgar un poder especial ante un consulado de Colombia, o ante un notario del país donde vives con apostilla, para que una persona de tu confianza firme en tu nombre. El poder debe indicar qué inmueble y qué actos autoriza. Se exige porque, al constituir la hipoteca, esa persona te está endeudando con el banco a tu nombre.
