@@ -13,9 +13,9 @@ tags:
   - comprar vivienda a cuotas
   - financiación directa
 pub_date: 2026-10-23
-hero_image: ../../assets/blog/vivienda/llaves-vivienda-nueva.jpg
-hero_alt: "Mano sosteniendo las llaves de una vivienda con un llavero en forma de casa, frente a una puerta abierta"
-hero_position: "center 45%"
+card_image: ../../assets/blog/vivienda/llaves-vivienda-nueva.jpg
+card_alt: "Mano sosteniendo las llaves de una vivienda con un llavero en forma de casa, frente a una puerta abierta"
+card_position: "center 40%"
 draft: false
 ---
 

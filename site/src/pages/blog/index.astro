@@ -55,12 +55,13 @@ const schema = {
           <div class="grid gap-6 md:grid-cols-3">
             {posts.map((p) => (
               <article class="overflow-hidden rounded-2xl border border-ink/10 bg-white">
-                {p.file?.data.hero_image ? (
+                {p.file?.data.card_image || p.file?.data.hero_image ? (
                   <a href={`/blog/${p.slug}/`} tabindex="-1" aria-hidden="true">
                     <Image
                       class="aspect-[16/9] w-full object-cover"
-                      src={p.file.data.hero_image}
-                      alt={p.file.data.hero_alt || p.title}
+                      src={(p.file.data.card_image ?? p.file.data.hero_image)!}
+                      alt={(p.file.data.card_image ? p.file.data.card_alt : p.file.data.hero_alt) || p.title}
+                      style={p.file.data.card_image && p.file.data.card_position ? `object-position: ${p.file.data.card_position}` : undefined}
                       width={750}
                       height={422}
                       format="webp"

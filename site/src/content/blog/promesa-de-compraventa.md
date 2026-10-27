@@ -13,9 +13,9 @@ tags:
   - qué pasa si una promesa de compraventa no se cumple
   - cómo desistir de una promesa de compraventa
 pub_date: 2026-10-23
-hero_image: ../../assets/blog/promesa/firma-de-contrato.jpg
-hero_alt: "Persona firmando con bolígrafo las hojas de un contrato sobre una mesa"
-hero_position: "center 58%"
+card_image: ../../assets/blog/promesa/firma-de-contrato.jpg
+card_alt: "Persona firmando con bolígrafo las hojas de un contrato sobre una mesa"
+card_position: "center 58%"
 draft: false
 ---
 

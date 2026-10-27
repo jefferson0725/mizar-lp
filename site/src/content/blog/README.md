@@ -24,6 +24,9 @@ updated: 2026-11-02                                 # opcional: fecha de la últ
 hero_image: ../../assets/blog/como-elegir-parcela.jpg   # opcional; ruta relativa a este archivo
 hero_alt: "Descripción de la foto, para lectores de pantalla y Google"   # OBLIGATORIO si hay hero_image
 hero_position: "center 22%"   # opcional; qué parte de la foto se ve en la franja (sube o baja el % para que salgan las caras)
+card_image: ../../assets/blog/x.jpg   # opcional; portada de la tarjeta en /blog/ (no sale dentro del artículo)
+card_alt: "Descripción de la foto"   # OBLIGATORIO si hay card_image
+card_position: "center 40%"   # opcional; qué parte de la foto se ve en la tarjeta
 draft: false                                        # true = no se publica (borrador)
 ---
 
