@@ -56,6 +56,16 @@ Durante la obra sigues pagando arriendo, igual que en el otro camino. La diferen
 
 *(Nota: este es un ejemplo ilustrativo con cifras redondas imaginarias. No corresponde a un inmueble real de Grupo Mizar.)*
 
+<div style="margin:2rem 0;display:grid;gap:10px">
+<img src="/blog/img/vivienda-sobre-planos/edificio-render.webp" alt="Render de un edificio de apartamentos de fachada blanca y ladrillo, con locales en el primer piso" width="900" height="1126" loading="lazy" decoding="async" style="display:block;width:auto;max-width:100%;max-height:75vh;height:auto;margin:0 auto;border-radius:10px">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+<img src="/blog/img/vivienda-sobre-planos/interior-01.webp" alt="Render de una habitación principal con cama doble y baño privado" width="640" height="800" loading="lazy" decoding="async" style="width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:10px;margin:0">
+<img src="/blog/img/vivienda-sobre-planos/interior-02.webp" alt="Render de una sala con sofá gris, barra para comer y ventanal" width="640" height="800" loading="lazy" decoding="async" style="width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:10px;margin:0">
+<img src="/blog/img/vivienda-sobre-planos/interior-03.webp" alt="Render de una cocina con muebles de madera oscura y comedor con mesa de mármol" width="640" height="884" loading="lazy" decoding="async" style="width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:10px;margin:0">
+<img src="/blog/img/vivienda-sobre-planos/interior-04.webp" alt="Render de una habitación sencilla con cama y ventana" width="640" height="800" loading="lazy" decoding="async" style="width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:10px;margin:0">
+</div>
+</div>
+
 ## Las 3 formas de comprar vivienda sin cuota inicial
 
 Casi ninguna opción elimina por completo el pago inicial. Lo que cambia es cuánto pones al principio, quién te lo pide y qué requisitos debes cumplir.
