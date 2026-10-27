@@ -13,6 +13,9 @@ tags:
   - qué pasa si una promesa de compraventa no se cumple
   - cómo desistir de una promesa de compraventa
 pub_date: 2026-10-23
+hero_image: ../../assets/blog/promesa/equipo-mizar-revisando-planos.jpg
+hero_alt: "Equipo de Grupo Mizar reunido en una sala de juntas revisando planos y folletos de un proyecto"
+hero_position: "center 30%"
 draft: false
 ---
 
