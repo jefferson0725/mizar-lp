@@ -13,13 +13,15 @@ tags:
   - qué pasa si una promesa de compraventa no se cumple
   - cómo desistir de una promesa de compraventa
 pub_date: 2026-10-23
-hero_image: ../../assets/blog/promesa/equipo-mizar-revisando-planos.jpg
-hero_alt: "Equipo de Grupo Mizar reunido en una sala de juntas revisando planos y folletos de un proyecto"
-hero_position: "center 30%"
+hero_image: ../../assets/blog/promesa/firma-de-contrato.jpg
+hero_alt: "Persona firmando con bolígrafo las hojas de un contrato sobre una mesa"
+hero_position: "center 58%"
 draft: false
 ---
 
 Antes de la escritura, antes del registro y antes de recibir las llaves, hay un documento que define casi todo en la compra de un inmueble: la promesa de compraventa.
+
+![Equipo de Grupo Mizar reunido en una sala de juntas revisando planos y folletos de un proyecto](../../assets/blog/promesa/equipo-mizar-revisando-planos.jpg)
 
 Si está bien hecha, te protege desde el primer pago. Si le falta un solo requisito, puede no servir para nada. Y casi siempre se firma con prisa, en la emoción de haber encontrado el lugar.
 
