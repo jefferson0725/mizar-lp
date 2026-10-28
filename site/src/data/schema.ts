@@ -76,3 +76,88 @@ export function faqSchema(items: { q: string; a: string }[]) {
     })),
   };
 }
+
+/** Unidad que se vende en un proyecto (apartamento o lote), con las medidas que muestra la página. */
+type Unidad =
+  | { tipo: 'apartamento'; nombre: string; alcobas: number; banos: number; areaM2: [min: number, max?: number] }
+  | { tipo: 'lote'; nombre: string; medidas?: string; areaDesdeM2?: number };
+
+/**
+ * Ficha de un proyecto (RealEstateListing). Regla de Google: solo datos que el visitante ve en
+ * la página; si un dato no está a la vista (precio total, área), no va aquí.
+ */
+export function proyectoSchema(f: {
+  path: string;
+  nombre: string;
+  descripcion: string;
+  municipio: string;
+  departamento: string;
+  imagen?: string;
+  geo?: [lat: number, lng: number];
+  mapa?: string;
+  precioDesde?: number;
+  unidad: Unidad;
+}) {
+  const org = { '@id': `${SITE_URL}/#organizacion` };
+  const url = new URL(f.path, SITE_URL).href;
+  const u = f.unidad;
+  const medidasLote =
+    u.tipo === 'lote'
+      ? [
+          ...(u.medidas ? [{ '@type': 'PropertyValue', name: 'Medidas del lote', value: u.medidas }] : []),
+          ...(u.areaDesdeM2
+            ? [{ '@type': 'PropertyValue', name: 'Área desde', minValue: u.areaDesdeM2, unitCode: 'MTK', unitText: 'm²' }]
+            : []),
+        ]
+      : [];
+  const mainEntity =
+    u.tipo === 'apartamento'
+      ? {
+          '@type': 'Apartment',
+          name: u.nombre,
+          numberOfRooms: u.alcobas,
+          numberOfBathroomsTotal: u.banos,
+          floorSize: {
+            '@type': 'QuantitativeValue',
+            unitCode: 'MTK',
+            ...(u.areaM2[1] ? { minValue: u.areaM2[0], maxValue: u.areaM2[1] } : { value: u.areaM2[0] }),
+          },
+        }
+      : {
+          '@type': 'Place',
+          name: u.nombre,
+          ...(medidasLote.length && { additionalProperty: medidasLote }),
+        };
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'RealEstateListing',
+    '@id': `${url}#ficha`,
+    name: f.nombre,
+    description: f.descripcion,
+    url,
+    inLanguage: 'es-CO',
+    ...(f.imagen && { image: new URL(f.imagen, SITE_URL).href }),
+    provider: org,
+    contentLocation: {
+      '@type': 'Place',
+      name: `${f.municipio}, ${f.departamento}`,
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: f.municipio,
+        addressRegion: f.departamento,
+        addressCountry: 'CO',
+      },
+      ...(f.geo && { geo: { '@type': 'GeoCoordinates', latitude: f.geo[0], longitude: f.geo[1] } }),
+      ...(f.mapa && { hasMap: f.mapa }),
+    },
+    mainEntity,
+    offers: {
+      '@type': 'Offer',
+      availability: 'https://schema.org/InStock',
+      seller: org,
+      ...(f.precioDesde && {
+        priceSpecification: { '@type': 'PriceSpecification', minPrice: f.precioDesde, priceCurrency: 'COP' },
+      }),
+    },
+  };
+}

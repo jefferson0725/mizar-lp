@@ -1,4 +1,6 @@
 ---
+import fotoOg from '../../assets/blog/mesa/canon-del-chicamocha.jpg';
+import { ogImagen } from '../../lib/og';
 import { Image } from 'astro:assets';
 import Base from '../../layouts/Base.astro';
 import { formatDate } from '../../lib/article';
@@ -25,12 +27,14 @@ const schema = {
     { '@type': 'ListItem', position: 2, name: 'Blog', item: new URL('/blog/', site).href },
   ],
 };
+const ogImage = await ogImagen(fotoOg);
 ---
 
 <Base
   title="Blog inmobiliario | Grupo Mizar"
   description="Guías de Grupo Mizar para comprar propiedad en Colombia a cuotas y sin bancos: apartamentos VIS, inversión desde el exterior y respaldo de constructora."
   path="/blog"
+  ogImage={ogImage}
   schema={schema}
 >
   <section class="bg-plum-dark py-16 text-white md:py-24">

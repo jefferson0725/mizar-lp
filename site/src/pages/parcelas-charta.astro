@@ -11,7 +11,7 @@ import Cabana from "../landing/charta/Cabana.astro";
 import Testimonio from "../landing/charta/Testimonio.astro";
 import Cierre from "../landing/charta/Cierre.astro";
 import LandingFooter from "../landing/charta/Footer.astro";
-import { breadcrumbSchema } from "../data/schema";
+import { breadcrumbSchema, proyectoSchema } from "../data/schema";
 import WhatsAppFloat from "../components/WhatsAppFloat.astro";
 import { getWhatsAppConfig } from "../data/whatsapp";
 const wa = getWhatsAppConfig('/parcelas-charta');
@@ -26,6 +26,17 @@ const wa = getWhatsAppConfig('/parcelas-charta');
   headerColorDark="#142720"
   schema={[
     breadcrumbSchema([["Proyectos", "/proyectos/"], ["Parcelas en Charta", "/parcelas-charta/"]]),
+    proyectoSchema({
+      path: "/parcelas-charta/",
+      nombre: "Parcelas campestres en Charta",
+      descripcion: "Parcelas campestres en Charta, Santander, desde 1.250 m² y a 5 minutos del pueblo, con financiación directa a cuotas, sin bancos.",
+      municipio: "Charta",
+      departamento: "Santander",
+      imagen: "/assets/parcelas-charta.jpg",
+      geo: [7.2793889, -72.9642778],
+      mapa: "https://maps.app.goo.gl/958kctt7fkMLMWqm6",
+      unidad: { tipo: "lote", nombre: "Parcela campestre en Charta", areaDesdeM2: 1250 },
+    }),
   ]}
 >
   <div class="theme-charta">

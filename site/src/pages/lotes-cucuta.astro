@@ -1,4 +1,6 @@
 ---
+import { ogImagen } from '../lib/og';
+import { proyectoSchema } from '../data/schema';
 import { getImage } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import FaqAccordion from '../components/proyectos/FaqAccordion.astro';
@@ -24,6 +26,7 @@ const wa = (msg: string) =>
 const heroBg = (await getImage({ src: renderLotes, width: 1800, format: 'webp' })).src;
 const renderMid = (await getImage({ src: renderLotes, width: 1200, format: 'webp' })).src;
 const imagen1 = (await getImage({ src: imagen1Raw, width: 900, format: 'webp' })).src;
+const ogImage = await ogImagen(imagen1Raw);
 
 const galeria = await Promise.all(
   [galeriaRaw1, galeriaRaw3, galeriaRaw4, galeriaRaw5].map((img) =>
@@ -117,6 +120,15 @@ const faqSchema = {
 
 const schema = [
   faqSchema,
+  proyectoSchema({
+    path: '/lotes-cucuta/',
+    nombre: 'Mi Lote · San Cayetano',
+    descripcion: 'Lotes urbanos de 7x10 o 7x16 metros en San Cayetano, Cúcuta, junto al anillo vial occidental y a 100 metros de la futura Universidad Simón Bolívar.',
+    municipio: 'San Cayetano',
+    departamento: 'Norte de Santander',
+    imagen: ogImage,
+    unidad: { tipo: 'lote', nombre: 'Lote urbano en San Cayetano', medidas: '7x10 o 7x16 metros' },
+  }),
   {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -132,6 +144,7 @@ const schema = [
   title="Lotes en venta en Cúcuta a cuotas, sin bancos | Mi Lote"
   description="Lotes en venta en San Cayetano, Cúcuta: 7x10 y 7x16 con escritura independiente, a 100 m de la futura Universidad Simón Bolívar. A cuotas y sin bancos."
   path="/lotes-cucuta"
+  ogImage={ogImage}
   schema={schema}
   footerDireccion="Oficinas de la EDS de San Isidro, anillo vial occidental, San Cayetano, Norte de Santander"
 >

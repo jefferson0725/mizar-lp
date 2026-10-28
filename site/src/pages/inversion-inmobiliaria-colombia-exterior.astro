@@ -1,9 +1,13 @@
 ---
+import fotoOg from '../assets/blog/vivienda/llaves-vivienda-nueva.jpg';
+import { ogImagen } from '../lib/og';
 import LandingSeo from '../components/proyectos/LandingSeo.astro';
+const ogImage = await ogImagen(fotoOg);
 ---
 
 <LandingSeo
   path="/inversion-inmobiliaria-colombia-exterior"
+  ogImage={ogImage}
   title="Comprar vivienda en Colombia desde el exterior | Mizar"
   description="Comprar vivienda en Colombia desde el exterior (EE. UU., España): apartamentos, parcelas o lotes a cuotas, sin banco y con acompañamiento remoto de Mizar."
   eyebrow="Para colombianos en el exterior"

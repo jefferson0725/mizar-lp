@@ -1,4 +1,6 @@
 ---
+import fotoOg from '../assets/blog/promesa/equipo-mizar-revisando-planos.jpg';
+import { ogImagen } from '../lib/og';
 import Base from '../layouts/Base.astro';
 
 const schema = {
@@ -17,12 +19,14 @@ const schema = {
     },
   },
 };
+const ogImage = await ogImagen(fotoOg);
 ---
 
 <Base
   title="Contacto | Grupo Mizar — Bucaramanga"
   description="Contacta a Grupo Mizar en Bucaramanga: formulario, WhatsApp y oficinas en Provenza. Te atendemos si buscas propiedad en Colombia o desde el exterior también."
   path="/contacto"
+  ogImage={ogImage}
   schema={schema}
 >
   <section class="py-16 md:py-24">

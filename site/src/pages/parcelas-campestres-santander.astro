@@ -1,9 +1,13 @@
 ---
+import fotoOg from '../assets/charta/charta-cabana-aerea.jpg';
+import { ogImagen } from '../lib/og';
 import LandingSeo from '../components/proyectos/LandingSeo.astro';
+const ogImage = await ogImagen(fotoOg);
 ---
 
 <LandingSeo
   path="/parcelas-campestres-santander"
+  ogImage={ogImage}
   title="Parcelas campestres en Santander a cuotas | Grupo Mizar"
   description="Parcelas campestres en Santander, en Charta y Mesa de los Santos: tierra propia a cuotas y sin bancos, con clima de montaña y escritura a tu nombre."
   eyebrow="Parcelas · Charta y Mesa de los Santos"

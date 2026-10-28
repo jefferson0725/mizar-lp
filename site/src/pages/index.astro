@@ -1,4 +1,5 @@
 ---
+import { ogImagen } from '../lib/og';
 import { getImage, Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import HeroForm from '../components/islands/HeroForm.jsx';
@@ -90,12 +91,14 @@ const carouselSlides = [
     quote: '',
   },
 ];
+const ogImage = await ogImagen(equipoImg);
 ---
 
 <Base
   title="Grupo Mizar: constructora en Bucaramanga, a cuotas y sin bancos"
   description="Constructora en Bucaramanga con +20 años: apartamentos sobre planos en Girón y Piedecuesta, parcelas en Santander y lotes en Cúcuta, a cuotas y sin bancos."
   path="/"
+  ogImage={ogImage}
   headerTransparent
   preloadImage={heroSlides[0]?.src}
 >

@@ -12,7 +12,7 @@ import FAQ from "../landing/laureles/FAQ.astro";
 import Resumen from "../landing/laureles/Resumen.astro";
 import Contacto from "../landing/laureles/Contacto.astro";
 import LandingFooter from "../landing/laureles/Footer.astro";
-import { breadcrumbSchema, faqSchema } from "../data/schema";
+import { breadcrumbSchema, faqSchema, proyectoSchema } from "../data/schema";
 import { faqLaureles } from "../landing/laureles/faq";
 import WhatsAppFloat from "../components/WhatsAppFloat.astro";
 import { getWhatsAppConfig } from "../data/whatsapp";
@@ -22,12 +22,22 @@ const wa = getWhatsAppConfig('/laureles-campestre');
 <LandingReact
   title="Apartamentos sobre planos en Girón | Laureles Campestre"
   description="Apartamentos sobre planos en Girón, a 150 m del futuro anillo vial. A cuotas y sin bancos, directo con Mizar, financiación hasta 20 años. Entregas 2027-2028."
-  ogImage="/assets/hero-fachada.webp"
+  ogImage="/og/laureles-campestre.jpg"
   path="/laureles-campestre"
   headerColor="#0a2342"
   headerColorDark="#061629"
   schema={[
     breadcrumbSchema([["Proyectos", "/proyectos/"], ["Laureles Campestre", "/laureles-campestre/"]]),
+    proyectoSchema({
+      path: "/laureles-campestre/",
+      nombre: "Laureles Campestre",
+      descripcion: "Apartamentos de 3 alcobas en Girón, Santander, de 48,24 m² y 56,10 m², a 150 metros del futuro anillo vial. Se separan con $3.000.000 y se financian hasta por 20 años.",
+      municipio: "Girón",
+      departamento: "Santander",
+      imagen: "/og/laureles-campestre.jpg",
+      mapa: "https://maps.app.goo.gl/3BggRD6CCFP5oFJ7A",
+      unidad: { tipo: "apartamento", nombre: "Apartamento de 3 alcobas en Girón", alcobas: 3, banos: 1, areaM2: [48.24, 56.1] },
+    }),
     faqSchema(faqLaureles),
   ]}
 >

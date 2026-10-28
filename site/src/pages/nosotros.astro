@@ -1,4 +1,5 @@
 ---
+import { ogImagen } from '../lib/og';
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import equipoImg from '../assets/equipo.jpg';
@@ -62,12 +63,14 @@ const schema = {
   description:
     'Historia de Grupo Mizar: más de 20 años construyendo en Colombia, del Parque Bosque Encantado a un modelo de propiedades a cuotas sin bancos.',
 };
+const ogImage = await ogImagen(equipoImg);
 ---
 
 <Base
   title="Nosotros — 20 años construyendo en Colombia | Grupo Mizar"
   description="Conoce la historia de Grupo Mizar: empresa familiar santandereana con +20 años, +100 obras entregadas y propiedades a cuotas, sin bancos ni filas largas."
   path="/nosotros"
+  ogImage={ogImage}
   schema={schema}
 >
   <!-- HERO + CIFRAS (credibilidad en el primer viewport, también en mobile) -->

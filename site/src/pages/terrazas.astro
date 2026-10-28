@@ -12,7 +12,7 @@ import FAQ from "../landing/terrazas/FAQ.astro";
 import Resumen from "../landing/terrazas/Resumen.astro";
 import Contacto from "../landing/terrazas/Contacto.astro";
 import TerrazasFooter from "../landing/terrazas/Footer.astro";
-import { breadcrumbSchema, faqSchema } from "../data/schema";
+import { breadcrumbSchema, faqSchema, proyectoSchema } from "../data/schema";
 import { faqTerrazas } from "../landing/terrazas/faq";
 import WhatsAppFloat from "../components/WhatsAppFloat.astro";
 import { getWhatsAppConfig } from "../data/whatsapp";
@@ -22,12 +22,22 @@ const wa = getWhatsAppConfig('/terrazas');
 <LandingReact
   title="Apartamentos sobre planos en Piedecuesta | Terrazas de la Cantera"
   description="Apartamentos sobre planos en Piedecuesta con vista al Cerro de La Cantera: 60 m², 3 alcobas, a cuotas y sin bancos, directo con Mizar. Entrega diciembre 2027."
-  ogImage="/assets/terrazas-fachada.webp"
+  ogImage="/og/terrazas.jpg"
   path="/terrazas"
   headerColor="#025362"
   headerColorDark="#013a45"
   schema={[
     breadcrumbSchema([["Proyectos", "/proyectos/"], ["Terrazas de la Cantera", "/terrazas/"]]),
+    proyectoSchema({
+      path: "/terrazas/",
+      nombre: "Terrazas de la Cantera",
+      descripcion: "Apartamentos de 3 alcobas y 60,47 m² en el centro de Piedecuesta, Santander. Se separan con $2.000.000 y se pagan a cuotas directo con Mizar, sin bancos.",
+      municipio: "Piedecuesta",
+      departamento: "Santander",
+      imagen: "/og/terrazas.jpg",
+      mapa: "https://maps.google.com/maps?q=Terrazas+de+la+Cantera+Piedecuesta",
+      unidad: { tipo: "apartamento", nombre: "Apartamento de 3 alcobas en Piedecuesta", alcobas: 3, banos: 2, areaM2: [60.47] },
+    }),
     faqSchema(faqTerrazas),
   ]}
 >

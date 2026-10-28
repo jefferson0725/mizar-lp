@@ -6,6 +6,7 @@ import ArticleView from '../../components/ArticleView.astro';
 import { toArticleView, formatDate } from '../../lib/article';
 import { getAllPosts, STRAPI_URL, type BlogItem } from '../../lib/posts';
 import { extractFaq, faqSchema } from '../../lib/faq';
+import { ogImagen } from '../../lib/og';
 
 export async function getStaticPaths() {
   const posts = await getAllPosts();
@@ -19,10 +20,11 @@ const site = Astro.site ?? new URL('https://grupomizar.com.co');
 // Dos orígenes, misma ficha: archivo (.md, imagen por astro:assets) o Strapi (bloques JSON).
 let view;
 let heroUrl: string | null = null;
+let ogUrl: string | null = null;
 let Content: Awaited<ReturnType<typeof render>>['Content'] | undefined;
 
 if (post.file) {
-  const { hero_image, hero_alt, hero_position } = post.file.data;
+  const { hero_image, hero_alt, hero_position, card_image } = post.file.data;
   ({ Content } = await render(post.file));
   view = {
     eyebrow: post.frente.replace(/-/g, ' '),
@@ -38,10 +40,14 @@ if (post.file) {
     const og = await getImage({ src: hero_image, width: 1200, format: 'jpg' });
     heroUrl = new URL(og.src, site).href;
   }
+  // Foto al compartir: la portada de la tarjeta del listado y, si no hay, la del artículo.
+  const fotoOg = card_image ?? hero_image;
+  if (fotoOg) ogUrl = await ogImagen(fotoOg);
 } else {
   // Misma preparación de datos que la vista previa de borradores (src/lib/article.ts).
   view = toArticleView(post.strapi!, STRAPI_URL);
   heroUrl = view.heroUrl;
+  ogUrl = heroUrl;
 }
 
 const path = `/blog/${post.slug}/`;
@@ -108,7 +114,7 @@ const breadcrumbSchema = {
   title={post.file?.data.seo_title ?? `${post.title} | Grupo Mizar`}
   description={post.description}
   path={path}
-  ogImage={heroUrl ?? undefined}
+  ogImage={ogUrl ?? undefined}
   schema={[...schemas, breadcrumbSchema]}
   ogType="article"
   articlePublished={datePublished}

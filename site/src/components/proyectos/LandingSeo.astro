@@ -16,9 +16,11 @@ interface Props {
   proyectoSlugs: string[];
   faq: { q: string; a: string }[];
   ctaMensaje: string;
+  /** Foto al compartir (ruta 1200x630 en JPG); sin ella sale og-default */
+  ogImage?: string;
 }
 
-const { path, title, description, eyebrow, h1, respuesta, beneficios, proyectoSlugs, faq, ctaMensaje } =
+const { path, title, description, eyebrow, h1, respuesta, beneficios, proyectoSlugs, faq, ctaMensaje, ogImage } =
   Astro.props;
 
 const relacionados = proyectos.filter((p) => proyectoSlugs.includes(p.slug));
@@ -47,7 +49,7 @@ const breadcrumbSchema = {
 const schema = [faqSchema, breadcrumbSchema];
 ---
 
-<Base title={title} description={description} path={path} schema={schema}>
+<Base title={title} description={description} path={path} ogImage={ogImage} schema={schema}>
   <section class="bg-plum py-14 text-white md:py-20">
     <div class="container-site max-w-3xl">
       <p class="eyebrow text-gold">{eyebrow}</p>
