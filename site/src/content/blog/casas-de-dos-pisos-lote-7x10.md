@@ -43,6 +43,8 @@ Con dos pisos, el área construida casi se duplica. Por eso las casas de dos pis
 
 ![Render de una casa de dos pisos con fachada blanca y de ladrillo, ventanales y balcón con baranda de vidrio en el segundo piso](../../assets/blog/casas-7x10/render-casa-dos-pisos-fachada.webp)
 
+<p class="pie-foto">Render de referencia de una casa de dos pisos.</p>
+
 Si tu lote es de 7x16 (112 m²), tienes más margen para un patio grande, un parqueadero o un local al frente.
 
 ## ¿Cuántas habitaciones caben en una casa de dos pisos de 7x10?

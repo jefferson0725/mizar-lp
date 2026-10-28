@@ -23,6 +23,8 @@ Antes de la escritura, antes del registro y antes de recibir las llaves, hay un 
 
 ![Equipo de Grupo Mizar reunido en una sala de juntas revisando planos y folletos de un proyecto](../../assets/blog/promesa/equipo-mizar-revisando-planos.jpg)
 
+<p class="pie-foto">Equipo de Grupo Mizar revisando los planos de un proyecto.</p>
+
 Si está bien hecha, te protege desde el primer pago. Si le falta un solo requisito, puede no servir para nada. Y casi siempre se firma con prisa, en la emoción de haber encontrado el lugar.
 
 En esta guía te explicamos qué es una promesa de compraventa, los cuatro requisitos que exige la ley, qué cláusulas debes leer con calma, cuáles son las señales de alerta y qué hacer si vives fuera de Colombia.
@@ -113,6 +115,8 @@ En Grupo Mizar trabajamos así: el terreno del proyecto está a nombre de Mizar,
 ## Cómo firmar una promesa de compraventa si vives en el exterior
 
 <video controls playsinline preload="none" poster="/blog/videos/firmar-desde-el-exterior-videollamada.jpg" width="720" height="1280" aria-label="Video: una clienta que vive fuera del país conversa por videollamada con una asesora de Grupo Mizar sobre su compra" style="display:block;margin:2rem auto;width:auto;max-width:100%;max-height:80vh;height:auto;border-radius:12px;background:#000"><source src="/blog/videos/firmar-desde-el-exterior-videollamada.mp4" type="video/mp4"></video>
+
+<p class="pie-foto">Una clienta que vive fuera del país conversa por videollamada con una asesora de Grupo Mizar.</p>
 
 No necesitas viajar a Colombia. Lo que cambia es el trámite, según si tu compra incluye o no un crédito hipotecario.
 

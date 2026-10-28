@@ -70,6 +70,14 @@ const { eyebrow, title, description, meta, heroUrl, heroAlt, contentHtml, heroIm
 
 <style>
   /* YouTube facade */
+  /* Pie de foto o de video: texto corto debajo de cada imagen del artículo */
+  .article-body :global(.pie-foto) {
+    margin-top: -1rem;
+    font-size: 0.875rem;
+    line-height: 1.45;
+    color: rgb(31 42 46 / 0.65);
+    text-align: center;
+  }
   .article-body :global(.yt-facade) {
     position: relative;
     margin-top: 1.5rem;
