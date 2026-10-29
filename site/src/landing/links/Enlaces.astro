@@ -16,34 +16,38 @@ import fondo from "../../assets/charta/charta-atardecer-pueblo.jpg";
 const wa = getWhatsAppConfig("/links");
 const WA_URL = `https://wa.me/${wa.phone}?text=${encodeURIComponent(wa.message)}`;
 
+// Esta página solo se enlaza desde las biografías de redes: la UTM marca en GA4
+// que la visita a cada proyecto llegó desde ahí.
+const UTM = "?utm_source=redes-sociales&utm_medium=social&utm_campaign=links-mizar";
+
 const bg = await getImage({ src: fondo, format: "webp", width: 1200 });
 
 const proyectos = [
   {
     titulo: "Parcelas Mesa de los Santos",
     detalle: "Mirador de la Montaña · Desde $75 millones",
-    href: "/mirador-de-la-montana/",
+    href: `/mirador-de-la-montana/${UTM}`,
     img: mirador,
     alt: "Lotes campestres Mirador de la Montaña",
   },
   {
     titulo: "Apartamentos en Girón",
     detalle: "Laureles Campestre · A 150 m del futuro anillo vial",
-    href: "/laureles-campestre/",
+    href: `/laureles-campestre/${UTM}`,
     img: giron,
     alt: "Proyecto Laureles Campestre en Girón",
   },
   {
     titulo: "Apartamentos en Piedecuesta",
     detalle: "Terrazas de la Cantera · Sobre planos",
-    href: "/terrazas/",
+    href: `/terrazas/${UTM}`,
     img: piedecuesta,
     alt: "Proyecto Terrazas de la Cantera en Piedecuesta",
   },
   {
     titulo: "Parcelas en Charta",
     detalle: "Desde 1.250 m² · Charta, Santander",
-    href: "/parcelas-charta/",
+    href: `/parcelas-charta/${UTM}`,
     img: charta,
     alt: "Cabaña campestre en Charta, Santander",
     nuevo: true,
@@ -205,7 +209,7 @@ const redes = [
     </ul>
 
     <a
-      href="/"
+      href={`/${UTM}`}
       data-event="linkinbio-click"
       class="lnk-in mt-5 flex items-center justify-center gap-2 w-full rounded-2xl border border-white/25 px-5 py-4 font-semibold text-white hover:bg-white/10 transition-colors"
       style={`animation-delay:${0.29 + proyectos.length * 0.07}s`}

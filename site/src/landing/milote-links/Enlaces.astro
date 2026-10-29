@@ -47,8 +47,12 @@ const redes = [
 
 const [whatsapp, instagram] = redes;
 
+// Esta página solo se enlaza desde las biografías de redes: la UTM marca en GA4
+// que la visita a la web llegó desde ahí.
+const UTM = "?utm_source=redes-sociales&utm_medium=social&utm_campaign=links-milote";
+
 const botones = [
-  { label: "Página Web", href: "/lotes-cucuta/", event: "linkinbio-click", externo: false, logo: true },
+  { label: "Página Web", href: `/lotes-cucuta/${UTM}`, event: "linkinbio-click", externo: false, logo: true },
   { label: "WhatsApp", href: whatsapp.href, event: "whatsapp-click", externo: true, icono: whatsapp },
   { label: "Instagram", href: instagram.href, event: "social-click", externo: true, icono: instagram },
 ];
