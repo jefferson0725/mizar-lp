@@ -124,7 +124,7 @@ No necesitas viajar a Colombia. Lo que cambia es el trámite, según si tu compr
 
 **Si compras sin crédito hipotecario, directamente con una constructora**, el proceso es más simple. Por ejemplo, en Grupo Mizar la promesa queda a tu nombre y la firma, en una notaría en Colombia, la persona que tú autorices, sin trámites en el consulado ni apostillas, puede ser un familiar o la misma constructora. Como no hay hipoteca de por medio, después de firmar la promesa pagas tu vivienda a cuotas directamente con nosotros y, cuando terminas de pagar, se firma la escritura que deja la vivienda a tu nombre.
 
-En Grupo Mizar acompañamos este proceso a distancia, porque cerca del 60% de quienes nos compran vive fuera del país. Si estás en esa situación, en nuestra guía para comprar vivienda en Colombia desde Estados Unidos te explicamos el proceso completo.
+En Grupo Mizar acompañamos este proceso a distancia, porque cerca del 60% de quienes nos compran vive fuera del país. Si estás en esa situación, en nuestra guía para [comprar vivienda en Colombia desde Estados Unidos](/blog/comprar-casa-en-colombia-desde-estados-unidos/) te explicamos el proceso completo.
 
 ## ¿Hay que autenticar la promesa en notaría?
 
@@ -178,7 +178,7 @@ Sí. Si compras con crédito hipotecario, necesitas un poder especial otorgado a
 
 La parte que cumplió puede exigir el cumplimiento o la resolución del contrato, además de las arras o la cláusula penal pactadas.
 
-**Sigue leyendo:** [Vivienda sin cuota inicial: ¿es posible en Colombia?](/blog/vivienda-sin-cuota-inicial/) · [La Mesa de los Santos: guía para vivir e invertir](/blog/mesa-de-los-santos/) · [San Cayetano, Norte de Santander](/blog/san-cayetano-norte-de-santander/) · Comprar vivienda en Colombia desde Estados Unidos
+**Sigue leyendo:** [Vivienda sin cuota inicial: ¿es posible en Colombia?](/blog/vivienda-sin-cuota-inicial/) · [La Mesa de los Santos: guía para vivir e invertir](/blog/mesa-de-los-santos/) · [San Cayetano, Norte de Santander](/blog/san-cayetano-norte-de-santander/) · [Comprar vivienda en Colombia desde Estados Unidos](/blog/comprar-casa-en-colombia-desde-estados-unidos/)
 
 *Este artículo es informativo y no reemplaza la asesoría de un abogado.*
 

@@ -131,7 +131,7 @@ Con la financiación directa, ese historial deja de ser un requisito. El proceso
 
 * **Sigues el avance de la obra** por videollamada y con reportes.
 
-Te explicamos el paso a paso, con requisitos y cómo proteger tu dinero, en nuestra guía para comprar vivienda en Colombia desde Estados Unidos.
+Te explicamos el paso a paso, con requisitos y cómo proteger tu dinero, en nuestra guía para [comprar vivienda en Colombia desde Estados Unidos](/blog/comprar-casa-en-colombia-desde-estados-unidos/).
 
 ## Cómo funciona la financiación directa con Grupo Mizar
 
@@ -161,7 +161,7 @@ Y estas son las respuestas a las preguntas que casi todos nos hacen antes de dec
 
 * **¿Y si decido no seguir?** Se te devuelve el dinero según lo pactado en el contrato.
 
-* **¿Tiene algún ahorro frente al crédito bancario?** Sí. Como no se constituye hipoteca, no pagas los gastos de constituirla ni de levantarla. En un apartamento de 170 millones, ese ahorro ronda los 6 a 8 millones de pesos. Te mostramos el detalle de esos gastos en nuestra guía de gastos notariales y de escrituración.
+* **¿Tiene algún ahorro frente al crédito bancario?** Sí. Como no se constituye hipoteca, no pagas los gastos de constituirla ni de levantarla. En un apartamento de 170 millones, ese ahorro ronda los 6 a 8 millones de pesos. Te mostramos el detalle de esos gastos en nuestra guía de [gastos notariales y de escrituración](/blog/gastos-notariales-escrituracion/).
 
 * **¿Financian compras en otros proyectos?** No. La financiación directa aplica solo a proyectos de Grupo Mizar.
 
@@ -203,6 +203,6 @@ En 2026 no se abren nuevas inscripciones. Los subsidios de las cajas de compensa
 
 Hablamos contigo para buscar nuevas condiciones. Si decides desistir, se te devuelve el dinero según lo pactado en el contrato.
 
-**Sigue leyendo:** [Promesa de compraventa: qué es y qué revisar](/blog/promesa-de-compraventa/) · Gastos notariales y de escrituración · Comprar vivienda en Colombia desde Estados Unidos
+**Sigue leyendo:** [Promesa de compraventa: qué es y qué revisar](/blog/promesa-de-compraventa/) · [Gastos notariales y de escrituración](/blog/gastos-notariales-escrituracion/) · [Comprar vivienda en Colombia desde Estados Unidos](/blog/comprar-casa-en-colombia-desde-estados-unidos/)
 
 *Actualizado: 23 de octubre de 2026. Escrito por el equipo de Grupo Mizar.*
