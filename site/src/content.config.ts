@@ -12,11 +12,11 @@ const blog = defineCollection({
   schema: ({ image }) =>
     z
       .object({
-        title: z.string().max(100, 'El título (H1) debe tener 100 caracteres o menos; el de Google va en seo_title'),
+        title: z.string().max(130, 'El título (H1) debe tener 130 caracteres o menos; el de Google va en seo_title'),
         // Si se omite, la URL usa el nombre del archivo.
         slug: z.string().optional(),
         // Título para <title> y og:title (sin sufijo). Si se omite: "<title> | Grupo Mizar".
-        seo_title: z.string().max(60, 'seo_title debe tener 60 caracteres o menos').optional(),
+        seo_title: z.string().max(70, 'seo_title debe tener 70 caracteres o menos').optional(),
         description: z.string(),
         author: z.string().default('Grupo Mizar'),
         // consejos, parcelas-charta, laureles-campestre, terrazas, mirador-de-la-montana, mi-lote, colombianos-en-el-exterior

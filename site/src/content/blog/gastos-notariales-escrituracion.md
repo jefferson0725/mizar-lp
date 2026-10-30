@@ -1,5 +1,5 @@
 ---
-title: "Gastos notariales y de escrituración: cuánto pagas al comprar vivienda (y cuánto suma la hipoteca)"
+title: "Gastos notariales y de escrituración 2026: cuánto pagas al comprar vivienda (y cuánto suma la hipoteca)"
 seo_title: "Gastos notariales 2026: cuánto cuesta escriturar vivienda"
 slug: gastos-notariales-escrituracion
 description: "Cuánto son los gastos notariales y de escrituración en 2026, quién paga cada uno, qué es la boleta fiscal y cuánto suman la hipoteca y su levantamiento."

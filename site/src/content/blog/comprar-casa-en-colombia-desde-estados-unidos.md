@@ -1,6 +1,6 @@
 ---
-title: "Cómo comprar vivienda en Colombia desde Estados Unidos: requisitos y firma a distancia"
-seo_title: "Comprar vivienda en Colombia desde EE. UU.: paso a paso"
+title: "Cómo comprar vivienda en Colombia desde Estados Unidos: requisitos, firma a distancia y cómo proteger tu dinero"
+seo_title: "Comprar vivienda en Colombia desde Estados Unidos: paso a paso"
 slug: comprar-casa-en-colombia-desde-estados-unidos
 description: "Cómo comprar vivienda en Colombia desde Estados Unidos sin viajar: cómo saber a quién le compras, cómo se firma a distancia y cómo pagar tus cuotas desde allá."
 author: "Grupo Mizar"
